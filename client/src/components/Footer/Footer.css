@@ -1,0 +1,6 @@
+.iconHover {
+  color: white;
+}
+.iconHover:hover {
+  color: blue;
+}

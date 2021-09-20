@@ -1,0 +1,12 @@
+.navFontSize {
+  font-size: 18px;
+}
+.collapseTransition {
+  transition: all 1.5s ease;
+}
+.dropdownItem {
+  transition: all 0.5s ease;
+}
+.nav-dropdown .show {
+  background-color: #187875;
+}
