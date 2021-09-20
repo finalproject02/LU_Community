@@ -1,2 +1,5 @@
 /node_modules
 /config/config.env
+/controllers/test.js
+/models/testModel
+/routes/test.js
