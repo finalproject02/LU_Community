@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "It's our final year project LU Community server. We are very determinate for our this project. There are lots features in our app. Chatting, sharing, Calling, Video Conversations",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Dynamic Developers",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "gridfs-stream": "^1.1.1",
+    "helmet": "^4.6.0",
+    "html-pdf": "^3.0.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "multer-gridfs-storage": "^5.0.1",
+    "nodemailer": "^6.6.3",
+    "selenium-webdriver": "^4.0.0-rc-1",
+    "socket.io": "^4.2.0"
+  }
+}
