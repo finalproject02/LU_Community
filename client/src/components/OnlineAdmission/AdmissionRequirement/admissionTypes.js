@@ -1,5 +1,6 @@
 const admissionTypes = [
     {
+      name: 'B.Sc',
       title: "Leading University Admission Form",
       subtitle: "Admission for Undergraduate Programs",
       heading: "Admission Requirements:",
@@ -11,6 +12,7 @@ const admissionTypes = [
         "3. For ‘O’ and ‘A’ level students: 5 subjects in ‘O’ level and 2 subjects in ’A’ level where grade B in at least 4 subjects and grade C in the remaining subjects.",
     },
     {
+      name: 'M.Sc',
       title: "Leading University Admission Form",
       subtitle: "Admission for Undergraduate Programs",
       heading: "Admission Requirements:",
