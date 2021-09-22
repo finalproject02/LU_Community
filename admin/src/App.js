@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import AdminNavbar from './components/AdminNavbar/AdminNavbar';
 import Home from './pages/Home/Home';
