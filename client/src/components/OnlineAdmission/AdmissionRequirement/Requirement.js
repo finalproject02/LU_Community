@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import "./Requirement.css";
-import { useHistory } from "react-router-dom";
-import "./AdmissionRequirementData.js";
+import admissionTypes from "./admissionTypes";
+import AdmissionFirstStep from "../AdmissionFristStep/AdmissionFirstStep";
 
 const Requirement = () => {
-  let history = useHistory();
-  function handleClick() {
-    history.push("/admissionfirststep");
-  }
+  const [step, setStep] = useState(false)
 
   return (
     <Container>
       <Row className="justify-content-center">
-        {admissionTypes.map((item) => (
+        {!step ? admissionTypes.map((item) => (
           <Col md="8">
             <Card className="w-100 my-5">
               <Card.Body className="shadow-sm p-4">
@@ -35,17 +32,18 @@ const Requirement = () => {
                 <Card.Text>{item.requirement7}</Card.Text>
                 <hr />
                 <div className="text-end">
-                  <Card.Link
+                  <Card
                     className="btn bg-primary text-white px-5"
-                    onClick={handleClick}
+                    onClick={() => item.name === 'B.Sc' ? setStep(true) : alert('Coming soon..')}
                   >
                     Next
-                  </Card.Link>
+                  </Card>
                 </div>
               </Card.Body>
             </Card>
           </Col>
-        ))}
+        )) : <AdmissionFirstStep />
+        }
       </Row>
     </Container>
   );
