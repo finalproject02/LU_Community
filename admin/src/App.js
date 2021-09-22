@@ -9,6 +9,8 @@ import {
 import AdminNavbar from './components/AdminNavbar/AdminNavbar';
 import Home from './pages/Home/Home';
 import AdmissionRequest from './pages/AdmissionRequest/AdmissionRequest';
+import NotFound from "./components/NotFound/NotFound";
+import StudentDetails from './components/StudentDetails/StudentDetails';
 
 function App() {
   return (
@@ -16,11 +18,20 @@ function App() {
       <Router>
         <AdminNavbar></AdminNavbar>
         <Switch>
-          <Route exact path="/home">
+          <Route exact path="/">
             <Home></Home>
           </Route>
-          <Route exact path="/admissionRequest">
+          <Route path="/home">
+            <Home></Home>
+          </Route>
+          <Route path="/admissionRequest">
             <AdmissionRequest></AdmissionRequest>
+          </Route>
+          <Route path="/studentDetails">
+            <StudentDetails></StudentDetails>
+          </Route>
+          <Route path="*">
+            <NotFound></NotFound>
           </Route>
         </Switch>
       </Router>
