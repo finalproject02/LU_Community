@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Col, Container, Form, Row } from 'react-bootstrap';
 
 const AdmissionFinalStep = () => {
+
     return (
         <Container>
             <Row className="justify-content-center">
