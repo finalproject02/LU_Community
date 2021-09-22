@@ -1,556 +1,437 @@
-import React from 'react';
+import React, { useState } from 'react';
 import jahed from "../../images/jahed.jpg";
+import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import Button from '@restart/ui/esm/Button';
 
 const StudentDetails = () => {
+    const [value, setValue] = useState("");
+
+
+    const checkResults = () => {
+
+    }
+    const handleSubmit = () => {
+
+    }
+
     return (
         <div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="card bg-light w-75 shadow rounded my-5">
-                        <div class="card-body">
-                            <form action="" method="post">
-                                <fieldset>
-                                    <legend>
-                                        <h2 class="textPrimary">
-                                            Leading University Admission Form
-                                        </h2>
-                                    </legend>
-                                    <h6 class="card-title textSecondary">
-                                        Admission for Undergraduate Programs
-                                    </h6>
-                                    <hr class="mt-5" />
+            <Container>
+                <Row className="justify-content-center">
+                    <Col md="10">
+                        <Card className="bg-light w-100 shadow rounded my-5">
+                            <Card.Body className="card-body">
+                                <Form onSubmit={handleSubmit}>
                                     <fieldset>
-                                        <div class="row">
-                                            <legend>Basic Info.</legend>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="program" class="form-label"
-                                                    >Selected Program</label
-                                                    >
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="name"
-                                                        value="CSE"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="name" class="form-label"
-                                                    >Full Name of the Applicant</label
-                                                    >
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="name"
-                                                        value="Mahdi Hossain Tanvir"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="f_name" class="form-label"
-                                                    >Applicant's Father Name</label
-                                                    >
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="f_name"
-                                                        value="Masuk Miah"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="f_occupation" class="form-label"
-                                                    >Applicant's Father's Occupation</label
-                                                    >
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="f_occupation"
-                                                        value="Businessman"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="m_name" class="form-label"
-                                                    >Applicant's Mother Name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-2"
-                                                        id="m_name"
-                                                        value="Shahana Akhter"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="m_occupation" class="form-label"
-                                                    >Applicant's Mother Occupation
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="m_occupation"
-                                                        value="House Wife"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nid" class="form-label"
-                                                    >Father's/Mother's NID No.
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="nid"
-                                                        value="642 3296 4790"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="applicant_mobile" class="form-label"
-                                                    >Applicant's Mobile
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant_mobile"
-                                                        value="01750511747"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="applicant_email" class="form-label"
-                                                    >Applicant's Email
-                                                    </label>
-                                                    <input
-                                                        type="email"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant's email"
-                                                        value="applicant's email"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label
-                                                        for="applicant's_nid_birth"
-                                                        class="form-label"
-                                                    >Applicant's National ID / Birth Certificate No.
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant's_nid_birth"
-                                                        value="applicant's nid/birth certificate no. "
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="applicant_birthday" class="form-label"
-                                                    >Applicant's Date of Birth
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant_birthday"
-                                                        value="applicant's date of birth"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="pplicant_gender" class="form-label"
-                                                    >Applicant's Gender
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant_birthday"
-                                                        value="Male"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="applicant_religion" class="form-label"
-                                                    >Applicant's Religion
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant_birthday"
-                                                        value="Islam"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label
-                                                        for="applicant_nationality"
-                                                        class="form-label"
-                                                    >Applicant's Nationality
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant_nationality"
-                                                        value="applicant's nationality"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="applicant_marital" class="form-label"
-                                                    >Applicant's Marital Status
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant_marital"
-                                                        value="applicant's marital status"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="applicant_bloodgrp" class="form-label"
-                                                    >Applicant's Blood Group
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="applicant_bloodgrp"
-                                                        value="applicant's blood group"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <hr />
-                                    <fieldset>
-                                        <div class="row">
-                                            <legend>Guardian's Info.</legend>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="g_name" class="form-label"
-                                                    >Guardian's Name and Address
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="g_name"
-                                                        value="guardian's name and address"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="g_contact" class="form-label"
-                                                    >Guardian's Contact No
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        class="form-control w-100 mb-3"
-                                                        id="g_contact"
-                                                        value="guardian's contact no"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <hr />
-                                    <fieldset>
-                                        <div class="row">
-                                            <legend>Address</legend>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="permanent_address" class="form-label"
-                                                    >Permanent Address
-                                                    </label>
-                                                    <textarea
-                                                        class="form-control w-100 mb-3"
-                                                        name="Permanent_Address"
-                                                        id="permanent_address"
-                                                        cols="10"
-                                                        rows="4"
-                                                    ></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="present_address" class="form-label"
-                                                    >Present Address
-                                                    </label>
-                                                    <textarea
-                                                        class="form-control w-100 mb-3"
-                                                        name="Present_Address"
-                                                        id="present_address"
-                                                        cols="10"
-                                                        rows="4"
-                                                    ></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <hr />
-                                    <fieldset>
-                                        <div class="row">
-                                            <legend>Academic Info.</legend>
-                                            <div class="col-md-6">
-                                                <fieldset>
-                                                    <legend>SSC Info.</legend>
-                                                    <div class="form-group">
-                                                        <label for="ssc_regi" class="form-label"
-                                                        >Registration no. of SSC
-                                                        </label>
-                                                        <input
+                                        <legend>
+                                            <h2 className="textPrimary">
+                                                Leading University Admission Form
+                                            </h2>
+                                        </legend>
+                                        <h6 className="card-title textSecondary">
+                                            Admission for Undergraduate Programs
+                                        </h6>
+                                        <hr className="mt-5" />
+                                        <fieldset>
+                                            <Row>
+                                                <legend>Basic Info.</legend>
+                                                <Col md="6">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Selected Program</Form.Label>
+                                                        <Form.Control
                                                             type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="ssc_regi"
-                                                            value="ssc registration number"
+                                                            className="w-100"
+                                                            value={value}
                                                         />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="ssc_inst_name" class="form-label"
-                                                        >Name of the Institution (SSC)
-                                                        </label>
-                                                        <input
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Full Name of the Applicant</Form.Label>
+                                                        <Form.Control
                                                             type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="ssc_inst_name"
-                                                            value="ssc institution name"
+                                                            className="w-100"
+                                                            value={value}
                                                         />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="ssc_roll" class="form-label"
-                                                        >Roll
-                                                        </label>
-                                                        <input
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Father Name</Form.Label>
+                                                        <Form.Control
                                                             type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="ssc_roll"
-                                                            value="ssc roll"
+                                                            className="w-100"
+                                                            value={value}
                                                         />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_group" class="form-label"
-                                                        >Group
-                                                        </label>
-                                                        <input
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Father's Occupation</Form.Label>
+                                                        <Form.Control
                                                             type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="ssc_group"
-                                                            value="ssc group"
+                                                            className="w-100"
+                                                            value={value}
                                                         />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_inst_year" class="form-label"
-                                                        >Year
-                                                        </label>
-                                                        <input
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Mother Name</Form.Label>
+                                                        <Form.Control
                                                             type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="ssc_inst_year"
-                                                            value="ssc year"
+                                                            className="w-100"
+                                                            value={value}
                                                         />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_board" class="form-label"
-                                                        >Board
-                                                        </label>
-                                                        <input
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Mother Occupation</Form.Label>
+                                                        <Form.Control
                                                             type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="ssc_board"
-                                                            value="ssc board"
+                                                            className="w-100"
+                                                            value={value}
                                                         />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_gpa" class="form-label"
-                                                        >GPA
-                                                        </label>
-                                                        <input
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Father's/Mother's NID No.</Form.Label>
+                                                        <Form.Control
                                                             type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="ssc_gpa"
-                                                            value="ssc gpa"
+                                                            className="w-100"
+                                                            value={value}
                                                         />
-                                                    </div>
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Mobile</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col md="6">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Email</Form.Label>
+                                                        <Form.Control
+                                                            type="email"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's National ID / Birth Certificate No.
+                                                        </Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Date of Birth
+                                                        </Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Gender </Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Religion</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Nationality</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Marital Status</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Blood Group</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </fieldset>
+                                        <hr />
+                                        <fieldset>
+                                            <Row>
+                                                <legend>Guardian's Info.</legend>
+                                                <Col md="6">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Guardian's Name and Address
+                                                        </Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col md="6">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Guardian's Contact No</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            className="w-100"
+                                                            value={value}
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </fieldset>
+                                        <hr />
+                                        <fieldset>
+                                            <Row>
+                                                <legend>Address</legend>
+                                                <Col md="6">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Permanent Address</Form.Label>
+                                                        <Form.Control as="textarea" className="w-100" name="Permanent_Address" rows={4} value={value} />
+                                                    </Form.Group>
+                                                </Col>
+                                                <div className="col-md-6">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Present Address
+                                                        </Form.Label>
+                                                        <Form.Control as="textarea" className="w-100" name="Present_Address" rows={4} value={value} />
+                                                    </Form.Group>
+                                                </div>
+                                            </Row>
+                                        </fieldset>
+                                        <hr />
+                                        <fieldset>
+                                            <Row>
+                                                <legend>Academic Info.</legend>
+                                                <Col md="6">
+                                                    <fieldset>
+                                                        <legend>SSC Info.</legend>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Registration no. of SSC</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Name of the Institution (SSC)</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Roll</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Group</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label >Year</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Board</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>GPA</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <div className="mt-3 mb-1">
+                                                            <Button className="btn bg-success" onClick={checkResults}
+                                                            >Check SSC Result</Button>
+                                                        </div>
+                                                        <small className="text-success">
+                                                            <FaCheckCircle></FaCheckCircle>
+                                                            The result is matched
+                                                        </small>
+                                                        <br />
+                                                        <small className="text-danger d-none">
+                                                            <FaTimesCircle></FaTimesCircle>
+                                                            The result is not matched
+                                                        </small>
+                                                    </fieldset>
+                                                </Col>
+                                                <div className="col-md-6">
+                                                    <fieldset>
+                                                        <legend>HSC Info.</legend>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Registration no. of HSC</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Name of the Institution (HSC)
+                                                            </Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Roll</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Group</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Year</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>Board</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label>GPA</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                className="w-100"
+                                                                value={value}
+                                                            />
+                                                        </Form.Group>
 
-                                                    <div class="mt-3 mb-1">
-                                                        <a class="btn bg-success" href="#"
-                                                        >Check SSC Result</a
-                                                        >
-                                                    </div>
-                                                    <small class="text-success">
-                                                        <i
-                                                            class="fa fa-check-circle mr-1"
-                                                            aria-hidden="true"
-                                                        ></i
-                                                        >The result is matched
-                                                    </small>
-                                                    <br />
-                                                    <small class="text-danger d-none">
-                                                        <i
-                                                            class="fa fa-times-circle mr-1"
-                                                            aria-hidden="true"
-                                                        ></i
-                                                        >The result is not matched
-                                                    </small>
-                                                </fieldset>
+                                                        <div className="mt-3 mb-1">
+                                                            <Button className="btn bg-success" onClick={checkResults}
+                                                            >Check HSC Result</Button>
+                                                        </div>
+                                                        <small className="text-success">
+                                                            <FaCheckCircle></FaCheckCircle>
+                                                            The result is matched
+                                                        </small>
+                                                        <br />
+                                                        <small className="text-danger d-none">
+                                                            <FaTimesCircle></FaTimesCircle>
+                                                            The result is not matched
+                                                        </small>
+                                                    </fieldset>
+                                                </div>
+                                            </Row>
+                                        </fieldset>
+                                        <hr />
+                                        <fieldset>
+                                            <Row>
+                                                <legend>Documents</legend>
+                                                <Col md="6" className="d-flex justify-content-center document">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Applicant's Photo</Form.Label>
+                                                        <Card.Img
+                                                            src={jahed}
+                                                            className="img-fluid w-75 p-2 img-thumbnail"
+                                                            alt="image_name"
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Guardian's Photo</Form.Label>
+                                                        <Card.Img
+                                                            src={jahed}
+                                                            className="img-fluid w-75 p-2 img-thumbnail"
+                                                            alt="image_name"
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col md="6" className="d-flex justify-content-center">
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>SSC Transcript</Form.Label>
+                                                        <Card.Img
+                                                            src={jahed}
+                                                            className="img-fluid w-75 p-2 img-thumbnail"
+                                                            alt="image_name"
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>HSC Transcript</Form.Label>
+                                                        <Card.Img
+                                                            src={jahed}
+                                                            className="img-fluid w-75 p-2 img-thumbnail"
+                                                            alt="image_name"
+                                                        />
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </fieldset>
+                                        <br />
+                                        <div className="d-flex justify-content-between px-3">
+                                            <div>
+                                                <input type="submit" value="Reject Request" className="btn btn-danger" />
                                             </div>
-                                            <div class="col-md-6">
-                                                <fieldset>
-                                                    <legend>HSC Info.</legend>
-                                                    <div class="form-group">
-                                                        <label for="hsc_regi" class="form-label"
-                                                        >Registration no. of HSC
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="hsc_regi"
-                                                            value="hsc registration number"
-                                                        />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_inst_name" class="form-label"
-                                                        >Name of the Institution (HSC)
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="hsc_inst_name"
-                                                        />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_roll" class="form-label"
-                                                        >Roll
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="hsc_roll"
-                                                            value="hsc roll"
-                                                        />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_group" class="form-label"
-                                                        >Group
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="hsc_group"
-                                                            value="hsc group"
-                                                        />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_inst_year" class="form-label"
-                                                        >Year
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="hsc_inst_year"
-                                                            value="hsc year"
-                                                        />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_board" class="form-label"
-                                                        >Board
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="hsc_board"
-                                                            value="hsc board"
-                                                        />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hsc_gpa" class="form-label"
-                                                        >GPA
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            class="form-control w-100 mb-3"
-                                                            id="hsc_gpa"
-                                                            value="hsc gpa"
-                                                        />
-                                                    </div>
-
-                                                    <div class="mt-3 mb-1">
-                                                        <a class="btn bg-success" href="#"
-                                                        >Check HSC Result</a
-                                                        >
-                                                    </div>
-                                                    <small class="text-success"
-                                                    ><i
-                                                        class="fa fa-check-circle mr-1"
-                                                        aria-hidden="true"
-                                                    ></i
-                                                        >The result is matched</small
-                                                    >
-                                                    <small class="text-danger d-none">
-                                                        <i
-                                                            class="fa fa-times-circle mr-1"
-                                                            aria-hidden="true"
-                                                        ></i
-                                                        >The result is not matched
-                                                    </small>
-                                                </fieldset>
+                                            <div>
+                                                <input type="submit" value="Accept Request" className="btn btn-success" />
                                             </div>
                                         </div>
                                     </fieldset>
-                                    <hr />
-                                    <fieldset>
-                                        <div class="row">
-                                            <legend>Documents</legend>
-                                            <div class="col-md-6 d-flex justify-content-center document">
-                                                <div class="form-group">
-                                                    <label for="applicant_photo" class="form-label">
-                                                        Applicant's Photo
-                                                    </label>
-                                                    <img
-                                                        src={jahed}
-                                                        class="img-fluid w-75 p-2 img-thumbnail"
-                                                        alt="tanvirs Image"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="guardian_photo" class="form-label"
-                                                    >Guardian's Photo
-                                                    </label>
-                                                    <img
-                                                        src={jahed}
-                                                        class="img-fluid w-75 p-2 img-thumbnail"
-                                                        alt="tanvirs Image"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 d-flex justify-content-center">
-                                                <div class="form-group">
-                                                    <label for="ssc_transcript" class="form-label"
-                                                    >SSC Transcript
-                                                    </label>
-                                                    <img
-                                                        src={jahed}
-                                                        class="img-fluid w-75 p-2 img-thumbnail"
-                                                        alt="tanvirs Image"
-                                                    />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="hsc_transcript" class="form-label"
-                                                    >HSC Transcript
-                                                    </label>
-                                                    <img
-                                                        src={jahed}
-                                                        class="img-fluid w-75 p-2 img-thumbnail"
-                                                        alt="tanvirs Image"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <br />
-                                    <div class="d-flex justify-content-between px-3">
-                                        <div>
-                                            <a href="#" class="btn btn-danger">Reject Request</a>
-                                        </div>
-                                        <div>
-                                            <a href="#" class="btn btn-success"
-                                            >Approve Request</a
-                                            >
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 };
