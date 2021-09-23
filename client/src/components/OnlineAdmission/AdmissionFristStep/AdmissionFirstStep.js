@@ -55,6 +55,7 @@ const AdmissionFirstStep = () => {
                                 placeholder="applicant name"
                                 name={'applicant_name'}
                                 onChange={handleChane}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -66,10 +67,10 @@ const AdmissionFirstStep = () => {
                             <Form.Control
                                 type="text"
                                 className="w-100"
-                                id="f_name"
                                 placeholder="applicant father name"
                                 name={'applicant_fatherName'}
                                 onChange={handleChane}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -83,6 +84,7 @@ const AdmissionFirstStep = () => {
                                 placeholder="applicant's father occupation"
                                 onChange={handleChane}
                                 name={'applicant_father_occupation'}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -96,6 +98,7 @@ const AdmissionFirstStep = () => {
                                 placeholder="applicant's mother name"
                                 name={'applicant_motherName'}
                                 onChange={handleChane}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -109,6 +112,7 @@ const AdmissionFirstStep = () => {
                                 placeholder="applicant's mother occupation"
                                 onChange={handleChane}
                                 name={'applicant_mother_occupation'}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -117,12 +121,13 @@ const AdmissionFirstStep = () => {
                               <span className="text-danger fw-bolder">*</span>
                             </Form.Label>
                             <Form.Control
-                                type="text"
+                                type="number"
                                 className="w-100"
                                 id="nid"
                                 placeholder="father's/mother's nid"
                                 name={'father_or_mother_nid'}
                                 onChange={handleChane}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -131,11 +136,12 @@ const AdmissionFirstStep = () => {
                               <span className="text-danger fw-bolder">*</span>
                             </Form.Label>
                             <Form.Control
-                                type="text"
+                                type="number"
                                 className="w-100"
                                 placeholder="applicant's mobile"
                                 name={'applicant_mobile'}
                                 onChange={handleChane}
+                                required
                             />
                           </Form.Group>
                         </Col>
@@ -151,6 +157,7 @@ const AdmissionFirstStep = () => {
                                 placeholder="applicant's email"
                                 name={'applicant_email'}
                                 onChange={handleChane}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -159,11 +166,12 @@ const AdmissionFirstStep = () => {
                               <span className="text-danger fw-bolder">*</span>
                             </Form.Label>
                             <Form.Control
-                                type="text"
+                                type="number"
                                 className="w-100"
                                 placeholder="applicant's nid/birth certificate no. "
                                 onChange={handleChane}
                                 name={'applicant_birth_or_nid_number'}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -178,6 +186,7 @@ const AdmissionFirstStep = () => {
                                 placeholder="applicant's date of birth"
                                 onChange={handleChane}
                                 name={'applicant_date_of_birth'}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -223,6 +232,7 @@ const AdmissionFirstStep = () => {
                                 placeholder="applicant's nationality"
                                 name={'applicant_nationality'}
                                 onChange={handleChane}
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -236,6 +246,7 @@ const AdmissionFirstStep = () => {
                                 name="applicant_marital_status"
                                 onChange={handleChane}
                                 placeholder="applicant's marital status"
+                                required
                             />
                           </Form.Group>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -249,6 +260,7 @@ const AdmissionFirstStep = () => {
                                 name="applicant_blood_group"
                                 onChange={handleChane}
                                 placeholder="applicant's blood group"
+                                required
                             />
                           </Form.Group>
                         </Col>

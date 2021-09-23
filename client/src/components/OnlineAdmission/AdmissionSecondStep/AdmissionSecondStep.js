@@ -42,6 +42,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 placeholder="guardian's name"
                                                                 name={'guardian_name'}
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -61,6 +62,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 placeholder="guardian's contact no"
                                                                 name={'guardian_contact'}
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -84,6 +86,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 rows={5}
                                                                 onChange={handleChange}
                                                                 name={'permanent_address'}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -102,6 +105,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 rows={5}
                                                                 onChange={handleChange}
                                                                 name={'present_address'}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
