@@ -2,35 +2,16 @@ import admissions from "../models/admissionModel.js";
 import { Builder, By, until } from 'selenium-webdriver';
 import { sendOfferLetterMessage, sendAccurateCredential } from "../services/mailService.js";
 export const admission = async (req, res) => {
-    const {
-        program_name, applicant_name, applicant_email,
-        applicant_birth_or_nid_number, applicant_mobile,
-        applicant_fatherName, applicant_motherName,
-        applicant_date_of_birth,
-        ssc_regis_no, ssc_institution_name,
-        ssc_roll_no, ssc_group, ssc_year, ssc_board,
-        ssc_gpa, hsc_regis_no, hsc_institution_name,
-        hsc_roll_no, hsc_group, hsc_year, hsc_board,
-        hsc_gpa
-    } = req.body;
-
-    const newAdmission = new admissions({
-        program_name, applicant_name, applicant_email,
-        applicant_birth_or_nid_number, applicant_mobile,
-        applicant_fatherName, applicant_motherName,
-        applicant_date_of_birth,
-        ssc_regis_no, ssc_institution_name,
-        ssc_roll_no, ssc_group, ssc_year, ssc_board,
-        ssc_gpa, hsc_regis_no, hsc_institution_name,
-        hsc_roll_no, hsc_group, hsc_year, hsc_board,
-        hsc_gpa
-    });
+    const application = req.body;
 
     try {
+        const newAdmission = new admissions(application);
         await newAdmission.save()
-        res.status(200).json({ success: true, msg: 'Application successfully completed. We will with you contact very soon.', newAdmission: newAdmission })
+        res.status(200).json({ application: newAdmission, success: true, message: 'Application successfully completed. We will with you contact very soon.' })
+
     } catch (error) {
-        res.status(400).json({msg: error})
+       // res.status(400).json({ message: error, success: false })
+        console.log(error)
     }
 
 
@@ -41,7 +22,7 @@ export const getApplications = async (req, res) => {
         const applications = await admissions.find();
         res.status(200).json({ applications: applications });
     } catch (error) {
-        res.status(400).json({ msg: error })
+      res.status(400).json({ message : 'Something went wrong' })
     }
 }
 

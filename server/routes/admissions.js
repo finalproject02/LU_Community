@@ -4,7 +4,7 @@ import {admission, getApplications, getApplication, verifySSCCredentialChecking,
 
 const router = express.Router();
 
-router.post('/onlineAdmissions', admission);
+router.post('/onlineAdmission', admission);
 router.get('/onlineAdmissions/', getApplications);
 router.get('/onlineAdmissions/:id', getApplication);
 router.patch('/onlineAdmissions/:id/SSCCredentialCheck', verifySSCCredentialChecking);

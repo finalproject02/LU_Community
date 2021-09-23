@@ -1,15 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import AdmissionFinalStep from "../AdmissionFinalStep/AdmissionFinalStep";
 
-const AdmissionSecondStep = ({firstFormData}) => {
+const AdmissionSecondStep = ({ firstFormData }) => {
     const [secondStep, setSecondStep] = useState(false);
-    const [secondFormData, setSecondForm] = useState({guardian_name:  '', guardian_contact: '', present_address: '', permanent_address: ''});
-    const handleChange = (e) => setSecondForm({...firstFormData, ...secondFormData, [e.target.name] : e.target.value})
+    const [secondFormData, setSecondForm] = useState({ guardian_name: '', guardian_contact: '', present_address: '', permanent_address: '' });
+    const handleChange = (e) => setSecondForm({ ...firstFormData, ...secondFormData, [e.target.name]: e.target.value })
     const handleSubmit = (e) => {
         e.preventDefault();
         setSecondStep(true)
-        console.log(secondFormData)
     }
     return (
         <Container>
@@ -31,7 +30,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                 <Row>
                                                     <legend>Guardian's Info.</legend>
                                                     <Col md="6">
-                                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                        <Form.Group className="mb-3">
                                                             <Form.Label>
                                                                 Guardian's Name
                                                                 <span className="text-danger fw-bolder">*</span>
@@ -42,14 +41,13 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 placeholder="guardian's name"
                                                                 name={'guardian_name'}
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
                                                     <Col md="6">
                                                         <Form.Group
-                                                            className="mb-3"
-                                                            controlId="formBasicEmail"
-                                                        >
+                                                            className="mb-3">
                                                             <Form.Label>
                                                                 Guardian's Contact No
                                                                 <span className="text-danger fw-bolder">*</span>
@@ -61,6 +59,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 placeholder="guardian's contact no"
                                                                 name={'guardian_contact'}
                                                                 onChange={handleChange}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -71,9 +70,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                     <legend>Address</legend>
                                                     <Col md="6">
                                                         <Form.Group
-                                                            className="mb-3"
-                                                            controlId="formBasicEmail"
-                                                        >
+                                                            className="mb-3">
                                                             <Form.Label>
                                                                 Permanent Address
                                                                 <span className="text-danger fw-bolder">*</span>
@@ -84,16 +81,13 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 rows={5}
                                                                 onChange={handleChange}
                                                                 name={'permanent_address'}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
                                                     <Col md="6">
-                                                        <Form.Group
-                                                            className="mb-3"
-                                                            controlId="formBasicEmail"
-                                                        >
-                                                            <Form.Label>
-                                                                Present Address
+                                                        <Form.Group className="mb-3">
+                                                            <Form.Label> Present Address
                                                                 <span className="text-danger fw-bolder">*</span>
                                                             </Form.Label>
                                                             <Form.Control
@@ -102,6 +96,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                                                 rows={5}
                                                                 onChange={handleChange}
                                                                 name={'present_address'}
+                                                                required
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -109,8 +104,11 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                             </fieldset>
                                             <hr />
                                         </Row>
-                                        <div className="text-end">
-                                            <button type={'submit'} className="btn bg-primary text-white px-5">
+                                        <div className="d-flex align-items-center justify-content-between">
+                                            <button className="btn bg-primary text-white px-5" type={'button'}>
+                                                Previous
+                                            </button>
+                                            <button className="btn bg-primary text-white px-5" type={'submit'}>
                                                 Next
                                             </button>
                                         </div>
@@ -118,7 +116,7 @@ const AdmissionSecondStep = ({firstFormData}) => {
                                 </Form>
                             </Card.Body>
                         </Card>
-                    </Col> : <AdmissionFinalStep secondFormData={secondFormData}/>
+                    </Col> : <AdmissionFinalStep secondFormData={secondFormData} />
                 }
             </Row>
         </Container>
