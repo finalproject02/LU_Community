@@ -8,9 +8,9 @@ import Footer from "../../components/Footer/Footer";
 const Home = () => {
   return (
     <div className="bg-light">
-      <Header></Header>
-      <MainNavbar></MainNavbar>
-      <MainCarousel></MainCarousel>
+      <Header/>
+      <MainNavbar/>
+      <MainCarousel/>
       <HomeBody></HomeBody>
       <Footer></Footer>
     </div>
