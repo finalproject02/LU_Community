@@ -14,13 +14,13 @@ function App() {
   return (
     <div>
       <Router>
-        <AdminNavbar></AdminNavbar>
+        <AdminNavbar/>
         <Switch>
           <Route exact path="/home">
-            <Home></Home>
+            <Home/>
           </Route>
           <Route exact path="/admissionRequest">
-            <AdmissionRequest></AdmissionRequest>
+            <AdmissionRequest/>
           </Route>
         </Switch>
       </Router>
