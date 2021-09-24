@@ -12,7 +12,7 @@ import Events from "../Events/Events";
 import CampusFacilities from "../CampusFacilities/CampusFacilities";
 import CampusLocation from "../CampusLocation/CampusLocation";
 import Affiliations from "../Affiliations/Affiliations";
-import Footer from "../Footer/Footer";
+import MainSidebar from "../MainSidebar/MainSidebar";
 
 const HomeBody = () => {
   return (
@@ -25,14 +25,7 @@ const HomeBody = () => {
           <LatestNews></LatestNews>
         </Col>
         <Col md="4" className="mt-0 mt-sm-5">
-          <AdmissionGoingOn></AdmissionGoingOn>
-          <HomeSideCard title={"Forms & Downloads"}></HomeSideCard>
-          <HomeSideCard title={"Contact"}></HomeSideCard>
-          <HomeSideCard title={"Academic Calendar"}></HomeSideCard>
-          <NoticeBoard></NoticeBoard>
-          <OfficeOrder></OfficeOrder>
-          <SocialMediaCard></SocialMediaCard>
-          <HomeSideMenu></HomeSideMenu>
+          <MainSidebar></MainSidebar>
         </Col>
       </Row>
       <Row>

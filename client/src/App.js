@@ -5,130 +5,134 @@ import OnlineAdmissionBody from "./pages/OnlineAdmission/OnlineAdmissionBody";
 import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
 import NotFound from "./components/NotFound/NotFound";
 import Classroom from "./pages/Classroom/Classroom";
+import Header from "./components/Header/Header";
+import MainNavbar from "./components/MainNavbar/MainNavbar";
+import Login from "./pages/Login/Login";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
-    <div>
+    <div className="bg-light">
       <Router>
+        <Header />
+        <MainNavbar />
         <Switch>
           <Route exact path="/home">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/aboutus">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/admissionpolicy">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/scholarshipaid">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/howtoapply">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/academicprogram">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/tutionfees">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/academicpolicy">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/onlineadmission">
-            <OnlineAdmissionBody></OnlineAdmissionBody>
+            <OnlineAdmissionBody />
           </Route>
           <Route path="/admissionfirststep">
-            <AdmissionFirstStep></AdmissionFirstStep>
+            <AdmissionFirstStep />
           </Route>
-          {/* <Route path="/admissionfirststep/">
-            <AdmissionFirstStep></AdmissionFirstStep>
-          </Route> */}
           <Route path="/contact">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/faq">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofbba">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofartandmodernlang">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofsocialscience">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofmodernscience">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofbba">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofcse">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofeee">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofcivil">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofenglish">
             <Home></Home>
           </Route>
           <Route path="/departmentofarchitect">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentoflaw">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofislamicstudies">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentoftourism">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofbangla">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/results">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/paymentprocedure">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/semesterregi">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/classroom">
-            <Classroom></Classroom>
+            <Classroom />
           </Route>
           <Route path="/socialplatform">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/routine">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/help">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/iqac">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/library">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/login">
-            <Home></Home>
+            <Login />
           </Route>
           <Route exact path="/">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="*">
-            <NotFound></NotFound>
+            <NotFound />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );
