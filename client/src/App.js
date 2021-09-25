@@ -9,6 +9,7 @@ import Header from "./components/Header/Header";
 import MainNavbar from "./components/MainNavbar/MainNavbar";
 import Login from "./pages/Login/Login";
 import Footer from "./components/Footer/Footer";
+import Signup from "./pages/Signup/Signup";
 
 function App() {
   return (
@@ -124,6 +125,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route exact path="/">
             <Home />

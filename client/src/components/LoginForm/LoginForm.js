@@ -1,6 +1,7 @@
 import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -34,8 +35,11 @@ const LoginForm = () => {
                 {/* <Button type="submit" className="btn btn-primary px-4">
                     LOG IN
                 </Button> */}
-                <div className="bgSecondary w-100 text-center">
+                <div className="bgSecondary w-100 text-center mb-2">
                     <input type="submit" value="LOG IN" className="btn text-white" />
+                </div>
+                <div className="text-center">
+                    <Link to="#" className="textSecondary textHover">Forgot your password?</Link>
                 </div>
 
             </Form>

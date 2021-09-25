@@ -223,6 +223,9 @@ const MainNavbar = () => {
             <Nav.Link className="navFontSize" href="/login">
               Login
             </Nav.Link>
+            <Nav.Link className="navFontSize" href="/signup">
+              Signup
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
