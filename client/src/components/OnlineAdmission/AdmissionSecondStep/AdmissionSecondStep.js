@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import AdmissionFinalStep from "../AdmissionFinalStep/AdmissionFinalStep";
 
-const AdmissionSecondStep = ({ firstFormData }) => {
+const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
     const [secondStep, setSecondStep] = useState(false);
     const [secondFormData, setSecondForm] = useState({ guardian_name: '', guardian_contact: '', present_address: '', permanent_address: '' });
     const handleChange = (e) => setSecondForm({ ...firstFormData, ...secondFormData, [e.target.name]: e.target.value })
@@ -105,7 +105,7 @@ const AdmissionSecondStep = ({ firstFormData }) => {
                                             <hr />
                                         </Row>
                                         <div className="d-flex align-items-center justify-content-between">
-                                            <button className="btn bg-primary text-white px-5" type={'button'}>
+                                            <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => setFirstStep((prevalue) => !prevalue)}>
                                                 Previous
                                             </button>
                                             <button className="btn bg-primary text-white px-5" type={'submit'}>

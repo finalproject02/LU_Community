@@ -1,4 +1,5 @@
 import testModel from "../models/testModel.js";
+import { sendOfferLetterMessage, sendAccurateCredential } from "../services/mailService.js";
 
 export const test = async (req, res) => {
     const { name, email, password } = req.body;
@@ -12,7 +13,7 @@ export const test = async (req, res) => {
         await newTest.save();
         res.status(200).json({ test: newTest })
     } catch (error) {
-        res.status(400).json({ error })
+        console.log(error)
     }
 }
 
@@ -28,3 +29,14 @@ export const updateTest = async (req, res) => {
         console.log(error)
     }
 }
+
+export const sendOffer = async (req, res) => {
+    const { name, email } = req.body;
+    try {
+        await sendOfferLetterMessage(email, name);
+        res.json('Success')
+    } catch (error) {
+        console.log(error)
+    }
+}
+

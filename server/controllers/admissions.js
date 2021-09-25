@@ -31,10 +31,10 @@ export const getApplication = async (req, res) => {
     try {
         const application = await admissions.findOne({ _id: id });
         if (application.ssc_credential_authenticate === 'authenticated credential' && application.hsc_credential_authenticate === 'authenticated credential' && application.status === 'application padding') {
-           const response = await sendOfferLetterMessage(application.applicant_email, application.applicant_name);
+           await sendOfferLetterMessage(application.applicant_email, application.applicant_name);
            await admissions.findByIdAndUpdate(id, { status: 'sent email for payment' })
            res.status(200).json({ application: application })
-        } else if (application.ssc_credential_authenticate === 'not authenticated' && application.hsc_credential_authenticate === 'not authenticated' && application.status === 'application padding') {
+        } else if (application.ssc_credential_authenticate === 'not authenticated' && application.hsc_credential_authenticate === 'not authenticated' && application.status === 'application pending') {
               await sendAccurateCredential(application.applicant_email, application.applicant_name);
               await admissions.findByIdAndUpdate(id, { status: 'sent email for accurate information' })
               res.status(200).json({ application: application })
