@@ -1,0 +1,14 @@
+.navFont {
+  font-size: 20px;
+}
+.iconFont {
+  font-size: 23px;
+}
+.notificationCount {
+  position: absolute;
+  left: 19px;
+  top: -12px;
+}
+.dropdown-toggle::after {
+  content: none !important;
+}

@@ -10,6 +10,7 @@ import MainNavbar from "./components/MainNavbar/MainNavbar";
 import Login from "./pages/Login/Login";
 import Footer from "./components/Footer/Footer";
 import Signup from "./pages/Signup/Signup";
+import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
 
 function App() {
   return (
@@ -109,7 +110,7 @@ function App() {
             <Classroom />
           </Route>
           <Route path="/socialplatform">
-            <Home />
+            <SocialPlatform />
           </Route>
           <Route path="/routine">
             <Home />
