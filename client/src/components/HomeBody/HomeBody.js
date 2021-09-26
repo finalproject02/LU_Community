@@ -1,11 +1,5 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import AdmissionGoingOn from "../AdmissionGoingOn/AdmissionGoingOn";
-import HomeSideCard from "../HomeSideCard/HomeSideCard";
-import HomeSideMenu from "../HomeSideMenu/HomeSideMenu";
-import NoticeBoard from "../NoticeBoard/NoticeBoard";
-import OfficeOrder from "../OfficeOrder/OfficeOrder";
-import SocialMediaCard from "../SocialMediaCard/SocialMediaCard";
 import WelcomeMessage from "../WelcomeMessage/WelcomeMessage";
 import LatestNews from "../LatestNews/LatestNews";
 import Events from "../Events/Events";

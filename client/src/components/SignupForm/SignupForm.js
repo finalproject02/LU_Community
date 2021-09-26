@@ -17,7 +17,7 @@ const SignupForm = () => {
             <Form onSubmit={handleSubmit} className="shadow p-5">
                 <Form.Group className="mb-3">
                     <Form.Label>Student Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Nname" name={'studentName'} onChange={handleChange} />
+                    <Form.Control type="text" placeholder="Enter name" name={'studentName'} onChange={handleChange} />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Student Email</Form.Label>

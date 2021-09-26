@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import socialMedia from "./SocialMediaCardData";
 
 function SocialMediaCard() {
@@ -12,10 +13,10 @@ function SocialMediaCard() {
             <Card.Title className="textSecondary fs-4">
               {media.title}
             </Card.Title>
-            <Card.Text>
-              <a class="text-dark textHover h-50" href={media.url}>
+            <Card.Text as='div'>
+              <Link className="text-dark textHover h-50" to={media.url}>
                 <img className="w-25" src={media.logo} alt={media.title} />
-              </a>
+              </Link>
             </Card.Text>
           </Card.Body>
         </Card>
