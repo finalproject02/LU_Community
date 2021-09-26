@@ -16,8 +16,6 @@ function App() {
   return (
     <div className="bg-light">
       <Router>
-        <Header />
-        <MainNavbar />
         <Switch>
           <Route exact path="/home">
             <Home />
@@ -137,7 +135,7 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
-        <Footer />
+
       </Router>
     </div>
   );
