@@ -19,7 +19,7 @@ const ProfileIntro = () => {
     }
     return (
         <div>
-            <Card>
+            <Card className="mb-4">
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title pt-2">Intro</h5>
