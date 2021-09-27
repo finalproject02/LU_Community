@@ -33,7 +33,7 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case CURRENT_USER:
             return {
                 ...state,
-                currentUser: action.payload.user,
+                currentUser: action.payload,
                 isAuthenticated: true,
                 isLoading: false,
             };

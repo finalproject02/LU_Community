@@ -25,7 +25,7 @@ export const SignUp = (userData) => async (dispatch) => {
     }
 }
 
-export const SignIn = () => (userData) => async (dispatch) => {
+export const SignIn = (userData)  => async (dispatch) => {
     try {
         dispatch({ type: LOADING });
         const { data : { user, token } } = await api.loginAccount(userData);

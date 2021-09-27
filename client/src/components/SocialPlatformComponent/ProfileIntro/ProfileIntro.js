@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaBlog, FaBook, FaGraduationCap, FaHome, FaPhone, FaRegComment, FaRegEdit } from 'react-icons/fa';
+import { useSelector } from "react-redux";
 
 const ProfileIntro = () => {
+    const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -53,7 +55,7 @@ const ProfileIntro = () => {
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBlog className="fs-5" />
-                        <p className="card-text ps-2 fs-5"><span>25</span> followers</p>
+                        <p className="card-text ps-2 fs-5"><span>{currentUser?.followings.length+1}</span> followers</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">

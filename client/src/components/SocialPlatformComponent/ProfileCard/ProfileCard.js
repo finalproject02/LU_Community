@@ -3,8 +3,10 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import profileCardData from './ProfileCardData';
 import "./ProfileCard.css";
+import { useSelector } from "react-redux";
 
 const ProfileCard = () => {
+    const currentUser = useSelector(state => state.auth.currentUser)
     return (
         <div>
             {
@@ -13,7 +15,7 @@ const ProfileCard = () => {
                         <Row>
                             <Card className="w-100 shadow-sm mb-4">
                                 <Container>
-                                    <Card.Img className="w-100 h-50" src={item.coverPhoto} alt={item.name} />
+                                    <Card.Img className="w-100 h-50" src={item.coverPhoto} alt={currentUser?.name} />
                                     <Card.Body >
                                         <Row className="mb-2">
                                             <Card.Text as="div" className="userPosition">
@@ -21,7 +23,7 @@ const ProfileCard = () => {
                                             </Card.Text>
 
                                             <Col className="mt-5 ms-sm-5 ms-3">
-                                                <h5 className="ms-3 mt-5 fw-bold fs-3">{item.name}</h5>
+                                                <h5 className="ms-3 mt-5 fw-bold fs-3">{currentUser?.name}</h5>
                                                 <p className="ms-3 mb-0 text-lead fs-5">{item.position}</p>
                                                 <p className="text-muted ms-3 mb-0">{item.address}
                                                     <span data-bs-toggle="modal"
