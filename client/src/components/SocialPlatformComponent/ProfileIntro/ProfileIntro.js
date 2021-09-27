@@ -114,7 +114,7 @@ const ProfileIntro = () => {
                                 <Form.Control type="text" onChange={handleChange} name="currentTown" />
                             </Col>
                         </Row>
-                        <Row className="bgSecondary text-center">
+                        <Row className="bgSecondary text-center m-2">
                             <input type="submit" value="Save Changes" className="btn w-100 text-white" onClick={handleClose} />
                         </Row>
                     </Form>

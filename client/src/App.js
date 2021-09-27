@@ -15,7 +15,6 @@ import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
 function App() {
   return (
     <div className="bg-light">
-      <MainNavbar/>
       <Router>
         <Switch>
           <Route exact path="/home">
@@ -136,7 +135,6 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
-
       </Router>
     </div>
   );

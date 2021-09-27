@@ -58,8 +58,8 @@ const PostCard = () => {
                                 Molestias eius labore laudantium!</p>
                         </div>
                     </Card.Text>
-                    <Card.Text as="div">
-                        <Carousel activeIndex={index} onSelect={handleSelect} className="mb-2">
+                    <Card.Text as="div" className="d-flex justify-content-center h-75">
+                        <Carousel activeIndex={index} onSelect={handleSelect} className="mb-2 w-75">
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
