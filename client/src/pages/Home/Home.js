@@ -6,6 +6,7 @@ import HomeBody from "../../components/HomeBody/HomeBody";
 import Footer from "../../components/Footer/Footer";
 import {useDispatch} from "react-redux";
 import {ALlUser} from "../../actions/users";
+import MainNavbar from "../../components/MainNavbar/MainNavbar";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -14,11 +15,8 @@ const Home = () => {
     },[])
   return (
     <div className="bg-light">
-      <Header/>
-      <MainNavbar/>
-      <MainCarousel/>
-      <HomeBody/>
-      <Footer/>
+      <MainCarousel />
+      <HomeBody />
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import PostBox from '../PostBox/PostBox';
-import PostCard from '../PostCard/PostCard';
+import Post from '../Post/Post';
+import ProfileEducation from '../ProfileEducation/ProfileEducation';
+import ProfileIntro from '../ProfileIntro/ProfileIntro';
 
 const SocialHome = () => {
     return (
@@ -9,11 +10,11 @@ const SocialHome = () => {
             <Container>
                 <Row>
                     <Col md="8">
-                        <PostBox />
-                        <PostCard />
+                        <Post />
                     </Col>
                     <Col md="4">
-
+                        <ProfileIntro />
+                        <ProfileEducation />
                     </Col>
                 </Row>
             </Container>

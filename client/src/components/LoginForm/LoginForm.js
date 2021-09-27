@@ -20,12 +20,12 @@ const LoginForm = () => {
             <Form onSubmit={handleSubmit} className="shadow p-5">
                 <Form.Group className="mb-3">
                     <Form.Label>Enter Student Id or Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" name={'emailorid'} onChange={handleChange} />
+                    <Form.Control type="email" placeholder="Enter email" name={'emailorid'} onChange={handleChange} required />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name={'password'} onChange={handleChange} />
+                    <Form.Control type="password" placeholder="Password" name={'password'} onChange={handleChange} required />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -35,8 +35,8 @@ const LoginForm = () => {
                 {/* <Button type="submit" className="btn btn-primary px-4">
                     LOG IN
                 </Button> */}
-                <div className="bgSecondary w-100 text-center mb-2">
-                    <input type="submit" value="LOG IN" className="btn text-white" />
+                <div className="bgSecondary text-center mb-2">
+                    <input type="submit" value="LOG IN" className="btn w-100 text-white" />
                 </div>
                 <div className="text-center">
                     <Link to="#" className="textSecondary textHover">Forgot your password?</Link>
