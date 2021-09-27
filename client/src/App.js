@@ -15,6 +15,7 @@ import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
 function App() {
   return (
     <div className="bg-light">
+      <MainNavbar/>
       <Router>
         <Switch>
           <Route exact path="/home">
