@@ -1,17 +1,22 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import OnlineAdmissionBody from "./pages/OnlineAdmission/OnlineAdmissionBody";
 import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
 import NotFound from "./components/NotFound/NotFound";
 import Classroom from "./pages/Classroom/Classroom";
 import { Provider } from "react-redux";
 import store from "./store";
+import MainNavbar from "./components/MainNavbar/MainNavbar";
+import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
+import MainCarousel from "./components/MainCarousel/MainCarousel";
+import Footer from "./components/Footer/Footer";
+import Signup from "../src/pages/Signup/Signup.js";
+import Login from "../src/pages/Login/Login.js";
 function App() {
   return (
     <Provider store={store}>
       <div className="bg-light">
-        <MainNavbar />
         <Router>
           <Switch>
             <Route exact path="/home">
@@ -132,7 +137,6 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
-
         </Router>
       </div>
     </Provider>
