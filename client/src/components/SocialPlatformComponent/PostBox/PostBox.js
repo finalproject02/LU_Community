@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, Form, Modal } from 'react-bootstrap';
 import pic from "../../../images/facebook.png";
 import "./PostBox.css";
-import { FaCertificate, FaFile, FaFrownOpen, FaImage, FaMapMarkedAlt, FaPhotoVideo, FaUserCircle, FaVideo } from 'react-icons/fa';
+import { FaCertificate, FaFile, FaImage, FaMapMarkedAlt, FaPhotoVideo, FaUserCircle, FaVideo } from 'react-icons/fa';
 
 const PostBox = () => {
     const [show, setShow] = useState(false);
