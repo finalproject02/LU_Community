@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, Carousel, Dropdown, Form } from 'react-bootstrap';
 import { FaEllipsisV, FaFrownOpen, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare, FaSmile } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import pic from "../../../images/facebook.png";
+import jahed from "../../../images/Jahed.jpg";
 import "./PostCard.css";
 
 const PostCard = () => {
@@ -16,11 +16,11 @@ const PostCard = () => {
 
     return (
         <div>
-            <Card className="w-100">
+            <Card className="w-100 rounded-3">
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
                         <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                            <img src={pic} alt="" className="img-fluid smallProfile me-3" />
+                            <img src={jahed} alt="" className="img-fluid smallProfile me-3" />
                             <div className="d-flex align-items-center">
                                 <div>
                                     <h6>Md Jahed Miah</h6>
@@ -58,26 +58,26 @@ const PostCard = () => {
                                 Molestias eius labore laudantium!</p>
                         </div>
                     </Card.Text>
-                    <Card.Text as="div" className="d-flex justify-content-center h-75">
+                    <Card.Text as="div" className="d-flex justify-content-center">
                         <Carousel activeIndex={index} onSelect={handleSelect} className="mb-2 w-75">
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
-                                    src={pic}
+                                    src={jahed}
                                     alt="First slide"
                                 />
                             </Carousel.Item>
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
-                                    src={pic}
+                                    src={jahed}
                                     alt="Second slide"
                                 />
                             </Carousel.Item>
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
-                                    src={pic}
+                                    src={jahed}
                                     alt="Third slide"
                                 />
                             </Carousel.Item>
@@ -122,7 +122,7 @@ const PostCard = () => {
                     <Card.Text as="div">
                         <div className="mt-2">
                             <div className="d-flex justify-content-between position-relative pt-2">
-                                <img src={pic} alt="" className="img-fluid smProfile me-2" />
+                                <img src={jahed} alt="" className="img-fluid smProfile me-2" />
                                 <Form.Control type="text" className="ps-4 rounded-pill me-5"
                                     placeholder="Put your comment" />
                                 <div className="commentBoxPosition">
@@ -133,12 +133,12 @@ const PostCard = () => {
 
                             <div id="commentShow">
                                 <div className="d-flex justify-content-start align-items-center pt-2 mb-2 ms-3">
-                                    <img src={pic} alt="" className="img-fluid smProfile me-2" />
+                                    <img src={jahed} alt="" className="img-fluid smProfile me-2" />
                                     <div className="d-flex align-items-center">
                                         <div className="bgGray rounded p-2">
                                             <h6>Md Jahed Miah</h6>
                                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Perspiciatis, fugiat.</p>
+                                                Pers  jahediatis, fugiat.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -152,14 +152,14 @@ const PostCard = () => {
                                 </div>
                                 <div className="reply">
                                     <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
-                                        <img src={pic} alt=""
+                                        <img src={jahed} alt=""
                                             className="img-fluid smProfile me-2" />
                                         <div className="d-flex align-items-center">
                                             <div className="bgGray rounded p-2">
                                                 <h6>Md Jahed Miah</h6>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing
                                                     elit.
-                                                    Perspiciatis, fugiat.</p>
+                                                    Pers  jahediatis, fugiat.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -176,12 +176,12 @@ const PostCard = () => {
 
                             <div>
                                 <div className="d-flex justify-content-start align-items-center pt-2 mb-2 ms-3">
-                                    <img src={pic} alt="" className="img-fluid smProfile me-2" />
+                                    <img src={jahed} alt="" className="img-fluid smProfile me-2" />
                                     <div className="d-flex align-items-center">
                                         <div className="bgGray rounded p-2">
                                             <h6>Md Jahed Miah</h6>
                                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Perspiciatis, fugiat.</p>
+                                                Pers  jahediatis, fugiat.</p>
                                         </div>
                                     </div>
                                 </div>

@@ -11,7 +11,7 @@ const ProfileCard = () => {
                 profileCardData.map(item => (
                     <div key={item.id}>
                         <Row>
-                            <Card className="w-100 shadow-sm mb-4">
+                            <Card className="w-100 shadow-sm mb-4 rounded-3">
                                 <Container>
                                     <Card.Img className="w-100 h-50" src={item.coverPhoto} alt={item.name} />
                                     <Card.Body >

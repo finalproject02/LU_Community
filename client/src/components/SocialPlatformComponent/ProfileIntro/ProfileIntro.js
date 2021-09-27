@@ -19,7 +19,7 @@ const ProfileIntro = () => {
     }
     return (
         <div>
-            <Card className="mb-4">
+            <Card className="mb-4 rounded-3">
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title pt-2">Intro</h5>
@@ -63,18 +63,18 @@ const ProfileIntro = () => {
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaRegComment className="fs-5" />
-                        <Link to="#" className="anchor">
-                            <p className="card-text ps-2 fs-5">Send Message</p>
+                        <Link to="#" className="textHover">
+                            <p className="card-text ps-2 fs-5 textPrimary">Send Message</p>
                         </Link>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-3">
                         <FaPhone className="fs-5" />
-                        <Link to="#" className="anchor">
-                            <p className="card-text ps-2 fs-5"> 01719-373476</p>
+                        <Link to="#" className="textHover">
+                            <p className="card-text ps-2 fs-5 textPrimary"> 01719-373476</p>
                         </Link>
                     </Card.Text>
-                    <div className="bgSecondary text-center">
+                    <div className="bgPrimary text-center rounded-3">
                         <Link to="#" className="btn w-100 text-white">View More</Link>
                     </div>
                 </Card.Body>
@@ -114,7 +114,7 @@ const ProfileIntro = () => {
                                 <Form.Control type="text" onChange={handleChange} name="currentTown" />
                             </Col>
                         </Row>
-                        <Row className="bgSecondary text-center m-2">
+                        <Row className="bgSecondary text-center m-2 rounded-3">
                             <input type="submit" value="Save Changes" className="btn w-100 text-white" onClick={handleClose} />
                         </Row>
                     </Form>

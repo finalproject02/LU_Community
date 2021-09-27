@@ -12,7 +12,7 @@ const PostBox = () => {
     const [otherFile, setOtherFile] = useState();
     return (
         <div>
-            <Card className="w-100 shadow mb-4 w-100">
+            <Card className="w-100 shadow-sm mb-4 w-100 rounded-3">
                 <div class="d-flex justify-content-center pt-4">
                     <img src={pic} alt="" class="img-fluid smallProfile me-3" />
                     <input type="text" class="form-control ps-4 rounded-pill w-75"
@@ -101,7 +101,7 @@ const PostBox = () => {
                     </Card>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button type="button" class="btn btn-primary px-5 py-2 fs-5" onClick={handleClose}>Post</button>
+                    <button type="button" class="btn btn-primary px-5 py-2 fs-5 rounded-3" onClick={handleClose}>Post</button>
                 </Modal.Footer>
             </Modal>
         </div>

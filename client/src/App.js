@@ -5,12 +5,10 @@ import OnlineAdmissionBody from "./pages/OnlineAdmission/OnlineAdmissionBody";
 import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
 import NotFound from "./components/NotFound/NotFound";
 import Classroom from "./pages/Classroom/Classroom";
-import Header from "./components/Header/Header";
-import MainNavbar from "./components/MainNavbar/MainNavbar";
 import Login from "./pages/Login/Login";
-import Footer from "./components/Footer/Footer";
 import Signup from "./pages/Signup/Signup";
 import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
+import SocialProfile from "./components/SocialPlatformComponent/SocialProfile/SocialProfile";
 
 function App() {
   return (
@@ -109,6 +107,9 @@ function App() {
           </Route>
           <Route path="/socialplatform">
             <SocialPlatform />
+          </Route>
+          <Route path="/socialProfile">
+            <SocialProfile />
           </Route>
           <Route path="/routine">
             <Home />

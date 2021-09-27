@@ -1,12 +1,12 @@
 import React from 'react';
+import SocialHome from '../../components/SocialPlatformComponent/SocialHome/SocialHome';
 import SocialNavbar from '../../components/SocialPlatformComponent/SocialNavbar/SocialNavbar';
-import SocialProfile from '../../components/SocialPlatformComponent/SocialProfile/SocialProfile';
 
 const SocialPlatform = () => {
     return (
         <div>
             <SocialNavbar />
-            <SocialProfile />
+            <SocialHome />
         </div>
     );
 };
