@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const ProfileCard = () => {
     const currentUser = useSelector(state => state.auth.currentUser)
     return (
-        <div>
+        <div className="overflow-hidden">
             {
                 profileCardData.map(item => (
                     <div key={item.id}>
@@ -19,7 +19,7 @@ const ProfileCard = () => {
                                     <Card.Body >
                                         <Row className="mb-2">
                                             <Card.Text as="div" className="userPosition">
-                                                <img src={item.profilePhoto} className="img-fluid userProfile p-2 rounded-pill bg-light" alt={item.name} />
+                                                <img src={item.profilePhoto} className="img-fluid userProfile p-2 rounded-pill" alt={item.name} />
                                             </Card.Text>
 
                                             <Col className="mt-5 ms-sm-5 ms-3">
