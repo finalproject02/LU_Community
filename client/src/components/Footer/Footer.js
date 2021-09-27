@@ -9,6 +9,7 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -54,8 +55,9 @@ const Footer = () => {
           </Col>
           <Col md="4">
             <h2 className="textSecondary mb-3">Useful Links</h2>
-            <p className="text-white textHover"></p>
-            <p className="text-white textHover"></p>
+            <p className="text-white textHover">facebook</p>
+            <p className="text-white textHover">linkedin</p>
+            <p className="text-white textHover">Instagram</p>
           </Col>
           <Col md="4">
             <h2 className="textSecondary mb-3">Contact</h2>
@@ -69,9 +71,9 @@ const Footer = () => {
       <Row style={{ backgroundColor: "#0e6e6b" }}>
         <p className="text-center text-white p-4">
           Copyright 2021 Leading University, all rights reserved. Developed by
-          <a href="#" className="textHover textSecondary">
+          <Link to="#" className="textHover textSecondary">
             &nbsp;Dynamic Developers
-          </a>
+          </Link>
           . <br /> This site is maintained by CSE & IT Department.
         </p>
       </Row>

@@ -1,0 +1,12 @@
+.userProfile {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+.userPosition {
+  position: absolute;
+  top: 42%;
+  left: 10%;
+  overflow: hidden;
+  clear: both;
+}
