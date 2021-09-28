@@ -30,7 +30,6 @@ const ProfileCard = () => {
         dispatch(updateProfile(data));
         setShowSecond(false)
     }
-
     return (
         <div className="overflow-hidden">
             {
@@ -40,18 +39,28 @@ const ProfileCard = () => {
                             <Card className="w-100 shadow-sm mb-4 rounded-3">
                                 <Container>
                                     <Card.Body className="pt-0">
-                                        <Card.Img className="w-100" src={item.coverPhoto} alt={item.name} style={{ height: "20rem" }} />
+                                        <label htmlFor="coverPhoto" className="w-100">
+                                            {
+                                                coverPhoto && coverPhoto.type.startsWith("image") ? (<Card.Img className="w-100 img-fluid" src={URL.createObjectURL(coverPhoto)} alt="name" style={{ height: "20rem" }} />) : (<Card.Img className="w-100 img-fluid" src={item.coverPhoto} alt={item.name} style={{ height: "20rem" }} />)
+                                            }
+                                            <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
+                                            </Form.Control>
+                                        </label>
                                         <Row className="mb-2 position-relative">
-                                            <Card.Text as="div" className="userPosition">
-                                                <img src={item.profilePhoto} className="img-fluid userProfile p-2 bg-light" alt={item.name} />
-                                            </Card.Text>
+                                            <label htmlFor="profilePhoto" className="userPosition">
+                                                {
+                                                    profilePhoto && profilePhoto.type.startsWith("image") ? (<Card.Img style={{ height: '150px' }} className="img-fluid w-25 rounded-pill p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" />) : (<img src={item.profilePhoto} className="img-fluid userProfile p-2 bg-light" alt={item.name} style={{ height: '150px' }} />)
+                                                }
+                                                <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
+                                                </Form.Control>
+                                            </label>
                                             <Col className="mt-5 ms-sm-5 ms-3">
                                                 <h5 className="ms-3 mt-5 fw-bold fs-3">{currentUser?.name}</h5>
                                                 <p className="ms-3 mb-0 text-lead fs-5">{currentUser?.current_position}</p>
                                                 <p className="text-muted ms-3 mb-0">{currentUser?.present_address }
                                                     <span data-bs-toggle="modal"
                                                         data-bs-target="#contactModal">
-                                                        <Link to="#" className="textHover textPrimary" onClick={handleShow}>  Contact info</Link>
+                                                        <Link to="#" className="textHover textPrimary" onClick={handleShow}>Contact info</Link>
                                                     </span>
                                                 </p>
                                                 <p className="ms-3">
