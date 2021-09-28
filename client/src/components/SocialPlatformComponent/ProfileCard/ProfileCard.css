@@ -5,8 +5,13 @@
 }
 .userPosition {
   position: absolute;
-  top: 42%;
-  left: 10%;
+  top: -35%;
+  left: 5%;
   overflow: hidden;
   clear: both;
+}
+.profileBg {
+  width: 100%;
+  height: 5rem;
+  background-position: 50% 30%;
 }

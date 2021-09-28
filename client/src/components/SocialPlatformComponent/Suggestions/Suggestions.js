@@ -7,12 +7,12 @@ import "./Suggestions.css";
 const Suggestions = () => {
     console.log(friendSuggestion);
     return (
-        <div>
+        <div className="mb-4">
             <Card className="w-100 rounded-3">
                 <Card.Body>
                     <Card.Title className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title">People you may know</h5>
-                        <h6 className="card-subtitle mb-2 text-muted ">See All</h6>
+                        <h6 className="card-subtitle mb-2 text-muted textHover">See All</h6>
                     </Card.Title>
                     <Card.Text>
                         {

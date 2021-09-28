@@ -1,12 +1,13 @@
 import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
-import { Card, Carousel, Dropdown, Form } from 'react-bootstrap';
+import { Card, Carousel, Collapse, Dropdown, Form } from 'react-bootstrap';
 import { FaEllipsisV, FaFrownOpen, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare, FaSmile } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import jahed from "../../../images/Jahed.jpg";
 import "./PostCard.css";
 
 const PostCard = () => {
+    const [open, setOpen] = useState(false);
 
     const [index, setIndex] = useState(0);
 
@@ -15,7 +16,7 @@ const PostCard = () => {
     };
 
     return (
-        <div>
+        <div className="mb-4">
             <Card className="w-100 rounded-3">
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
@@ -108,7 +109,9 @@ const PostCard = () => {
                                 <FaRegHeart className="fs-5" />
                                 <p className="ps-2 pt-3 fs-5">Like</p>
                             </div>
-                            <div className="d-flex align-items-center">
+                            <div className="d-flex align-items-center" onClick={() => setOpen(!open)}
+                                aria-controls="example-collapse-text"
+                                aria-expanded={open}>
                                 <FaRegComment className="fs-5" />
                                 <p className="ps-2 pt-3 fs-5">Comment</p>
                             </div>
@@ -119,7 +122,7 @@ const PostCard = () => {
                         </div>
                     </Card.Text>
                     <hr className="hr" />
-                    <Card.Text as="div">
+                    <Collapse in={open}>
                         <div className="mt-2">
                             <div className="d-flex justify-content-between position-relative pt-2">
                                 <img src={jahed} alt="" className="img-fluid smProfile me-2" />
@@ -197,7 +200,7 @@ const PostCard = () => {
                             <Link href="#" className="ps-3 textHover text-dark">load more
                                 comment..</Link>
                         </div>
-                    </Card.Text>
+                    </Collapse>
                 </Card.Body>
             </Card>
         </div>

@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import OnlineAdmissionBody from "./pages/OnlineAdmission/OnlineAdmissionBody";
 import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
 import NotFound from "./components/NotFound/NotFound";
@@ -8,7 +8,9 @@ import Classroom from "./pages/Classroom/Classroom";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
-import SocialProfile from "./components/SocialPlatformComponent/SocialProfile/SocialProfile";
+import AllNotification from "./components/SocialPlatformComponent/pages/AllNotification/AllNotification";
+import SocialProfile from "./components/SocialPlatformComponent/pages/SocialProfile/SocialProfile";
+
 
 function App() {
   return (
@@ -110,6 +112,9 @@ function App() {
           </Route>
           <Route path="/socialProfile">
             <SocialProfile />
+          </Route>
+          <Route path="/allnotification">
+            <AllNotification />
           </Route>
           <Route path="/routine">
             <Home />

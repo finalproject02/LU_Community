@@ -8,7 +8,7 @@ import jahed from '../../../images/Jahed.jpg';
 const SocialNavbar = () => {
     return (
         <div>
-            <header className="p-3 sticky-top bg-light">
+            <header className="p-3 sticky-top bg-light shadow-sm">
                 <Container>
                     <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                         <Link to="/socialPlatform" className="d-flex align-items-center pb-1 mb-lg-0 text-dark text-decoration-none fs-2 fw-bold mt-1">
@@ -33,34 +33,36 @@ const SocialNavbar = () => {
                                 <FaRegCommentDots className="me-2 iconFont" />
                                 Messaging</Link>
                             </div>
-                            <div className="dropdown">
-                                <a className="nav-link navFont px-2 link-dark" data-bs-toggle="dropdown">
+                            <Dropdown>
+                                <Dropdown.Toggle variant="light" id="dropdown-basic">
                                     <FaRegBell className="me-2 iconFont" />
                                     <span className="notificationCount text-danger fw-bold">5</span>
                                     Notification
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                    <span className="dropdown-item dropdown-header">5 Notifications</span>
-                                    <div className="dropdown-divider"></div>
-                                    <Link to="#" className="dropdown-item">
-                                        <i className="fas fa-users mr-1"></i> Jahed liked your post
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="/">
+                                        <i className="fas fa-users mr-1"></i>
+                                        Jahed liked your post
                                         <div className="text-muted text-sm">12 hours</div>
-                                    </Link>
+                                    </Dropdown.Item>
                                     <div className="dropdown-divider"></div>
-                                    <Link to="#" className="dropdown-item">
-                                        <i className="fas fa-users mr-1"></i>Tanvir commented your post
+                                    <Dropdown.Item href="/">
+                                        <i className="fas fa-users mr-1"></i>
+                                        Tanvir commented your post
                                         <div className="text-muted text-sm">12 hours</div>
-                                    </Link>
+                                    </Dropdown.Item>
                                     <div className="dropdown-divider"></div>
-                                    <Link to="#" className="dropdown-item">
-                                        <i className="fas fa-file mr-1"></i> 3 new reports
+                                    <Dropdown.Item href="/">
+                                        <i className="fas fa-file mr-1"></i>
+                                        3 new reports
                                         <div className="text-muted text-sm">2 days</div>
-                                    </Link>
+                                    </Dropdown.Item>
                                     <div className="dropdown-divider"></div>
-                                    <Link to="/allnotification.html" className="dropdown-item dropdown-footer">See All
-                                        Notifications</Link>
-                                </div>
-                            </div>
+                                    <Dropdown.Item href="/allNotification">
+                                        See All Notifications
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </div>
                         <Form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                             <Form.Control type="search" placeholder="Search..." />

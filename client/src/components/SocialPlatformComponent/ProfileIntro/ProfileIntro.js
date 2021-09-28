@@ -28,50 +28,50 @@ const ProfileIntro = () => {
                     <hr />
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBook className="fs-5" />
-                        <p className="card-text ps-2 fs-5">Full stack web developer
+                        <p className="card-text ps-2 fs-6">Full stack web developer
                         </p>
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaGraduationCap className="fs-1 me-2" />
-                        <p className="card-text fs-5">Studying at Computer Science & Engineering at Leading
+                        <p className="card-text fs-6">Studying at Computer Science & Engineering at Leading
                             University, Sylhet</p>
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBook className="fs-5" />
-                        <p className="card-text ps-2 fs-5"><span>46</span>th batch</p>
+                        <p className="card-text ps-2 fs-6"><span>46</span>th batch</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaHome className="fs-5" />
-                        <p className="card-text ps-2 fs-5">Lives in Sylhet</p>
+                        <p className="card-text ps-2 fs-6">Lives in Sylhet</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaHome className="fs-5" />
-                        <p className="card-text ps-2 fs-5">From Sylhet</p>
+                        <p className="card-text ps-2 fs-6">From Sylhet</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBlog className="fs-5" />
-                        <p className="card-text ps-2 fs-5"><span>25</span> followers</p>
+                        <p className="card-text ps-2 fs-6"><span>25</span> followers</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBlog className="fs-5" />
-                        <p className="card-text ps-2 fs-5">Joined<span>September 2021</span></p>
+                        <p className="card-text ps-2 fs-6">Joined<span>September 2021</span></p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaRegComment className="fs-5" />
                         <Link to="#" className="textHover">
-                            <p className="card-text ps-2 fs-5 textPrimary">Send Message</p>
+                            <p className="card-text ps-2 fs-6 textPrimary">Send Message</p>
                         </Link>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-3">
                         <FaPhone className="fs-5" />
                         <Link to="#" className="textHover">
-                            <p className="card-text ps-2 fs-5 textPrimary"> 01719-373476</p>
+                            <p className="card-text ps-2 fs-6 textPrimary"> 01719-373476</p>
                         </Link>
                     </Card.Text>
                     <div className="bgPrimary text-center rounded-3">
