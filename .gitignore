@@ -1,6 +1,3 @@
-.idea/workspace.xml
-.idea/vcs.xml
-.idea/modules.xml
-.idea/LU_Community.iml
+.idea
 .vscode
 package-lock.json

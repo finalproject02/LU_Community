@@ -3,6 +3,7 @@ import {
     LOGIN_ACCOUNT_SUCCESS,
     CREATE_ACCOUNT_FAILED,
     LOGIN_ACCOUNT_FAILED,
+    LOGOUT_SUCCESS,
     CURRENT_USER,
     LOADING,
     LOADED, UPDATE_INFO
@@ -22,6 +23,7 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
             };
         case CREATE_ACCOUNT_FAILED:
         case LOGIN_ACCOUNT_FAILED:
+        case LOGOUT_SUCCESS:
             localStorage.removeItem('token')
             return {
                 ...state,
@@ -52,7 +54,7 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case UPDATE_INFO:
             return {
                 ...state,
-                currentUser: [state.currentUser, action.payload]
+                currentUser: action.payload
             }
         default:
             return state

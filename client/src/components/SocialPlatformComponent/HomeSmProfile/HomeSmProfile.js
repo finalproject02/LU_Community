@@ -3,8 +3,10 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import jahed from "../../../images/Jahed.jpg";
 import "./HomeSmProfile.css";
+import { useSelector } from "react-redux";
 
 const HomeSmProfile = () => {
+    const { currentUser } = useSelector(state => state.auth)
     return (
         <div className="mb-4">
             <Card className="w-100 shadow-sm">
@@ -14,8 +16,8 @@ const HomeSmProfile = () => {
                         <img src={jahed} class="simpleProfileImg w-25 img-fluid rounded-pill"
                             alt="" />
                         <div class="mt-5 text-center">
-                            <h5 class="card-title pt-2">Md Jahed Miah</h5>
-                            <h6 class="card-subtitle mb-2 text-muted ">Full stack web developer</h6>
+                            <h5 class="card-title pt-2">{currentUser?.name}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted ">{currentUser?.current_position}</h6>
                         </div>
                         <hr />
                         <div class="d-flex justify-content-between align-items-center">

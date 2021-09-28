@@ -1,4 +1,3 @@
-import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -18,7 +17,7 @@ const LoginForm = () => {
         e.preventDefault();
         setLogin(true);
         dispatch(SignIn(data));
-        history.push('socialplatform')
+
     }
     console.log(data)
     return (

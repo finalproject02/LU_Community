@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
+import { useSelector } from "react-redux";
 
 const ContactInfo = () => {
+    const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -33,7 +35,7 @@ const ContactInfo = () => {
                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
                             <h6 class="fs-6 ps-2 pt-2">Email</h6>
                         </div>
-                        <a href="#" class="anchor">mdjahedahmed512@gmail.com</a>
+                        <a href="#" class="anchor">{currentUser?.email}</a>
                     </div>
                     <div>
                         <div class="d-flex align-items-center pt-3">

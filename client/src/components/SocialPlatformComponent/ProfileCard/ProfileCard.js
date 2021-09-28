@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom';
 import profileCardData from './ProfileCardData';
 import "./ProfileCard.css";
 import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaJoint, FaPhone, FaUserCircle } from 'react-icons/fa';
+import {useSelector} from "react-redux";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import {updateProfile} from "../../../actions/auth";
 
 const ProfileCard = () => {
+    const dispatch = useDispatch()
+    const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -16,14 +22,15 @@ const ProfileCard = () => {
 
 
     const [save, setSave] = useState(false);
-    const [data, setData] = useState({
-        websiteUrl: '', name: '', email: '', phone: '', address: '', birthday: ''
-    });
+    const [data, setData] = useState();
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();
         setSave(true);
+        dispatch(updateProfile(data));
+        setShowSecond(false)
     }
+
     return (
         <div className="overflow-hidden">
             {
@@ -39,12 +46,12 @@ const ProfileCard = () => {
                                                 <img src={item.profilePhoto} className="img-fluid userProfile p-2 bg-light" alt={item.name} />
                                             </Card.Text>
                                             <Col className="mt-5 ms-sm-5 ms-3">
-                                                <h5 className="ms-3 mt-5 fw-bold fs-3">{item.name}</h5>
-                                                <p className="ms-3 mb-0 text-lead fs-5">{item.position}</p>
-                                                <p className="text-muted ms-3 mb-0">{item.address}
+                                                <h5 className="ms-3 mt-5 fw-bold fs-3">{currentUser?.name}</h5>
+                                                <p className="ms-3 mb-0 text-lead fs-5">{currentUser?.current_position}</p>
+                                                <p className="text-muted ms-3 mb-0">{currentUser?.present_address }
                                                     <span data-bs-toggle="modal"
                                                         data-bs-target="#contactModal">
-                                                        <Link to="#" className="textHover textPrimary" onClick={handleShow}>Contact info</Link>
+                                                        <Link to="#" className="textHover textPrimary" onClick={handleShow}>  Contact info</Link>
                                                     </span>
                                                 </p>
                                                 <p className="ms-3">
@@ -101,7 +108,7 @@ const ProfileCard = () => {
                             <Modal show={show} onHide={handleClose}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>
-                                        <h5 className="fs-5">Md. Jahed Miah</h5>
+                                        <h5 className="fs-5">{currentUser?.name}</h5>
                                     </Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
@@ -122,35 +129,35 @@ const ProfileCard = () => {
                                             <FaEnvelopeOpen className="fs-5" />
                                             <h6 className="fs-6 ps-2 pt-2">Email</h6>
                                         </div>
-                                        <Link href="#" className="textHover textPrimary ms-4">mdjahedahmed512@gmail.com</Link>
+                                        <Link href="#" className="textHover textPrimary ms-4">{currentUser?.email}</Link>
                                     </div>
                                     <div className="mb-2">
                                         <div className="d-flex align-items-center">
                                             <FaPhone className="fs-5" />
                                             <h6 className="fs-6 ps-2 pt-2">Phone</h6>
                                         </div>
-                                        <Link href="#" className="textHover textPrimary ms-4">01797213005</Link>
+                                        <Link href="#" className="textHover textPrimary ms-4">{currentUser?.mobile}</Link>
                                     </div>
                                     <div className="mb-2">
                                         <div className="d-flex align-items-center">
                                             <FaBirthdayCake className="fs-5" />
                                             <h6 className="fs-6 ps-2 pt-2">Birthday</h6>
                                         </div>
-                                        <p className="ms-4">January 16</p>
+                                        <p className="ms-4">{moment(currentUser?.date_of_birth).format('dddd, MMMM Do')}</p>
                                     </div>
                                     <div className="mb-2">
                                         <div className="d-flex align-items-center">
                                             <FaConnectdevelop className="fs-5" />
                                             <h6 className="fs-6 ps-2 pt-2">Connected</h6>
                                         </div>
-                                        <p className="ms-4">January 16, 2021</p>
+                                        <p className="ms-4">{moment(currentUser?.createdAt).format('dddd, MMMM Do YYYY')}</p>
                                     </div>
                                     <div className="mb-4">
                                         <div className="d-flex align-items-center">
                                             <FaAddressBook className="fs-5" />
                                             <h6 className="fs-6 ps-2 pt-2">Address</h6>
                                         </div>
-                                        <p className="ms-4">Sylhet, Bangladesh</p>
+                                        <p className="ms-4">{currentUser?.present_address}</p>
                                     </div>
                                 </Modal.Body>
                             </Modal>
@@ -169,31 +176,27 @@ const ProfileCard = () => {
                                             <Link to="#" clasNames="textHover">lucommunity.com/lusp/md-jahed-miah-1601b3211</Link>
                                         </div>
                                         <div className="pt-3 mb-1">
-                                            <h6 className="">Website URL</h6>
-                                            <Form.Control className="w-100" type="text" onChange={handleChange} name="websiteUrl" />
-                                        </div>
-                                        <div className="pt-3 mb-1">
                                             <h6 className="">Name</h6>
-                                            <Form.Control className="w-100" type="text" onChange={handleChange} name="name" />
+                                            <Form.Control className="w-100" type="text" defaultValue={currentUser?.name} onChange={handleChange} name="name" />
                                         </div>
                                         <div className="pt-3 mb-1">
                                             <h6 className="">Email</h6>
-                                            <Form.Control className="w-100" type="text" onChange={handleChange} name="email" />
+                                            <Form.Control className="w-100" type="text" onChange={handleChange} defaultValue={currentUser?.email} name="email" />
                                         </div>
                                         <div className="pt-3 mb-1">
                                             <h6 className="">Phone</h6>
-                                            <Form.Control className="w-100" type="text" onChange={handleChange} name="phone" />
+                                            <Form.Control className="w-100" type="text" defaultValue={currentUser?.mobile} onChange={handleChange} name="mobile" />
                                         </div>
                                         <div className="pt-3 mb-1">
                                             <h6 className="">Address</h6>
-                                            <Form.Control className="w-100" type="text" onChange={handleChange} name="address" />
+                                            <Form.Control className="w-100" type="text" defaultValue={currentUser?.present_address} onChange={handleChange} name="present_address" />
                                         </div>
                                         <div className="pt-3 mb-4">
                                             <h6 className="">Birthday</h6>
-                                            <Form.Control className="w-100" type="date" onChange={handleChange} name="birthday" />
+                                            <Form.Control defaultValue={currentUser?.date_of_birth} className="w-100" type="date" onChange={handleChange} name="date_of_birth" />
                                         </div>
                                         <div className="bgSecondary text-center m-2 rounded-3">
-                                            <input type="submit" value="Save Changes" className="btn w-100 text-white" onClick={handleClose} />
+                                            <input type="submit" value="Save Changes" className="btn w-100 text-white" />
                                         </div>
                                     </Form>
                                 </Modal.Body>

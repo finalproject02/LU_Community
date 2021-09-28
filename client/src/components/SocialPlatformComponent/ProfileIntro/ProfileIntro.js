@@ -2,20 +2,24 @@ import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaBlog, FaBook, FaGraduationCap, FaHome, FaPhone, FaRegComment, FaRegEdit } from 'react-icons/fa';
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import {updateProfile} from "../../../actions/auth";
 
 const ProfileIntro = () => {
+    const dispatch = useDispatch();
+    const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const [save, setSave] = useState(false);
-    const [data, setData] = useState({
-        position: '', education: '', batch: '', homeTown: '', currentTown: ''
-    });
+    const [data, setData] = useState();
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();
         setSave(true);
+        dispatch(updateProfile(data))
     }
     return (
         <div>
@@ -28,37 +32,37 @@ const ProfileIntro = () => {
                     <hr />
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBook className="fs-5" />
-                        <p className="card-text ps-2 fs-6">Full stack web developer
+                        <p className="card-text ps-2 fs-6">{currentUser?.current_position}
                         </p>
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaGraduationCap className="fs-1 me-2" />
-                        <p className="card-text fs-6">Studying at Computer Science & Engineering at Leading
+                        <p className="card-text fs-6">Studying at {currentUser?.department} at Leading
                             University, Sylhet</p>
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBook className="fs-5" />
-                        <p className="card-text ps-2 fs-6"><span>46</span>th batch</p>
+                        <p className="card-text ps-2 fs-6"><span>{currentUser?.batch}</span></p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaHome className="fs-5" />
-                        <p className="card-text ps-2 fs-6">Lives in Sylhet</p>
+                        <p className="card-text ps-2 fs-6">Lives in {currentUser?.present_address}</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaHome className="fs-5" />
-                        <p className="card-text ps-2 fs-6">From Sylhet</p>
+                        <p className="card-text ps-2 fs-6">From {currentUser?.permanent_address}</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBlog className="fs-5" />
-                        <p className="card-text ps-2 fs-6"><span>25</span> followers</p>
+                        <p className="card-text ps-2 fs-6"><span>{currentUser?.connections}</span> followers</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBlog className="fs-5" />
-                        <p className="card-text ps-2 fs-6">Joined<span>September 2021</span></p>
+                        <p className="card-text ps-2 fs-6">Joined <span>{moment(currentUser?.createdAt).format('dddd, MMMM Do YYYY')}</span></p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
@@ -71,7 +75,7 @@ const ProfileIntro = () => {
                     <Card.Text as="div" className="d-flex align-items-center mb-3">
                         <FaPhone className="fs-5" />
                         <Link to="#" className="textHover">
-                            <p className="card-text ps-2 fs-6 textPrimary"> 01719-373476</p>
+                            <p className="card-text ps-2 fs-6 textPrimary">{currentUser?.mobile}</p>
                         </Link>
                     </Card.Text>
                     <div className="bgPrimary text-center rounded-3">
@@ -89,29 +93,23 @@ const ProfileIntro = () => {
                         <Row className="mb-2">
                             <Col md="12">
                                 <h6 className="">Position</h6>
-                                <Form.Control type="text" onChange={handleChange} name="position" />
-                            </Col>
-                        </Row>
-                        <Row className="mb-2">
-                            <Col md="12">
-                                <h6 className="">Education</h6>
-                                <Form.Control type="text" onChange={handleChange} name="education" />
+                                <Form.Control defaultValue={currentUser?.current_position} type="text" onChange={handleChange} name="current_position" />
                             </Col>
                         </Row>
                         <Row className="mb-2">
                             <Col md="12">
                                 <h6 className="">Batch</h6>
-                                <Form.Control type="text" onChange={handleChange} name="batch" />
+                                <Form.Control type="text" defaultValue={currentUser?.batch} onChange={handleChange} name="batch" />
                             </Col>
                         </Row>
                         <Row className="mb-4">
                             <Col md="6">
                                 <h6 className="">Home Town</h6>
-                                <Form.Control type="text" onChange={handleChange} name="homeTown" />
+                                <Form.Control type="text" defaultValue={currentUser?.permanent_address} onChange={handleChange} name="permanent_address" />
                             </Col>
                             <Col md="6">
                                 <h6 className="">Current Town</h6>
-                                <Form.Control type="text" onChange={handleChange} name="currentTown" />
+                                <Form.Control type="text" defaultValue={currentUser?.present_address} onChange={handleChange} name="present_address" />
                             </Col>
                         </Row>
                         <Row className="bgSecondary text-center m-2 rounded-3">

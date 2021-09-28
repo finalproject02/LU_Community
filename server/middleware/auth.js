@@ -6,7 +6,6 @@ export const auth = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.SECRET);
         req.user = decoded;
-        console.log(req.user)
         next()
     } catch (error) {
         res.status(400).json({ message: 'Token is not valid' });

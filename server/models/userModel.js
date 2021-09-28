@@ -24,16 +24,28 @@ const userModel = new mongoose.Schema({
         type: String,
         default: null
     },
+    cover_picture: {
+        type: String,
+        default: null
+    },
+    date_of_birth: {
+      type: String,
+      default: null
+    },
     current_position: {
         type: String,
         default: null
     },
-    current_semester: {
+    batch: {
         type: String,
         default: null
     },
 
-    address: {
+    present_address: {
+        type: String,
+        default: null
+    },
+    permanent_address: {
         type: String,
         default: null
     },
@@ -53,11 +65,27 @@ const userModel = new mongoose.Schema({
         type: Array,
         default: []
     },
-    followers: {
+    connection: {
+        type: Array,
+        default: []
+    },
+    connecting: {
+        type: Array,
+        default: []
+    },
+    connection_requests: {
         type: Array,
         default: []
     },
     followings: {
+        type: Array,
+        default: []
+    },
+    education_background: {
+        type: Array,
+        default:[]
+    },
+    aboutMe: {
         type: Array,
         default: []
     }

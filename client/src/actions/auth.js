@@ -3,9 +3,11 @@ import {
     LOGIN_ACCOUNT_SUCCESS,
     CREATE_ACCOUNT_FAILED,
     LOGIN_ACCOUNT_FAILED,
+    LOGOUT_SUCCESS,
     CURRENT_USER,
     LOADING,
-    LOADED, UPDATE_INFO
+    LOADED,
+    UPDATE_INFO
 } from "./types";
 import * as api from '../api';
 import {returnErrors} from './erros'
@@ -40,6 +42,11 @@ export const SignIn = (userData)  => async (dispatch) => {
     }
 }
 
+export const Logout = () => {
+    return {
+        type: LOGOUT_SUCCESS
+    }
+}
 export const LoadingCurrentUser = () => async (dispatch, getState) => {
     try {
         dispatch({ type: LOADING })
