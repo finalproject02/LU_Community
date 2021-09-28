@@ -1,4 +1,3 @@
-import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { Card, Carousel, Collapse, Dropdown, Form } from 'react-bootstrap';
 import { FaEllipsisV, FaFrownOpen, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare, FaSmile } from 'react-icons/fa';

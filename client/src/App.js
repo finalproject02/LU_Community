@@ -10,6 +10,7 @@ import Signup from "./pages/Signup/Signup";
 import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
 import AllNotification from "./components/SocialPlatformComponent/pages/AllNotification/AllNotification";
 import SocialProfile from "./components/SocialPlatformComponent/pages/SocialProfile/SocialProfile";
+import Connection from "./components/SocialPlatformComponent/pages/Connection/Connection";
 
 
 function App() {
@@ -115,6 +116,9 @@ function App() {
           </Route>
           <Route path="/allnotification">
             <AllNotification />
+          </Route>
+          <Route path="/connection">
+            <Connection />
           </Route>
           <Route path="/routine">
             <Home />

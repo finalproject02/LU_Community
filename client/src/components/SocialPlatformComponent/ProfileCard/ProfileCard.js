@@ -3,7 +3,7 @@ import { Card, Col, Container, Dropdown, Form, Modal, Row } from 'react-bootstra
 import { Link } from 'react-router-dom';
 import profileCardData from './ProfileCardData';
 import "./ProfileCard.css";
-import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaJoint, FaPhone, FaUserCircle } from 'react-icons/fa';
+import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaPhone, FaUserCircle } from 'react-icons/fa';
 
 const ProfileCard = () => {
     const [coverPhoto, setCoverPhoto] = useState();

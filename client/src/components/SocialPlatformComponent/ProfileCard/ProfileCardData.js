@@ -6,7 +6,7 @@ const profileCardData = [
         name: "Md Jahed Miah",
         position: "Web Developer",
         address: "Sylhet, Bangladesh ",
-        totalConnection: "46 connections"
+        totalConnection: "46 connections",
     }
 ];
 export default profileCardData;
