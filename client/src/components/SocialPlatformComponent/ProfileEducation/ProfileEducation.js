@@ -1,7 +1,6 @@
-import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
-import { FaGraduationCap, FaPencilAlt } from 'react-icons/fa';
+import { FaEdit, FaGraduationCap, FaPencilAlt } from 'react-icons/fa';
 
 const ProfileEducation = () => {
     const [show, setShow] = useState(false);
@@ -9,13 +8,12 @@ const ProfileEducation = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
-        <div>
-            <Card className="w-100">
+        <div className="mb-4">
+            <Card className="w-100 rounded-3">
                 <Card.Body>
                     <Card.Text as="div" class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title pt-2">Education</h5>
-                        <i class="fa fa-edit" aria-hidden="true" data-bs-toggle="modal"
-                            data-bs-target="#educationProModal"></i>
+                        <FaEdit className="fs-5" onClick={handleShow} />
                     </Card.Text>
                     <hr />
                     <Card.Text as="div">
@@ -87,7 +85,7 @@ const ProfileEducation = () => {
                                 <Form.Control type="date" />
                             </Col>
                         </Row>
-                        <Row className="bgSecondary text-center m-2">
+                        <Row className="bgSecondary text-center m-2 rounded-3">
                             <input type="submit" value="Save Changes" className="btn w-100 text-white" onClick={handleClose} />
                         </Row>
                     </Form>

@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaBlog, FaBook, FaGraduationCap, FaHome, FaPhone, FaRegComment, FaRegEdit } from 'react-icons/fa';
-import { useSelector } from "react-redux";
 
 const ProfileIntro = () => {
-    const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -21,7 +19,7 @@ const ProfileIntro = () => {
     }
     return (
         <div>
-            <Card className="mb-4">
+            <Card className="mb-4 rounded-3">
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title pt-2">Intro</h5>
@@ -30,53 +28,53 @@ const ProfileIntro = () => {
                     <hr />
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBook className="fs-5" />
-                        <p className="card-text ps-2 fs-5">Full stack web developer
+                        <p className="card-text ps-2 fs-6">Full stack web developer
                         </p>
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaGraduationCap className="fs-1 me-2" />
-                        <p className="card-text fs-5">Studying at Computer Science & Engineering at Leading
+                        <p className="card-text fs-6">Studying at Computer Science & Engineering at Leading
                             University, Sylhet</p>
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBook className="fs-5" />
-                        <p className="card-text ps-2 fs-5"><span>46</span>th batch</p>
+                        <p className="card-text ps-2 fs-6"><span>46</span>th batch</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaHome className="fs-5" />
-                        <p className="card-text ps-2 fs-5">Lives in Sylhet</p>
+                        <p className="card-text ps-2 fs-6">Lives in Sylhet</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaHome className="fs-5" />
-                        <p className="card-text ps-2 fs-5">From Sylhet</p>
+                        <p className="card-text ps-2 fs-6">From Sylhet</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBlog className="fs-5" />
-                        <p className="card-text ps-2 fs-5"><span>{currentUser?.followings.length+1}</span> followers</p>
+                        <p className="card-text ps-2 fs-6"><span>25</span> followers</p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaBlog className="fs-5" />
-                        <p className="card-text ps-2 fs-5">Joined<span>September 2021</span></p>
+                        <p className="card-text ps-2 fs-6">Joined<span>September 2021</span></p>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         <FaRegComment className="fs-5" />
-                        <Link to="#" className="anchor">
-                            <p className="card-text ps-2 fs-5">Send Message</p>
+                        <Link to="#" className="textHover">
+                            <p className="card-text ps-2 fs-6 textPrimary">Send Message</p>
                         </Link>
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-3">
                         <FaPhone className="fs-5" />
-                        <Link to="#" className="anchor">
-                            <p className="card-text ps-2 fs-5"> 01719-373476</p>
+                        <Link to="#" className="textHover">
+                            <p className="card-text ps-2 fs-6 textPrimary"> 01719-373476</p>
                         </Link>
                     </Card.Text>
-                    <div className="bgSecondary text-center">
+                    <div className="bgPrimary text-center rounded-3">
                         <Link to="#" className="btn w-100 text-white">View More</Link>
                     </div>
                 </Card.Body>
@@ -116,7 +114,7 @@ const ProfileIntro = () => {
                                 <Form.Control type="text" onChange={handleChange} name="currentTown" />
                             </Col>
                         </Row>
-                        <Row className="bgSecondary text-center m-2">
+                        <Row className="bgSecondary text-center m-2 rounded-3">
                             <input type="submit" value="Save Changes" className="btn w-100 text-white" onClick={handleClose} />
                         </Row>
                     </Form>
