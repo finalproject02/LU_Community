@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 import path from "path";
 import {uploadFile} from "../../../actions/files";
 import Avatar from '../../../images/avatar.jpeg'
+import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaPhone, FaUserCircle } from 'react-icons/fa';
 
 const ProfileCard = () => {
     const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const ProfileCard = () => {
     const [show, setShow] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 

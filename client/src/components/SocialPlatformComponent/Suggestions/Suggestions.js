@@ -5,7 +5,6 @@ import friendSuggestion from "./FriendSuggestionsData.js";
 import "./Suggestions.css";
 
 const Suggestions = () => {
-    console.log(friendSuggestion);
     return (
         <div className="mb-4">
             <Card className="w-100 rounded-3">
