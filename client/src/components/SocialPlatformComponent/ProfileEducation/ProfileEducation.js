@@ -3,6 +3,7 @@ import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { FaEdit, FaGraduationCap, FaPencilAlt } from 'react-icons/fa';
 import { useSelector } from "react-redux";
 import EducationProfileModal from "../EducationProfileModal/EducationProfileModal";
+import moment from "moment";
 
 const ProfileEducation = () => {
 
@@ -10,6 +11,7 @@ const ProfileEducation = () => {
     const [show, setShow] = useState(false);
     const [newShow, setNewShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
+    const [degreeName, setDegreeName] = useState([])
 
 
     const handleClose = () => setShow(false);
@@ -35,13 +37,16 @@ const ProfileEducation = () => {
                                             <FaGraduationCap className="fs-4" />
                                             <p class="ps-2">{education.school}</p>
                                         </div>
-                                        <FaPencilAlt className="fs-5" onClick={() => {education={education}; handleShow()} } />
-                                        <EducationProfileModal education={education} show={show} handleClose={handleClose}/>
+                                        <FaPencilAlt className="fs-5" onClick={(e) =>{
+                                            e.stopPropagation();
+                                            setDegreeName(education.degree);
+                                            handleShow()} } />
+                                        <EducationProfileModal DegreeName={degreeName}  show={show} handleClose={handleClose}/>
                                     </div>
                                     <div>
                                         <p class="mb-0">{education.degree}</p>
                                         <p class="mb-0">Degree: {education.field_of_study}</p>
-                                        <p class="mt-0 pt-0">{education.start_date} - {education.end_date}</p>
+                                        <p class="mt-0 pt-0">{moment(education.start_date).year()} - {moment(education.end_date).year()}</p>
                                     </div>
                                 </div>
                             </Card.Text>

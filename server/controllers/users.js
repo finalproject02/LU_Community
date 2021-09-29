@@ -35,20 +35,24 @@ export const updateUser = async (req, res) => {
     try {
         if (school && degree && field_of_study && start_date && end_date) {
             const findUser = await userModel.findById(id);
-            const existsData = findUser.education_background.some(data => data.degree === degree);
+            const existsData = findUser.education_background.some(data => data.degree === degree );
             if (existsData === true) {
-                res.status(400).json({ message: 'Already added this degree, try different one' })
+                await findUser.updateOne({$pull: { education_background: {degree}}});
+                await findUser.updateOne({$push: {education_background: [req.body]}});
+                const user = await userModel.findById(id);
+                res.status(200).json({ user: user })
             } else {
-                const userDetails = await findUser.updateOne({$push: { education_background: [req.body] }});
-                res.status(200).json({ user: userDetails })
+                await findUser.updateOne({$push: { education_background: [req.body] }});
+                const user = await userModel.findById(id)
+                res.status(200).json({ user: user })
             }
-        } else {
+        }
+        else {
             const updateDate = await userModel.findByIdAndUpdate(id, req.body, {new: true});
             res.status(200).json({user: updateDate})
         }
     } catch (error) {
-       // res.status(500).json({ message: 'Something went wrong' });
-        console.log(error)
+       res.status(500).json({ message: 'Something went wrong' });
     }
 }
 

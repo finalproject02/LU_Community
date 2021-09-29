@@ -8,11 +8,18 @@ import {useSelector} from "react-redux";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import {updateProfile} from "../../../actions/auth";
+import { v4 as uuidv4 } from 'uuid';
+import path from "path";
+import {uploadFile} from "../../../actions/files";
+import Avatar from '../../../images/avatar.jpeg'
 
 const ProfileCard = () => {
     const dispatch = useDispatch()
-    const { currentUser } = useSelector(state => state.auth)
+    const { currentUser } = useSelector(state => state.auth);
+    const [userData, setUserData] = useState({})
     const [show, setShow] = useState(false);
+    const [coverPhoto, setCoverPhoto] = useState();
+    const [profilePhoto, setProfilePhoto] = useState();
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -30,6 +37,29 @@ const ProfileCard = () => {
         dispatch(updateProfile(data));
         setShowSecond(false)
     }
+    const uploadProfile =  () => {
+        if (profilePhoto) {
+            const formData = new FormData();
+            const profile_picture = uuidv4() + path.extname(profilePhoto.name);
+            formData.append('name', profile_picture);
+            formData.append('file', profilePhoto);
+            dispatch(uploadFile(formData));
+            userData.profile_picture = profile_picture;
+            dispatch(updateProfile(userData))
+        }
+    }
+    const uploadCover = () => {
+        if (coverPhoto) {
+            const formData = new FormData();
+            const cover_picture = uuidv4() + path.extname(coverPhoto.name);
+            formData.append('name', cover_picture);
+            formData.append('file', coverPhoto);
+            dispatch(uploadFile(formData));
+            userData.cover_picture = cover_picture;
+            dispatch(updateProfile(userData))
+        }
+    }
+
     return (
         <div className="overflow-hidden">
             {
@@ -41,7 +71,7 @@ const ProfileCard = () => {
                                     <Card.Body className="pt-0">
                                         <label htmlFor="coverPhoto" className="w-100">
                                             {
-                                                coverPhoto && coverPhoto.type.startsWith("image") ? (<Card.Img className="w-100 img-fluid" src={URL.createObjectURL(coverPhoto)} alt="name" style={{ height: "20rem" }} />) : (<Card.Img className="w-100 img-fluid" src={item.coverPhoto} alt={item.name} style={{ height: "20rem" }} />)
+                                                coverPhoto && coverPhoto.type.startsWith("image") ? (<><Card.Img className="w-100 img-fluid" src={URL.createObjectURL(coverPhoto)} alt="name" style={{ objectFit: "cover" }} /><button onClick={uploadCover}>Upload</button></>) : (<Card.Img className="w-100 img-fluid" src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.cover_picture}` : Avatar} alt={currentUser?.cover_picture} style={{ height: "20rem", objectFit:'cover' }} />)
                                             }
                                             <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
                                             </Form.Control>
@@ -49,7 +79,7 @@ const ProfileCard = () => {
                                         <Row className="mb-2 position-relative">
                                             <label htmlFor="profilePhoto" className="userPosition">
                                                 {
-                                                    profilePhoto && profilePhoto.type.startsWith("image") ? (<Card.Img style={{ height: '150px' }} className="img-fluid w-25 rounded-pill p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" />) : (<img src={item.profilePhoto} className="img-fluid userProfile p-2 bg-light" alt={item.name} style={{ height: '150px' }} />)
+                                                    profilePhoto && profilePhoto.type.startsWith("image") ? (<><Card.Img style={{ objectFit: 'cover' }} className="img-fluid w-25 rounded-pill p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" /><button onClick={uploadProfile}>Upload</button></>) : (<img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} className="img-fluid userProfile p-2 bg-light" alt={item.name} style={{ height: '150px', objectFit: 'scalable' }} />)
                                                 }
                                                 <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
                                                 </Form.Control>
@@ -57,10 +87,10 @@ const ProfileCard = () => {
                                             <Col className="mt-5 ms-sm-5 ms-3">
                                                 <h5 className="ms-3 mt-5 fw-bold fs-3">{currentUser?.name}</h5>
                                                 <p className="ms-3 mb-0 text-lead fs-5">{currentUser?.current_position}</p>
-                                                <p className="text-muted ms-3 mb-0">{currentUser?.present_address }
+                                                <p className="text-muted ms-3 mb-0">{currentUser?.present_address  }
                                                     <span data-bs-toggle="modal"
                                                         data-bs-target="#contactModal">
-                                                        <Link to="#" className="textHover textPrimary" onClick={handleShow}>Contact info</Link>
+                                                        <Link to="#" className="textHover textPrimary" onClick={handleShow}> Contact info</Link>
                                                     </span>
                                                 </p>
                                                 <p className="ms-3">

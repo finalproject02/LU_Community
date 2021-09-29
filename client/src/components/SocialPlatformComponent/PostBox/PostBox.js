@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Card, Form, Modal } from 'react-bootstrap';
-import pic from "../../../images/facebook.png";
 import "./PostBox.css";
 import { FaCertificate, FaFile, FaImage, FaMapMarkedAlt, FaPhotoVideo, FaUserCircle, FaVideo } from 'react-icons/fa';
+import { useSelector } from "react-redux";
+import Avatar from "../../../images/avatar.jpeg";
 
 const PostBox = () => {
+    const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -14,7 +16,7 @@ const PostBox = () => {
         <div>
             <Card className="w-100 shadow-sm mb-4 w-100 rounded-3">
                 <div class="d-flex justify-content-center pt-4">
-                    <img src={pic} alt="" class="img-fluid smallProfile me-3" />
+                    <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt="" class="img-fluid smallProfile me-3" />
                     <input type="text" class="form-control ps-4 rounded-pill w-75"
                         placeholder="What's going on your mind?" onClick={handleShow} />
                 </div>
@@ -55,10 +57,10 @@ const PostBox = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div class="d-flex justify-content-start align-items-center pt-3 mb-2">
-                        <img src={pic} alt="" class="img-fluid smallProfile me-3" />
+                        <img src={`/api/files/storage/${currentUser?.profile_picture}`} alt="" class="img-fluid smallProfile me-3" />
                         <div class="d-flex align-items-center">
                             <div>
-                                <h6>Md Jahed Miah</h6>
+                                <h6>{currentUser?.name}</h6>
                                 <Form.Select class="form-select rounded-pill" name="shareWith">
                                     <option value="">Friends</option>
                                     <option value="">Public</option>

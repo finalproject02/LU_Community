@@ -224,7 +224,7 @@ const MainNavbar = () => {
             <Nav.Link className="navFontSize me-4" href="/library">
               Library
             </Nav.Link>
-            {isAuthenticated === true? (
+            {isAuthenticated? (
                 <Nav.Link className="navFontSize" onClick={() => dispatch(Logout())}>
                   Logout
                 </Nav.Link>

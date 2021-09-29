@@ -98,6 +98,12 @@ const ProfileIntro = () => {
                         </Row>
                         <Row className="mb-2">
                             <Col md="12">
+                                <h6 className="">Department</h6>
+                                <Form.Control defaultValue={currentUser?.department} type="text" onChange={handleChange} name="department" />
+                            </Col>
+                        </Row>
+                        <Row className="mb-2">
+                            <Col md="12">
                                 <h6 className="">Batch</h6>
                                 <Form.Control type="text" defaultValue={currentUser?.batch} onChange={handleChange} name="batch" />
                             </Col>

@@ -13,14 +13,17 @@ import SocialProfile from "./components/SocialPlatformComponent/pages/SocialProf
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {LoadingCurrentUser} from "./actions/auth";
+import {ToastContainer} from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LoadingCurrentUser())
   }, [])
+
   return (
       <div className="bg-light">
+        <ToastContainer/>
         <Router>
           <Switch>
             <Route exact path="/home">

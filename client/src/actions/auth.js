@@ -10,7 +10,8 @@ import {
     UPDATE_INFO
 } from "./types";
 import * as api from '../api';
-import {returnErrors} from './erros'
+import {returnErrors} from './erros';
+import {useHistory} from "react-router-dom";
 
 export const SignUp = (userData) => async (dispatch) => {
     try {

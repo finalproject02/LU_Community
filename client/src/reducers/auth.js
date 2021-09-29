@@ -13,7 +13,8 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
     switch (action.type) {
         case CREATE_ACCOUNT_SUCCESS:
         case LOGIN_ACCOUNT_SUCCESS:
-            localStorage.setItem('token', action.payload.token)
+            localStorage.setItem('token', action.payload.token);
+            localStorage.setItem('id', action.payload.user._id);
             return {
                 ...state,
                 token: action.payload.token,
@@ -24,7 +25,8 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case CREATE_ACCOUNT_FAILED:
         case LOGIN_ACCOUNT_FAILED:
         case LOGOUT_SUCCESS:
-            localStorage.removeItem('token')
+            localStorage.removeItem('token');
+            localStorage.removeItem('id');
             return {
                 ...state,
                 token: null,
@@ -54,7 +56,8 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case UPDATE_INFO:
             return {
                 ...state,
-                currentUser: action.payload
+                currentUser: action.payload,
+                isAuthenticated: true
             }
         default:
             return state
