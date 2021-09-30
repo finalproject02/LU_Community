@@ -2,11 +2,11 @@ import React from 'react';
 import PostBox from '../PostBox/PostBox';
 import PostCard from '../PostCard/PostCard';
 
-const Post = () => {
+const Post = ({posts}) => {
     return (
         <div>
             <PostBox />
-            <PostCard />
+            <PostCard posts={posts}/>
         </div>
     );
 };

@@ -19,3 +19,6 @@ export const SEARCHING = 'SEARCHING';
 export const FOLLOWERS = 'FOLLOWERS';
 export const FOLLOWINGS = 'FOLLOWINGS';
 export const UPDATE_INFO = 'UPDATE_INFO';
+export const POSTS = 'POSTS';
+export const NEW_POST = 'NEW_POST';
+export const DELETE_POST = 'DELETE_POST';

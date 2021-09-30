@@ -8,18 +8,16 @@ import ProfileEducation from '../../ProfileEducation/ProfileEducation';
 import PhotoCard from '../../PhotoCard/PhotoCard';
 import FriendCard from '../../FriendCard/FriendCard';
 import Suggestions from '../../Suggestions/Suggestions';
-import {useSelector, useDispatch} from "react-redux";
-import {Redirect, useHistory} from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 import decode from 'jwt-decode';
 import 'react-toastify/dist/ReactToastify.css'
-import {Logout} from "../../../../actions/auth";
 
 const SocialProfile = () => {
     const history = useHistory();
-    const dispatch = useDispatch();
-    const {isAuthenticated, currentUser, token} = useSelector(state => state.auth);
-    const [userToken, setUserToken] = useState(token);
+    const {token} = useSelector(state => state.auth);
+    const {posts} = useSelector(state => state.posts);
+    console.log(posts)
 
     useEffect(() => {
         if (token) {
@@ -28,21 +26,6 @@ const SocialProfile = () => {
         }
     }, [token]);
 
-    const showToast = (type, message) => {
-        switch (type) {
-            case 0:
-                toast.warning(message)
-                break;
-            case 1:
-                toast.success(message)
-                break;
-            default:
-                break;
-        }
-    }
-    const denyPermission = () => {
-        showToast(0, 'Not allow without login ')
-    }
 
     return (
         <div>
@@ -53,7 +36,7 @@ const SocialProfile = () => {
                     <Container>
                         <Row>
                             <Col md="8">
-                                <Post />
+                                <Post posts={posts}/>
                             </Col>
                             <Col md="4">
                                 <ProfileIntro />
@@ -65,7 +48,7 @@ const SocialProfile = () => {
                         </Row>
                     </Container>
                 </>
-            ) : denyPermission
+            ) :  history.push('/')
             }
         </div>
     );

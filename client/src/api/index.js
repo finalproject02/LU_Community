@@ -15,3 +15,7 @@ export const followUser = (getState, userId) => axios.patch(`/api/user/${userId}
 export const unfollowUser = (getState, userId) => axios.patch(`/api/user/${userId}/unfollow`, tokenConfig(getState));
 export const fetchFollowers = (getState) => axios.get('/api/followers', tokenConfig(getState));
 export const fetchFollowings= (getState) => axios.get('/api/followings', tokenConfig(getState));
+
+export const newPost = (postData, getState) => axios.post('/api/posts', postData, tokenConfig(getState));
+export const fetchPosts = (getState) => axios.get('/api/posts', tokenConfig(getState));
+export const removePosts = (getState, id) => axios.delete(`/api/posts/${id}`, tokenConfig(getState));
