@@ -2,11 +2,58 @@ import React, { useState } from 'react';
 import { Card, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import { FaCommentDots, FaPlus, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import jahed from "../../../images/Jahed.jpg"
+import jahed from "../../../images/Jahed.jpg";
+import AboutClub from '../AboutClub/AboutClub';
+import AllPhotos from '../AllPhotos/AllPhotos';
+import AllVideos from '../AllVideos/AllVideos';
+import ClubEvents from '../ClubEvents/ClubEvents';
+import ClubHome from '../ClubHome/ClubHome';
 
 const ClubProfile = () => {
+    const [about, setAbout] = useState(false);
+    const [post, setPost] = useState(true);
+    const [event, setEvent] = useState(false);
+    const [photo, setPhoto] = useState(false);
+    const [video, setVideo] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
+
+    const handleChangeHome = () => {
+        setPost(true);
+        setPhoto(false);
+        setVideo(false);
+        setEvent(false);
+        setAbout(false);
+    }
+
+    const handleChangeAbout = () => {
+        setPost(false);
+        setPhoto(false);
+        setVideo(false);
+        setEvent(false);
+        setAbout(true);
+    }
+    const handleChangeEvent = () => {
+        setPost(false);
+        setAbout(false);
+        setPhoto(false);
+        setVideo(false);
+        setEvent(true);
+    }
+    const handleChangePhoto = () => {
+        setPost(false);
+        setAbout(false);
+        setEvent(false);
+        setVideo(false);
+        setPhoto(true);
+    }
+    const handleChangeVideo = () => {
+        setPost(false);
+        setAbout(false);
+        setEvent(false);
+        setPhoto(false);
+        setVideo(true);
+    }
 
     return (
         <div className="overflow-hidden">
@@ -37,7 +84,7 @@ const ClubProfile = () => {
                                             <Link to="#" className="btn btn-primary me-2 mb-2">
                                                 <FaCommentDots className="me-2 mb-1" />
                                                 Send Message</Link>
-                                            <Link to="#" className="btn btn-primary me-2">
+                                            <Link to="#" className="btn btn-primary me-2 mb-2">
                                                 <FaUserPlus className="me-2 mb-1" />
                                                 Send Membership Request</Link>
                                         </div>
@@ -50,23 +97,23 @@ const ClubProfile = () => {
                                 <div className="container d-flex flex-wrap">
                                     <ul className="nav me-auto">
                                         <li className="nav-item">
-                                            <Link to="/socialProfile" className="nav-link link-dark px-2 active"
-                                                aria-current="page">Home</Link>
+                                            <p className="nav-link link-dark px-2 active"
+                                                aria-current="page" onClick={handleChangeHome}>Home</p>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="aboutProfile" className="nav-link link-dark ps-4 px-2">About</Link>
+                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="allFriend" className="nav-link link-dark ps-4 px-2">Event</Link>
+                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeEvent}>Event</p>
                                         </li>
                                         <Dropdown as="li">
                                             <Dropdown.Toggle variant="light">
                                                 More
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="/allPhotos">Photos</Dropdown.Item>
-                                                <Dropdown.Item href="/allVideos">Videos</Dropdown.Item>
-                                                <Dropdown.Item href="/allVideos">Events</Dropdown.Item>
+                                                <Dropdown.Item onClick={handleChangePhoto}>Photos</Dropdown.Item>
+                                                <Dropdown.Item onClick={handleChangeVideo}>Videos</Dropdown.Item>
+                                                <Dropdown.Item onClick={handleChangePhoto}>Events</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </ul>
@@ -92,7 +139,24 @@ const ClubProfile = () => {
                     </Card>
                 </Row>
             </div>
-        </div >
+
+            {
+                post && <ClubHome />
+            }
+            {
+                about && <AboutClub />
+            }
+            {
+                event && <ClubEvents />
+            }
+            {
+                photo && <AllPhotos />
+            }
+            {
+                video && <AllVideos />
+            }
+
+        </div>
     );
 };
 

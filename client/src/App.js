@@ -49,9 +49,6 @@ function App() {
           <Route path="/onlineadmission">
             <OnlineAdmissionBody />
           </Route>
-          <Route path="/admissionfirststep">
-            <AdmissionFirstStep />
-          </Route>
           <Route path="/contact">
             <Home />
           </Route>
