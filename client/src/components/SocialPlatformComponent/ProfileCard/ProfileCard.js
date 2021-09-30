@@ -246,7 +246,7 @@ const ProfileCard = () => {
                     </div>
                 ))
             }
-        </div >
+        </div>
     );
 
 };

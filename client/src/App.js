@@ -10,11 +10,12 @@ import Signup from "./pages/Signup/Signup";
 import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
 import AllNotification from "./components/SocialPlatformComponent/pages/AllNotification/AllNotification";
 import SocialProfile from "./components/SocialPlatformComponent/pages/SocialProfile/SocialProfile";
-import {useDispatch} from "react-redux";
-import {useEffect} from "react";
-import {LoadingCurrentUser} from "./actions/auth";
-import {ToastContainer} from "react-toastify";
-import {getCurrentUserPosts} from "./actions/posts";
+import Connection from "./components/SocialPlatformComponent/pages/Connection/Connection";
+import Club from "./components/SocialPlatformComponent/pages/Club/Club";
+import Group from "./components/SocialPlatformComponent/pages/Group/Group";
+import SearchPage from "./components/SocialPlatformComponent/pages/SearchPage/SearchPage";
+import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDetails";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -128,8 +129,17 @@ function App() {
           <Route path="/allnotification">
             <AllNotification />
           </Route>
-          <Route path="/routine">
-            <Home />
+          <Route path="/club">
+            <Club />
+          </Route>
+          <Route path="/clubDetails">
+            <ClubDetails />
+          </Route>
+          <Route path="/group">
+            <Group />
+          </Route>
+          <Route path="/search">
+            <SearchPage />
           </Route>
           <Route path="/help">
             <Home />
