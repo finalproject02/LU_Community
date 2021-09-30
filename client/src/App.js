@@ -11,6 +11,10 @@ import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
 import AllNotification from "./components/SocialPlatformComponent/pages/AllNotification/AllNotification";
 import SocialProfile from "./components/SocialPlatformComponent/pages/SocialProfile/SocialProfile";
 import Connection from "./components/SocialPlatformComponent/pages/Connection/Connection";
+import Club from "./components/SocialPlatformComponent/pages/Club/Club";
+import Group from "./components/SocialPlatformComponent/pages/Group/Group";
+import SearchPage from "./components/SocialPlatformComponent/pages/SearchPage/SearchPage";
+import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDetails";
 
 
 function App() {
@@ -120,8 +124,17 @@ function App() {
           <Route path="/connection">
             <Connection />
           </Route>
-          <Route path="/routine">
-            <Home />
+          <Route path="/club">
+            <Club />
+          </Route>
+          <Route path="/clubDetails">
+            <ClubDetails />
+          </Route>
+          <Route path="/group">
+            <Group />
+          </Route>
+          <Route path="/search">
+            <SearchPage />
           </Route>
           <Route path="/help">
             <Home />
