@@ -1,4 +1,4 @@
-import { LOADING, FILE_FAIL, FILE_UPLOAD } from "./types";
+import {LOADING, FILE_FAIL, FILE_UPLOAD, LOADED} from "./types";
 import * as API from '../api'
 
 export const uploadFile = (fileData) => async (dispatch) => {
@@ -8,7 +8,8 @@ export const uploadFile = (fileData) => async (dispatch) => {
         dispatch({
             type: FILE_UPLOAD,
             payload: data
-        })
+        });
+        dispatch({ type: LOADED })
 
     } catch (error) {
         dispatch({type: FILE_FAIL})

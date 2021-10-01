@@ -1,18 +1,21 @@
-import React from "react";
-import Header from "../../components/Header/Header";
+import React, {useEffect} from "react";
 import MainCarousel from "../../components/MainCarousel/MainCarousel";
-import MainNavbar from "../../components/MainNavbar/MainNavbar";
 import HomeBody from "../../components/HomeBody/HomeBody";
-import Footer from "../../components/Footer/Footer";
+import MainNavbar from "../../components/MainNavbar/MainNavbar";
+import Header from "../../components/Header/Header.js";
+import Footer from "../../components/Footer/Footer.js";
+import { LoadingCurrentUser } from "../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
+
   return (
-    <div className="bg-light">
-      <Header/>
-      <MainNavbar/>
-      <MainCarousel/>
-      <HomeBody></HomeBody>
-      <Footer></Footer>
+    <div>
+      <Header />
+      <MainNavbar />
+      <MainCarousel />
+      <HomeBody />
+      <Footer />
     </div>
   );
 };

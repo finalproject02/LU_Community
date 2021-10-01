@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import AdmissionSecondStep from "../AdmissionSecondStep/AdmissionSecondStep";
 
-const AdmissionFirstStep = () => {
+const AdmissionFirstStep = ({step}) => {
   const [firstStep, setFirstStep] = useState(false);
   const [firstFormData, setFirstFormData] = useState({ program_name: 'css', applicant_email: '', applicant_name: '', applicant_birth_or_nid_number: '', applicant_fatherName: '', applicant_date_of_birth: '', applicant_father_occupation: '', applicant_gender: 'male', applicant_motherName: '', applicant_religion: 'islam', applicant_mother_occupation: '', applicant_nationality: '', father_or_mother_nid: '', applicant_marital_status: '', applicant_mobile: '', applicant_blood_group: '' });
   const handleChange = (e) => setFirstFormData({ ...firstFormData, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
     setFirstStep(true)
+  }
+  if(!window.location.reload) {
+        alert('ho')
   }
   return (
       <Container>
@@ -17,7 +20,7 @@ const AdmissionFirstStep = () => {
               <Col md="8">
                 <Card className="card w-100 shadow-sm rounded my-5">
                   <Card.Body className="card-body p-4">
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit} return false>
                       <fieldset>
                         <div className="row">
                           <legend>
@@ -267,7 +270,7 @@ const AdmissionFirstStep = () => {
                           <hr />
                         </div>
                           <div className="d-flex align-items-center justify-content-between">
-                              <button className="btn bg-primary text-white px-5" type={'button'}>
+                              <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => step(prevalue => !prevalue)}>
                                   Cancel
                               </button>
                               <button className="btn bg-primary text-white px-5" type={'submit'}>
@@ -278,7 +281,7 @@ const AdmissionFirstStep = () => {
                     </Form>
                   </Card.Body>
                 </Card>
-              </Col> : <AdmissionSecondStep firstFormData={firstFormData}/>
+              </Col> : <AdmissionSecondStep firstFormData={firstFormData} setFirstStep={setFirstStep}/>
           }
         </Row>
       </Container>

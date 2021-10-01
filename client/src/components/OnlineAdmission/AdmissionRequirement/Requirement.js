@@ -38,7 +38,7 @@ const Requirement = () => {
               </Card.Body>
             </Card>
           </Col>
-        )) : <AdmissionFirstStep />
+        )) : <AdmissionFirstStep step={setStep} />
         }
       </Row>
     </Container>

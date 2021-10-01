@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function OfficeOrder() {
   const officeOrder = {
@@ -10,21 +11,21 @@ function OfficeOrder() {
     <Card className="w-100 shadow-sm mb-4">
       <Card.Body className="text-center p-4">
         <Card.Title className="textSecondary fs-4">Office Order</Card.Title>
-        <Card.Text>
+        <Card.Text as='div'>
           <Row className="mb-2 mt-2">
             <Col md="2" className="mt-1">
               <h6> {officeOrder.date}</h6>
             </Col>
             <Col className="notice-a">
-              <a class="text-dark textHover" href="#">
+              <Link to="#" className="text-dark textHover" >
                 {officeOrder.title}
-              </a>
+              </Link>
             </Col>
           </Row>
         </Card.Text>
-        <a href="#" className="textHover">
+        <Link to="#" className="textHover">
           <p className="text-end text-black">Archive</p>
-        </a>
+        </Link>
       </Card.Body>
     </Card>
   );

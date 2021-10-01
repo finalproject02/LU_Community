@@ -1,4 +1,4 @@
-import { FILE_UPLOAD, FILE_FAIL } from "../actions/types";
+import {FILE_UPLOAD, FILE_FAIL, LOADING, LOADED} from "../actions/types";
 
 export default (state = { message: null, isLoading: true }, action) => {
     switch (action.type) {
@@ -12,7 +12,17 @@ export default (state = { message: null, isLoading: true }, action) => {
             return {
                 ...state,
                 message: null,
+                isLoading: false
+            };
+        case LOADING:
+            return {
+                ...state,
                 isLoading: true
+            }
+       case LOADED:
+            return {
+                ...state,
+                isLoading: false
             }
         default:
             return state

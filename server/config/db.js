@@ -5,7 +5,8 @@ const DatabaseConnection = async () => {
        await mongoose.connect(process.env.MONGOURI, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
-            useCreateIndex: true
+            useCreateIndex: true,
+            useFindAndModify: false
         });
 
         console.log('Database connected:')
