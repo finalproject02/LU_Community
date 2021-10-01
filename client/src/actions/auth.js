@@ -11,7 +11,7 @@ import {
 } from "./types";
 import * as api from '../api';
 import {returnErrors} from './erros';
-import {useHistory} from "react-router-dom";
+
 
 export const SignUp = (userData) => async (dispatch) => {
     try {
@@ -77,6 +77,8 @@ export const tokenConfig = (getState) => {
 }
 
 export const updateProfile = (userData) => async (dispatch, getState) => {
+
+    console.log('first token: ', getState)
     try {
         dispatch({ type: LOADING });
         const {data: { user }} = await api.updateUserData(getState, userData);

@@ -1,11 +1,12 @@
 import {
-    followOne,
-    getAllUsers, getFollowers,
+    disconnect,
+    getAllUsers,
     getUser,
     searchUser,
-    unfollowOne,
+    connect,
     updateUser,
-    getFollowings
+    suggestionPeople,
+    accept_connection_request
 } from "../controllers/users.js";
 import express from "express";
 import {auth} from "../middleware/auth.js";
@@ -16,8 +17,10 @@ router.get('/AllUsers', auth, getAllUsers);
 router.get('/user', auth, getUser);
 router.get('/search', auth, searchUser);
 router.patch('/updateUser', auth, updateUser);
-router.patch('/user/:userId/follow', auth, followOne);
-router.patch('/user/:userId/unfollow', auth, unfollowOne);
-router.get('/followers', auth, getFollowers);
-router.get('/followings', auth, getFollowings)
+router.patch('/user/:userId/connect', auth,  connect);
+router.patch('/user/:userId/disconnect', auth, disconnect);
+router.patch('/user/:userId/accept_connection_request', auth,  accept_connection_request);
+// router.get('/followers', auth, getFollowers);
+//router.get('/followings', auth, getFollowings);
+router.get('/suggestions/:department', auth, suggestionPeople)
 export default router;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Container, Dropdown, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaHome, FaLightbulb, FaRegBell, FaRegCommentDots, FaTh, FaUserPlus } from 'react-icons/fa';
@@ -8,11 +8,12 @@ import { Logout } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
 import Loading from "../../../services/Loading";
+import {Suggestions} from "../../../actions/people";
 
 const SocialNavbar = () => {
     const history = useHistory();
     const dispatch = useDispatch()
-    const { currentUser, isAuthenticated, isLoading, token } = useSelector(state => state.auth);
+    const { currentUser, token } = useSelector(state => state.auth);
 
     return (
         <div>

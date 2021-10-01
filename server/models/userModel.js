@@ -54,8 +54,8 @@ const userModel = new mongoose.Schema({
         default: null
     },
     isTeacher: {
-       type: Boolean,
-       default: false
+        type: Boolean,
+        default: false
     },
     mobile: {
         type: String,

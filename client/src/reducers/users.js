@@ -1,22 +1,17 @@
 import {
-    ALL_USERS,
     LOADING,
     SEARCHING,
     LOADED,
     FOLLOWINGS,
     FOLLOWERS,
-    FOLLOW,
-    UNFOLLOW
+    CONNECT,
+    DISCONNECT,
+    ACCEPT_CONNECTION_REQUEST
 } from "../actions/types";
 
 export default (state = { users: [], isLoading: false, message: null, following: [], followers: [] }, action) => {
     switch (action.type) {
-        case ALL_USERS:
-            return {
-                ...state,
-                users: action.payload,
-                isLoading: false
-            };
+
         case SEARCHING:
             return {
                 ...state,
@@ -33,11 +28,13 @@ export default (state = { users: [], isLoading: false, message: null, following:
                 ...state,
                 isLoading: true,
             };
-        case FOLLOW:
-        case UNFOLLOW:
+        case ACCEPT_CONNECTION_REQUEST:
+        case CONNECT:
+        case DISCONNECT:
             return {
                 ...state,
-                message: action.payload
+                message: action.payload.message,
+                users: action.payload.user
             };
         case FOLLOWINGS:
             return {

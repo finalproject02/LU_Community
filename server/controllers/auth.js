@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const createAccount = async (req, res) => {
-    const { name, email, password, student_id } = req.body;
+    const { name, email, password, student_id, department, current_position, isTeacher } = req.body;
     if (!name || !email || !password) {
         return res.status(404).json({ message: 'Please enter all fields' })
     }
@@ -13,7 +13,7 @@ export const createAccount = async (req, res) => {
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const user = await userModel.create({email: email, password: hashedPassword,  name, student_id});
+      const user = await userModel.create({email: email, password: hashedPassword,  name, student_id, isTeacher, department, current_position});
 
       const token = jwt.sign({ id: user._id, name: user.name, email: user.email }, process.env.SECRET, { expiresIn: '365d' });
       res.status(200).json({ user, token })

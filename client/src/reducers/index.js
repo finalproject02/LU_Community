@@ -5,6 +5,7 @@ import files from "./files";
 import auth from './auth';
 import users from './users';
 import posts from "./posts";
+import people from "./people";
 
 export default combineReducers({
     application,
@@ -12,5 +13,6 @@ export default combineReducers({
     files,
     auth,
     users,
-    posts
+    posts,
+    people
 })

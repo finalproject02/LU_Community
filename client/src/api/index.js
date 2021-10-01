@@ -11,10 +11,12 @@ export const getCurrentUser = (getState) => axios.get('/api/user', tokenConfig(g
 export const fetchAllUsers = (getState) => axios.get('/api/AllUsers', tokenConfig(getState));
 export const searchUser = (getState, searchKey) => axios.get(`/api/search?searchKey=${searchKey}`, tokenConfig(getState));
 export const updateUserData = (getState, userData) => axios.patch(`/api/updateUser`, userData, tokenConfig(getState));
-export const followUser = (getState, userId) => axios.patch(`/api/user/${userId}/follow`, tokenConfig(getState));
-export const unfollowUser = (getState, userId) => axios.patch(`/api/user/${userId}/unfollow`, tokenConfig(getState));
+export const connect = (getState, userId) => axios.patch(`/api/user/${userId}/connect`, { data: ''},  tokenConfig(getState));
+export const disconnect = (getState, userId) => axios.patch(`/api/user/${userId}/disconnect`, {data: ''}, tokenConfig(getState));
+export const accept_connection_request = (getState, userId) => axios.patch(`/api/user/${userId}/accept_connection_request`, {data: ''}, tokenConfig(getState));
 export const fetchFollowers = (getState) => axios.get('/api/followers', tokenConfig(getState));
 export const fetchFollowings= (getState) => axios.get('/api/followings', tokenConfig(getState));
+export const suggestions = (keyWord, getState) => axios.get(`/api/suggestions/${keyWord}`, tokenConfig(getState))
 
 export const newPost = (postData, getState) => axios.post('/api/posts', postData, tokenConfig(getState));
 export const fetchPosts = (getState) => axios.get('/api/posts', tokenConfig(getState));

@@ -56,7 +56,7 @@ export const updateUser = async (req, res) => {
     }
 }
 
-export const followOne = async (req, res) => {
+export const connect = async (req, res) => {
     const { userId } = req.params;
     const currentUserId  = req.user.id;
 
@@ -65,23 +65,24 @@ export const followOne = async (req, res) => {
            const user = await userModel.findById(userId);
            const currentUser = await userModel.findById(currentUserId);
 
-           if (!user.followers.includes(currentUserId)) {
-               await user.updateOne({ $push: { followers: currentUserId  } });
-               await currentUser.updateOne({ $push: { followings: userId } });
-               res.status(200).json({ message: 'You have been followed' })
+           if (!user.connection_requests.includes(currentUserId)) {
+               await user.updateOne({ $push: { connection_requests: currentUserId  } });
+               await currentUser.updateOne({ $push: { connecting : userId } });
+               const finalResult = await userModel.findById(currentUserId);
+               res.status(200).json({ message: 'connection is requested ', user: finalResult });
            } else {
-               res.status(403).json({ message: 'You are already followed' })
+               res.status(403).json({ message: 'You are already requested for connect' })
            }
 
         } catch (error) {
-            res.status(500).json({ message: 'Something went wrong' })
+            res.status(500).json({ message: 'Something went wrong' });
         }
     } else {
         res.status(403).json({ message: 'You can not follow your self' })
     }
 }
 
-export const unfollowOne = async (req, res) => {
+export const disconnect = async (req, res) => {
     const { userId } = req.params;
     const  currentUserId  = req.user.id;
 
@@ -90,22 +91,41 @@ export const unfollowOne = async (req, res) => {
             const user = await userModel.findById(userId);
             const currentUser = await userModel.findById(currentUserId);
 
-            if (user.followers.includes(currentUserId)) {
-                await user.updateOne({ $pull: { followers: currentUserId } });
-                await currentUser.updateOne({ $pull: { followings: userId } });
-                res.status(200).json({ message: 'You have been unfollowed' })
-            } else {
-                res.status(403).json({ message: 'You did not followed' })
+            if (user.connecting.includes(currentUserId) || user.connection_requests.includes(currentUserId)) {
+                await user.updateOne({ $pull: { connecting: currentUserId, connection_requests: currentUserId} });
+                await currentUser.updateOne({ $pull: { connecting: userId, connection_requests: userId } });
+                const finalResult = await userModel.findById(currentUserId);
+                res.status(200).json({ message: 'You have been disconnected', user: finalResult })
             }
         } catch (error) {
-            res.status(500).json({ message: 'something went wrong' })
+           // res.status(500).json({ message: 'something went wrong' });
+            console.log(error)
         }
     } else {
         res.status(403).json({message: 'You can not follow your self'})
     }
 }
 
-export const getFollowers = async (req, res) => {
+export const accept_connection_request = async (req, res) => {
+    const { userId } = req.params;
+    const currentUserId = req.user.id;
+    try {
+        const user = await userModel.findOne({ _id: userId });
+        const currentUser = await userModel.findOne({ _id: currentUserId });
+        if (currentUser.connection_requests.includes(userId)) {
+            await user.updateOne({ $pull: { connecting: currentUserId} });
+            await currentUser.updateOne({ $pull: { connection_requests: userId} });
+            await user.updateOne({ $push: { connection: currentUserId} });
+            await currentUser.updateOne({ $push: { connection: userId} });
+            const finalResult = await userModel.findOne({ _id: currentUserId });
+            res.status(200).json({ message: 'Request Accepted', user: finalResult })
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'something went wrong' })
+    }
+}
+
+export const getConnections = async (req, res) => {
     const { id } = req.user;
     try {
        const user = await userModel.findOne({_id: id}).select('-password');
@@ -116,13 +136,14 @@ export const getFollowers = async (req, res) => {
     }
 }
 
-export const getFollowings = async (req, res) => {
-    const { id } = req.user;
+
+export const suggestionPeople = async (req,  res) => {
+    const { department } = req.params
     try {
-        const user = await userModel.findOne({_id: id}).select('-password');
-        const followings = await userModel.find({ _id: user.followings }).select('-password');
-        res.status(200).json({ followings })
+        const suggestions = await userModel.find({ department });
+        res.status(200).json({ suggestions })
     } catch (error) {
-        res.status(500).json({ message: 'Something went wrong' })
+        res.status(500).json({ message: 'Something went to error' })
+        console.log(error)
     }
 }

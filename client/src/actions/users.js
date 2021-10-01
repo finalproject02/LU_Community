@@ -1,24 +1,14 @@
-import { FOLLOW, UNFOLLOW,
-    ALL_USERS, FOLLOWINGS,
+import {
+    FOLLOWINGS,
     FOLLOWERS, SEARCHING,
-    LOADING, LOADED
+    LOADING, LOADED,
+    CONNECT,DISCONNECT,
+    ACCEPT_CONNECTION_REQUEST
 } from "../actions/types";
 import * as api from '../api';
 import {returnErrors} from "./erros";
 
-export const ALlUser = () => async (dispatch, getState) => {
-    try {
-       dispatch({ type: LOADING });
-       const { data : { users } } = await api.fetchAllUsers(getState)
-       dispatch({
-           type: ALL_USERS,
-           payload: users
-       });
-       dispatch({ type: LOADED })
-    } catch (error) {
-        returnErrors(error.response.data, error.response.status)
-    }
-}
+
 
 export const searchPeople = (searchKey) => async (dispatch, getState) => {
     try {
@@ -34,13 +24,13 @@ export const searchPeople = (searchKey) => async (dispatch, getState) => {
     }
 }
 
-export const follow = (id) => async (dispatch, getState) => {
+export const Connect = (id) => async (dispatch, getState) => {
     try {
         dispatch({ type:LOADING });
-        const { data } = await api.followUser(getState, id);
+        const { data : { message, user } } = await api.connect(getState, id);
         dispatch({
-            type: FOLLOW,
-            payload: data
+            type: CONNECT,
+            payload: { message, user }
         })
         dispatch({ type:LOADED});
     } catch (error) {
@@ -48,13 +38,27 @@ export const follow = (id) => async (dispatch, getState) => {
     }
 }
 
-export const unfollow = (id) => async (dispatch, getState) => {
+export const Disconnect = (id) => async (dispatch, getState) => {
     try {
         dispatch({ type:LOADING });
-        const { data } = await api.unfollowUser(getState, id);
+        const { data : { message, user } } = await api.disconnect(getState, id);
         dispatch({
-            type: UNFOLLOW,
-            payload: data
+            type: DISCONNECT,
+            payload: { message, user }
+        })
+        dispatch({ type:LOADED});
+    } catch (error) {
+        returnErrors(error.response.data, error.response.status)
+    }
+}
+
+export const Accept_Connection_Request = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({ type:LOADING });
+        const { data : { message, user } } = await api.accept_connection_request(getState, id);
+        dispatch({
+            type: ACCEPT_CONNECTION_REQUEST,
+            payload: { message, user }
         })
         dispatch({ type:LOADED});
     } catch (error) {
