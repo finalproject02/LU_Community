@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Card, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import { FaCommentDots, FaPlus, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import jahed from "../../../images/Jahed.jpg";
 import AboutClub from '../AboutClub/AboutClub';
 import AllPhotos from '../AllPhotos/AllPhotos';
 import AllVideos from '../AllVideos/AllVideos';
 import ClubEvents from '../ClubEvents/ClubEvents';
-import ClubHome from '../ClubHome/ClubHome';
+import jahed from "../../../images/Jahed.jpg";
+import GroupHome from '../GroupHome/GroupHome';
 
-const ClubProfile = () => {
+const GroupProfile = () => {
     const [about, setAbout] = useState(false);
     const [post, setPost] = useState(true);
     const [event, setEvent] = useState(false);
@@ -54,7 +54,6 @@ const ClubProfile = () => {
         setPhoto(false);
         setVideo(true);
     }
-
     return (
         <div className="overflow-hidden">
             <div>
@@ -69,26 +68,19 @@ const ClubProfile = () => {
                                     <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
                                     </Form.Control>
                                 </label>
-                                <Row className="mb-2 position-relative">
-                                    <label htmlFor="profilePhoto" className="userPosition">
-                                        {
-                                            profilePhoto && profilePhoto.type.startsWith("image") ? (<Card.Img style={{ height: '150px' }} className="img-fluid w-25 rounded-pill p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" />) : (<img src={jahed} className="img-fluid userProfile p-2 bg-light" alt="jahed2" style={{ height: '150px' }} />)
-                                        }
-                                        <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
-                                        </Form.Control>
-                                    </label>
-                                    <Col className="mt-5 ms-sm-5 ms-3">
-                                        <h5 className="ms-3 mt-5 fw-bold fs-3">Leading University Computer Club</h5>
-                                        <p className="ms-3 mb-0 text-lead fs-5">@Leading.University.Computer.Club</p>
-                                        <div className="mb-2 mt-4">
-                                            <Link to="#" className="btn btn-primary me-2 mb-2">
-                                                <FaCommentDots className="me-2 mb-1" />
-                                                Send Message</Link>
-                                            <Link to="#" className="btn btn-primary me-2 mb-2">
-                                                <FaUserPlus className="me-2 mb-1" />
-                                                Send Membership Request</Link>
-                                        </div>
-                                    </Col>
+                                <Row>
+                                    <div className="d-flex align-items-center mb-4">
+                                        <Col md="8">
+                                            <h5 className="ms-3 mt-5 fw-bold fs-3">Leading University CSE Group</h5>
+                                            <p className="ms-3 mb-0 text-lead fs-5"><small>Private group. <span>450 members</span></small></p>
+                                        </Col>
+                                        <Col md="4">
+                                            <Link to="#" className="btn btn-outline-primary w-100 ms-2">
+                                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                                Join Request
+                                            </Link>
+                                        </Col>
+                                    </div>
                                 </Row>
                             </Card.Body>
                         </Container>
@@ -119,9 +111,9 @@ const ClubProfile = () => {
                                     </ul>
                                     <ul className="nav">
                                         <li className="nav-item">
-                                            <Link to="#" className="nav-link link-dark px-2 mt-1 btn">
+                                            <Link to="#" className="textPrimary px-2 mt-1 btn">
                                                 <FaPlus className="me-1 mb-1" />
-                                                Follow
+                                                Invite
                                             </Link>
                                         </li>
                                         <li className="nav-item">
@@ -141,7 +133,7 @@ const ClubProfile = () => {
             </div>
 
             {
-                post && <ClubHome />
+                post && <GroupHome />
             }
             {
                 about && <AboutClub />
@@ -160,4 +152,4 @@ const ClubProfile = () => {
     );
 };
 
-export default ClubProfile;
+export default GroupProfile;

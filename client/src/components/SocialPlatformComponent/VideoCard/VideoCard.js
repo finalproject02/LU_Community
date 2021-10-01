@@ -9,7 +9,7 @@ const VideoCard = () => {
                 <Card.Body>
                     <Card.Title>
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4>Photos</h4>
+                            <h4>Videos</h4>
                             <h6 class="card-subtitle mb-2 text-muted textHover">See All</h6>
                         </div>
                     </Card.Title>

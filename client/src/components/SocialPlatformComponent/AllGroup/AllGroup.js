@@ -3,13 +3,13 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import clubSuggestions from '../ClubSuggestions/ClubSuggestionsData';
 
-const ClubSuggestionsCard = (props) => {
+const AllGroup = () => {
     return (
-        <div className="mb-4">
+        <div>
             <Card className="w-100 rounded-3">
                 <Card.Body>
                     <Card.Title className="d-flex justify-content-between align-items-center">
-                        <h5 className="card-title">You May Follow</h5>
+                        <h5 className="card-title">You May Join</h5>
                         <h6 className="card-subtitle mb-2 text-muted textHover">See All</h6>
                     </Card.Title>
                     <Card.Text>
@@ -38,4 +38,4 @@ const ClubSuggestionsCard = (props) => {
     );
 };
 
-export default ClubSuggestionsCard;
+export default AllGroup;
