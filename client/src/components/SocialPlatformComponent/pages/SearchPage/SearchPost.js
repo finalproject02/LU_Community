@@ -1,30 +1,22 @@
 import React, { useState } from 'react';
-import { Card, Carousel, Collapse, Dropdown, Form } from 'react-bootstrap';
-import { FaEllipsisV, FaFrownOpen, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare, FaSmile } from 'react-icons/fa';
+import { Card, Col, Collapse, Dropdown, Form, Row } from 'react-bootstrap';
+import { FaEllipsisH, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import jahed from "../../../images/Jahed.jpg";
-import "./PostCard.css";
+import jahed from "../../../../images/Jahed.jpg";
 
-const PostCard = () => {
+const SearchPost = () => {
     const [open, setOpen] = useState(false);
-
-    const [index, setIndex] = useState(0);
-
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-    };
-
     return (
         <div className="mb-4">
             <Card className="w-100 rounded-3">
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
                         <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                            <img src={jahed} alt="" className="img-fluid smallProfile me-3" />
+                            <img src={jahed} alt="jahed" className="img-fluid smallProfile me-3" />
                             <div className="d-flex align-items-center">
                                 <div>
                                     <h6>Md Jahed Miah</h6>
-                                    <small>August 15 at 11.29 pm</small>
+                                    <small>Web Deeloper</small>
                                 </div>
                             </div>
                         </div>
@@ -34,12 +26,10 @@ const PostCard = () => {
                                 <strong className="">Connect</strong>
                             </div>
                             <Dropdown>
-                                <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                    <FaEllipsisV />
+                                <Dropdown.Toggle variant="light">
+                                    <FaEllipsisH />
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Delete
-                                        Post</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2">Copy Post
                                         Link</Dropdown.Item>
                                     <Dropdown.Item href="#/action-3">Report
@@ -48,40 +38,20 @@ const PostCard = () => {
                             </Dropdown>
                         </div>
                     </Card.Text>
-                    <Card.Text as="div">
-                        <div className="mb-3">
-                            <p className="card-text p-2">Lorem ipsum dolor sit amet consectetur adipisicing
+                    <Card.Text as="div" className="d-flex justify-content-between">
+                        <Row>
+                            <Col md="8" className="card-text p-2">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit.
                                 Enim
                                 eveniet odio minus ex culpa suscipit nostrum sit illo, pariatur tenetur
                                 modi?
-                                Molestias eius labore laudantium!</p>
-                        </div>
-                    </Card.Text>
-                    <Card.Text as="div" className="d-flex justify-content-center">
-                        <Carousel activeIndex={index} onSelect={handleSelect} className="mb-2 w-75">
-                            <Carousel.Item>
-                                <img
-                                    className="d-block w-100"
-                                    src={jahed}
-                                    alt="First slide"
+                                Molestias eius labore laudantium!
+                            </Col>
+                            <Col md="4">
+                                <img className="d-block w-100" src={jahed} alt="First"
                                 />
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img
-                                    className="d-block w-100"
-                                    src={jahed}
-                                    alt="Second slide"
-                                />
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <img
-                                    className="d-block w-100"
-                                    src={jahed}
-                                    alt="Third slide"
-                                />
-                            </Carousel.Item>
-                        </Carousel>
+                            </Col>
+                        </Row>
                     </Card.Text>
                     <Card.Text as="div">
                         <div className="d-flex align-items-center justify-content-between">
@@ -90,7 +60,7 @@ const PostCard = () => {
                                     <FaRegHeart className="skyColor fs-5 me-2" />
                                     <FaRegHeart className="skyColor fs-5 me-2" />
                                 </div>
-                                <Link id="totalLike" href="#" className="text-dark textHover">You,Md
+                                <Link href="#" className="text-dark textHover">You,Md
                                     Rejaul
                                     and
                                     25 others</Link>
@@ -205,4 +175,5 @@ const PostCard = () => {
         </div>
     );
 };
-export default PostCard;
+
+export default SearchPost;

@@ -21,7 +21,7 @@ const NewConnection = () => {
                                 newConnectionData.map(item => (
                                     <Col key={item.id} md="3" className=" mb-2">
                                         <Card className="w-100">
-                                            <Card.Img src={item.Photo} className="card-img-top rounded-3" alt="..." />
+                                            <Card.Img src={item.Photo} className="w-100 rounded-3" alt="..." />
                                             <Card.Body>
                                                 <Card.Title>{item.name}</Card.Title>
                                                 <small className="card-subtitle text-muted mb-2">

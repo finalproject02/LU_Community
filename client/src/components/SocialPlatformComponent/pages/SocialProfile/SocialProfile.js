@@ -15,20 +15,6 @@ const SocialProfile = () => {
         <div>
             <SocialNavbar />
             <ProfileCard />
-            <Container>
-                <Row>
-                    <Col md="8">
-                        <Post />
-                    </Col>
-                    <Col md="4">
-                        <ProfileIntro />
-                        <ProfileEducation />
-                        <PhotoCard />
-                        <FriendCard />
-                        <Suggestions />
-                    </Col>
-                </Row>
-            </Container>
         </div>
     );
 };

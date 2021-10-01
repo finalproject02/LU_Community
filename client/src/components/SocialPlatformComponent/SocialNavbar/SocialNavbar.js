@@ -58,8 +58,8 @@ const SocialNavbar = () => {
                                         <div className="text-muted text-sm">2 days</div>
                                     </Dropdown.Item>
                                     <div className="dropdown-divider"></div>
-                                    <Dropdown.Item href="/allNotification">
-                                        See All Notifications
+                                    <Dropdown.Item>
+                                        <Link to="/allNotification" className="text-decoration-none text-dark">See All Notifications</Link>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -73,8 +73,12 @@ const SocialNavbar = () => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item href="/club">Clubs</Dropdown.Item>
-                                <Dropdown.Item href="/group">Groups</Dropdown.Item>
+                                <Dropdown.Item>
+                                    <Link to="/club" className="text-decoration-none text-dark">Clubs</Link>
+                                </Dropdown.Item>
+                                <Dropdown.Item >
+                                    <Link to="/group" className="text-decoration-none text-dark">Groups</Link>
+                                </Dropdown.Item>
                                 <Dropdown.Item href="/setting">Settings</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -85,7 +89,9 @@ const SocialNavbar = () => {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item href="/project">New project</Dropdown.Item>
-                                <Dropdown.Item href="/socialProfile">Profile</Dropdown.Item>
+                                <Dropdown.Item>
+                                    <Link to="/socialProfile" className="text-decoration-none text-dark">Profile</Link>
+                                </Dropdown.Item>
                                 <Dropdown.Item href="/setting">Settings</Dropdown.Item>
                                 <div className="dropdown-divider"></div>
                                 <Dropdown.Item href="/login">Sign out</Dropdown.Item>

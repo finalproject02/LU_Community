@@ -4,8 +4,56 @@ import { Link } from 'react-router-dom';
 import profileCardData from './ProfileCardData';
 import "./ProfileCard.css";
 import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaPhone, FaUserCircle } from 'react-icons/fa';
+import ProfileHome from '../pages/SocialProfile/ProfileHome';
+import AllPhotos from '../AllPhotos/AllPhotos';
+import AllVideos from '../AllVideos/AllVideos';
+import AboutClub from '../AboutClub/AboutClub';
+import AllFriend from '../AllFriend/AllFriend';
 
 const ProfileCard = () => {
+    const [post, setPost] = useState(true);
+    const [about, setAbout] = useState(false);
+    const [connection, setConnection] = useState(false);
+    const [photo, setPhoto] = useState(false);
+    const [video, setVideo] = useState(false);
+
+    const handleChangePost = () => {
+        setPost(true);
+        setPhoto(false);
+        setVideo(false);
+        setConnection(false);
+        setAbout(false);
+    }
+
+    const handleChangeAbout = () => {
+        setPost(false);
+        setPhoto(false);
+        setVideo(false);
+        setConnection(false);
+        setAbout(true);
+    }
+    const handleChangeConnection = () => {
+        setPost(false);
+        setAbout(false);
+        setPhoto(false);
+        setVideo(false);
+        setConnection(true);
+    }
+    const handleChangePhoto = () => {
+        setPost(false);
+        setAbout(false);
+        setConnection(false);
+        setVideo(false);
+        setPhoto(true);
+    }
+    const handleChangeVideo = () => {
+        setPost(false);
+        setAbout(false);
+        setConnection(false);
+        setPhoto(false);
+        setVideo(true);
+    }
+
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
 
@@ -16,7 +64,6 @@ const ProfileCard = () => {
     const [showSecond, setShowSecond] = useState(false);
     const handleCloseSecond = () => setShowSecond(false);
     const handleShowSecond = () => setShowSecond(true);
-
 
     const [save, setSave] = useState(false);
     const [data, setData] = useState({
@@ -78,22 +125,22 @@ const ProfileCard = () => {
                                         <div class="container d-flex flex-wrap">
                                             <ul class="nav me-auto">
                                                 <li class="nav-item">
-                                                    <Link to="/socialProfile" class="nav-link link-dark px-2 active"
-                                                        aria-current="page">Posts</Link>
+                                                    <p class="nav-link link-dark px-2 active"
+                                                        aria-current="page" onClick={handleChangePost}>Posts</p>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <Link to="aboutProfile" class="nav-link link-dark ps-4 px-2">About</Link>
+                                                    <p class="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <Link to="allFriend" class="nav-link link-dark ps-4 px-2">connections</Link>
+                                                    <p class="nav-link link-dark ps-4 px-2" onClick={handleChangeConnection}>connections</p>
                                                 </li>
                                                 <Dropdown as="li">
                                                     <Dropdown.Toggle variant="light">
                                                         More
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
-                                                        <Dropdown.Item href="/allPhotos">Photos</Dropdown.Item>
-                                                        <Dropdown.Item href="/allVideos">Videos</Dropdown.Item>
+                                                        <Dropdown.Item onClick={handleChangePhoto}>Photos</Dropdown.Item>
+                                                        <Dropdown.Item onClick={handleChangeVideo}>Videos</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
                                             </ul>
@@ -214,6 +261,22 @@ const ProfileCard = () => {
                         </Row>
                     </div>
                 ))
+            }
+
+            {
+                post && <ProfileHome />
+            }
+            {
+                about && <AboutClub />
+            }
+            {
+                connection && <AllFriend />
+            }
+            {
+                photo && <AllPhotos />
+            }
+            {
+                video && <AllVideos />
             }
         </div>
     );
