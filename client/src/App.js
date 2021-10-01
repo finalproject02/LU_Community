@@ -2,7 +2,6 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import OnlineAdmissionBody from "./pages/OnlineAdmission/OnlineAdmissionBody";
-import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
 import NotFound from "./components/NotFound/NotFound";
 import Classroom from "./pages/Classroom/Classroom";
 import Login from "./pages/Login/Login";

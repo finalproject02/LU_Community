@@ -11,40 +11,40 @@ const ProfileEducation = () => {
         <div className="mb-4">
             <Card className="w-100 rounded-3">
                 <Card.Body>
-                    <Card.Text as="div" class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title pt-2">Education</h5>
+                    <Card.Text as="div" className="d-flex justify-content-between align-items-center">
+                        <h5 className="card-title pt-2">Education</h5>
                         <FaEdit className="fs-5" onClick={handleShow} />
                     </Card.Text>
                     <hr />
                     <Card.Text as="div">
-                        <div class="col-md-12">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex">
+                        <div className="col-md-12">
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex">
                                     <FaGraduationCap className="fs-4" />
-                                    <p class="ps-2">Leading University</p>
+                                    <p className="ps-2">Leading University</p>
                                 </div>
                                 <FaPencilAlt className="fs-5" onClick={handleShow} />
                             </div>
                             <div>
-                                <p class="mb-0">Bachelor of Science (BSc),Computer Science and
+                                <p className="mb-0">Bachelor of Science (BSc),Computer Science and
                                     Engineering(CSE)</p>
-                                <p class="mt-0 pt-0">2017 – 2021</p>
+                                <p className="mt-0 pt-0">2017 – 2021</p>
                             </div>
                         </div>
                     </Card.Text>
                     <hr />
                     <Card.Text as="div">
-                        <div class="col-md-12">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex">
+                        <div className="col-md-12">
+                            <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex">
                                     <FaGraduationCap className="fs-4" />
-                                    <p class="ps-2">Dakshin Surma Govt.College, Sylhet</p>
+                                    <p className="ps-2">Dakshin Surma Govt.College, Sylhet</p>
                                 </div>
                                 <FaPencilAlt className="fs-5" onClick={handleShow} />
                             </div>
                             <div>
-                                <p class="mb-0">Degree Name HSC,Field Of Study Science</p>
-                                <p class="mt-0 pt-0">2015 – 2017</p>
+                                <p className="mb-0">Degree Name HSC,Field Of Study Science</p>
+                                <p className="mt-0 pt-0">2015 – 2017</p>
                             </div>
                         </div>
                     </Card.Text>
@@ -56,32 +56,32 @@ const ProfileEducation = () => {
                     <Modal.Title>Add Education</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form class="pt-3 mb-1">
+                    <Form className="pt-3 mb-1">
                         <Row className="mb-2">
                             <Col md="12">
-                                <h6 class="">School</h6>
+                                <h6 className="">School</h6>
                                 <Form.Control type="text" />
                             </Col>
                         </Row>
                         <Row className="mb-2">
                             <Col md="12">
-                                <h6 class="">Degree</h6>
+                                <h6 className="">Degree</h6>
                                 <Form.Control type="text" />
                             </Col>
                         </Row>
                         <Row className="mb-2">
                             <Col md="12">
-                                <h6 class="">Field of Study</h6>
+                                <h6 className="">Field of Study</h6>
                                 <Form.Control type="text" />
                             </Col>
                         </Row>
                         <Row className="mb-4">
                             <Col md="6">
-                                <h6 class="">Start date</h6>
+                                <h6 className="">Start date</h6>
                                 <Form.Control type="date" />
                             </Col>
                             <Col md="6">
-                                <h6 class="">End date</h6>
+                                <h6 className="">End date</h6>
                                 <Form.Control type="date" />
                             </Col>
                         </Row>
