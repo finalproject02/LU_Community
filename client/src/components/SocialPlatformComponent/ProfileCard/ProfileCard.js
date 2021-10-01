@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Dropdown, Form, Modal, Row } from 'react-bootstrap';
+import { Card, Col, Container, Dropdown, Form, Modal, Nav, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import profileCardData from './ProfileCardData';
 import "./ProfileCard.css";
@@ -7,8 +7,8 @@ import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen
 import ProfileHome from '../pages/SocialProfile/ProfileHome';
 import AllPhotos from '../AllPhotos/AllPhotos';
 import AllVideos from '../AllVideos/AllVideos';
-import AboutClub from '../AboutClub/AboutClub';
 import AllFriend from '../AllFriend/AllFriend';
+import ProfileAbout from '../ProfileAbout/ProfileAbout';
 
 const ProfileCard = () => {
     const [post, setPost] = useState(true);
@@ -121,19 +121,19 @@ const ProfileCard = () => {
                                     </Card.Body>
                                 </Container>
                                 <Row>
-                                    <nav class="py-2 bg-light border-bottom sticky-top">
-                                        <div class="container d-flex flex-wrap">
-                                            <ul class="nav me-auto">
-                                                <li class="nav-item">
-                                                    <p class="nav-link link-dark px-2 active"
-                                                        aria-current="page" onClick={handleChangePost}>Posts</p>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <p class="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <p class="nav-link link-dark ps-4 px-2" onClick={handleChangeConnection}>connections</p>
-                                                </li>
+                                    <nav className="py-2 bg-light border-bottom sticky-top">
+                                        <Container className="d-flex flex-wrap">
+                                            <Nav className="me-auto">
+                                                <Nav.Item>
+                                                    <Nav.Link className="nav-link link-dark px-2 active"
+                                                        aria-current="page" onClick={handleChangePost}>Posts</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
+                                                    <Nav.Link className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
+                                                    <Nav.Link className="nav-link link-dark ps-4 px-2" onClick={handleChangeConnection}>connections</Nav.Link>
+                                                </Nav.Item>
                                                 <Dropdown as="li">
                                                     <Dropdown.Toggle variant="light">
                                                         More
@@ -143,18 +143,18 @@ const ProfileCard = () => {
                                                         <Dropdown.Item onClick={handleChangeVideo}>Videos</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
-                                            </ul>
-                                            <ul class="nav">
-                                                <li class="nav-item">
-                                                    <Link to="#" class="nav-link link-dark px-2">
-                                                        <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-                                                            <input type="search" class="form-control" placeholder="Search..."
+                                            </Nav>
+                                            <ul className="nav">
+                                                <li className="nav-item">
+                                                    <Link to="#" className="nav-link link-dark px-2">
+                                                        <form className="col-12 col-lg-auto mb-3 mb-lg-0">
+                                                            <input type="search" className="form-control" placeholder="Search..."
                                                                 aria-label="Search" />
                                                         </form>
                                                     </Link>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </Container>
                                     </nav>
                                 </Row>
                             </Card>
@@ -218,7 +218,7 @@ const ProfileCard = () => {
                             <Modal show={showSecond} onHide={handleCloseSecond}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>
-                                        <h5 class="modal-title fs-5">
+                                        <h5 className="modal-title fs-5">
                                             Edit contact info</h5>
                                     </Modal.Title>
                                 </Modal.Header>
@@ -267,7 +267,7 @@ const ProfileCard = () => {
                 post && <ProfileHome />
             }
             {
-                about && <AboutClub />
+                about && <ProfileAbout />
             }
             {
                 connection && <AllFriend />

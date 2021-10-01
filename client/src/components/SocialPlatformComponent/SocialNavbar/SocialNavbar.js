@@ -90,7 +90,7 @@ const SocialNavbar = () => {
                             <Dropdown.Menu>
                                 <Dropdown.Item href="/project">New project</Dropdown.Item>
                                 <Dropdown.Item>
-                                    <Link to="/userProfile" className="text-decoration-none text-dark">Profile</Link>
+                                    <Link to="/socialProfile" className="text-decoration-none text-dark">Profile</Link>
                                 </Dropdown.Item>
                                 <Dropdown.Item href="/setting">Settings</Dropdown.Item>
                                 <div className="dropdown-divider"></div>

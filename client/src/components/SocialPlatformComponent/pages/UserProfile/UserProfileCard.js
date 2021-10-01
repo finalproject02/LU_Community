@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Dropdown, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import AboutClub from '../../AboutClub/AboutClub';
 import UserProfileHome from './UserProfileHome';
 import AllFriend from "../../AllFriend/AllFriend";
 import AllPhotos from "../../AllPhotos/AllPhotos.js";
 import AllVideos from "../../AllVideos/AllVideos.js";
 import profileCardData from "../../ProfileCard/ProfileCardData.js";
 import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEnvelopeOpen, FaPhone, FaUserCircle } from 'react-icons/fa';
+import ProfileAbout from '../../ProfileAbout/ProfileAbout';
 
 
 const UserProfileCard = () => {
@@ -211,7 +211,7 @@ const UserProfileCard = () => {
                     post && <UserProfileHome />
                 }
                 {
-                    about && <AboutClub />
+                    about && <ProfileAbout />
                 }
                 {
                     connection && <AllFriend />

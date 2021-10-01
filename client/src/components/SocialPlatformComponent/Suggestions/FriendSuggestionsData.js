@@ -4,6 +4,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Web developer",
+        homeTown: "Sylhet",
         mutual: 5
     },
     {
@@ -11,6 +12,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Web designer",
+        homeTown: "Sylhet",
         mutual: 5
     },
     {
@@ -18,6 +20,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Full-satck developer",
+        homeTown: "Sylhet",
         mutual: 5
     },
     {
@@ -25,6 +28,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Front-end developer",
+        homeTown: "Sylhet",
         mutual: 5
     },
     {
@@ -32,6 +36,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Back-end developer",
+        homeTown: "Sylhet",
         mutual: 5
     },
     {
@@ -39,6 +44,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Web developer",
+        homeTown: "Sylhet",
         mutual: 5
     },
     {
@@ -46,6 +52,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Web developer",
+        homeTown: "Sylhet",
         mutual: 5
     },
     {
@@ -53,6 +60,7 @@ const friendSuggestion = [
         imageUrl: "http://localhost:3000/static/media/Jahed.2e87f10d.jpg",
         name: "Md Jahed Miah",
         position: "Web developer",
+        homeTown: "Sylhet",
         mutual: 5
     },
 ];
