@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Dropdown, Form, Modal, Row } from 'react-bootstrap';
+import {Card, Col, Container, Dropdown, Form, Modal, Nav, Row} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
 import "./ProfileCard.css";
 import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaJoint, FaPhone, FaUserCircle } from 'react-icons/fa';
@@ -12,6 +12,11 @@ import {uploadFile} from "../../../actions/files";
 import Avatar from '../../../images/avatar.jpeg'
 import { useParams } from "react-router-dom";
 import {Accept_Connection_Request, Connect, Disconnect} from "../../../actions/users";
+import ProfileAbout from '../ProfileAbout/ProfileAbout';
+import AllFriend from "../AllFriend/AllFriend";
+import AllPhotos from "../AllPhotos/AllPhotos";
+import AllVideos from "../AllVideos/AllVideos";
+import ProfileHome from "../pages/SocialProfile/ProfileHome";
 
 const ProfileCard = () => {
     const { people } = useSelector(state => state.people)
@@ -23,6 +28,11 @@ const ProfileCard = () => {
     const [show, setShow] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
+    const [connection, setConnection] = useState(false);
+    const [photo, setPhoto] = useState(false);
+    const [video, setVideo] = useState(false);
+    const [post, setPost] = useState(true);
+    const [about, setAbout] = useState(false);
     const paramUser = people?.filter(person => person._id === id);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -38,6 +48,43 @@ const ProfileCard = () => {
     const [save, setSave] = useState(false);
     const [data, setData] = useState();
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
+
+    const handleChangePost = () => {
+        setPost(true);
+        setPhoto(false);
+        setVideo(false);
+        setConnection(false);
+        setAbout(false);
+    }
+
+    const handleChangeAbout = () => {
+        setPost(false);
+        setPhoto(false);
+        setVideo(false);
+        setConnection(false);
+        setAbout(true);
+    }
+    const handleChangeConnection = () => {
+        setPost(false);
+        setAbout(false);
+        setPhoto(false);
+        setVideo(false);
+        setConnection(true);
+    }
+    const handleChangePhoto = () => {
+        setPost(false);
+        setAbout(false);
+        setConnection(false);
+        setVideo(false);
+        setPhoto(true);
+    }
+    const handleChangeVideo = () => {
+        setPost(false);
+        setAbout(false);
+        setConnection(false);
+        setPhoto(false);
+        setVideo(true);
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         setSave(true);
@@ -144,27 +191,27 @@ const ProfileCard = () => {
                                 <Row>
                                     <nav class="py-2 bg-light border-bottom sticky-top">
                                         <div class="container d-flex flex-wrap">
-                                            <ul class="nav me-auto">
-                                                <li class="nav-item">
-                                                    <Link to="/socialProfile" class="nav-link link-dark px-2 active"
-                                                        aria-current="page">Posts</Link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <Link to="aboutProfile" class="nav-link link-dark ps-4 px-2">About</Link>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <Link to="allFriend" class="nav-link link-dark ps-4 px-2">connections</Link>
-                                                </li>
+                                            <Nav class="nav me-auto">
+                                                <Nav.Item>
+                                                    <Nav.Link className="nav-link link-dark px-2 active"
+                                                              aria-current="page" onClick={handleChangePost}>Posts</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
+                                                    <Nav.Link className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
+                                                    <Nav.Link className="nav-link link-dark ps-4 px-2" onClick={handleChangeConnection}>connections</Nav.Link>
+                                                </Nav.Item>
                                                 <Dropdown as="li">
                                                     <Dropdown.Toggle variant="light">
                                                         More
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
-                                                        <Dropdown.Item href="/allPhotos">Photos</Dropdown.Item>
-                                                        <Dropdown.Item href="/allVideos">Videos</Dropdown.Item>
+                                                        <Dropdown.Item onClick={handleChangePhoto}>Photos</Dropdown.Item>
+                                                        <Dropdown.Item  onClick={handleChangeVideo}>Videos</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
-                                            </ul>
+                                            </Nav>
                                             <ul class="nav">
                                                 <li class="nav-item">
                                                     <Link to="#" class="nav-link link-dark px-2">
@@ -279,7 +326,11 @@ const ProfileCard = () => {
                             </Modal>
                         </Row>
                     </div>
-
+            {post && <ProfileHome />}
+            {about && <ProfileAbout />}
+            {connection && <AllFriend />}
+            {photo && <AllPhotos />}
+            {video && <AllVideos />}
         </div>
     );
 

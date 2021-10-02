@@ -16,8 +16,6 @@ import 'react-toastify/dist/ReactToastify.css'
 const SocialProfile = () => {
     const history = useHistory();
     const {token} = useSelector(state => state.auth);
-    const {posts} = useSelector(state => state.posts);
-    console.log(posts)
 
     useEffect(() => {
         if (token) {
@@ -33,20 +31,7 @@ const SocialProfile = () => {
                 <>
                     <SocialNavbar />
                     <ProfileCard />
-                    <Container>
-                        <Row>
-                            <Col md="8">
-                                <Post posts={posts}/>
-                            </Col>
-                            <Col md="4">
-                                <ProfileIntro />
-                                <ProfileEducation />
-                                <PhotoCard />
-                                <FriendCard />
-                                <Suggestions />
-                            </Col>
-                        </Row>
-                    </Container>
+
                 </>
             ) :  history.push('/')
             }
