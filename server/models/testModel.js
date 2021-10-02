@@ -9,15 +9,9 @@ const testSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        password: {
-            type: String,
-            required: [true, 'Please enter your password'],
-            minlength: 8,
-            maxlength:8
-        },
-        roll: {
-            type: Number,
-            unique: true
+        education: {
+            type: Array,
+            default: []
         }
 
     },

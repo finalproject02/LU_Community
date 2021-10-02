@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import MainSidebar from '../../components/MainSidebar/MainSidebar';
 import SignupForm from '../../components/SignupForm/SignupForm';

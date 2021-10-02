@@ -14,11 +14,30 @@ import Club from "./components/SocialPlatformComponent/pages/Club/Club";
 import Group from "./components/SocialPlatformComponent/pages/Group/Group";
 import SearchPage from "./components/SocialPlatformComponent/pages/SearchPage/SearchPage";
 import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDetails";
-
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {LoadingCurrentUser} from "./actions/auth";
+import {getCurrentUserPosts} from "./actions/posts";
+import {ToastContainer} from "react-toastify";
+import {People, Suggestions} from "./actions/people";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(LoadingCurrentUser());
+    dispatch(getCurrentUserPosts());
+    dispatch(People())
+  }, []);
+  const { currentUser} = useSelector(state => state.auth);
+  const department = currentUser?.department
+  useEffect(() => {
+    dispatch(Suggestions(department))
+  }, [department])
+
   return (
     <div className="bg-light">
+      <ToastContainer/>
       <Router>
         <Switch>
           <Route exact path="/home">
@@ -79,7 +98,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/departmentofenglish">
-            <Home></Home>
+            <Home/>
           </Route>
           <Route path="/departmentofarchitect">
             <Home />
@@ -114,6 +133,9 @@ function App() {
           <Route path="/socialProfile">
             <SocialProfile />
           </Route>
+          <Route path="/profile/:id">
+            <SocialProfile />
+          </Route>
           <Route path="/allnotification">
             <AllNotification />
           </Route>
@@ -129,7 +151,7 @@ function App() {
           <Route path="/group">
             <Group />
           </Route>
-          <Route path="/search">
+          <Route exact path="/search">
             <SearchPage />
           </Route>
           <Route path="/help">

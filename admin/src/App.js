@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -10,31 +10,39 @@ import Home from './pages/Home/Home';
 import AdmissionRequest from './pages/AdmissionRequest/AdmissionRequest';
 import NotFound from "./components/NotFound/NotFound";
 import StudentDetails from './components/StudentDetails/StudentDetails';
+import {Provider, useDispatch} from "react-redux";
+import store from "./store";
+import {getAllApplication} from "./actions/applications";
+
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAllApplication())
+  }, [])
   return (
-    <div>
-      <Router>
-        <AdminNavbar></AdminNavbar>
-        <Switch>
-          <Route exact path="/">
-            <Home></Home>
-          </Route>
-          <Route path="/home">
-            <Home></Home>
-          </Route>
-          <Route path="/admissionRequest">
-            <AdmissionRequest></AdmissionRequest>
-          </Route>
-          <Route path="/studentDetails">
-            <StudentDetails></StudentDetails>
-          </Route>
-          <Route path="*">
-            <NotFound></NotFound>
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+        <div>
+          <Router>
+            <AdminNavbar/>
+            <Switch>
+              <Route exact path="/">
+                <Home/>
+              </Route>
+              <Route path="/home">
+                <Home/>
+              </Route>
+              <Route path="/admissionRequest">
+                <AdmissionRequest/>
+              </Route>
+              <Route path="/studentDetails/:id">
+                <StudentDetails/>
+              </Route>
+              <Route path="*">
+                <NotFound/>
+              </Route>
+            </Switch>
+          </Router>
+        </div>
   );
 }
 

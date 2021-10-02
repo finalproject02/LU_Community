@@ -12,11 +12,9 @@ const admissionSchema = new mongoose.Schema({
     applicant_email: {
         type: String,
         required: true,
-        unique: true
     },
     applicant_birth_or_nid_number: {
         type: Number,
-        unique: true,
         required: true,
         minlength: 10,
         maxlength: 17
@@ -112,7 +110,7 @@ const admissionSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'application padding'
+        default: 'application pending'
     },
     applicant_gender: String,
     applicant_nationality: String,
@@ -124,7 +122,10 @@ const admissionSchema = new mongoose.Schema({
     guardian_name: String,
     guardian_contact: String,
     guardian_photo: String,
-    address: String
+    permanent_address: String,
+    present_address: String,
+    father_or_mother_nid: Number,
+    applicant_blood_group: String
  },
     {timestamps: true}
 )
