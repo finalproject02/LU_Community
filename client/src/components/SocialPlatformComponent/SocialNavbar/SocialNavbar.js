@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Dropdown, Form } from 'react-bootstrap';
-import {Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaHome, FaLightbulb, FaRegBell, FaRegCommentDots, FaTh, FaUserPlus } from 'react-icons/fa';
 import './SocialNavbar.css';
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
@@ -21,7 +21,7 @@ const SocialNavbar = () => {
     }
     return (
         <div>
-            { token && (
+            {token && (
                 <header className="p-3 sticky-top bg-light shadow-sm">
                     <Container>
                         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -36,6 +36,7 @@ const SocialNavbar = () => {
                                 </div>
                                 <div><Link to="/connection" className="nav-link navFont px-2 link-dark">
                                     <FaUserPlus className="me-2 iconFont" />
+                                    <span className="notificationCount text-info fw-bold">2</span>
                                     Connection
                                 </Link>
                                 </div>
@@ -79,7 +80,7 @@ const SocialNavbar = () => {
                                 </Dropdown>
                             </div>
                             <Form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                                <Form.Control type="search" placeholder="Search..." name={'search'} onChange={(e) => setSearch(e.target.value)}  onKeyDown={handleKeyDown}/>
+                                <Form.Control type="search" placeholder="Search..." name={'search'} onChange={(e) => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
                             </Form>
                             <Dropdown>
                                 <Dropdown.Toggle variant="light" id="dropdown-basic">
