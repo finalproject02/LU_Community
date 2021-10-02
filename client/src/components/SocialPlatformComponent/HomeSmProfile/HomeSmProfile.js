@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import jahed from "../../../images/Jahed.jpg";
 import "./HomeSmProfile.css";
 import { useSelector } from "react-redux";
 import Avatar from '../../../images/avatar.jpeg'
