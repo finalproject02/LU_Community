@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 import { SignUp } from "../../actions/auth";
 
 const SignupForm = () => {
@@ -19,7 +20,7 @@ const SignupForm = () => {
     }
     return (
         <div className="mt-5 p-4">
-            <h2 className="text-center textPrimary">Signup</h2>
+            <h2 className="text-center textPrimary">{isTeacher ? 'Teacher Signup' : 'Student Signup'}</h2>
             <Form onSubmit={handleSubmit} className="shadow p-5">
                 <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>
@@ -41,7 +42,7 @@ const SignupForm = () => {
                         </Form.Group>
                     </>
 
-                ): (
+                ) : (
                     <Form.Group className="mb-3">
                         <Form.Label>Student Id</Form.Label>
                         <Form.Control type="number" placeholder="Enter id" name={'student_id'} onChange={handleChange} required />
@@ -55,10 +56,11 @@ const SignupForm = () => {
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control type="password" placeholder="Enter confirm Password" name={'confirmPassword'} onChange={handleChange} required />
                 </Form.Group>
-                <p onClick={()=> setIsTeacher(prevalue => !prevalue)}>{isTeacher ? 'Student Signup' : 'Teacher Signup' }</p>
                 <div className="bgSecondary text-center">
-
                     <input type="submit" value="SIGN UP" className="btn w-100 text-white" />
+                </div>
+                <div className="text-center mt-3">
+                    <Link to="#" className="textSecondary textHover" onClick={() => setIsTeacher(prevalue => !prevalue)}>{isTeacher ? 'Signup as a Student' : 'Signup as aTeacher'}</Link>
                 </div>
 
             </Form>
