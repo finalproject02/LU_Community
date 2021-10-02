@@ -13,10 +13,10 @@ import {returnErrors} from "./erros";
 export const searchPeople = (searchKey) => async (dispatch, getState) => {
     try {
         dispatch({ type: LOADING });
-        const { data : { users } } = await api.searchUser(getState, searchKey)
+        const { data } = await api.searchUser(getState, searchKey)
         dispatch({
             type: SEARCHING,
-            payload: users
+            payload: data
         });
         dispatch({ type: LOADED });
     } catch (error) {

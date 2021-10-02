@@ -152,7 +152,7 @@ function App() {
           <Route path="/group">
             <Group />
           </Route>
-          <Route path="/search">
+          <Route exact path="/search">
             <SearchPage />
           </Route>
           <Route path="/help">

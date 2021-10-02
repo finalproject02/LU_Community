@@ -21,8 +21,8 @@ export const getUser = async (req, res) => {
 export const searchUser = async (req, res) => {
     const { searchKey } = req.query;
     try {
-        const name = new RegExp(searchKey, 'i')
-        const users = await userModel.find({ name }).select('-password');
+        const key = new RegExp(searchKey, 'i')
+        const users = await userModel.find({ $or: [{name: key}, {department: key}, {batch: key}, {email: key}] }).select('-password').sort({isTeacher: -1});
         res.status(200).json({ users })
     } catch (error) {
         res.status(500).json({ message: 'Something went error' })

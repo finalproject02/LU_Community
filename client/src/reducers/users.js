@@ -15,7 +15,7 @@ export default (state = { users: [], isLoading: false, message: null, following:
         case SEARCHING:
             return {
                 ...state,
-                users: action.payload,
+                users: action.payload.users,
                 isLoading: false
             };
         case LOADING:

@@ -5,7 +5,7 @@ import Post from '../../Post/Post';
 import Suggestions from '../../Suggestions/Suggestions';
 import Online from '../../Online/Online';
 import HomeSmProfile from '../../HomeSmProfile/HomeSmProfile';
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 
 const SocialHome = () => {
     const { isAuthenticated } = useSelector(state => state.auth);
@@ -29,7 +29,7 @@ const SocialHome = () => {
                         </Row>
                     </Container>
                 </>
-            )  }
+            )}
         </div>
     );
 };

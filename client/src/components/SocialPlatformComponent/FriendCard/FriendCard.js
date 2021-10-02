@@ -14,16 +14,9 @@ const FriendCard = () => {
     const { people } = useSelector(state => state.people);
     const connections = people.filter(connect =>currentUser?.connection.includes(connect._id));
     const paramUser = people.filter(person => person._id === id);
-    const pconnection = paramUser.map(user => user.connection)
-    const finalFilter = (pconnection,people) => {
-        const fil = pconnection.filter(el => {
-            return people.indexOf(el._id) === -1;
-        });
-        return fil
-    };
+    const paramsConnection = paramUser.map(users => people.filter(person => users.connection.includes(person._id)))
 
 
-    console.log('params : ', finalFilter(pconnection, people))
     return (
         <div className="mb-4">
             <Card className="w-100 rounded-3">
@@ -50,6 +43,19 @@ const FriendCard = () => {
                                 ))
                             )
                          }
+                         {paramUser.length !== 0 && (
+                            paramsConnection.map(connections => connections.map(connection => (
+                                <Col md="4" className="mb-2">
+                                    <img src={connection.profile_picture ?
+                                        `/api/files/storage/${connection.profile_picture}` :
+                                        Avatar} className="img-fluid rounded-3" alt="" onClick={() => {
+                                        history.push(`/profile/${connection._id}`);
+                                        document.documentElement.scrollTop = 0;
+                                    }}/>
+                                    <Link href="#" className="textHover fontSize text-dark">{connection.name}</Link>
+                                </Col>
+                            )))
+                         )}
                     </Row>
                     </Card.Text>
                 </Card.Body>
