@@ -34,9 +34,9 @@ const SocialNavbar = () => {
                                     <FaHome className="me-2 iconFont mt-0 pt-0" />
                                     Home</Link>
                                 </div>
-                                <div><Link to="/connection" className="nav-link navFont px-2 link-dark">
+                                <div><Link to="/connection" className="nav-link navFont px-2 link-dark position-relative">
                                     <FaUserPlus className="me-2 iconFont" />
-                                    <span className="notificationCount text-info fw-bold">2</span>
+                                    <span className="ConnectionCount text-danger fw-bold">2</span>
                                     Connection
                                 </Link>
                                 </div>

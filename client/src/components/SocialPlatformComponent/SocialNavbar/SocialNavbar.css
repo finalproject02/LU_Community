@@ -6,9 +6,14 @@
 }
 .notificationCount {
   position: absolute;
-  left: 20px;
+  left: 22px;
   top: -5px;
 }
 .dropdown-toggle::after {
   content: none !important;
+}
+.ConnectionCount {
+  position: absolute;
+  left: 15px;
+  top: -5px;
 }
