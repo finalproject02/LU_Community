@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { FaDotCircle } from 'react-icons/fa';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Avatar from "../../../images/avatar.jpeg";
 
 const Online = () => {
@@ -16,7 +16,7 @@ const Online = () => {
                         <Card.Title>
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 className="">Online</h5>
-                                <h6 className="mb-2 text-muted textHover">See All</h6>
+                                <h6 className="mb-2 textHover">See all</h6>
                             </div>
                         </Card.Title>
                         <Card.Text>
@@ -24,7 +24,7 @@ const Online = () => {
                                 onlinePeople.map(item => (
                                     <div class="d-flex justify-content-between align-items-center pt-3 mb-2">
                                         <div class="d-flex justify-content-start align-items-center">
-                                            <img src={item.profile_picture ? `/api/files/storage/${item.profile_picture}` : Avatar} class="img-fluid sideProfile me-3" />
+                                            <img src={item.profile_picture ? `/api/files/storage/${item.profile_picture}` : Avatar} width="52" height="52" className="rounded-circle me-2" />
                                             <h6>{item.name}</h6>
                                         </div>
                                         <div class="pb-2">

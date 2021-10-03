@@ -19,3 +19,6 @@
 .textHover:hover {
   text-decoration: underline;
 }
+.coverPhoto {
+  background-position: top;
+}

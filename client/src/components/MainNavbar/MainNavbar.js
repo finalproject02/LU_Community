@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./MainNavbar.css";
 import { useSelector, useDispatch } from "react-redux";
-import {Logout} from "../../actions/auth";
+import { Logout } from "../../actions/auth";
 
 const MainNavbar = () => {
   const dispatch = useDispatch()
@@ -224,19 +224,19 @@ const MainNavbar = () => {
             <Nav.Link className="navFontSize me-4" href="/library">
               Library
             </Nav.Link>
-            {isAuthenticated? (
-                <Nav.Link className="navFontSize" onClick={() => dispatch(Logout())}>
-                  Logout
-                </Nav.Link>
+            {isAuthenticated ? (
+              <Nav.Link className="navFontSize" onClick={() => dispatch(Logout())}>
+                Logout
+              </Nav.Link>
             ) : (
-                <>
-                  <Nav.Link className="navFontSize" href="/login">
-                    Login
-                  </Nav.Link>
-                  <Nav.Link className="navFontSize" href="/signup">
-                    Signup
-                  </Nav.Link>
-                </>
+              <>
+                <Nav.Link className="navFontSize" href="/login">
+                  Login
+                </Nav.Link>
+                <Nav.Link className="navFontSize" href="/signup">
+                  Signup
+                </Nav.Link>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

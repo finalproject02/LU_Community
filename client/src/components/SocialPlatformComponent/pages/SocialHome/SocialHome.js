@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import SocialNavbar from '../../SocialNavbar/SocialNavbar';
 import Post from '../../Post/Post';
 import Suggestions from '../../Suggestions/Suggestions';
 import Online from '../../Online/Online';
 import HomeSmProfile from '../../HomeSmProfile/HomeSmProfile';
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const SocialHome = () => {
     const { isAuthenticated } = useSelector(state => state.auth);

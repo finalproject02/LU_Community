@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { DeletePosts } from "../../../actions/posts";
 
-const PostCard = ({posts}) => {
+const PostCard = ({ posts }) => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth)
 
@@ -27,7 +27,7 @@ const PostCard = ({posts}) => {
                     <Card.Body>
                         <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
                             <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                                <img src={`/api/files/storage/${currentUser?.profile_picture}`} alt="" className="img-fluid smallProfile me-3" />
+                                <img src={`/api/files/storage/${currentUser?.profile_picture}`} alt="" width="52" height="52" className="rounded-circle me-2" />
                                 <div className="d-flex align-items-center">
                                     <div>
                                         <h6>{currentUser?.name}</h6>
@@ -69,7 +69,6 @@ const PostCard = ({posts}) => {
                                         alt="First slide"
                                     />
                                 </Carousel.Item>
-
                             </Carousel>
                         </Card.Text>
                         <Card.Text as="div">
@@ -93,9 +92,9 @@ const PostCard = ({posts}) => {
                                     <FaRegHeart className="fs-5" />
                                     <p className="ps-2 pt-3 fs-5">Like</p>
                                 </div>
-                                <div className="d-flex align-items-center" onClick={() => setOpen(!open)}
-                                     aria-controls="example-collapse-text"
-                                     aria-expanded={open}>
+                                <div className="d-flex align-items-center coursor" onClick={() => setOpen(!open)}
+                                    aria-controls="example-collapse-text"
+                                    aria-expanded={open}>
                                     <FaRegComment className="fs-5" />
                                     <p className="ps-2 pt-3 fs-5">Comment</p>
                                 </div>
@@ -109,9 +108,9 @@ const PostCard = ({posts}) => {
                         <Collapse in={open}>
                             <div className="mt-2">
                                 <div className="d-flex justify-content-between position-relative pt-2">
-                                    <img src={jahed} alt="" className="img-fluid smProfile me-2" />
+                                    <img src={jahed} alt="name" width="35" height="35" className="rounded-circle me-2" />
                                     <Form.Control type="text" className="ps-4 rounded-pill me-5"
-                                                  placeholder="Put your comment" />
+                                        placeholder="Put your comment" />
                                     <div className="commentBoxPosition">
                                         <FaRegSmile title="add emoji" className="me-2" />
                                         <FaPhotoVideo title="photo/video" />
@@ -120,7 +119,7 @@ const PostCard = ({posts}) => {
 
                                 <div id="commentShow">
                                     <div className="d-flex justify-content-start align-items-center pt-2 mb-2 ms-3">
-                                        <img src={jahed} alt="" className="img-fluid smProfile me-2" />
+                                        <img src={jahed} alt="name" width="35" height="35" className="rounded-circle me-2" />
                                         <div className="d-flex align-items-center">
                                             <div className="bgGray rounded p-2">
                                                 <h6>Md Jahed Miah</h6>
@@ -139,8 +138,8 @@ const PostCard = ({posts}) => {
                                     </div>
                                     <div className="reply">
                                         <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
-                                            <img src={jahed} alt=""
-                                                 className="img-fluid smProfile me-2" />
+                                            <img src={jahed} alt="name"
+                                                width="35" height="35" className="rounded-circle me-2" />
                                             <div className="d-flex align-items-center">
                                                 <div className="bgGray rounded p-2">
                                                     <h6>Md Jahed Miah</h6>
@@ -158,27 +157,6 @@ const PostCard = ({posts}) => {
                                             </div>
                                             <p className="ps-2">Reply</p>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div className="d-flex justify-content-start align-items-center pt-2 mb-2 ms-3">
-                                        <img src={jahed} alt="" className="img-fluid smProfile me-2" />
-                                        <div className="d-flex align-items-center">
-                                            <div className="bgGray rounded p-2">
-                                                <h6>Md Jahed Miah</h6>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                    Pers  jahediatis, fugiat.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex ps-5">
-                                        <p className="pe-2 ms-2">Like</p>
-                                        <div>
-                                            <FaRegHeart className="fs-5 skyColor me-1" />
-                                            <span className="pe-2 border-end">5</span>
-                                        </div>
-                                        <p className="ps-2">Reply</p>
                                     </div>
                                 </div>
                                 <Link href="#" className="ps-3 textHover text-dark">load more

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FaBlog, FaBook, FaGraduationCap, FaHome, FaPhone, FaRegComment, FaRegEdit } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import {updateProfile} from "../../../actions/auth";
+import { updateProfile } from "../../../actions/auth";
 
 const ProfileIntro = () => {
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const ProfileIntro = () => {
                                     <p className="card-text ps-2 fs-6">{paramUser.map(user => user.current_position)}</p>
                                 </>
                             )
-                           :
+                            :
                             currentUser?.current_position && (
                                 <>
                                     <FaBook className="fs-5" />
@@ -59,19 +59,19 @@ const ProfileIntro = () => {
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                         {paramUser.length !== 0 ? (
                             <>
-                                {paramUser.map(user => user.isTeacher).includes(true)  ? (
-                                        paramUser.filter(user => user.department).length !== 0 &&
-                                        (
-                                            <>
-                                                <FaGraduationCap className="fs-1 me-2" />
-                                                <p className="card-text fs-6">{`Working as Teacher at ${paramUser.map(user => user.department)} at Leading University, Sylhet`}</p>
-                                            </>
-                                        )
-                                    ) :
+                                {paramUser.map(user => user.isTeacher).includes(true) ? (
+                                    paramUser.filter(user => user.department).length !== 0 &&
                                     (
-                                        paramUser.filter(user => user.department).length !== 0  &&
                                         <>
-                                            <FaGraduationCap className="fs-1 me-2" />
+                                            <FaGraduationCap className="fs-3 me-2" />
+                                            <p className="card-text fs-6">{`Working as Teacher at ${paramUser.map(user => user.department)} at Leading University, Sylhet`}</p>
+                                        </>
+                                    )
+                                ) :
+                                    (
+                                        paramUser.filter(user => user.department).length !== 0 &&
+                                        <>
+                                            <FaGraduationCap className="fs-3 me-2" />
                                             <p className="card-text fs-6">{`Studying at ${paramUser.map(user => user.department)} at Leading University, Sylhet`}</p>
                                         </>
                                     )
@@ -82,26 +82,26 @@ const ProfileIntro = () => {
                                 {currentUser?.isTeacher ? (
                                     currentUser?.department !== '' &&
                                     <>
-                                    <FaGraduationCap className="fs-1 me-2" />
-                                    <p className="card-text fs-6">{`Working as Teacher at ${currentUser?.department} at Leading University, Sylhet`}</p>
+                                        <FaGraduationCap className="fs-3 me-2" />
+                                        <p className="card-text fs-6">{`Working as Teacher at ${currentUser?.department} at Leading University, Sylhet`}</p>
                                     </>
                                 ) :
-                                (
-                                  currentUser?.department !== '' &&
-                                    <>
-                                      <FaGraduationCap className="fs-1 me-2" />
-                                       <p className="card-text fs-6">{`Studying at ${currentUser?.department} at Leading University, Sylhet`}</p>
-                                    </>
-                                )
+                                    (
+                                        currentUser?.department !== '' &&
+                                        <>
+                                            <FaGraduationCap className="fs-3 me-2" />
+                                            <p className="card-text fs-6">{`Studying at ${currentUser?.department} at Leading University, Sylhet`}</p>
+                                        </>
+                                    )
                                 }
                             </>
                         )}
                     </Card.Text>
-                    {paramUser.length !== 0 ?(
+                    {paramUser.length !== 0 ? (
                         <>
-                            {paramUser.map(user => user.isTeacher).includes(false)  &&
+                            {paramUser.map(user => user.isTeacher).includes(false) &&
                                 (
-                                    paramUser.filter(user => user.department).length !== 0  &&
+                                    paramUser.filter(user => user.department).length !== 0 &&
                                     <Card.Text as="div" className="d-flex align-items-center mb-2">
                                         <FaBook className="fs-5" />
                                         <p className="card-text ps-2 fs-6"><span>{paramUser.map(user => user.batch)}</span></p>
@@ -109,14 +109,14 @@ const ProfileIntro = () => {
                                 )
                             }
                         </>
-                    ): (!currentUser?.isTeacher && (
+                    ) : (!currentUser?.isTeacher && (
                         currentUser?.batch &&
                         <Card.Text as="div" className="d-flex align-items-center mb-2">
-                        <FaBook className="fs-5" />
-                        <p className="card-text ps-2 fs-6"><span>{currentUser?.batch}</span></p>
+                            <FaBook className="fs-5" />
+                            <p className="card-text ps-2 fs-6"><span>{currentUser?.batch}</span></p>
                         </Card.Text>
 
-                        )
+                    )
                     )}
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
@@ -213,7 +213,13 @@ const ProfileIntro = () => {
                         <Row className="mb-2">
                             <Col md="12">
                                 <h6 className="">Department</h6>
-                                <Form.Control defaultValue={currentUser?.department} type="text" onChange={handleChange} name="department" />
+                                <Form.Select defaultValue={currentUser?.department} onChange={handleChange} name="department" aria-label="Default select example">
+                                    <option value="CSE">CSE</option>
+                                    <option value="EEE">EEE</option>
+                                    <option value="BBA">BBA</option>
+                                    <option value="English">Engliah</option>
+                                    <option value="Bangla">Bangla</option>
+                                </Form.Select>
                             </Col>
                         </Row>
                         <Row className="mb-2">

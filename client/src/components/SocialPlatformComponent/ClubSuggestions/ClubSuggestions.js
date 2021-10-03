@@ -12,8 +12,8 @@ const ClubSuggestions = () => {
                 <Card.Body>
                     <Card.Title>
                         <div className="d-flex justify-content-between align-items-center">
-                            <h5 className="card-title">You May Follow the Clubs</h5>
-                            <Link to="#" className="mb-2 text-muted textHover" onClick={() => setOpen(!open)}
+                            <h5 className="card-title">You May Follow</h5>
+                            <Link to="#" className="mb-2 textHover text-dark" onClick={() => setOpen(!open)}
                                 aria-controls="example-collapse-text"
                                 aria-expanded={open}>See all</Link>
                         </div>
@@ -25,7 +25,7 @@ const ClubSuggestions = () => {
                                     <Collapse in={open}>
                                         <Col key={item.id} md="3" className="mb-2">
                                             <Card className="w-100">
-                                                <Card.Img src={item.imageUrl} className="card-img-top rounded-3 w-100" alt="..." />
+                                                <Card.Img src={item.imageUrl} style={{ cursor: 'pointer', height: "20vh" }} className="card-img-top rounded-3 w-100" alt="name" />
                                                 <Card.Body>
                                                     <Card.Title>{item.name}</Card.Title>
                                                     <small className="card-subtitle text-muted">
