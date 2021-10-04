@@ -21,3 +21,7 @@ export const suggestions = (keyWord, getState) => axios.get(`/api/suggestions/${
 export const newPost = (postData, getState) => axios.post('/api/posts', postData, tokenConfig(getState));
 export const fetchPosts = (getState) => axios.get('/api/posts', tokenConfig(getState));
 export const removePosts = (getState, id) => axios.delete(`/api/posts/${id}`, tokenConfig(getState));
+export const likeAndDislike = (getState, id) => axios.patch(`/api/posts/${id}/likeAndDislike`, {data: ''},tokenConfig(getState));
+export const comment = (getState, id, commentContent) => axios.patch(`/api/posts/${id}/comments`, commentContent, tokenConfig(getState));
+export const notifications = (getState) => axios.get(`/api/posts/notifications`, tokenConfig(getState));
+export const showNotifications = (getState) => axios.patch(`/api/posts/showNotifications`,{data: ''}, tokenConfig(getState));

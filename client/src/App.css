@@ -22,3 +22,6 @@
 .coverPhoto {
   background-position: top;
 }
+.cursor {
+  cursor: pointer;
+}

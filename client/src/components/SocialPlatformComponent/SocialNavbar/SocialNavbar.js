@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
-import { Badge, Container, Dropdown, Form, Nav, NavDropdown } from 'react-bootstrap';
+import { Badge, Container, Dropdown, Form, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaBell, FaFile, FaHome, FaRegBell, FaRegCommentDots, FaSearch, FaTh, FaUser, FaUserPlus } from 'react-icons/fa';
+import { FaHome, FaRegBell, FaRegCommentDots, FaTh, FaUser, FaUserPlus } from 'react-icons/fa';
 import './SocialNavbar.css';
 import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
-import DropdownItem from '@restart/ui/esm/DropdownItem';
+import { ShowNotifications } from "../../../actions/posts";
+import moment from "moment";
 
 const SocialNavbar = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+
     const [search, setSearch] = useState('');
     const { currentUser, token } = useSelector(state => state.auth);
+    const { notifications } = useSelector(state => state.posts);
+    const { people } = useSelector(state => state.people);
 
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             history.push(`/search?searchKey=${search}`);
         }
+    }
+    const getUserName = (id) => {
+        const user = people.filter(person => person._id === id);
+        return user.map(usr => usr.name)
     }
     return (
         <div>
@@ -52,36 +60,26 @@ const SocialNavbar = () => {
                                     <NavDropdown
                                         className="navFontSize"
                                         title={<div className="d-flex">
-                                            <FaRegBell className="iconFont me-1 text-dark" />
-                                            <Badge bg="danger" className='notificationCount'>9</Badge>
+                                            <FaRegBell className="iconFont me-1 text-dark" onClick={() => dispatch(ShowNotifications())} />
+                                            {notifications.filter(notification => notification.notification === true).length !== 0 && (
+                                                <Badge bg="danger" className="notificationCount text-danger fw-bold">{notifications.filter(notification => notification.notification === true).length}</Badge>
+                                            )}
                                             <span className="text-dark d-none d-sm-block">Notification</span>
-                                        </div>
-                                        }>
-                                        <NavDropdown.Item className="py-3">
-                                            <Link>
-                                                <FaUser className="me-1" />
-                                                Jahed liked your post
-                                                <div className="text-muted text-sm">12 hours</div>
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item className="py-3">
-                                            <Link>
-                                                <FaUser className="me-1" />
-                                                Tanvir commented your post
-                                                <div className="text-muted text-sm">12 hours</div>
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item className="py-3">
-                                            <Link>
-                                                <FaFile className="me-1" />
-                                                3 new reports
-                                                <div className="text-muted text-sm">2 days</div>
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item className="py-3">
-                                            <Link to="/allNotification" className="text-dark text-decoration-none">See All Notifications</Link>
-                                        </NavDropdown.Item>
+                                        </div>}>
+
+                                        {notifications.slice(0, 4).map(notification => (
+                                            <>
+                                                <NavDropdown.Item className="py-3">
+                                                    <FaUser className="me-1 mb-1" />
+                                                    {getUserName(notification.notify_by)} {notification.position} your post
+                                                    <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                            </>
+                                        ))}
+                                        <Dropdown.Item href="/allNotification">
+                                            See All Notifications
+                                        </Dropdown.Item>
                                     </NavDropdown>
                                 </div>
                             </ul>
@@ -108,7 +106,7 @@ const SocialNavbar = () => {
                             >
 
                                 <NavDropdown.Item className="dropdownItem py-3">
-                                    <Link to="/newproject" className="text-dark text-decoration-none">New project</Link>
+                                    <Link to="/newproject" className="text-dark text-decoration-none">Create a Group</Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item className="dropdownItem py-3">
                                     <Link to="/socialProfile" className="text-dark text-decoration-none">Profile</Link>
@@ -128,7 +126,7 @@ const SocialNavbar = () => {
                             </NavDropdown>
                         </div>
                     </Container>
-                </header>
+                </header >
             )
             }
         </div >

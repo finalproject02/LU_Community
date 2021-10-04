@@ -17,17 +17,19 @@ import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDe
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {LoadingCurrentUser} from "./actions/auth";
-import {getCurrentUserPosts} from "./actions/posts";
+import {getCurrentUserPosts, Notifications} from "./actions/posts";
 import {ToastContainer} from "react-toastify";
 import {People, Suggestions} from "./actions/people";
+import UserProfile from "./components/SocialPlatformComponent/pages/UserProfile/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(LoadingCurrentUser());
+    dispatch(Notifications())
     dispatch(getCurrentUserPosts());
-    dispatch(People())
+    dispatch(People());
+
   }, []);
   const { currentUser} = useSelector(state => state.auth);
   const department = currentUser?.department
@@ -134,7 +136,7 @@ function App() {
             <SocialProfile />
           </Route>
           <Route path="/profile/:id">
-            <SocialProfile />
+            <UserProfile/>
           </Route>
           <Route path="/allnotification">
             <AllNotification />

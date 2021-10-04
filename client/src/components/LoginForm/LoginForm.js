@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "./LoginForm.css";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {SignIn} from "../../actions/auth";
 import { useHistory } from "react-router-dom";
+import ShowToast from "../../services/ShowToast";
 
 const LoginForm = () => {
+    const { message } = useSelector(state => state.auth)
     const history = useHistory();
     const dispatch = useDispatch();
     const [login, setLogin] = useState(false);
@@ -19,7 +21,11 @@ const LoginForm = () => {
         dispatch(SignIn(data));
 
     }
-    console.log(data)
+    useEffect(() => {
+        if (message) {
+            ShowToast(3, message)
+        }
+    }, [message])
     return (
         <div className="mt-5 p-4">
             <h2 className="text-center textPrimary">Login</h2>

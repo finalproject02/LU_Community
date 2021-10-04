@@ -24,3 +24,7 @@ export const POSTS = 'POSTS';
 export const NEW_POST = 'NEW_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const SUGGESTIONS = 'SUGGESTIONS';
+export const COMMENT = 'COMMENT';
+export const LIKE_AND_DISLIKE = 'LIKE_AND_DISLIKE';
+export const NOTIFICATIONS = 'NOTIFICATIONS';
+export const SHOW_NOTIFICATIONS = 'SHOW_NOTIFICATIONS';

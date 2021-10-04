@@ -29,13 +29,13 @@ const Suggestions = (props) => {
                                             <div className="d-flex align-items-center">
                                                 <div>
                                                     <h6>
-                                                        <span class="textHover text-dark" className="img-fluid sideProfile me-3" style={{ cursor: 'pointer' }} onClick={() => history.push(`/profile/${suggestion._id}`)}>{suggestion.name}</span>
+                                                        <span className="textHover text-dark" style={{ cursor: 'pointer' }} onClick={() => history.push(`/profile/${suggestion._id}`)}>{suggestion.name}</span>
                                                     </h6>
                                                     <span className="text-muted">{suggestion.current_position}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <Link class="textPrimary text-decoration-none fw-bold">Connect</Link>
+                                        <strong class="textSecondary cursor">Connect</strong>
                                     </div>
                                 ))
                             }

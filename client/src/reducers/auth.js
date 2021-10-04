@@ -5,11 +5,11 @@ import {
     LOGIN_ACCOUNT_FAILED,
     LOGOUT_SUCCESS,
     CURRENT_USER,
-    LOADING,
+    LOADING, GET_ERRORS,
     LOADED, UPDATE_INFO
 } from "../actions/types";
 
-export default (state = { token: localStorage.getItem('token'), currentUser: null, isAuthenticated: false, isLoading: false }, action) => {
+export default (state = { token: localStorage.getItem('token'), currentUser: null, isAuthenticated: false, isLoading: false, message: '' }, action) => {
     switch (action.type) {
         case CREATE_ACCOUNT_SUCCESS:
         case LOGIN_ACCOUNT_SUCCESS:
@@ -58,6 +58,12 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
                 ...state,
                 currentUser: action.payload,
                 isAuthenticated: true
+            }
+        case GET_ERRORS:
+            return {
+                ...state,
+                isAuthenticated: false,
+                message: action.payload.message
             }
         default:
             return state

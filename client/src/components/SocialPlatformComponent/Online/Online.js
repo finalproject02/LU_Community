@@ -24,11 +24,11 @@ const Online = () => {
                                 onlinePeople.map(item => (
                                     <div class="d-flex justify-content-between align-items-center pt-3 mb-2">
                                         <div class="d-flex justify-content-start align-items-center">
-                                            <img src={item.profile_picture ? `/api/files/storage/${item.profile_picture}` : Avatar} width="52" height="52" className="rounded-circle me-2" />
+                                            <img src={item.profile_picture ? `/api/files/storage/${item.profile_picture}` : Avatar} width="45" height="45" className="rounded-circle me-2" alt="" />
                                             <h6>{item.name}</h6>
                                         </div>
                                         <div class="pb-2">
-                                            <FaDotCircle className="text-success" />
+                                            <FaDotCircle className="textSecondary" />
                                         </div>
                                     </div>
                                 ))

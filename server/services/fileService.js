@@ -10,8 +10,9 @@ const mongoURI = 'mongodb://localhost:27017/LU_Community'
 const conn = mongoose.createConnection(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true
-})
+    useFindAndModify: false,
+
+});
 
 let gfs;
 

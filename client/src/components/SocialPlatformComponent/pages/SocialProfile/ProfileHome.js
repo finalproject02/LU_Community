@@ -10,17 +10,19 @@ import {useSelector} from "react-redux";
 
 const ProfileHome = () => {
     const {posts} = useSelector(state => state.posts);
+    const {currentUser} = useSelector(state => state.auth);
+    const currentUserPost =posts.filter(currentUserPost => currentUserPost.creator_id === currentUser?._id )
     return (
         <div>
             <Container>
                 <Row>
                     <Col md="8">
-                        <Post posts={posts}/>
+                        <Post posts={currentUserPost}/>
                     </Col>
                     <Col md="4">
                         <ProfileIntro />
                         <ProfileEducation />
-                        <PhotoCard />
+                        <PhotoCard photos={currentUserPost}/>
                         <FriendCard />
                         <Suggestions />
                     </Col>

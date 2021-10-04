@@ -16,7 +16,7 @@ const HomeSmProfile = () => {
                         <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} width="90" height="90" className="simpleProfileImg rounded-circle p-1 bg-light"
                             alt="" />
                         <div className="mt-5 text-center">
-                            <h5 className="card-title pt-2">{currentUser?.name}</h5>
+                            <h5 className="card-title">{currentUser?.name}</h5>
                             <h6 className="card-subtitle mb-2 text-muted ">{currentUser?.current_position}</h6>
                         </div>
                         <hr />

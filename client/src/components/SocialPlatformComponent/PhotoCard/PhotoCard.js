@@ -1,47 +1,25 @@
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import jahed from "../../../images/Jahed.jpg";
 
-const PhotoCard = () => {
+const PhotoCard = ({ photos }) => {
     return (
         <div className="mb-4">
             <Card className="w-100">
                 <Card.Body>
                     <Card.Title>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div className="d-flex justify-content-between align-items-center">
                             <h4>Photos</h4>
-                            <h6 class="card-subtitle mb-2 text-muted textHover">See All</h6>
+                            <h6 className="mb-2 textHover">See all</h6>
                         </div>
                     </Card.Title>
                     <Card.Text>
                         <Row>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
+                            {photos?.map(photo => (
+                                <Col md="4" className="mb-2">
+                                    <img src={`/api/files/storage/${photo.filename}`}
+                                        style={{ cursor: 'pointer', height: "12vh" }} className="card-img-top rounded-3" alt="" />
+                                </Col>
+                            ))}
                         </Row>
                     </Card.Text>
                 </Card.Body>

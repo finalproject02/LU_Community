@@ -20,7 +20,7 @@ const PepoleYouKnow = () => {
                         <Card.Title>
                             <div className="d-flex justify-content-between align-suggestions-center">
                                 <h5 className="card-title">You May Know</h5>
-                                <Link to="#" className="mb-2 textHover text-dark">See all</Link>
+                                <p to="#" className="mb-2 textHover">See all</p>
                             </div>
                         </Card.Title>
                         <Card.Text as="div">
@@ -29,7 +29,7 @@ const PepoleYouKnow = () => {
                                     finalSuggestion?.map(suggestion => (
                                         <Col key={suggestion.id} md="3" className="mb-2">
                                             <Card className="w-100">
-                                                <Card.Img onClick={() => history.push(`/profile/${suggestion._id}`)} style={{ cursor: 'pointer', height: "20vh" }} src={suggestion.profile_picture ? `/api/files/storage/${suggestion.profile_picture}` : Avatar} className="img-fluid rounded-3" alt="..." />
+                                                <Card.Img onClick={() => history.push(`/profile/${suggestion._id}`)} style={{ cursor: 'pointer', height: "20vh" }} src={suggestion.profile_picture ? `/api/files/storage/${suggestion.profile_picture}` : Avatar} className="img-fluid rounded-3" alt="." />
                                                 <Card.Body>
                                                     <Card.Title onClick={() => history.push(`/profile/${suggestion._id}`)} style={{ cursor: 'pointer' }}>{suggestion.name}</Card.Title>
                                                     <h6>{suggestion.current_position}</h6>

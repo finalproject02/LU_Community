@@ -32,10 +32,10 @@ const AllVideos = () => {
                                         <FaRegHeart className="skyColor fs-5 me-2" />
                                         <FaRegHeart className="skyColor fs-5 me-2" />
                                     </div>
-                                    <Link id="totalLike" href="#" className="text-dark textHover fs-5">You,Md
+                                    <small id="totalLike" href="#" className="text-dark textHover fs-5">You,Md
                                         Rejaul
                                         and
-                                        25 others</Link>
+                                        25 others</small>
                                 </div>
                                 <div className="d-flex align-items-center py-2 fs-5">
                                     <Link href="#" className="textHover text-dark text-dark textHover pe-3"><span
@@ -46,17 +46,17 @@ const AllVideos = () => {
                         <hr className="hr" />
                         <Card.Text as="div">
                             <div className="d-flex justify-content-between align-items-center">
-                                <div className="d-flex align-items-center ps-4">
+                                <div className="d-flex align-items-center ps-4 cursor">
                                     <FaRegHeart className="fs-5" />
                                     <p className="ps-2 pt-3 fs-5">Like</p>
                                 </div>
-                                <div className="d-flex align-items-center" onClick={() => setOpen(!open)}
+                                <div className="d-flex align-items-center cursor" onClick={() => setOpen(!open)}
                                     aria-controls="example-collapse-text"
                                     aria-expanded={open}>
                                     <FaRegComment className="fs-5" />
                                     <p className="ps-2 pt-3 fs-5">Comment</p>
                                 </div>
-                                <div className="d-flex align-items-center">
+                                <div className="d-flex align-items-center cursor">
                                     <FaShare className="fs-5" />
                                     <p className="ps-2 pt-3 pe-4 fs-5">Share</p>
                                 </div>

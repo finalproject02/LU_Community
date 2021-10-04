@@ -40,7 +40,6 @@ const userModel = new mongoose.Schema({
         type: String,
         default: null
     },
-
     present_address: {
         type: String,
         default: null
@@ -86,6 +85,10 @@ const userModel = new mongoose.Schema({
         default:[]
     },
     aboutMe: {
+        type: Array,
+        default: []
+    },
+    member_requests: {
         type: Array,
         default: []
     }

@@ -64,7 +64,7 @@ const ClubProfile = () => {
                             <Card.Body className="pt-0">
                                 <label htmlFor="coverPhoto" className="w-100">
                                     {
-                                        coverPhoto && coverPhoto.type.startsWith("image") ? (<Card.Img className="w-100 img-fluid" src={URL.createObjectURL(coverPhoto)} alt="name" style={{ height: "20rem" }} />) : (<Card.Img className="w-100 img-fluid" src={jahed} alt="jahed" style={{ height: "20rem" }} />)
+                                        coverPhoto && coverPhoto.type.startsWith("image") ? (<Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" />) : (<Card.Img className="w-100 img-fluid" src={jahed} alt="jahed" style={{ width: "100%", height: "30vh" }} />)
                                     }
                                     <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
                                     </Form.Control>
@@ -72,21 +72,27 @@ const ClubProfile = () => {
                                 <Row className="mb-2 position-relative">
                                     <label htmlFor="profilePhoto" className="userPosition">
                                         {
-                                            profilePhoto && profilePhoto.type.startsWith("image") ? (<Card.Img style={{ height: '150px' }} className="img-fluid w-25 rounded-pill p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" />) : (<img src={jahed} className="img-fluid userProfile p-2 bg-light" alt="jahed2" style={{ height: '150px' }} />)
+                                            profilePhoto && profilePhoto.type.startsWith("image") ? (<Card.Img style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" />) : (<img src={jahed} alt="jahed2" style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" />)
                                         }
                                         <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
                                         </Form.Control>
                                     </label>
-                                    <Col className="mt-5 ms-sm-5 ms-3">
+                                    <Col md="12" className="mt-5 ms-sm-5 ms-3">
                                         <h5 className="ms-3 mt-5 fw-bold fs-3">Leading University Computer Club</h5>
                                         <p className="ms-3 mb-0 text-lead fs-5">@Leading.University.Computer.Club</p>
-                                        <div className="mb-2 mt-4">
-                                            <Link to="#" className="btn btn-primary me-2 mb-2">
-                                                <FaCommentDots className="me-2 mb-1" />
-                                                Send Message</Link>
-                                            <Link to="#" className="btn btn-primary me-2 mb-2">
-                                                <FaUserPlus className="me-2 mb-1" />
-                                                Send Membership Request</Link>
+                                        <div className="mb-2 mt-4 d-flex">
+                                            <div className="bgPrimary text-center rounded-3 w-25 me-2 mb-2">
+                                                <div className="btn text-white">
+                                                    <FaCommentDots className="me-2 mb-1" />
+                                                    Send Message
+                                                </div>
+                                            </div>
+                                            <div className="bgPrimary text-center rounded-3 w-25 mb-2">
+                                                <div className="btn text-white">
+                                                    <FaUserPlus className="me-2 mb-1" />
+                                                    Send Membership Request
+                                                </div>
+                                            </div>
                                         </div>
                                     </Col>
                                 </Row>
@@ -96,14 +102,14 @@ const ClubProfile = () => {
                             <nav className="py-2 bg-light border-bottom">
                                 <div className="container d-flex flex-wrap">
                                     <ul className="nav me-auto">
-                                        <li className="nav-item">
+                                        <li className="nav-item cursor">
                                             <p className="nav-link link-dark px-2 active"
                                                 aria-current="page" onClick={handleChangeHome}>Home</p>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item cursor">
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item cursor">
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeEvent}>Event</p>
                                         </li>
                                         <Dropdown as="li">

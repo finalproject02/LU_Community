@@ -8,11 +8,13 @@ import SearchPost from './SearchPost';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
 import {searchPeople} from "../../../../actions/users";
+import Loading from "../../../../services/Loading";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 const SearchPage = () => {
+    const { isAuthenticated } = useSelector(state => state.auth)
     const dispatch = useDispatch();
     const query = useQuery();
     const SearchKey = query.get('searchKey') || query.get('search');
@@ -23,21 +25,28 @@ const SearchPage = () => {
     const { users } = useSelector(state => state.users)
 
     return (
-        <div>
-            <SocialNavbar />
-            <Container>
-                <Row className="d-flex justify-content-center">
-                    <Col md="8">
-                        <h3 className="mt-4">Search Results</h3>
-                        <hr />
-                        <SearchPeople users={users}/>
-                        {/*<SearchPost />*/}
-                        {/*<SearchClub />*/}
-                        {/*<SearchGroup />*/}
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        isAuthenticated ? (
+            <div>
+                <SocialNavbar />
+                <Container>
+                    <Row className="d-flex justify-content-center">
+                        <Col md="8">
+                            <h3 className="mt-4">Search Results</h3>
+                            <hr />
+                            <SearchPeople users={users}/>
+                            {/*<SearchPost />*/}
+                            {/*<SearchClub />*/}
+                            {/*<SearchGroup />*/}
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        ) : (
+            <>
+                <Loading color={'black'} type={'spin'}/>
+                <h5>Please Login first</h5>
+            </>
+        )
     );
 };
 

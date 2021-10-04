@@ -16,3 +16,13 @@
   height: 5rem;
   background-position: 50% 30%;
 }
+.confirmBtnPosition {
+  position: absolute;
+  top: 0%;
+  right: 8.5%;
+}
+.confirmProfileBtn {
+  position: absolute;
+  bottom: 2%;
+  left: 7%;
+}
