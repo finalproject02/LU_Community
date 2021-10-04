@@ -2,12 +2,10 @@ import {
     FOLLOWINGS,
     FOLLOWERS, SEARCHING,
     LOADING, LOADED,
-    CONNECT,DISCONNECT,
-    ACCEPT_CONNECTION_REQUEST
+    CONNECT, DISCONNECT,
+    ACCEPT_CONNECTION_REQUEST, GET_ERRORS
 } from "../actions/types";
 import * as api from '../api';
-import {returnErrors} from "./erros";
-
 
 
 export const searchPeople = (searchKey) => async (dispatch, getState) => {
@@ -20,7 +18,10 @@ export const searchPeople = (searchKey) => async (dispatch, getState) => {
         });
         dispatch({ type: LOADED });
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
 
@@ -34,7 +35,10 @@ export const Connect = (id) => async (dispatch, getState) => {
         })
         dispatch({ type:LOADED});
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
 
@@ -48,7 +52,10 @@ export const Disconnect = (id) => async (dispatch, getState) => {
         })
         dispatch({ type:LOADED});
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
 
@@ -62,7 +69,10 @@ export const Accept_Connection_Request = (id) => async (dispatch, getState) => {
         })
         dispatch({ type:LOADED});
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
 
@@ -76,7 +86,10 @@ export const followings = () =>  async ( dispatch, getState ) => {
         })
         dispatch({ type:LOADED});
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
 
@@ -90,6 +103,9 @@ export const followers = () =>  async ( dispatch, getState ) => {
         })
         dispatch({ type:LOADED});
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }

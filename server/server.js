@@ -16,7 +16,7 @@ import cors from 'cors'
 
 const app = express();
 const server = http.createServer(app);
-dotenv.config({ path: './config/config.env' })
+dotenv.config({ path: './config/config.env' });
 await DatabaseConnection()
 
 app.use(express.json({ limit: '30mb', extended: true }));

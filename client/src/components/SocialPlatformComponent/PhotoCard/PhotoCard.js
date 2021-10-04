@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import jahed from "../../../images/Jahed.jpg";
 
-const PhotoCard = () => {
+const PhotoCard = ({photos}) => {
     return (
         <div className="mb-4">
             <Card className="w-100">
@@ -15,33 +15,13 @@ const PhotoCard = () => {
                     </Card.Title>
                     <Card.Text>
                         <Row>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <img src={jahed} class="img-fluid rounded-3 mb-2" alt="" />
-                            </Col>
+                            {photos?.map(photo => (
+                                <Col md="4" className="mb-2">
+                                    <img src={`/api/files/storage/${photo.filename}`} class="img-fluid rounded-3 mb-2" alt="" />
+                                </Col>
+                            ))}
+
+
                         </Row>
                     </Card.Text>
                 </Card.Body>

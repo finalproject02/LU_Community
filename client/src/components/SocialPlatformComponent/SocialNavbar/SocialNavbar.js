@@ -7,17 +7,26 @@ import {useSelector, useDispatch} from "react-redux";
 import { Logout } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
+import {ShowNotifications} from "../../../actions/posts";
+import moment from "moment";
 
 const SocialNavbar = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+
     const [search, setSearch] = useState('');
     const { currentUser, token } = useSelector(state => state.auth);
+    const { notifications } = useSelector(state => state.posts);
+    const { people } = useSelector(state => state.people);
 
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             history.push(`/search?searchKey=${search}`);
         }
+    }
+    const getUserName = (id) => {
+        const user = people.filter(person => person._id === id);
+        return user.map(usr => usr.name)
     }
     return (
         <div>
@@ -49,29 +58,25 @@ const SocialNavbar = () => {
                                 </div>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                        <FaRegBell className="me-2 iconFont" />
-                                        <span className="notificationCount text-danger fw-bold">5</span>
+                                        <FaRegBell className="me-2 iconFont" onClick={() => dispatch(ShowNotifications())}/>
+                                        {notifications.filter(notification => notification.notification===true).length !== 0 && (
+                                            <span className="notificationCount text-danger fw-bold">{notifications.filter(notification => notification.notification===true).length}</span>
+                                        )}
+
                                         Notification
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href="/">
-                                            <i className="fas fa-users mr-1"></i>
-                                            Jahed liked your post
-                                            <div className="text-muted text-sm">12 hours</div>
-                                        </Dropdown.Item>
-                                        <div className="dropdown-divider"></div>
-                                        <Dropdown.Item href="/">
-                                            <i className="fas fa-users mr-1"></i>
-                                            Tanvir commented your post
-                                            <div className="text-muted text-sm">12 hours</div>
-                                        </Dropdown.Item>
-                                        <div className="dropdown-divider"></div>
-                                        <Dropdown.Item href="/">
-                                            <i className="fas fa-file mr-1"></i>
-                                            3 new reports
-                                            <div className="text-muted text-sm">2 days</div>
-                                        </Dropdown.Item>
-                                        <div className="dropdown-divider"></div>
+                                        {notifications.slice(0, 4).map(notification => (
+                                           <>
+                                               <Dropdown.Item href="/">
+                                                   <i className="fas fa-users mr-1"></i>
+                                                   {getUserName(notification.notify_by)} {notification.position} your post
+                                                   <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
+                                               </Dropdown.Item>
+                                               <div className="dropdown-divider"></div>
+                                           </>
+                                        ))}
+
                                         <Dropdown.Item href="/allNotification">
                                             See All Notifications
                                         </Dropdown.Item>

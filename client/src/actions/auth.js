@@ -7,10 +7,10 @@ import {
     CURRENT_USER,
     LOADING,
     LOADED,
-    UPDATE_INFO
+    UPDATE_INFO,
+    GET_ERRORS
 } from "./types";
 import * as api from '../api';
-import {returnErrors} from './erros';
 
 
 export const SignUp = (userData) => async (dispatch) => {
@@ -24,7 +24,10 @@ export const SignUp = (userData) => async (dispatch) => {
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch({type: CREATE_ACCOUNT_FAILED});
-        returnErrors(error.response.message, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
 
@@ -39,7 +42,10 @@ export const SignIn = (userData)  => async (dispatch) => {
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch({ type: LOGIN_ACCOUNT_FAILED });
-        returnErrors(error.response.message, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
 
@@ -58,7 +64,7 @@ export const LoadingCurrentUser = () => async (dispatch, getState) => {
         });
         dispatch({ type: LOADED })
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+       console.log('error')
     }
 }
 export const tokenConfig = (getState) => {
@@ -88,6 +94,9 @@ export const updateProfile = (userData) => async (dispatch, getState) => {
         })
         dispatch({ type: LOADED });
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }

@@ -1,5 +1,4 @@
-import { NEW_APPLICATION, LOADED, LOADING } from "./types";
-import { returnErrors } from "./erros";
+import {NEW_APPLICATION, LOADED, LOADING, GET_ERRORS} from "./types";
 import * as API from "../api";
 
 export const createApplication = (applicantData) => async (dispatch) => {
@@ -12,9 +11,9 @@ export const createApplication = (applicantData) => async (dispatch) => {
         })
         dispatch({ type: LOADED })
     } catch (error) {
-        returnErrors(
-            error.response.data,
-            error.response.status
-        )
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
     }
 }
