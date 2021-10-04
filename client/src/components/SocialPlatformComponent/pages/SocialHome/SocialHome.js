@@ -15,10 +15,9 @@ const SocialHome = () => {
     const currentUserPost =posts.filter(currentPost => currentUser?.connection.includes(currentPost.creator_id) || currentPost.creator_id === currentUser?._id)
 
     return (
-
-            isAuthenticated ? (
-                    <div>
-                    <SocialNavbar />
+        <>
+            <div>
+                <SocialNavbar />
                 <Container>
                     <Row>
                         <Col md="8">
@@ -31,12 +30,18 @@ const SocialHome = () => {
                         </Col>
                     </Row>
                 </Container>
-                    </div>
-            ) :
-            <>
-                <Loading color={'black'} type={'spin'}/>
-                <h5>Please Login first</h5>
-            </>
+            </div>
+
+            {!isAuthenticated && (
+                <>
+                    <Loading color={'black'} type={'spin'}/>
+                    <h5>Please Login first</h5>
+                </>
+            )}
+
+        </>
+
+
 
 
     );

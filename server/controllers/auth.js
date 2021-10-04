@@ -7,6 +7,9 @@ export const createAccount = async (req, res) => {
     if (!name || !email || !password) {
         return res.status(404).json({ message: 'Please enter all fields' })
     }
+    if(student_id.length !== 10) {
+        return res.status(400).json({ message:'Student id length should be 10' })
+    }
     try {
       const alreadyAssign = await userModel.findOne({ email });
       if (alreadyAssign) return res.status(404).json({ message: 'Email should be different from others.' });
