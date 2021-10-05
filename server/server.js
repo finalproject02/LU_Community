@@ -1,8 +1,6 @@
 import express from 'express';
 import http from "http";
 import morgan from 'morgan'
-import { Server } from "socket.io";
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import methodOverride from 'method-override';
 import admissions from "./routes/admissions.js";

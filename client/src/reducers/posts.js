@@ -1,11 +1,8 @@
 import {
-    NEW_POST,
-    POSTS,
-    LOADED,
-    LOADING,
-    DELETE_POST,
+    NEW_POST, POSTS,
+    LOADED, LOADING,
+    DELETE_POST, COMMENT,
     LIKE_AND_DISLIKE,
-    COMMENT,
     NOTIFICATIONS,
     SHOW_NOTIFICATIONS
 } from "../actions/types";
@@ -15,7 +12,7 @@ export default (state = { posts:[], notifications: [], isLoading: false }, actio
         case NEW_POST:
             return {
                 ...state,
-                posts: [action.payload.post, ...state.posts],
+                posts: [action.payload, ...state.posts],
                 isLoading: false
             }
         case POSTS:

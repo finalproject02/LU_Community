@@ -32,12 +32,6 @@ const SocialHome = () => {
                 </Container>
             </div>
 
-            {!isAuthenticated && (
-                <>
-                    <Loading color={'black'} type={'spin'}/>
-                    <h5>Please Login first</h5>
-                </>
-            )}
 
         </>
 

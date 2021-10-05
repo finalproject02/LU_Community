@@ -23,10 +23,7 @@ export const CreatePost = (postData) => async (dispatch, getState) => {
             type: LOADED
         })
     } catch (error) {
-        dispatch({
-            type: GET_ERRORS,
-            payload: error.response.data
-        })
+       console.log(error)
     }
 }
 
