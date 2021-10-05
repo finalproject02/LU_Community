@@ -9,8 +9,8 @@ const ClubSuggestionsCard = (props) => {
             <Card className="w-100 rounded-3">
                 <Card.Body>
                     <Card.Title className="d-flex justify-content-between align-items-center">
-                        <h5 className="card-title">You May Follow</h5>
-                        <h6 className="card-subtitle mb-2 text-muted textHover">See All</h6>
+                        <h5>You May Follow</h5>
+                        <h6 className="mb-2 textHover">See all</h6>
                     </Card.Title>
                     <Card.Text>
                         {
@@ -27,7 +27,7 @@ const ClubSuggestionsCard = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <strong class="textSecondary">Follow</strong>
+                                    <strong class="textSecondary cursor">Follow</strong>
                                 </div>
                             ))
                         }

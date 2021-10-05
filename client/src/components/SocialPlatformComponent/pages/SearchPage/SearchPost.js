@@ -12,7 +12,7 @@ const SearchPost = () => {
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
                         <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                            <img src={jahed} alt="jahed" className="img-fluid smallProfile me-3" />
+                            <img src={jahed} alt="jahed" width="55" height="55" className="rounded-circle me-2" />
                             <div className="d-flex align-items-center">
                                 <div>
                                     <h6>Md Jahed Miah</h6>
@@ -23,7 +23,7 @@ const SearchPost = () => {
                         <div className="d-flex align-items-center pe-3 skyColor">
                             <div className="d-none">
                                 <i className="fa fa-plus pe-2" aria-hidden="true"></i>
-                                <strong className="">Connect</strong>
+                                <strong className="cursor">Connect</strong>
                             </div>
                             <Dropdown>
                                 <Dropdown.Toggle variant="light">

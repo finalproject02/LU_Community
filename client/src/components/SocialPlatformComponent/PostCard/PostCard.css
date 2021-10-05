@@ -11,13 +11,13 @@
 .commentBoxPosition {
   position: absolute;
   right: 11%;
-  bottom: 12%;
+  bottom: 33%;
   font-size: 24px;
 }
 @media (max-width: 576px) {
   .commentBoxPosition {
     right: 18%;
-    bottom: 12%;
+    bottom: 38%;
     font-size: 18px;
   }
 }
@@ -29,4 +29,7 @@
 }
 .bgGray {
   background-color: gainsboro;
+}
+.coursor {
+  cursor: pointer;
 }

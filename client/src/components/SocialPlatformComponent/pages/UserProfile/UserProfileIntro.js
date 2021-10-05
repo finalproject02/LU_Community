@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
-import { FaBlog, FaBook, FaGraduationCap, FaHome, FaPhone, FaRegComment, FaRegEdit } from 'react-icons/fa';
-import {useSelector} from "react-redux";
+import { Link, useParams } from 'react-router-dom';
+import { FaBlog, FaBook, FaCommentDots, FaGraduationCap, FaHome, FaPhone } from 'react-icons/fa';
+import { useSelector } from "react-redux";
 import moment from "moment";
 
 const UserProfileIntro = () => {
@@ -23,19 +23,19 @@ const UserProfileIntro = () => {
                             {user.isTeacher === true ? (
                                 user.department !== '' && (
                                     <Card.Text as="div" className="d-flex align-items-center mb-2">
-                                        <FaGraduationCap className="fs-1 me-2" />
+                                        <FaGraduationCap className="fs-3 me-2" />
                                         <p className="card-text fs-6">{`Working as Teacher at ${user.department} at Leading University, Sylhet`}</p>
                                     </Card.Text>
                                 )
                             ) :
-                             (
-                                 user.department !== null && (
-                                    <Card.Text as="div" className="d-flex align-items-center mb-2">
-                                         <FaGraduationCap className="fs-1 me-2" />
-                                         <p className="card-text fs-6">{`Studying at ${user.department} at Leading University, Sylhet`}</p>
-                                    </Card.Text>
-                                 )
-                             )
+                                (
+                                    user.department !== null && (
+                                        <Card.Text as="div" className="d-flex align-items-center mb-2">
+                                            <FaGraduationCap className="fs-3 me-2" />
+                                            <p className="card-text fs-6">{`Studying at ${user.department} at Leading University, Sylhet`}</p>
+                                        </Card.Text>
+                                    )
+                                )
                             }
                             {!user.isTeacher && user.batch && (
                                 <Card.Text as="div" className="d-flex align-items-center mb-2">
@@ -69,10 +69,10 @@ const UserProfileIntro = () => {
                             </Card.Text>
 
                             <Card.Text as="div" className="d-flex align-items-center mb-2">
-                                <FaRegComment className="fs-5" />
-                                <Link to="#" className="textHover">
+                                <FaCommentDots className="fs-5" />
+                                <div className="textHover">
                                     <p className="card-text ps-2 fs-6 textPrimary">Send Message</p>
-                                </Link>
+                                </div>
                             </Card.Text>
 
                             {user.mobile !== null && (
@@ -83,12 +83,11 @@ const UserProfileIntro = () => {
                                     </Link>
                                 </Card.Text>
                             )}
-                            <div className="bgPrimary text-center rounded-3">
-                                <Link to="#" className="btn w-100 text-white">View More</Link>
+                            <div className="bgPrimary text-center rounded-3 mt-4">
+                                <strong className="btn w-100 text-white">View More</strong>
                             </div>
                         </>
                     ))}
-
                 </Card.Body>
             </Card>
         </div>

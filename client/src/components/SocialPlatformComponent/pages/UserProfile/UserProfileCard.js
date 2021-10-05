@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Container, Dropdown, Form, Modal, Row } from 'react-bootstrap';
-import {Link, Redirect, useParams} from 'react-router-dom';
+import { Link, Redirect, useParams } from 'react-router-dom';
 import UserProfileHome from './UserProfileHome';
 import AllFriend from "../../AllFriend/AllFriend";
 import AllPhotos from "../../AllPhotos/AllPhotos.js";
 import AllVideos from "../../AllVideos/AllVideos.js";
 import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEnvelopeOpen, FaPhone, FaUserCircle } from 'react-icons/fa';
-import ProfileAbout from '../../ProfileAbout/ProfileAbout';
-import {useSelector} from "react-redux";
-import {Accept_Connection_Request, Connect, Disconnect} from "../../../../actions/users";
+import UserProfileAbout from './UserProfileAbout.js';
+import { useSelector } from "react-redux";
+import { Accept_Connection_Request, Connect, Disconnect } from "../../../../actions/users";
 import moment from "moment";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import Avatar from '../../../../images/avatar.jpeg'
 
 const UserProfileCard = () => {
@@ -70,7 +70,7 @@ const UserProfileCard = () => {
     }
     const isConnected = paramUser.filter(user => currentUser?.connection.includes(user._id));
     const isConnecting = paramUser.filter(user => currentUser?.connecting.includes(user._id));
-    const isConnectionRequest= paramUser.filter(user => currentUser?.connection_requests.includes(user._id));
+    const isConnectionRequest = paramUser.filter(user => currentUser?.connection_requests.includes(user._id));
     const otherPosition = paramUser.filter(user => !currentUser?.connection.includes(user._id) && !currentUser?.connecting.includes(user._id) && !currentUser?.connection_requests.includes(user._id))
 
 
@@ -85,11 +85,11 @@ const UserProfileCard = () => {
                                     <Container>
                                         <Card.Body className="pt-0">
                                             <label htmlFor="coverPhoto" className="w-100">
-                                              <Card.Img className="w-100 img-fluid" src={user.cover_picture ? `/api/files/storage/${user.cover_picture}` : Avatar} alt={user.name} style={{ height: "20rem" }} />
+                                                <Card.Img style={{ width: "100%", height: "30vh" }} src={user.cover_picture ? `/api/files/storage/${user.cover_picture}` : Avatar} alt={user.name} />
                                             </label>
                                             <Row className="mb-2 position-relative">
                                                 <label htmlFor="profilePhoto" className="userPosition">
-                                                   <img  src={user.profile_picture ? `/api/files/storage/${user.profile_picture}` : Avatar} className="img-fluid userProfile p-2 bg-light" alt={user.name} style={{ height: '150px' }} />
+                                                    <img src={user.profile_picture ? `/api/files/storage/${user.profile_picture}` : Avatar} style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" alt={user.name} />
                                                 </label>
                                                 <Col className="mt-5 ms-sm-5 ms-3">
                                                     <h5 className="ms-3 mt-5 fw-bold fs-3">{user.name}</h5>
@@ -127,48 +127,48 @@ const UserProfileCard = () => {
                                                             <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
-                                                    {otherPosition.length  !== 0 && (
+                                                    {otherPosition.length !== 0 && (
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Connect(paramUser.map(user => user._id))); window.location.reload() }}>Connect</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
                                                     {user._id === currentUser?._id && (
-                                                        <Redirect to={'/socialProfile'}/>
+                                                        <Redirect to={'/socialProfile'} />
                                                     )}
                                                 </Col>
                                             </Row>
                                         </Card.Body>
                                     </Container>
                                     <Row>
-                                        <nav class="py-2 bg-light border-bottom sticky-top">
-                                            <div class="container d-flex flex-wrap">
-                                                <ul class="nav me-auto">
-                                                    <li class="nav-user">
-                                                        <p class="nav-link link-dark px-2 active"
+                                        <nav className="py-2 bg-light border-bottom sticky-top">
+                                            <div className="container d-flex flex-wrap">
+                                                <ul className="nav me-auto">
+                                                    <li className="nav-user cursor">
+                                                        <p className="nav-link link-dark px-2 active"
                                                             aria-current="page" onClick={handleChangePost}>Posts</p>
                                                     </li>
-                                                    <li class="nav-user">
-                                                        <p class="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
+                                                    <li className="nav-user cursor">
+                                                        <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                                     </li>
-                                                    <li class="nav-user">
-                                                        <p class="nav-link link-dark ps-4 px-2" onClick={handleChangeConnection}>connections</p>
+                                                    <li className="nav-user cursor">
+                                                        <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeConnection}>Connections</p>
                                                     </li>
                                                     <Dropdown as="li">
                                                         <Dropdown.Toggle variant="light">
                                                             More
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu>
-                                                            <Dropdown.user onClick={handleChangePhoto}>Photos</Dropdown.user>
-                                                            <Dropdown.user onClick={handleChangeVideo}>Videos</Dropdown.user>
+                                                            <Dropdown.Item onClick={handleChangePhoto}>Photos</Dropdown.Item>
+                                                            <Dropdown.Item onClick={handleChangeVideo}>Videos</Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </ul>
-                                                <ul class="nav">
-                                                    <li class="nav-user">
-                                                        <Link to="#" class="nav-link link-dark px-2">
-                                                            <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-                                                                <input type="search" class="form-control" placeholder="Search..."
+                                                <ul className="nav">
+                                                    <li className="nav-user">
+                                                        <Link to="#" className="nav-link link-dark px-2">
+                                                            <form className="col-12 col-lg-auto mb-3 mb-lg-0">
+                                                                <input type="search" className="form-control" placeholder="Search..."
                                                                     aria-label="Search" />
                                                             </form>
                                                         </Link>
@@ -242,10 +242,10 @@ const UserProfileCard = () => {
                     post && <UserProfileHome />
                 }
                 {
-                    about && <ProfileAbout />
+                    about && <UserProfileAbout />
                 }
                 {
-                    connection && <AllFriend setPost={setPost} paramsConnection={paramsConnection}/>
+                    connection && <AllFriend setPost={setPost} paramsConnection={paramsConnection} />
                 }
                 {
                     photo && <AllPhotos />

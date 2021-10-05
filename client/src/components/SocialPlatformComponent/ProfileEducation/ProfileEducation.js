@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
-import { FaEdit, FaGraduationCap, FaPencilAlt } from 'react-icons/fa';
+import { FaEdit, FaGraduationCap, FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { useSelector } from "react-redux";
 import EducationProfileModal from "../EducationProfileModal/EducationProfileModal";
 import moment from "moment";
@@ -22,31 +22,35 @@ const ProfileEducation = () => {
         <div className="mb-4">
             <Card className="w-100 rounded-3">
                 <Card.Body>
-                    <Card.Text as="div" class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title pt-2">Education</h5>
+                    <Card.Text as="div" className="d-flex justify-content-between align-items-center">
+                        <h5 className="card-title pt-2">Education</h5>
                         <FaEdit className="fs-5" onClick={() => setNewShow(true)} />
-                        <EducationProfileModal newShow={newShow} closeNewShow={closeNewShow}/>
+                        <EducationProfileModal newShow={newShow} closeNewShow={closeNewShow} />
                     </Card.Text>
                     <hr />
                     {currentUser?.education_background.map(education => (
                         <>
                             <Card.Text as="div">
-                                <div class="col-md-12">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex">
+                                <div className="col-md-12">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <div className="d-flex">
                                             <FaGraduationCap className="fs-4" />
-                                            <p class="ps-2">{education.school}</p>
+                                            <p className="ps-2">{education.school}</p>
                                         </div>
-                                        <FaPencilAlt className="fs-5" onClick={(e) =>{
-                                            e.stopPropagation();
-                                            setDegreeName(education.degree);
-                                            handleShow()} } />
-                                        <EducationProfileModal DegreeName={degreeName}  show={show} handleClose={handleClose}/>
+                                        <div className="d-flex">
+                                            <FaPencilAlt title="edit" className="fs-5" onClick={(e) => {
+                                                e.stopPropagation();
+                                                setDegreeName(education.degree);
+                                                handleShow()
+                                            }} />
+                                            <FaTrash title="delete" className="fs-5 ms-2" />
+                                        </div>
+                                        <EducationProfileModal DegreeName={degreeName} show={show} handleClose={handleClose} />
                                     </div>
                                     <div>
-                                        <p class="mb-0">{education.degree}</p>
-                                        <p class="mb-0">Degree: {education.field_of_study}</p>
-                                        <p class="mt-0 pt-0">{moment(education.start_date).year()} - {moment(education.end_date).year()}</p>
+                                        <p className="mb-0">{education.degree}</p>
+                                        <p className="mb-0">Degree: {education.field_of_study}</p>
+                                        <p className="mt-0 pt-0">{moment(education.start_date).year()} - {moment(education.end_date).year()}</p>
                                     </div>
                                 </div>
                             </Card.Text>

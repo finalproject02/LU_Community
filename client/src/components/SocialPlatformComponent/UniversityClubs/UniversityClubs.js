@@ -38,10 +38,9 @@ const UniversityClubs = () => {
                             </Card>
                         </Col>
                     </div>
-                </Row >
-            </Container >
-
-        </div >
+                </Row>
+            </Container>
+        </div>
     );
 };
 

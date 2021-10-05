@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
-import { FaBlog, FaBook, FaGraduationCap, FaHome, FaPhone, FaRegComment, FaRegEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaBlog, FaBook, FaGraduationCap, FaHome, FaPhone, FaRegEdit } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import {updateProfile} from "../../../actions/auth";
+import { updateProfile } from "../../../actions/auth";
 
 const ProfileIntro = () => {
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const ProfileIntro = () => {
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title pt-2">Intro</h5>
-                            <FaRegEdit className="fs-5" onClick={handleShow} />
+                        <FaRegEdit className="fs-5" onClick={handleShow} />
                     </Card.Text>
                     <hr />
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
@@ -43,23 +43,23 @@ const ProfileIntro = () => {
 
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
-                                {currentUser?.isTeacher ? (
-                                    currentUser?.department !== null &&
-                                    <>
-                                    <FaGraduationCap className="fs-1 me-2" />
-                                    <p className="card-text fs-6">{`Working as Teacher at ${currentUser?.department} at Leading University, Sylhet`}</p>
-                                    </>
-                                ) :
-                                (
-                                  currentUser?.department !== null &&
-                                    <>
-                                      <FaGraduationCap className="fs-1 me-2" />
-                                       <p className="card-text fs-6">{`Studying at ${currentUser?.department} at Leading University, Sylhet`}</p>
-                                    </>
-                                )
-                                }
+                        {currentUser?.isTeacher ? (
+                            currentUser?.department !== null &&
+                            <>
+                                <FaGraduationCap className="fs-3 me-2" />
+                                <p className="card-text fs-6">{`Working as Teacher at ${currentUser?.department} at Leading University, Sylhet`}</p>
+                            </>
+                        ) :
+                            (
+                                currentUser?.department !== null &&
+                                <>
+                                    <FaGraduationCap className="fs-3 me-2" />
+                                    <p className="card-text fs-6">{`Studying at ${currentUser?.department} at Leading University, Sylhet`}</p>
+                                </>
+                            )
+                        }
                     </Card.Text>
-                    { !currentUser?.isTeacher && (
+                    {!currentUser?.isTeacher && (
                         currentUser?.batch && (
                             <Card.Text as="div" className="d-flex align-items-center mb-2">
                                 <FaBook className="fs-5" />
@@ -76,7 +76,6 @@ const ProfileIntro = () => {
                                 <p className="card-text ps-2 fs-6">Lives in {currentUser?.present_address}</p>
                             </>
                         )}
-
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
@@ -86,9 +85,6 @@ const ProfileIntro = () => {
                                 <p className="card-text ps-2 fs-6">From {currentUser?.permanent_address}</p>
                             </>
                         )}
-
-
-
                     </Card.Text>
 
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
@@ -133,7 +129,13 @@ const ProfileIntro = () => {
                         <Row className="mb-2">
                             <Col md="12">
                                 <h6 className="">Department</h6>
-                                <Form.Control defaultValue={currentUser?.department} type="text" onChange={handleChange} name="department" />
+                                <Form.Select defaultValue={currentUser?.department} onChange={handleChange} name="department" aria-label="Default select example">
+                                    <option value="CSE">CSE</option>
+                                    <option value="EEE">EEE</option>
+                                    <option value="BBA">BBA</option>
+                                    <option value="English">Engliah</option>
+                                    <option value="Bangla">Bangla</option>
+                                </Form.Select>
                             </Col>
                         </Row>
                         <Row className="mb-2">

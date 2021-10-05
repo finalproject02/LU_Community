@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
-import { FaCommentDots, FaPlus, FaUserPlus } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import AboutClub from '../AboutClub/AboutClub';
 import AllPhotos from '../AllPhotos/AllPhotos';
@@ -63,7 +63,7 @@ const GroupProfile = () => {
                             <Card.Body className="pt-0">
                                 <label htmlFor="coverPhoto" className="w-100">
                                     {
-                                        coverPhoto && coverPhoto.type.startsWith("image") ? (<Card.Img className="w-100 img-fluid" src={URL.createObjectURL(coverPhoto)} alt="name" style={{ height: "20rem" }} />) : (<Card.Img className="w-100 img-fluid" src={jahed} alt="jahed" style={{ height: "20rem" }} />)
+                                        coverPhoto && coverPhoto.type.startsWith("image") ? (<Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" />) : (<Card.Img src={jahed} alt="jahed" style={{ width: "100%", height: "30vh" }} />)
                                     }
                                     <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
                                     </Form.Control>
@@ -88,14 +88,14 @@ const GroupProfile = () => {
                             <nav className="py-2 bg-light border-bottom">
                                 <div className="container d-flex flex-wrap">
                                     <ul className="nav me-auto">
-                                        <li className="nav-item">
+                                        <li className="nav-item cursor">
                                             <p className="nav-link link-dark px-2 active"
                                                 aria-current="page" onClick={handleChangeHome}>Home</p>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item cursor">
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item cursor">
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeEvent}>Event</p>
                                         </li>
                                         <Dropdown as="li">

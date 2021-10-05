@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import { FaLink } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Avatar from '../../../images/avatar.jpeg'
 import { useHistory } from "react-router-dom";
 import { Accept_Connection_Request, Disconnect } from "../../../actions/users";
@@ -20,9 +20,9 @@ const NewConnection = () => {
                 <Card className="w-100">
                     <Card.Body>
                         <Card.Title>
-                            <div className="d-flex justify-content-between align-requestss-center">
-                                <h5 className="card-title">New Connection</h5>
-                                <Link to="#" className="mb-2 text-muted textHover">See all</Link>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5>New Connection</h5>
+                                <Link to="#" className="mb-2 textHover text-dark">See all</Link>
                             </div>
                         </Card.Title>
                         <Card.Text as="div">
@@ -30,8 +30,8 @@ const NewConnection = () => {
                                 {
                                     connectionRequests.map(requests => (
                                         <Col key={requests.id} md="3" className=" mb-2">
-                                            <Card className="w-100" style={{cursor: 'pointer'}}>
-                                                <Card.Img src={requests.profile_picture ? `/api/files/storage/${requests.profile_picture}` : Avatar} className="card-img-top rounded-3" alt="..." onClick={() => { history.push(`/profile/${requests._id}`) }}/>
+                                            <Card className="w-100" style={{ cursor: 'pointer' }}>
+                                                <Card.Img src={requests.profile_picture ? `/api/files/storage/${requests.profile_picture}` : Avatar} style={{ cursor: 'pointer', height: "20vh" }} className="card-img-top rounded-3 w-100" alt="name" onClick={() => { history.push(`/profile/${requests._id}`) }} />
                                                 <Card.Body>
                                                     <Card.Title onClick={() => { history.push(`/profile/${requests._id}`) }}>{requests.name}</Card.Title>
                                                     <small className="card-subtitle text-muted mb-2">
