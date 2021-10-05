@@ -14,13 +14,14 @@ import Club from "./components/SocialPlatformComponent/pages/Club/Club";
 import Group from "./components/SocialPlatformComponent/pages/Group/Group";
 import SearchPage from "./components/SocialPlatformComponent/pages/SearchPage/SearchPage";
 import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDetails";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {LoadingCurrentUser} from "./actions/auth";
-import {getCurrentUserPosts, Notifications} from "./actions/posts";
-import {ToastContainer} from "react-toastify";
-import {People, Suggestions} from "./actions/people";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { LoadingCurrentUser } from "./actions/auth";
+import { getCurrentUserPosts, Notifications } from "./actions/posts";
+import { ToastContainer } from "react-toastify";
+import { People, Suggestions } from "./actions/people";
 import UserProfile from "./components/SocialPlatformComponent/pages/UserProfile/UserProfile";
+import NotificationPostPage from "./components/SocialPlatformComponent/pages/NotificationPostPage/NotificationPostPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function App() {
     dispatch(People());
 
   }, []);
-  const { currentUser} = useSelector(state => state.auth);
+  const { currentUser } = useSelector(state => state.auth);
   const department = currentUser?.department
   useEffect(() => {
     dispatch(Suggestions(department))
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <div className="bg-light">
-      <ToastContainer/>
+      <ToastContainer />
       <Router>
         <Switch>
           <Route exact path="/home">
@@ -100,7 +101,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/departmentofenglish">
-            <Home/>
+            <Home />
           </Route>
           <Route path="/departmentofarchitect">
             <Home />
@@ -136,10 +137,13 @@ function App() {
             <SocialProfile />
           </Route>
           <Route path="/profile/:id">
-            <UserProfile/>
+            <UserProfile />
           </Route>
-          <Route path="/allnotification">
+          <Route path="/allNotification">
             <AllNotification />
+          </Route>
+          <Route path="/notificationPostPage">
+            <NotificationPostPage />
           </Route>
           <Route path="/connection">
             <Connection />

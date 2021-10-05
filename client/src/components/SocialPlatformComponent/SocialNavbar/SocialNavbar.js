@@ -70,9 +70,11 @@ const SocialNavbar = () => {
                                         {notifications.slice(0, 4).map(notification => (
                                             <>
                                                 <NavDropdown.Item className="py-3">
-                                                    <FaUser className="me-1 mb-1" />
-                                                    {getUserName(notification.notify_by)} {notification.position} your post
-                                                    <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
+                                                    <Link to="/notificationPostPage" className="text-decoration-none text-dark">
+                                                        <FaUser className="me-1 mb-1" />
+                                                        {getUserName(notification.notify_by)} {notification.position} your post
+                                                        <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
+                                                    </Link>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                             </>

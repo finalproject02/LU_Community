@@ -25,3 +25,7 @@
 .cursor {
   cursor: pointer;
 }
+.notificationHover:hover {
+  background-color: rgb(245, 239, 239);
+  cursor: pointer;
+}
