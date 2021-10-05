@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
+import { Card, Col, Container, Dropdown, Form, NavDropdown, Row } from 'react-bootstrap';
+import { FaPlus, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import AboutClub from '../AboutClub/AboutClub';
 import AllPhotos from '../AllPhotos/AllPhotos';
 import AllVideos from '../AllVideos/AllVideos';
-import ClubEvents from '../ClubEvents/ClubEvents';
 import jahed from "../../../images/Jahed.jpg";
 import GroupHome from '../GroupHome/GroupHome';
+import AboutGroup from '../AboutGroup/AboutGroup';
+import GroupMember from '../GroupMember/GroupMember';
 
 const GroupProfile = () => {
     const [about, setAbout] = useState(false);
     const [post, setPost] = useState(true);
-    const [event, setEvent] = useState(false);
+    const [groupMember, setGroupMember] = useState(false);
     const [photo, setPhoto] = useState(false);
     const [video, setVideo] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
@@ -22,7 +22,7 @@ const GroupProfile = () => {
         setPost(true);
         setPhoto(false);
         setVideo(false);
-        setEvent(false);
+        setGroupMember(false);
         setAbout(false);
     }
 
@@ -30,27 +30,27 @@ const GroupProfile = () => {
         setPost(false);
         setPhoto(false);
         setVideo(false);
-        setEvent(false);
+        setGroupMember(false);
         setAbout(true);
     }
-    const handleChangeEvent = () => {
+    const handleChangeGroupMember = () => {
         setPost(false);
         setAbout(false);
         setPhoto(false);
         setVideo(false);
-        setEvent(true);
+        setGroupMember(true);
     }
     const handleChangePhoto = () => {
         setPost(false);
         setAbout(false);
-        setEvent(false);
+        setGroupMember(false);
         setVideo(false);
         setPhoto(true);
     }
     const handleChangeVideo = () => {
         setPost(false);
         setAbout(false);
-        setEvent(false);
+        setGroupMember(false);
         setPhoto(false);
         setVideo(true);
     }
@@ -75,10 +75,12 @@ const GroupProfile = () => {
                                             <p className="ms-3 mb-0 text-lead fs-5"><small>Private group. <span>450 members</span></small></p>
                                         </Col>
                                         <Col md="4">
-                                            <Link to="#" className="btn btn-outline-primary w-100 ms-2">
-                                                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                                                Join Request
-                                            </Link>
+                                            <div className="bgPrimary rounded-3 w-75 ms-2 text-center">
+                                                <div className="btn text-white">
+                                                    <FaUserPlus className="me-1 mb-1" />
+                                                    Join
+                                                </div>
+                                            </div>
                                         </Col>
                                     </div>
                                 </Row>
@@ -96,18 +98,17 @@ const GroupProfile = () => {
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                         </li>
                                         <li className="nav-item cursor">
-                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeEvent}>Event</p>
+                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeGroupMember}>Members</p>
                                         </li>
-                                        <Dropdown as="li">
-                                            <Dropdown.Toggle variant="light">
-                                                More
-                                            </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={handleChangePhoto}>Photos</Dropdown.Item>
-                                                <Dropdown.Item onClick={handleChangeVideo}>Videos</Dropdown.Item>
-                                                <Dropdown.Item onClick={handleChangePhoto}>Events</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                                        <NavDropdown className="navFontSize text-dark"
+                                            title={<span className="text-dark">More</span>}>
+                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangePhoto}>
+                                                Photos
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangeVideo}>
+                                                Videos
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
                                     </ul>
                                     <ul className="nav">
                                         <li className="nav-item">
@@ -136,10 +137,10 @@ const GroupProfile = () => {
                 post && <GroupHome />
             }
             {
-                about && <AboutClub />
+                about && <AboutGroup />
             }
             {
-                event && <ClubEvents />
+                groupMember && <GroupMember />
             }
             {
                 photo && <AllPhotos />

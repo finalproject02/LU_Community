@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import { People, Suggestions } from "./actions/people";
 import UserProfile from "./components/SocialPlatformComponent/pages/UserProfile/UserProfile";
 import NotificationPostPage from "./components/SocialPlatformComponent/pages/NotificationPostPage/NotificationPostPage";
+import GroupInitial from "./components/SocialPlatformComponent/GroupInitial/GroupInitial";
 
 function App() {
   const dispatch = useDispatch();
@@ -156,6 +157,9 @@ function App() {
           </Route>
           <Route path="/group">
             <Group />
+          </Route>
+          <Route path="/groupInitial">
+            <GroupInitial />
           </Route>
           <Route exact path="/search">
             <SearchPage />

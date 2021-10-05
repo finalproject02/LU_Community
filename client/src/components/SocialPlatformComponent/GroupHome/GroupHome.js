@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import AllGroup from '../AllGroup/AllGroup';
-import HomeSmProfile from '../HomeSmProfile/HomeSmProfile';
 import PhotoCard from '../PhotoCard/PhotoCard';
 import Post from '../Post/Post';
 import VideoCard from '../VideoCard/VideoCard';

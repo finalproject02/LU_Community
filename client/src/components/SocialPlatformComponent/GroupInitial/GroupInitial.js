@@ -1,15 +1,12 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import SocialNavbar from '../../SocialNavbar/SocialNavbar';
-import UniversityClubs from '../../UniversityClubs/UniversityClubs';
-import jahed from "../../../../images/Jahed.jpg";
-import PostCard from '../../PostCard/PostCard';
 import { Link } from 'react-router-dom';
-import ClubSuggestions from '../../ClubSuggestions/ClubSuggestions';
-import Suggestions from '../../Suggestions/Suggestions';
-import ClubSuggestionsCard from '../../ClubSuggestionsCard/ClubSuggestionsCard';
+import jahed from "../../../images/Jahed.jpg";
+import AllGroup from '../AllGroup/AllGroup';
+import PostCard from '../PostCard/PostCard';
+import SocialNavbar from '../SocialNavbar/SocialNavbar';
 
-const Club = () => {
+const GroupInitial = () => {
     return (
         <div>
             <div>
@@ -22,15 +19,15 @@ const Club = () => {
                             <Card className="w-100 mb-4">
                                 <Card.Body>
                                     <div className="d-flex justify-content-between align-items-center mb-3">
-                                        <h6>Following Club</h6>
+                                        <h6>Joined Group</h6>
                                         <h6 className="textHover">See all</h6>
                                     </div>
-                                    <Link to="/clubDetails" className="d-flex justify-content-start align-items-center mb-2 cardHover p-3 rounded-3 text-decoration-none text-dark">
+                                    <Link to="/group" className="d-flex justify-content-start align-items-center mb-2 cardHover p-3 rounded-3 text-decoration-none text-dark">
                                         <img src={jahed} alt="" width="45" height="45" className="rounded-circle me-2" />
                                         <div className="d-flex align-items-center">
                                             <div>
-                                                <h6 className="mb-0">Leading University Computer Club</h6>
-                                                <small>Computer club</small>
+                                                <h6 className="mb-0">CSE 46th Batch</h6>
+                                                <small>DBMS</small>
                                             </div>
                                         </div>
                                     </Link>
@@ -49,7 +46,7 @@ const Club = () => {
                             <PostCard />
                         </Col>
                         <Col md="4">
-                            <ClubSuggestionsCard />
+                            <AllGroup />
                         </Col>
                     </Row>
                 </Container>
@@ -58,4 +55,4 @@ const Club = () => {
     );
 };
 
-export default Club;
+export default GroupInitial;

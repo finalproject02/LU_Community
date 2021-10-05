@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
+import { Card, Col, Container, Form, NavDropdown, Row } from 'react-bootstrap';
 import { FaCommentDots, FaPlus, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import jahed from "../../../images/Jahed.jpg";
@@ -7,14 +7,17 @@ import AboutClub from '../AboutClub/AboutClub';
 import AllPhotos from '../AllPhotos/AllPhotos';
 import AllVideos from '../AllVideos/AllVideos';
 import ClubEvents from '../ClubEvents/ClubEvents';
+import ClubFollower from '../ClubFollower/ClubFollower';
 import ClubHome from '../ClubHome/ClubHome';
 
 const ClubProfile = () => {
     const [about, setAbout] = useState(false);
     const [post, setPost] = useState(true);
-    const [event, setEvent] = useState(false);
+    const [follower, setFollower] = useState(false);
     const [photo, setPhoto] = useState(false);
     const [video, setVideo] = useState(false);
+    const [event, setEvent] = useState(false);
+
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
 
@@ -24,6 +27,7 @@ const ClubProfile = () => {
         setVideo(false);
         setEvent(false);
         setAbout(false);
+        setFollower(false);
     }
 
     const handleChangeAbout = () => {
@@ -31,20 +35,23 @@ const ClubProfile = () => {
         setPhoto(false);
         setVideo(false);
         setEvent(false);
+        setFollower(false);
         setAbout(true);
     }
-    const handleChangeEvent = () => {
+    const handleChangeFollower = () => {
         setPost(false);
         setAbout(false);
         setPhoto(false);
         setVideo(false);
-        setEvent(true);
+        setEvent(false);
+        setFollower(true);
     }
     const handleChangePhoto = () => {
         setPost(false);
         setAbout(false);
         setEvent(false);
         setVideo(false);
+        setFollower(false);
         setPhoto(true);
     }
     const handleChangeVideo = () => {
@@ -52,7 +59,16 @@ const ClubProfile = () => {
         setAbout(false);
         setEvent(false);
         setPhoto(false);
+        setFollower(false);
         setVideo(true);
+    }
+    const handleChangeEvent = () => {
+        setPost(false);
+        setAbout(false);
+        setPhoto(false);
+        setVideo(false);
+        setFollower(false);
+        setEvent(true);
     }
 
     return (
@@ -110,18 +126,21 @@ const ClubProfile = () => {
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                         </li>
                                         <li className="nav-item cursor">
-                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeEvent}>Event</p>
+                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeFollower}>Follower</p>
                                         </li>
-                                        <Dropdown as="li">
-                                            <Dropdown.Toggle variant="light">
-                                                More
-                                            </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={handleChangePhoto}>Photos</Dropdown.Item>
-                                                <Dropdown.Item onClick={handleChangeVideo}>Videos</Dropdown.Item>
-                                                <Dropdown.Item onClick={handleChangePhoto}>Events</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+
+                                        <NavDropdown className="navFontSize text-dark"
+                                            title={<span className="text-dark">More</span>}>
+                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangePhoto}>
+                                                Photos
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangeVideo}>
+                                                Videos
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangeEvent}>
+                                                Events
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
                                     </ul>
                                     <ul className="nav">
                                         <li className="nav-item">
@@ -131,12 +150,12 @@ const ClubProfile = () => {
                                             </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="#" className="nav-link link-dark px-2">
+                                            <div className="nav-link link-dark px-2">
                                                 <Form className="col-12 col-lg-auto mb-3 mb-lg-0">
                                                     <input type="search" className="form-control" placeholder="Search..."
                                                         aria-label="Search" />
                                                 </Form>
-                                            </Link>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -153,13 +172,16 @@ const ClubProfile = () => {
                 about && <AboutClub />
             }
             {
-                event && <ClubEvents />
+                follower && < ClubFollower />
             }
             {
                 photo && <AllPhotos />
             }
             {
                 video && <AllVideos />
+            }
+            {
+                event && <ClubEvents />
             }
 
         </div>
