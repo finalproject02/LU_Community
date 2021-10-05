@@ -1,132 +1,183 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import OnlineAdmissionBody from "./pages/OnlineAdmission/OnlineAdmissionBody";
 import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
 import NotFound from "./components/NotFound/NotFound";
 import Classroom from "./pages/Classroom/Classroom";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
+import SocialPlatform from "./pages/SocialPlatform/SocialPlatform";
+import AllNotification from "./components/SocialPlatformComponent/pages/AllNotification/AllNotification";
+import SocialProfile from "./components/SocialPlatformComponent/pages/SocialProfile/SocialProfile";
+import Connection from "./components/SocialPlatformComponent/pages/Connection/Connection";
+import Club from "./components/SocialPlatformComponent/pages/Club/Club";
+import Group from "./components/SocialPlatformComponent/pages/Group/Group";
+import SearchPage from "./components/SocialPlatformComponent/pages/SearchPage/SearchPage";
+import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDetails";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {LoadingCurrentUser} from "./actions/auth";
+import {getCurrentUserPosts} from "./actions/posts";
+import {ToastContainer} from "react-toastify";
+import {People, Suggestions} from "./actions/people";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(LoadingCurrentUser());
+    dispatch(getCurrentUserPosts());
+    dispatch(People())
+  }, []);
+  const { currentUser} = useSelector(state => state.auth);
+  const department = currentUser?.department
+  useEffect(() => {
+    dispatch(Suggestions(department))
+  }, [department])
+
   return (
-    <div>
+    <div className="bg-light">
+      <ToastContainer/>
       <Router>
         <Switch>
           <Route exact path="/home">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/aboutus">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/admissionpolicy">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/scholarshipaid">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/howtoapply">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/academicprogram">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/tutionfees">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/academicpolicy">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/onlineadmission">
-            <OnlineAdmissionBody></OnlineAdmissionBody>
+            <OnlineAdmissionBody />
           </Route>
           <Route path="/admissionfirststep">
-            <AdmissionFirstStep></AdmissionFirstStep>
+            <AdmissionFirstStep />
           </Route>
-          {/* <Route path="/admissionfirststep/">
-            <AdmissionFirstStep></AdmissionFirstStep>
-          </Route> */}
           <Route path="/contact">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/faq">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofbba">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofartandmodernlang">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofsocialscience">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/facultyofmodernscience">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofbba">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofcse">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofeee">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofcivil">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofenglish">
-            <Home></Home>
+            <Home/>
           </Route>
           <Route path="/departmentofarchitect">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentoflaw">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofislamicstudies">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentoftourism">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/departmentofbangla">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/results">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/paymentprocedure">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/semesterregi">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/classroom">
-            <Classroom></Classroom>
+            <Classroom />
           </Route>
           <Route path="/socialplatform">
-            <Home></Home>
+            <SocialPlatform />
           </Route>
-          <Route path="/routine">
-            <Home></Home>
+          <Route path="/socialProfile">
+            <SocialProfile />
+          </Route>
+          <Route path="/profile/:id">
+            <SocialProfile />
+          </Route>
+          <Route path="/allnotification">
+            <AllNotification />
+          </Route>
+          <Route path="/connection">
+            <Connection />
+          </Route>
+          <Route path="/club">
+            <Club />
+          </Route>
+          <Route path="/clubDetails">
+            <ClubDetails />
+          </Route>
+          <Route path="/group">
+            <Group />
+          </Route>
+          <Route path="/search">
+            <SearchPage />
           </Route>
           <Route path="/help">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/iqac">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/library">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="/login">
-            <Home></Home>
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route exact path="/">
-            <Home></Home>
+            <Home />
           </Route>
           <Route path="*">
-            <NotFound></NotFound>
+            <NotFound />
           </Route>
         </Switch>
       </Router>
