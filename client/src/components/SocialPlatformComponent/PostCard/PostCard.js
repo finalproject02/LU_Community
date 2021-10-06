@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Carousel, Collapse, Dropdown, Form } from 'react-bootstrap';
 import { FaEllipsisV, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import Avatar from "../../../images/avatar.jpeg";
 import "./PostCard.css";
 import { useSelector, useDispatch } from "react-redux";

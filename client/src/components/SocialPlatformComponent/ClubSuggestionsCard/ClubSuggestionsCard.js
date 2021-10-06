@@ -21,13 +21,13 @@ const ClubSuggestionsCard = (props) => {
                                         <div className="d-flex align-items-center">
                                             <div>
                                                 <h6>
-                                                    <Link to="#" class="textHover text-dark">{item.name}</Link>
+                                                    <Link to="#" className="textHover text-dark">{item.name}</Link>
                                                 </h6>
                                                 <span className="text-muted">{item.position}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <strong class="textSecondary cursor">Follow</strong>
+                                    <strong className="textSecondary cursor">Follow</strong>
                                 </div>
                             ))
                         }

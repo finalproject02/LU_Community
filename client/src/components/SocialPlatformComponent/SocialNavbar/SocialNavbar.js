@@ -9,9 +9,13 @@ import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
 import { ShowNotifications } from "../../../actions/posts";
 import moment from "moment";
-import CreateGroup from '../CreateGroup/CreateGroup';
+import NotificationPostPage from '../pages/NotificationPostPage/NotificationPostPage';
 
 const SocialNavbar = () => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -71,11 +75,12 @@ const SocialNavbar = () => {
                                         {notifications.slice(0, 4).map(notification => (
                                             <>
                                                 <NavDropdown.Item className="py-3">
-                                                    <Link to="/notificationPostPage" className="text-decoration-none text-dark">
+                                                    <div onClick={handleShow} className="text-decoration-none text-dark">
                                                         <FaUser className="me-1 mb-1" />
                                                         {getUserName(notification.notify_by)} {notification.position} your post
                                                         <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
-                                                    </Link>
+                                                    </div>
+                                                    <NotificationPostPage show={show} handleClose={handleClose} />
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                             </>
