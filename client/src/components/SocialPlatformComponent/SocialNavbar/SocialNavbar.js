@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
 import { ShowPostNotifications } from "../../../actions/posts";
 import moment from "moment";
+import CreateGroup from '../CreateGroup/CreateGroup';
 
 const SocialNavbar = () => {
     const dispatch = useDispatch();
@@ -98,7 +99,7 @@ const SocialNavbar = () => {
                                     <Link to="/club" className="text-dark text-decoration-none">Club</Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item className="dropdownItem py-3">
-                                    <Link to="/group" className="text-dark text-decoration-none">Group</Link>
+                                    <Link to="/groupInitial" className="text-dark text-decoration-none">Group</Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item className="dropdownItem py-3">
                                     <Link to="/settings" className="text-dark text-decoration-none">Settings</Link>
@@ -108,10 +109,6 @@ const SocialNavbar = () => {
                                 className="navFontSize text-dark"
                                 title={<img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt="mdo" width="32" height="32" className="rounded-circle" />}
                             >
-
-                                <NavDropdown.Item className="dropdownItem py-3">
-                                    <Link to="/newproject" className="text-dark text-decoration-none">Create a Group</Link>
-                                </NavDropdown.Item>
                                 <NavDropdown.Item className="dropdownItem py-3">
                                     <Link to="/socialProfile" className="text-dark text-decoration-none">Profile</Link>
                                 </NavDropdown.Item>
@@ -130,10 +127,10 @@ const SocialNavbar = () => {
                             </NavDropdown>
                         </div>
                     </Container>
-                </header >
+                </header>
             )
             }
-        </div >
+        </div>
     );
 };
 

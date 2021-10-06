@@ -25,7 +25,7 @@
 .cursor {
   cursor: pointer;
 }
-.notificationHover:hover {
-  background-color: rgb(245, 239, 239);
+.cardHover:hover {
+  background-color: whitesmoke;
   cursor: pointer;
 }

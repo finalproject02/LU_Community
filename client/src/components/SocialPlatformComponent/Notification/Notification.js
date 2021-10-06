@@ -33,7 +33,7 @@ const Notification = () => {
                     <Card.Text>
                         {
                             notifications?.map(notification => (
-                                <div className="d-flex justify-content-between align-items-center mb-2 notificationHover">
+                                <div className="d-flex justify-content-between align-items-center mb-2 cardHover">
                                     <Link to="/notificationPostPage" className="d-flex align-items-center ps-2 text-decoration-none text-dark">
                                         <img src={getUserProfilePicture(notification.notify_by) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by)}` : Avatar} alt={notification.creator_name} width="50" height="50" className="rounded-circle" />
                                         <div className="d-flex align-items-center ms-2">
