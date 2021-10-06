@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { FaEdit, FaGraduationCap, FaPencilAlt, FaTrash } from 'react-icons/fa';
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import EducationProfileModal from "../EducationProfileModal/EducationProfileModal";
 import moment from "moment";
+import { DeleteEducationBackground} from "../../../actions/auth";
 
 const ProfileEducation = () => {
-
+    const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
     const [newShow, setNewShow] = useState(false);
-    const [editShow, setEditShow] = useState(false);
     const [degreeName, setDegreeName] = useState([])
 
 
@@ -24,7 +24,7 @@ const ProfileEducation = () => {
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title pt-2">Education</h5>
-                        <FaEdit className="fs-5" onClick={() => setNewShow(true)} />
+                        <FaEdit style={{cursor: 'pointer'}} className="fs-5" onClick={() => setNewShow(true)} />
                         <EducationProfileModal newShow={newShow} closeNewShow={closeNewShow} />
                     </Card.Text>
                     <hr />
@@ -38,12 +38,14 @@ const ProfileEducation = () => {
                                             <p className="ps-2">{education.school}</p>
                                         </div>
                                         <div className="d-flex">
-                                            <FaPencilAlt title="edit" className="fs-5" onClick={(e) => {
+                                            <FaPencilAlt style={{cursor: 'pointer'}} title="edit" className="fs-5" onClick={(e) => {
                                                 e.stopPropagation();
                                                 setDegreeName(education.degree);
                                                 handleShow()
                                             }} />
-                                            <FaTrash title="delete" className="fs-5 ms-2" />
+                                            <FaTrash style={{cursor: 'pointer'}} title="delete" className="fs-5 ms-2" onClick={() => {
+                                                dispatch(DeleteEducationBackground(education.degree))
+                                            }}/>
                                         </div>
                                         <EducationProfileModal DegreeName={degreeName} show={show} handleClose={handleClose} />
                                     </div>

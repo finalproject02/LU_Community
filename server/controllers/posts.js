@@ -81,7 +81,7 @@ export const Comments = async (req, res) => {
     }
 }
 
-export const Notifications = async (req, res) => {
+export const postNotifications = async (req, res) => {
     try {
         const notifications = await postNotificationModel.find({ creator_id: req.user.id }).sort({ createdAt: -1 });
         res.status(200).json({ notifications: notifications })
@@ -90,11 +90,11 @@ export const Notifications = async (req, res) => {
     }
 }
 
-export const showNotifications = async (req, res) => {
+export const showPostNotifications = async (req, res) => {
     const userId = req.user.id;
     try {
         await postNotificationModel.updateMany({ creator_id: userId }, { notification: false });
-        const afterUpdate = await postNotificationModel.find({ creator_id: userId });
+        const afterUpdate = await postNotificationModel.find({ creator_id: userId }).sort({ createdAt: -1 });
         res.status(200).json({ notifications: afterUpdate })
     } catch (error) {
         console.log(error)

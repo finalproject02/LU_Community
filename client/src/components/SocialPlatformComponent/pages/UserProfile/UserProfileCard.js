@@ -8,10 +8,11 @@ import AllVideos from "../../AllVideos/AllVideos.js";
 import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEnvelopeOpen, FaPhone, FaUserCircle } from 'react-icons/fa';
 import UserProfileAbout from './UserProfileAbout.js';
 import { useSelector } from "react-redux";
-import { Accept_Connection_Request, Connect, Disconnect } from "../../../../actions/users";
+import { Accept_Connection_Request, Connect, Disconnect } from "../../../../actions/auth";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import Avatar from '../../../../images/avatar.jpeg'
+import path from "path";
 
 const UserProfileCard = () => {
     const dispatch = useDispatch();
@@ -21,17 +22,21 @@ const UserProfileCard = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const { people } = useSelector(state => state.people);
+    const { posts } = useSelector(state => state.posts);
     const { currentUser } = useSelector(state => state.auth);
 
 
     const paramUser = people?.filter(person => person._id === id);
-    const paramsConnection = paramUser?.map(users => people.filter(person => users.connection.includes(person._id)))
+    const paramsConnection = paramUser?.map(users => people.filter(person => users.connection.includes(person._id)));
+    const paramsUserPosts = posts?.filter(post => post.creator_id === id);
+    const paramsUserPhoto = paramsUserPosts.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase() === '.jpg')
     const [post, setPost] = useState(true);
     const [about, setAbout] = useState(false);
     const [connection, setConnection] = useState(false);
     const [photo, setPhoto] = useState(false);
     const [video, setVideo] = useState(false);
 
+   // console.log(paramsUserPhotos)
     const handleChangePost = () => {
         setPost(true);
         setPhoto(false);
@@ -79,7 +84,7 @@ const UserProfileCard = () => {
             <div className="overflow-hidden">
                 {
                     paramUser.map(user => (
-                        <div key={user.id}>
+                        <div key={user._id}>
                             <Row>
                                 <Card className="w-100 shadow-sm mb-4 rounded-3">
                                     <Container>
@@ -105,7 +110,6 @@ const UserProfileCard = () => {
                                                     </p>
                                                     {isConnected.length !== 0 && (
                                                         <div className="mb-2">
-                                                            <Link to="#" className="btn btn-primary me-2">Connect</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Share Profile</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Remove Connection</Link>
@@ -116,20 +120,20 @@ const UserProfileCard = () => {
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2">Connecting</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Message</Link>
-                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))); window.location.reload() }}>Remove Connection</Link>
+                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))) }}>Remove Connection</Link>
                                                         </div>
                                                     )}
 
                                                     {isConnectionRequest.length !== 0 && (
                                                         <div className="mb-2">
-                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Accept_Connection_Request(paramUser.map(user => user._id))); window.location.reload() }}>Accept</Link>
-                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))); window.location.reload() }}>Ignore</Link>
+                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Accept_Connection_Request(paramUser.map(user => user._id)))}}>Accept</Link>
+                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))); }}>Ignore</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
                                                     {otherPosition.length !== 0 && (
                                                         <div className="mb-2">
-                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Connect(paramUser.map(user => user._id))); window.location.reload() }}>Connect</Link>
+                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Connect(paramUser.map(user => user._id))) }}>Connect</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
@@ -181,7 +185,7 @@ const UserProfileCard = () => {
                                 <Modal show={show} onHide={handleClose}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>
-                                            <h5 className="fs-5">Md. Jahed Miah</h5>
+                                            <h5 className="fs-5">{user.name}</h5>
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
@@ -203,20 +207,24 @@ const UserProfileCard = () => {
                                             </div>
                                             <Link href="#" className="textHover textPrimary ms-4">{user.email}</Link>
                                         </div>
-                                        <div className="mb-2">
-                                            <div className="d-flex align-users-center">
-                                                <FaPhone className="fs-5" />
-                                                <h6 className="fs-6 ps-2 pt-2">Phone</h6>
+                                        {user.mobile !== null && (
+                                            <div className="mb-2">
+                                                <div className="d-flex align-users-center">
+                                                    <FaPhone className="fs-5" />
+                                                    <h6 className="fs-6 ps-2 pt-2">Phone</h6>
+                                                </div>
+                                                <Link href="#" className="textHover textPrimary ms-4">{user.mobile}</Link>
                                             </div>
-                                            <Link href="#" className="textHover textPrimary ms-4">{user.mobile}</Link>
-                                        </div>
-                                        <div className="mb-2">
-                                            <div className="d-flex align-users-center">
-                                                <FaBirthdayCake className="fs-5" />
-                                                <h6 className="fs-6 ps-2 pt-2">Birthday</h6>
+                                        )}
+                                        {user.date_of_birth !== null && (
+                                            <div className="mb-2">
+                                                <div className="d-flex align-users-center">
+                                                    <FaBirthdayCake className="fs-5" />
+                                                    <h6 className="fs-6 ps-2 pt-2">Birthday</h6>
+                                                </div>
+                                                <p className="ms-4">{moment(user.date_of_birth).format('dddd, MMMM Do')}</p>
                                             </div>
-                                            <p className="ms-4">{moment(user.data_of_birth).format('dddd, MMMM Do')}</p>
-                                        </div>
+                                        )}
                                         <div className="mb-2">
                                             <div className="d-flex align-users-center">
                                                 <FaConnectdevelop className="fs-5" />
@@ -224,13 +232,15 @@ const UserProfileCard = () => {
                                             </div>
                                             <p className="ms-4">{moment(user.createdAt).format('dddd, MMMM Do YYYY')}</p>
                                         </div>
-                                        <div className="mb-4">
-                                            <div className="d-flex align-users-center">
-                                                <FaAddressBook className="fs-5" />
-                                                <h6 className="fs-6 ps-2 pt-2">Address</h6>
+                                        {user.present_address !== null && (
+                                            <div className="mb-4">
+                                                <div className="d-flex align-users-center">
+                                                    <FaAddressBook className="fs-5" />
+                                                    <h6 className="fs-6 ps-2 pt-2">Address</h6>
+                                                </div>
+                                                <p className="ms-4">{user.present_address}</p>
                                             </div>
-                                            <p className="ms-4">{user.present_address}</p>
-                                        </div>
+                                        )}
                                     </Modal.Body>
                                 </Modal>
                             </Row>
@@ -239,7 +249,7 @@ const UserProfileCard = () => {
                 }
 
                 {
-                    post && <UserProfileHome />
+                    post && <UserProfileHome setPost={setPost} setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection}/>
                 }
                 {
                     about && <UserProfileAbout />
@@ -248,7 +258,7 @@ const UserProfileCard = () => {
                     connection && <AllFriend setPost={setPost} paramsConnection={paramsConnection} />
                 }
                 {
-                    photo && <AllPhotos />
+                    photo && <AllPhotos photos={paramsUserPhoto}/>
                 }
                 {
                     video && <AllVideos />

@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
-import { ShowNotifications } from "../../../actions/posts";
+import { ShowPostNotifications } from "../../../actions/posts";
 import moment from "moment";
 
 const SocialNavbar = () => {
@@ -16,7 +16,7 @@ const SocialNavbar = () => {
 
     const [search, setSearch] = useState('');
     const { currentUser, token } = useSelector(state => state.auth);
-    const { notifications } = useSelector(state => state.posts);
+    const { post_notifications } = useSelector(state => state.posts);
     const { people } = useSelector(state => state.people);
 
     const handleKeyDown = (e) => {
@@ -59,15 +59,17 @@ const SocialNavbar = () => {
                                 <div className='position-relative d-flex align-items-center'>
                                     <NavDropdown
                                         className="navFontSize"
-                                        title={<div className="d-flex">
-                                            <FaRegBell className="iconFont me-1 text-dark" onClick={() => dispatch(ShowNotifications())} />
-                                            {notifications.filter(notification => notification.notification === true).length !== 0 && (
-                                                <Badge bg="danger" className="notificationCount text-danger fw-bold">{notifications.filter(notification => notification.notification === true).length}</Badge>
+                                        title={
+                                            <div className="d-flex"  onClick={() => dispatch(ShowPostNotifications())}>
+                                            <FaRegBell className="iconFont me-1 text-dark" />
+                                            {post_notifications.filter(notification => notification.notification === true).length !== 0 && (
+                                                <Badge bg="danger" className="notificationCount text-white fw-bold">{post_notifications.filter(notification => notification.notification === true).length}</Badge>
                                             )}
                                             <span className="text-dark d-none d-sm-block">Notification</span>
-                                        </div>}>
+                                        </div>
+                                        }>
 
-                                        {notifications.slice(0, 4).map(notification => (
+                                        {post_notifications.slice(0, 4).map(notification => (
                                             <>
                                                 <NavDropdown.Item className="py-3">
                                                     <Link to="/notificationPostPage" className="text-decoration-none text-dark">

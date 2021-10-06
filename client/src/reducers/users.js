@@ -28,14 +28,7 @@ export default (state = { users: [], isLoading: false, message: null, following:
                 ...state,
                 isLoading: true,
             };
-        case ACCEPT_CONNECTION_REQUEST:
-        case CONNECT:
-        case DISCONNECT:
-            return {
-                ...state,
-                message: action.payload.message,
-                users: action.payload.user
-            };
+
         case FOLLOWINGS:
             return {
                 ...state,

@@ -6,21 +6,13 @@ import Loading from "../../../../services/Loading";
 
 
 const UserProfile = () => {
-    const { isAuthenticated } = useSelector(state => state.auth)
+    const { currentUser } = useSelector(state => state.auth)
     return (
-        isAuthenticated ?
-            (
-                <div>
-                    <SocialNavbar />
-                    <UserProfileCard />
-                </div>
-            ) :
-            (
-                <>
-                    <Loading color={'black'} type={'spin'}/>
-                    <h5>Please Login first</h5>
-                </>
-            )
+          <div>
+               <SocialNavbar />
+               <UserProfileCard />
+          </div>
+
     );
 };
 

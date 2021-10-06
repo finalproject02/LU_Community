@@ -8,16 +8,16 @@ import { v4 as uuidv4 } from 'uuid';
 import path from "path";
 import { CreatePost } from "../../../actions/posts";
 import { uploadFile } from "../../../actions/files";
-import isLoading from '../../../services/Loading'
-import Loading from "../../../services/Loading";
 
 const PostBox = () => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth)
-    const { isLoading } = useSelector(state => state.posts)
     const [show, setShow] = useState(false);
     const [data, setData] = useState({ post_status: 'Friends', description: '' })
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setFile('')
+    };
     const handleShow = () => setShow(true);
     const [file, setFile] = useState();
     const [otherFile, setOtherFile] = useState();
@@ -33,11 +33,11 @@ const PostBox = () => {
             fileData.append('file', file);
             dispatch(uploadFile(fileData))
             dispatch(CreatePost(data));
+        } else {
+            dispatch(CreatePost(data));
         }
-        if (isLoading) {
-            return <Loading type={'spin'} color={'black'} />
-        }
-        handleClose()
+
+        handleClose();
 
     }
     return (

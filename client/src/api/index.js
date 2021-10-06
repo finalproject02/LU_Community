@@ -11,6 +11,8 @@ export const getCurrentUser = (getState) => axios.get('/api/user', tokenConfig(g
 export const fetchAllUsers = (getState) => axios.get('/api/AllUsers', tokenConfig(getState));
 export const searchUser = (getState, searchKey) => axios.get(`/api/search?searchKey=${searchKey}`, tokenConfig(getState));
 export const updateUserData = (getState, userData) => axios.patch(`/api/updateUser`, userData, tokenConfig(getState));
+export const deleteEducationBackground= (getState, degree) => axios.delete(`/api/educationBackground/${degree}`, tokenConfig(getState));
+export const deleteJob= (getState, company_name) => axios.delete(`/api/jobs/${company_name}`, tokenConfig(getState));
 export const connect = (getState, userId) => axios.patch(`/api/user/${userId}/connect`, { data: ''},  tokenConfig(getState));
 export const disconnect = (getState, userId) => axios.patch(`/api/user/${userId}/disconnect`, {data: ''}, tokenConfig(getState));
 export const accept_connection_request = (getState, userId) => axios.patch(`/api/user/${userId}/accept_connection_request`, {data: ''}, tokenConfig(getState));
@@ -23,5 +25,5 @@ export const fetchPosts = (getState) => axios.get('/api/posts', tokenConfig(getS
 export const removePosts = (getState, id) => axios.delete(`/api/posts/${id}`, tokenConfig(getState));
 export const likeAndDislike = (getState, id) => axios.patch(`/api/posts/${id}/likeAndDislike`, {data: ''},tokenConfig(getState));
 export const comment = (getState, id, commentContent) => axios.patch(`/api/posts/${id}/comments`, commentContent, tokenConfig(getState));
-export const notifications = (getState) => axios.get(`/api/posts/notifications`, tokenConfig(getState));
-export const showNotifications = (getState) => axios.patch(`/api/posts/showNotifications`,{data: ''}, tokenConfig(getState));
+export const postNotifications = (getState) => axios.get(`/api/posts/postNotifications`, tokenConfig(getState));
+export const showPostNotifications = (getState) => axios.patch(`/api/posts/showPostNotifications`,{data: ''}, tokenConfig(getState));

@@ -9,13 +9,11 @@ import { updateProfile } from "../../../actions/auth";
 const ProfileIntro = () => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth);
-    const { people } = useSelector(state => state.people);
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [save, setSave] = useState(false);
-    const [data, setData] = useState();
+    const [data, setData] = useState({ department: 'CSE' });
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,7 +26,7 @@ const ProfileIntro = () => {
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title pt-2">Intro</h5>
-                        <FaRegEdit className="fs-5" onClick={handleShow} />
+                        <FaRegEdit style={{cursor: 'pointer'}} className="fs-5" onClick={handleShow} />
                     </Card.Text>
                     <hr />
                     <Card.Text as="div" className="d-flex align-items-center mb-2">

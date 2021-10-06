@@ -3,11 +3,11 @@ import {
     LOADED, LOADING,
     DELETE_POST, COMMENT,
     LIKE_AND_DISLIKE,
-    NOTIFICATIONS,
-    SHOW_NOTIFICATIONS
+    POST_NOTIFICATIONS,
+    SHOW_POST_NOTIFICATIONS
 } from "../actions/types";
 
-export default (state = { posts:[], notifications: [], isLoading: false }, action) => {
+export default (state = { posts:[], post_notifications: [], isLoading: false }, action) => {
     switch (action.type) {
         case NEW_POST:
             return {
@@ -43,11 +43,11 @@ export default (state = { posts:[], notifications: [], isLoading: false }, actio
                 ...state,
                 posts: state.posts.filter(post => post._id !==  action.payload)
             }
-        case NOTIFICATIONS:
-        case SHOW_NOTIFICATIONS:
+        case POST_NOTIFICATIONS:
+        case SHOW_POST_NOTIFICATIONS:
             return {
                 ...state,
-                notifications: action.payload
+                post_notifications: action.payload
             }
         default:
             return state

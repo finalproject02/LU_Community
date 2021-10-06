@@ -7,7 +7,7 @@ import SearchPeople from './SearchPeople';
 import SearchPost from './SearchPost';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
-import {searchPeople} from "../../../../actions/users";
+import {searchPeople} from "../../../../actions/auth";
 import Loading from "../../../../services/Loading";
 
 function useQuery() {

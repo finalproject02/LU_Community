@@ -13,8 +13,7 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                     <Card.Body>
                         <Card.Title>
                             <div className="d-flex justify-content-between align-connections-center">
-                                <h5 className="card-title">All Connections</h5>
-                                <p className="mb-2 textHover">See all</p>
+                                {connections?.length !== 0 || paramsConnection?.length !== 0 &&  <h5 className="card-title">All Connections</h5>}
                             </div>
                         </Card.Title>
                         <Card.Text as="div">
@@ -28,12 +27,11 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                                                     document.documentElement.scrollTop = 0
                                                 }} />
                                                 <Card.Body>
-                                                    <Card.Title>{connection.name}</Card.Title>
+                                                    <Card.Title style={{cursor: 'pointer'}} onClick={() => {
+                                                        history.push(`/profile/${connection._id}`);
+                                                        document.documentElement.scrollTop = 0;
+                                                    }}>{connection.name}</Card.Title>
                                                     <h6>{connection.position}</h6>
-                                                    <small className="text-muted">
-                                                        <FaLink className="me-2" />
-                                                        <span>{connection.mutual}</span> Mutual Friends
-                                                    </small>
                                                     <Card.Text as="div" className="mt-2">
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
                                                             <strong className="btn w-100 text-white">Chat</strong>
@@ -61,12 +59,11 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                                                     document.documentElement.scrollTop = 0;
                                                 }} />
                                                 <Card.Body>
-                                                    <Card.Title>{PConnection.name}</Card.Title>
+                                                    <Card.Title style={{cursor: 'pointer'}} onClick={() => {
+                                                        history.push(`/profile/${PConnection._id}`);
+                                                        document.documentElement.scrollTop = 0;
+                                                    }}>{PConnection.name}</Card.Title>
                                                     <h6>{PConnection.position}</h6>
-                                                    <small className="text-muted">
-                                                        <FaLink className="me-2" />
-                                                        <span>{PConnection.mutual}</span> Mutual Friends
-                                                    </small>
                                                     <Card.Text as="div" className="mt-2">
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
                                                             <strong className="btn w-100 text-white">Chat</strong>

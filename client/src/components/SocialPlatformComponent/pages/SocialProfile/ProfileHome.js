@@ -7,11 +7,13 @@ import ProfileEducation from '../../ProfileEducation/ProfileEducation';
 import ProfileIntro from '../../ProfileIntro/ProfileIntro';
 import Suggestions from '../../Suggestions/Suggestions';
 import {useSelector} from "react-redux";
+import path from "path";
 
-const ProfileHome = () => {
+const ProfileHome = ({ setPhoto, setAbout, setConnection, setPost}) => {
     const {posts} = useSelector(state => state.posts);
     const {currentUser} = useSelector(state => state.auth);
-    const currentUserPost =posts.filter(currentUserPost => currentUserPost.creator_id === currentUser?._id )
+    const currentUserPost = posts.filter(currentUserPost => currentUserPost.creator_id === currentUser?._id );
+    const currentUserPhotos = currentUserPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase() === '.jpg')
     return (
         <div>
             <Container>
@@ -21,9 +23,9 @@ const ProfileHome = () => {
                     </Col>
                     <Col md="4">
                         <ProfileIntro />
-                        <ProfileEducation />
-                        <PhotoCard photos={currentUserPost}/>
-                        <FriendCard />
+                        <ProfileEducation/>
+                        <PhotoCard setPost={setPost} setAbout={setAbout} setPhoto={setPhoto} setConnection={setConnection} photos={currentUserPhotos}/>
+                        <FriendCard setPost={setPost} setAbout={setAbout} setPhoto={setPhoto} setConnection={setConnection}/>
                         <Suggestions />
                     </Col>
                 </Row>
