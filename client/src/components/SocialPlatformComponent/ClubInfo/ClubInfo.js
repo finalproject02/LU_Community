@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Form, Modal } from 'react-bootstrap';
-import { FaCommentDots, FaEnvelopeOpen, FaGlobe, FaPhone, FaRegClock, FaRegEdit, FaUsers } from 'react-icons/fa';
+import { FaCommentDots, FaEnvelopeOpen, FaGlobe, FaPhone, FaRegClock, FaRegEdit, FaTrashAlt, FaUsers } from 'react-icons/fa';
 import Collapsible from "react-collapsible-paragraph";
 import { Link } from 'react-router-dom';
 import aboutClubData from './AboutClubData';
@@ -36,40 +36,55 @@ const ClubInfo = () => {
                                         including <span>{item.friend}</span> of your friends</p>
                                 </div>
                                 <div className="mb-2">
-                                    <div className="d-flex">
-                                        <FaRegClock className="mt-1" />
-                                        <h6 className="ps-2 textHover text-dark">Open</h6>
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex">
+                                            <FaRegClock className="mt-1" />
+                                            <h6 className="ps-2  text-dark">Open</h6>
+                                        </div>
+                                        <FaTrashAlt />
                                     </div>
                                     <p className="ms-4">9:00 AM - 5:00 PM</p>
                                 </div>
                                 <div className="mb-2">
-                                    <div className="d-flex">
-                                        <FaGlobe className="mt-1" />
-                                        <h6 className="ps-2 textHover text-dark">Website</h6>
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex">
+                                            <FaGlobe className="mt-1" />
+                                            <h6 className="ps-2 text-dark">Website</h6>
+                                        </div>
+                                        <FaTrashAlt />
                                     </div>
-                                    <p className="ms-4">{item.website}</p>
+                                    <p className="ms-4 textHover cursor">{item.website}</p>
                                 </div>
                                 <div className="mb-2">
-                                    <div className="d-flex">
-                                        <FaPhone className="mt-1" />
-                                        <h6 className="ps-2 textHover text-dark">Phone</h6>
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex">
+                                            <FaPhone className="mt-1" />
+                                            <h6 className="ps-2 text-dark">Phone</h6>
+                                        </div>
+                                        <FaTrashAlt />
                                     </div>
-                                    <p className="ms-4">{item.phone}</p>
+                                    <p className="ms-4 textHover cursor">{item.phone}</p>
                                 </div>
                                 <div className="mb-2">
-                                    <div className="d-flex">
-                                        <FaEnvelopeOpen className="mt-1" />
-                                        <h6 className="ps-2 textHover text-dark">Email</h6>
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex">
+                                            <FaEnvelopeOpen className="mt-1" />
+                                            <h6 className="ps-2 text-dark">Email</h6>
+                                        </div>
+                                        <FaTrashAlt />
                                     </div>
-                                    <p className="ms-4">{item.email}</p>
+                                    <p className="ms-4 textHover cursor">{item.email}</p>
                                 </div>
                                 <div className="d-flex align-items-center mb-2">
                                     <FaCommentDots />
-                                    <Link className="ps-2 textHover text-dark">Send Message</Link>
+                                    <Link className="ps-2 textHover cursor text-dark">Send Message</Link>
                                 </div>
                             </div>
                             <div className="mb-2 p-3">
-                                <h5 className="mb-2">Details info</h5>
+                                <div className="d-flex justify-content-between">
+                                    <h5 className="mb-2">Details info</h5>
+                                    <FaTrashAlt />
+                                </div>
                                 <Collapsible lines={5}>About
                                     Hello, Welcome to Leading University Computer Club's official fan page. Please enjoy your stay with us & get updated. Feel free to ask any question.
                                     Selected Committee(Current):

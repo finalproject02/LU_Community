@@ -118,26 +118,26 @@ const ClubProfile = () => {
                             <nav className="py-2 bg-light border-bottom">
                                 <div className="container d-flex flex-wrap">
                                     <ul className="nav me-auto">
-                                        <li className="nav-item cursor">
+                                        <li className="nav-item cardHover rounded-3">
                                             <p className="nav-link link-dark px-2 active"
                                                 aria-current="page" onClick={handleChangeHome}>Home</p>
                                         </li>
-                                        <li className="nav-item cursor">
+                                        <li className="nav-item cardHover rounded-3">
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
                                         </li>
-                                        <li className="nav-item cursor">
+                                        <li className="nav-item cardHover rounded-3">
                                             <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeFollower}>Follower</p>
                                         </li>
 
-                                        <NavDropdown className="navFontSize text-dark"
+                                        <NavDropdown className="navFontSize text-dark cardHover rounded-3"
                                             title={<span className="text-dark">More</span>}>
-                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangePhoto}>
+                                            <NavDropdown.Item className="py-2" onClick={handleChangePhoto}>
                                                 Photos
                                             </NavDropdown.Item>
-                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangeVideo}>
+                                            <NavDropdown.Item className="py-2" onClick={handleChangeVideo}>
                                                 Videos
                                             </NavDropdown.Item>
-                                            <NavDropdown.Item className="dropdownItem py-3" onClick={handleChangeEvent}>
+                                            <NavDropdown.Item className="py-2" onClick={handleChangeEvent}>
                                                 Events
                                             </NavDropdown.Item>
                                         </NavDropdown>

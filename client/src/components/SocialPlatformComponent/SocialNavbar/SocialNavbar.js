@@ -12,11 +12,6 @@ import moment from "moment";
 import CreateGroup from '../CreateGroup/CreateGroup';
 
 const SocialNavbar = () => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -112,11 +107,6 @@ const SocialNavbar = () => {
                                 className="navFontSize text-dark"
                                 title={<img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt="mdo" width="32" height="32" className="rounded-circle" />}
                             >
-
-                                <NavDropdown.Item className="dropdownItem py-3">
-                                    <span className="" onClick={handleShow}>Create a Group</span>
-                                    <CreateGroup show={show} handleClose={handleClose} />
-                                </NavDropdown.Item>
                                 <NavDropdown.Item className="dropdownItem py-3">
                                     <Link to="/socialProfile" className="text-dark text-decoration-none">Profile</Link>
                                 </NavDropdown.Item>
@@ -135,10 +125,10 @@ const SocialNavbar = () => {
                             </NavDropdown>
                         </div>
                     </Container>
-                </header >
+                </header>
             )
             }
-        </div >
+        </div>
     );
 };
 

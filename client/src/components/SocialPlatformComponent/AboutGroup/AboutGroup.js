@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
-import { FaCalendar, FaEye, FaGlobe, FaRegEdit, FaUsers } from 'react-icons/fa';
+import { FaCalendar, FaEye, FaGlobe, FaRegEdit, FaTrashAlt, FaUsers } from 'react-icons/fa';
 
 const AboutGroup = () => {
     const [show, setShow] = useState(false);
@@ -79,16 +79,11 @@ const AboutGroup = () => {
                             <hr />
                             <Card.Text className="p-3">
                                 <Card.Text as="div">
-                                    <h6 className="pt-2">1. Be kind and courteous</h6>
+                                    <div className="d-flex justify-content-between">
+                                        <h6 className="pt-2">1. Be kind and courteous</h6>
+                                        <FaTrashAlt />
+                                    </div>
                                     <p>We're all in this together to create a welcoming environment. Let's treat everyone with respect. Healthy debates are natural, but kindness is required.</p>
-                                </Card.Text>
-                                <Card.Text as="div">
-                                    <h6 className="pt-2">2. Respect everyone's privacy</h6>
-                                    <p>Being part of this group requires mutual trust. Authentic, expressive discussions make groups great, but may also be sensitive and private. What's shared in the group should stay in the group.</p>
-                                </Card.Text>
-                                <Card.Text as="div">
-                                    <h6 className="pt-2">3. No hate speech or bullying</h6>
-                                    <p>Make sure everyone feels safe. Bullying of any kind isn't allowed, and degrading comments about things such as race, religion, culture, sexual orientation, gender or identity will not be tolerated.</p>
                                 </Card.Text>
                             </Card.Text>
                         </Card.Body>
