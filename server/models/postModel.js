@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const postModel = new mongoose.Schema({
-    creator_name: {
+    owner_name: {
         type: String,
         required: true
     },
-    creator_id: {
+    owner_id: {
         type: String,
         required: true
     },

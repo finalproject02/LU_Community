@@ -134,7 +134,7 @@ const GroupProfile = () => {
             </div>
 
             {
-                post && <GroupHome />
+                post && <GroupHome setPost={setPost} setPhoto={setPhoto}/>
             }
             {
                 about && <AboutGroup />

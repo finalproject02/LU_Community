@@ -5,8 +5,10 @@ import PhotoCard from '../PhotoCard/PhotoCard';
 import Post from '../Post/Post';
 import VideoCard from '../VideoCard/VideoCard';
 import GroupIntro from './GroupIntro';
+import {useSelector} from "react-redux";
 
-const GroupHome = () => {
+const GroupHome = ({setPhoto, setPost}) => {
+    const {posts} = useSelector(state => state.posts)
     return (
         <div>
             <Container>
@@ -16,7 +18,7 @@ const GroupHome = () => {
                     </Col>
                     <Col md="4">
                         <GroupIntro />
-                        <PhotoCard />
+                        <PhotoCard photos={posts} setPost={setPost} setPhoto={setPhoto}/>
                         <VideoCard />
                         <AllGroup />
                     </Col>

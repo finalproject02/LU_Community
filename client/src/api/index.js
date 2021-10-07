@@ -27,3 +27,8 @@ export const likeAndDislike = (getState, id) => axios.patch(`/api/posts/${id}/li
 export const comment = (getState, id, commentContent) => axios.patch(`/api/posts/${id}/comments`, commentContent, tokenConfig(getState));
 export const postNotifications = (getState) => axios.get(`/api/posts/postNotifications`, tokenConfig(getState));
 export const showPostNotifications = (getState) => axios.patch(`/api/posts/showPostNotifications`,{data: ''}, tokenConfig(getState));
+
+export const createClub = (clubDate, getState) => axios.post('/api/club/create', clubDate, tokenConfig(getState));
+export const createGroup = (groupData, getState) => axios.post('/api/group/create', groupData, tokenConfig(getState));
+export const allGroup = (getState) => axios.get('/api/group', tokenConfig(getState));
+export const allClub = (getState) => axios.get('/api/club', tokenConfig(getState));

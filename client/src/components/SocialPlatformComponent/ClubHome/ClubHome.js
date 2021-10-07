@@ -5,8 +5,10 @@ import HomeSmProfile from '../HomeSmProfile/HomeSmProfile';
 import PhotoCard from '../PhotoCard/PhotoCard';
 import Post from '../Post/Post';
 import VideoCard from '../VideoCard/VideoCard';
+import {useSelector} from "react-redux";
 
 const ClubHome = () => {
+    const {posts} = useSelector(state => state.posts)
     return (
         <div>
             <Container>
@@ -16,7 +18,7 @@ const ClubHome = () => {
                     </Col>
                     <Col md="4">
                         <HomeSmProfile />
-                        <PhotoCard />
+                        <PhotoCard  photos={posts}/>
                         <VideoCard />
                         <ClubSuggestionsCard />
                     </Col>

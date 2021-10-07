@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import SocialNavbar from '../../SocialNavbar/SocialNavbar';
 import jahed from "../../../../images/Jahed.jpg";
@@ -6,12 +6,20 @@ import PostCard from '../../PostCard/PostCard';
 import { Link } from 'react-router-dom';
 import ClubSuggestionsCard from '../../ClubSuggestionsCard/ClubSuggestionsCard';
 import CreateClub from '../../CreateClub/CreateClub';
+import {useSelector} from "react-redux";
 
 const Club = () => {
+    const { clubs } = useSelector(state => state.clubs)
+    const { currentUser } = useSelector(state => state.auth)
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+    }
+    const myClubs = clubs?.filter(club => club.creator_id === currentUser?._id);
+    const suggestionClub = clubs?.filter(club => club.creator_id !== currentUser?._id);
+
     return (
         <div>
             <div>
@@ -25,23 +33,29 @@ const Club = () => {
                                 <button className="btn w-100 text-white" onClick={handleShow}>Create New Club</button>
                                 <CreateClub show={show} handleClose={handleClose} />
                             </div>
-                            <Card className="w-100 mb-4">
-                                <Card.Body>
-                                    <div className="d-flex justify-content-between align-items-center mb-3">
-                                        <h6>Your Club</h6>
-                                        <h6 className="textHover">See all</h6>
-                                    </div>
-                                    <Link to="/clubDetails" className="d-flex justify-content-start align-items-center mb-2 cardHover p-3 rounded-3 text-decoration-none text-dark">
-                                        <img src={jahed} alt="" width="45" height="45" className="rounded-circle me-2" />
-                                        <div className="d-flex align-items-center">
-                                            <div>
-                                                <h6 className="mb-0">Leading University Computer Club</h6>
-                                                <small>Computer club</small>
+                            {myClubs?.length !== 0 && (
+                                <Card className="w-100 mb-4">
+                                    <Card.Body>
+                                        {myClubs?.length > 3 && (
+                                            <div className="d-flex justify-content-between align-items-center mb-3">
+                                                <h6>Your Club</h6>
+                                                <h6 className="textHover">See all</h6>
                                             </div>
-                                        </div>
-                                    </Link>
-                                </Card.Body>
-                            </Card>
+                                        )}
+                                        {myClubs.slice(0, 3).map(club => (
+                                            <Link to={`/clubDetails/${club._id}`} className="d-flex justify-content-start align-items-center mb-2 cardHover p-3 rounded-3 text-decoration-none text-dark">
+                                                <img src={jahed} alt="" width="45" height="45" className="rounded-circle me-2" />
+                                                <div className="d-flex align-items-center">
+                                                    <div>
+                                                        <h6 className="mb-0">{club.name}</h6>
+                                                        <small>{club.category}</small>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </Card.Body>
+                                </Card>
+                            )}
                             <Card className="w-100 mb-4">
                                 <Card.Body>
                                     <div className="d-flex justify-content-between align-items-center mb-3">
@@ -72,7 +86,7 @@ const Club = () => {
                             <PostCard />
                         </Col>
                         <Col md="4">
-                            <ClubSuggestionsCard />
+                            <ClubSuggestionsCard suggestions={suggestionClub}/>
                         </Col>
                     </Row>
                 </Container>

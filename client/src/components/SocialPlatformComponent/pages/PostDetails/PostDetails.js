@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import SocialNavbar from "../../SocialNavbar/SocialNavbar";
 import PostCard from "../../PostCard/PostCard";
 
-const NotificationPostPage = () => {
+const PostDetails = () => {
     return (
         <div>
             <div>
@@ -22,4 +22,4 @@ const NotificationPostPage = () => {
     );
 };
 
-export default NotificationPostPage;
+export default PostDetails;

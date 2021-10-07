@@ -53,16 +53,16 @@ const PostCard = ({ posts }) => {
                     <Card.Body>
                         <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
                             <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                                <img src={getUserProfilePicture(post.creator_id) !== null ? `/api/files/storage/${getUserProfilePicture(post.creator_id)}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
+                                <img src={getUserProfilePicture(post.owner_id) !== null ? `/api/files/storage/${getUserProfilePicture(post.owner_id)}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
                                 <div className="d-flex align-items-center">
                                     <div>
-                                        <h6>{getUserName(post.creator_id)}</h6>
+                                        <h6>{getUserName(post.owner_id)}</h6>
                                         <small>{moment(post.createdAt).fromNow()}</small>
                                     </div>
                                 </div>
                             </div>
                             <div className="d-flex align-items-center pe-3 skyColor">
-                                {post.creator_id === currentUser._id && (
+                                {post.owner_id === currentUser?._id && (
                                     <Dropdown>
                                         <Dropdown.Toggle variant="light" id="dropdown-basic">
                                             <FaEllipsisV />

@@ -94,7 +94,8 @@ const userModel = new mongoose.Schema({
         default: []
     },
     language: String,
-    website: String
+    website: String,
+    notifications: Array
 },
     { timestamps: true }
 

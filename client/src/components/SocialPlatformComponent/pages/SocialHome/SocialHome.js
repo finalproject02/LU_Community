@@ -12,7 +12,7 @@ const SocialHome = () => {
     const { isAuthenticated } = useSelector(state => state.auth);
     const { posts } = useSelector(state => state.posts);
     const { currentUser } = useSelector(state => state.auth);
-    const currentUserPost = posts.filter(currentPost => currentUser?.connection.includes(currentPost.creator_id) || currentPost.creator_id === currentUser?._id)
+    const currentUserPost = posts.filter(currentPost => currentUser?.connection.includes(currentPost.owner_id) || currentPost.owner_id === currentUser?._id)
 
     return (
         <>
@@ -32,12 +32,6 @@ const SocialHome = () => {
                 </Container>
             </div>
 
-            {!isAuthenticated && (
-                <>
-                    <Loading color={'black'} type={'spin'} />
-                    <h5>Please Login first</h5>
-                </>
-            )}
 
         </>
 

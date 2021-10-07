@@ -63,20 +63,20 @@ const SocialNavbar = () => {
                                         title={
                                             <div className="d-flex"  onClick={() => dispatch(ShowPostNotifications())}>
                                             <FaRegBell className="iconFont me-1 text-dark" />
-                                            {post_notifications.filter(notification => notification.notification === true).length !== 0 && (
-                                                <Badge bg="danger" className="notificationCount text-white fw-bold">{post_notifications.filter(notification => notification.notification === true).length}</Badge>
+                                            {currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length !== 0 && (
+                                                <Badge bg="danger" className="notificationCount text-white fw-bold">{currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length}</Badge>
                                             )}
                                             <span className="text-dark d-none d-sm-block">Notification</span>
                                         </div>
                                         }>
 
-                                        {post_notifications.slice(0, 4).map(notification => (
+                                        {currentUser?.notifications.filter(noti => noti !== 'connection_requests').slice(0, 4).sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
                                             <>
                                                 <NavDropdown.Item className="py-3">
-                                                    <Link to="/notificationPostPage" className="text-decoration-none text-dark">
+                                                    <Link to={`/post/${notification.document_id}`} className="text-decoration-none text-dark">
                                                         <FaUser className="me-1 mb-1" />
                                                         {getUserName(notification.notify_by)} {notification.position} your post
-                                                        <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
+                                                        <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
                                                     </Link>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />

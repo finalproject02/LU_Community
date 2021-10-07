@@ -22,7 +22,7 @@ const ProfileCard = () => {
     const { people } = useSelector(state => state.people);
     const { posts } = useSelector(state => state.posts);
     const currentUserConnections = people.filter(connect => currentUser?.connection.includes(connect._id));
-    const currentUserPost = posts.filter(post => post.creator_id === currentUser?._id);
+    const currentUserPost = posts.filter(post => post.owner_id === currentUser?._id);
     const currentUserPhotos = currentUserPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase().toLowerCase() === '.jpg')
     const [userData, setUserData] = useState({})
     const [show, setShow] = useState(false);
@@ -97,6 +97,7 @@ const ProfileCard = () => {
             dispatch(uploadFile(formData));
             userData.profile_picture = profile_picture;
             dispatch(updateProfile(userData))
+            window.location.reload();
         }
     }
     const uploadCover = () => {
@@ -107,7 +108,8 @@ const ProfileCard = () => {
             formData.append('file', coverPhoto);
             dispatch(uploadFile(formData));
             userData.cover_picture = cover_picture;
-            dispatch(updateProfile(userData))
+            dispatch(updateProfile(userData));
+            window.location.reload();
         }
     }
 

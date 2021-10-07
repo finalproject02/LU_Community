@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import jahed from "../../../images/Jahed.jpg";
 import AllGroup from '../AllGroup/AllGroup';
