@@ -17,7 +17,7 @@ const SocialNavbar = () => {
 
     const [search, setSearch] = useState('');
     const { currentUser, token } = useSelector(state => state.auth);
-    const { post_notifications } = useSelector(state => state.posts);
+    const { notifications } = useSelector(state => state.posts);
     const { people } = useSelector(state => state.people);
 
     const handleKeyDown = (e) => {
@@ -67,8 +67,7 @@ const SocialNavbar = () => {
                                                 <Badge bg="danger" className="notificationCount text-white fw-bold">{currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length}</Badge>
                                             )}
                                             <span className="text-dark d-none d-sm-block">Notification</span>
-                                        </div>
-                                        }>
+                                        </div>}>
 
                                         {currentUser?.notifications.filter(noti => noti !== 'connection_requests').slice(0, 4).sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
                                             <>

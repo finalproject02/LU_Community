@@ -29,3 +29,12 @@
   background-color: whitesmoke;
   cursor: pointer;
 }
+.picture-container {
+  margin: 0 auto;
+  overflow: hidden;
+  background-position: 50% 30%;
+}
+.picture-img {
+  height: 300px;
+  width: 100%;
+}

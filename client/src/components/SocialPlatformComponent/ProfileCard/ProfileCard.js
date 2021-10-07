@@ -123,7 +123,7 @@ const ProfileCard = () => {
                             <Card.Body className="pt-0">
                                 <label htmlFor="coverPhoto" className="w-100">
                                     {
-                                        coverPhoto && coverPhoto.type.startsWith("image") ? (<><Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" /><button className="btn btn-warning confirmBtnPosition" onClick={uploadCover}>Confirm</button></>) : (<Card.Img src={currentUser?.cover_picture ? `/api/files/storage/${currentUser?.cover_picture}` : Avatar} alt={'Not found'} style={{ width: "100%", height: "30vh" }} />)
+                                        coverPhoto && coverPhoto.type.startsWith("image") ? (<div className="picture-container"><Card.Img className="picture-img" src={URL.createObjectURL(coverPhoto)} alt="name" /><button className="btn btn-warning confirmBtnPosition" onClick={uploadCover}>Confirm</button></div>) : (<div className="picture-container"> <Card.Img src={currentUser?.cover_picture ? `/api/files/storage/${currentUser?.cover_picture}` : Avatar} alt={'Not found'} className="picture-img rounded-3" /></div>)
                                     }
                                     <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
                                     </Form.Control>
@@ -131,7 +131,7 @@ const ProfileCard = () => {
                                 <Row className="mb-2 position-relative">
                                     <label htmlFor="profilePhoto" className="userPosition">
                                         {
-                                            profilePhoto && profilePhoto.type.startsWith("image") ? (<><Card.Img style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" /><button className="btn btn-warning confirmProfileBtn" onClick={uploadProfile}>Confirm</button></>) : (<img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt={'Not Found'} style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" />)
+                                            profilePhoto && profilePhoto.type.startsWith("image") ? (<><Card.Img style={{ width: "190px", height: "190px", borderRadius: "50%" }} className="p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" /><button className="btn btn-warning confirmProfileBtn" onClick={uploadProfile}>Confirm</button></>) : (<img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt={'Not Found'} style={{ width: "190px", height: "190px", borderRadius: "50%" }} className="p-2 bg-light" />)
                                         }
                                         <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
                                         </Form.Control>
