@@ -23,6 +23,7 @@ import { People, Suggestions } from "./actions/people";
 import UserProfile from "./components/SocialPlatformComponent/pages/UserProfile/UserProfile";
 import NotificationPostPage from "./components/SocialPlatformComponent/pages/NotificationPostPage/NotificationPostPage";
 import GroupInitial from "./components/SocialPlatformComponent/GroupInitial/GroupInitial";
+import Message from "./components/SocialPlatformComponent/pages/Message/Message";
 
 function App() {
   const dispatch = useDispatch();
@@ -148,6 +149,9 @@ function App() {
           </Route>
           <Route path="/connection">
             <Connection />
+          </Route>
+          <Route path="/message">
+            <Message />
           </Route>
           <Route path="/club">
             <Club />

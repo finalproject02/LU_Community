@@ -1,0 +1,56 @@
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  background: #e5ddd6;
+}
+.messageDiv {
+  display: flex;
+  margin: 5px 15px;
+}
+.message {
+  padding: 8px 10px;
+  border-radius: 4px;
+  max-width: 50%;
+  color: #303030;
+  font-size: 14px;
+}
+.chatBox {
+  background: #f0f0f0;
+  padding: 10px;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.messageContainer {
+  flex-direction: column;
+  overflow-y: auto;
+  background: #e4e0dd;
+}
+.searchContainer {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  padding: 5px 10px;
+  gap: 10px;
+  width: 100%;
+}
+
+.profileHeader {
+  display: flex;
+  flex-direction: row;
+  background: #ededed;
+  padding: 10px;
+  align-items: center;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: row;
+  background: #ededed;
+  align-items: center;
+  gap: 10px;
+}

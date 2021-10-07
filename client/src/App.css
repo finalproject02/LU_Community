@@ -38,3 +38,21 @@
   height: 300px;
   width: 100%;
 }
+.overFlowY {
+  overflow-y: scroll;
+}
+.aside {
+  width: 100%;
+  height: 800px;
+  background-color: #bab8bb;
+  display: inline-block;
+  font-size: 15px;
+  vertical-align: top;
+}
+.chat {
+  width: 100%;
+  height: 90%;
+  display: inline-block;
+  font-size: 16px;
+  vertical-align: top;
+}
