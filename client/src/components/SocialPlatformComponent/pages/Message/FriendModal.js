@@ -22,32 +22,32 @@ const FriendModal = ({ show, handleClose }) => {
                             </div>
                         </div>
                         <div className="p-4">
-                            <div className="d-flex align-items-center cardHover px-2 py-2">
+                            <div className="d-flex align-items-center cardHover px-2 py-2 rounded-3">
                                 <FaImage className="me-2" />
                                 Photo 38
                             </div>
-                            <div className="d-flex align-items-center cardHover px-2 py-2">
+                            <div className="d-flex align-items-center cardHover px-2 py-2 rounded-3">
                                 <FaFile className="me-2" />
                                 File 38
                             </div>
-                            <div className="d-flex align-items-center cardHover px-2 py-2">
+                            <div className="d-flex align-items-center cardHover px-2 py-2 rounded-3">
                                 <FaLink className="me-2" />
                                 Link 38
                             </div>
                         </div>
-                        <div className="d-flex justify-content-between px-4 cardHover py-2">
+                        <div className="d-flex justify-content-between px-4 cardHover py-2 rounded-3">
                             Notification
                             <FaBellSlash className="fs-5" />
                         </div>
-                        <div className="d-flex justify-content-between px-4 cardHover py-2">
+                        <div className="d-flex justify-content-between px-4 cardHover py-2 rounded-3">
                             Clear History
                             <FaHistory className="fs-5" />
                         </div>
-                        <div className="d-flex justify-content-between px-4 cardHover py-2">
+                        <div className="d-flex justify-content-between px-4 cardHover py-2 rounded-3">
                             Delete Chat
                             <FaTrashAlt className="fs-5" />
                         </div>
-                        <div className="mb-4 d-flex justify-content-between px-4 cardHover py-2">
+                        <div className="mb-4 d-flex justify-content-between px-4 cardHover py-2 rounded-3">
                             Block User
                             <FaBan className="fs-5" />
                         </div>

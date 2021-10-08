@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Picker from "emoji-picker-react";
 import { messagesList } from "./mockData";
 import jahed from "../../../../images/Jahed.jpg"
 import { Form } from "react-bootstrap";
@@ -11,6 +10,9 @@ const Conversation = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [otherFile, setOtherFile] = useState();
+
 
     const [text, setText] = useState("");
     const [messageList, setMessageList] = useState(messagesList);
@@ -60,11 +62,20 @@ const Conversation = () => {
                 <div className="text-start mb-1 d-flex justify-content-start">
                     <div className="bg-warning p-2 rounded-3">I am also good.</div>
                 </div>
+                {
+                    otherFile && otherFile.type.startsWith("image") && (<img width="50%" className="w-100 img-fluid img-thumbnail mt-1" src={URL.createObjectURL(otherFile)} alt="name" />)
+                }
+                {
+                    otherFile && otherFile.type.startsWith("video") && (<video width="150" height="100" className="p-1 shadow-sm" src={URL.createObjectURL(otherFile)} width="320" height="240" autoPlay />)
+                }
             </div>
             <div className="position-relative">
                 <div className="chatBox">
                     <div className="searchContainer d-flex align-items-center w-100">
-                        <FaPaperclip className="me-2 ms-2 fs-5" />
+                        <label htmlFor="otherFile">
+                            <FaPaperclip className="me-2 ms-2 fs-5" />
+                            <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
+                        </label>
                         <Form.Control type="text" className="w-100"
                             placeholder="Type a message"
                             value={text}
