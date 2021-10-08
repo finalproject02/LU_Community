@@ -32,7 +32,7 @@ const ContactComponent = (props) => {
                     <div>
                         <img width="45" className="rounded-circle me-2 cursor" src={jahed} alt="name" />
                     </div>
-                    <div className="mt-0">
+                    <div className="mt-0 d">
                         <strong className="mt-0">{userData?.name}</strong><br />
                         <small className="text-muted">{userData?.lastText}</small>
                     </div>

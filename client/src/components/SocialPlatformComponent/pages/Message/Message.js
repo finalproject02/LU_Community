@@ -13,7 +13,7 @@ const Message = () => {
                     <Col md="4 pe-0">
                         <ConversationList />
                     </Col>
-                    <Col md="8" className="ps-0 ms-0">
+                    <Col md="8" className="ps-0 ms-0 d-none d-md-block">
                         <Conversation />
                     </Col>
                 </Row>
