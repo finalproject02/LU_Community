@@ -60,3 +60,9 @@
   background-color: rgb(102, 165, 247);
   cursor: pointer;
 }
+.commentBoxPostDetails {
+  position: absolute;
+  right: 18%;
+  bottom: 40%;
+  font-size: 15px;
+}

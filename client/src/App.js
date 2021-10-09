@@ -144,7 +144,7 @@ function App() {
           <Route path="/allNotification">
             <AllNotification />
           </Route>
-          <Route path="/notificationPostPage">
+          <Route path="/postDetails">
             <NotificationPostPage />
           </Route>
           <Route path="/connection">
