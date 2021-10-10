@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, NavDropdown, Row } from 'react-bootstrap';
-import { FaCommentDots, FaPlus, FaUserPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import jahed from "../../../images/Jahed.jpg";
+import { FaCommentDots, FaPlus, FaMinus } from 'react-icons/fa';
+import {useParams} from 'react-router-dom';
+import Avatar from "../../../images/avatar.jpeg";
 import AboutClub from '../AboutClub/AboutClub';
 import AllPhotos from '../AllPhotos/AllPhotos';
 import AllVideos from '../AllVideos/AllVideos';
 import ClubEvents from '../ClubEvents/ClubEvents';
 import ClubFollower from '../ClubFollower/ClubFollower';
 import ClubHome from '../ClubHome/ClubHome';
+import {useSelector, useDispatch} from "react-redux";
+import {ClubFollow, ClubUnfollow} from "../../../actions/clubs";
+import {v4 as uuidv4} from "uuid";
+import path from "path";
+import {uploadFile} from "../../../actions/files";
+import {ClubUpdate} from "../../../actions/clubs";
 
 const ClubProfile = () => {
+    const params = useParams();
+    const dispatch = useDispatch();
+    const { id } = params;
+    const [clubData, setClubData]   = useState({})
+    const { clubs } = useSelector(state => state.clubs);
+    const { currentUser } = useSelector(state => state.auth);
     const [about, setAbout] = useState(false);
     const [post, setPost] = useState(true);
     const [follower, setFollower] = useState(false);
@@ -20,6 +32,9 @@ const ClubProfile = () => {
 
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
+
+    const paramsClub = clubs?.filter(club => club._id === id);
+    const isCreator = clubs?.filter(club => club.creator_id === currentUser._id && club._id === id)
 
     const handleChangeHome = () => {
         setPost(true);
@@ -71,48 +86,97 @@ const ClubProfile = () => {
         setEvent(true);
     }
 
+    const uploadProfile = () => {
+        if (profilePhoto) {
+            const formData = new FormData();
+            const profile_picture = uuidv4() + path.extname(profilePhoto.name);
+            formData.append('name', profile_picture);
+            formData.append('file', profilePhoto);
+            dispatch(uploadFile(formData));
+            clubData.profile_picture = profile_picture
+            console.log(clubData)
+            dispatch(ClubUpdate(clubData, id))
+            window.location.reload();
+        }
+
+    }
+    const uploadCover = () => {
+        if (coverPhoto) {
+            const formData = new FormData();
+            const cover_picture = uuidv4() + path.extname(coverPhoto.name);
+            formData.append('name', cover_picture);
+            formData.append('file', coverPhoto);
+            dispatch(uploadFile(formData));
+            clubData.cover_picture = cover_picture;
+            dispatch(ClubUpdate(clubData, id));
+            window.location.reload();
+        }
+    }
+
     return (
         <div className="overflow-hidden">
             <div>
                 <Row>
                     <Card className="w-100 shadow-sm mb-4 rounded-3">
                         <Container>
-                            <Card.Body className="pt-0">
-                                <label htmlFor="coverPhoto" className="w-100">
-                                    {
-                                        coverPhoto && coverPhoto.type.startsWith("image") ? (<Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" />) : (<Card.Img className="w-100 img-fluid" src={jahed} alt="jahed" style={{ width: "100%", height: "30vh" }} />)
-                                    }
-                                    <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
-                                    </Form.Control>
-                                </label>
-                                <Row className="mb-2 position-relative">
-                                    <label htmlFor="profilePhoto" className="userPosition">
+                            {paramsClub.slice(0, 1).map(club => (
+                                <Card.Body className="pt-0">
+                                    <label htmlFor="coverPhoto" className="w-100">
                                         {
-                                            profilePhoto && profilePhoto.type.startsWith("image") ? (<Card.Img style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" />) : (<img src={jahed} alt="jahed2" style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" />)
+                                            coverPhoto && coverPhoto.type.startsWith("image") ? (<div className={'picture-container'}><Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" /><button className="btn btn-warning confirmBtnPosition" onClick={uploadCover}>Confirm</button></div>) : (<Card.Img className="w-100 img-fluid" src={club.cover_picture ? `/api/files/storage/${club.cover_picture}`: Avatar} alt={club.name} style={{ width: "100%", height: "30vh" }} />)
                                         }
-                                        <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
-                                        </Form.Control>
+                                        {isCreator?.length !== 0 && (
+                                            <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
+                                            </Form.Control>
+                                        )}
                                     </label>
-                                    <Col md="12" className="mt-5 ms-sm-5 ms-3">
-                                        <h5 className="ms-3 mt-5 fw-bold fs-3">Leading University Computer Club</h5>
-                                        <p className="ms-3 mb-0 text-lead fs-5">@Leading.University.Computer.Club</p>
-                                        <div className="mb-2 mt-4 d-flex">
-                                            <div className="bgPrimary text-center rounded-3 w-25 me-2 mb-2">
-                                                <div className="btn text-white">
-                                                    <FaCommentDots className="me-2 mb-1" />
-                                                    Send Message
-                                                </div>
+                                    <Row className="mb-2 position-relative">
+                                        <label htmlFor="profilePhoto" className="userPosition">
+                                            {
+                                                profilePhoto && profilePhoto.type.startsWith("image") ? (<><Card.Img style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" /><button className="btn btn-warning confirmProfileBtn" onClick={uploadProfile}>Confirm</button></>) : (<img src={club.profile_picture ? `/api/files/storage/${club.profile_picture}` : Avatar} alt={club.name} style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" />)
+                                            }
+                                            {isCreator.length !== 0 && (
+                                                <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
+                                                </Form.Control>
+                                            )}
+                                        </label>
+                                        <Col md="12" className="mt-5 ms-sm-5 ms-3">
+                                            <h5 className="ms-3 mt-5 fw-bold fs-3">{club.name}</h5>
+                                            <p className="ms-3 mb-0 text-lead fs-5">@Leading.University.Computer.Club</p>
+                                            <div className="mb-2 mt-4 d-flex">
+
                                             </div>
-                                            <div className="bgPrimary text-center rounded-3 w-25 mb-2">
-                                                <div className="btn text-white">
-                                                    <FaUserPlus className="me-2 mb-1" />
-                                                    Send Membership Request
+                                            {isCreator.length === 0 && (
+                                                <div className="mb-2 mt-4 d-flex">
+                                                    {currentUser?.followings.includes(id) ? (
+                                                        <div style={{cursor: 'pointer'}} className="bgPrimary text-center rounded-3 w-25 me-2 mb-2" onClick={() => dispatch(ClubUnfollow(id))}>
+                                                            <div className="btn text-white">
+                                                                <FaMinus className="me-2 mb-1" />
+                                                                Unfollow
+
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div style={{cursor: 'pointer'}} className="bgPrimary text-center rounded-3 w-25 me-2 mb-2" onClick={() => dispatch(ClubFollow(id))}>
+                                                            <div className="btn text-white">
+                                                                <FaPlus className="me-2 mb-1" />
+                                                                Follow
+
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                    <div style={{cursor: 'pointer'}} className="bgPrimary text-center rounded-3 w-25 mb-2">
+                                                        <div className="btn text-white">
+                                                            <FaCommentDots className="me-2 mb-1" />
+                                                            Send Message
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Card.Body>
+                                            )}
+                                        </Col>
+                                    </Row>
+                                </Card.Body>
+                            ))}
                         </Container>
                         <Row className="sticky-top">
                             <nav className="py-2 bg-light border-bottom">
@@ -143,12 +207,7 @@ const ClubProfile = () => {
                                         </NavDropdown>
                                     </ul>
                                     <ul className="nav">
-                                        <li className="nav-item">
-                                            <Link to="#" className="nav-link link-dark px-2 mt-1 btn">
-                                                <FaPlus className="me-1 mb-1" />
-                                                Follow
-                                            </Link>
-                                        </li>
+
                                         <li className="nav-item">
                                             <div className="nav-link link-dark px-2">
                                                 <Form className="col-12 col-lg-auto mb-3 mb-lg-0">
@@ -172,7 +231,7 @@ const ClubProfile = () => {
                 about && <AboutClub />
             }
             {
-                follower && < ClubFollower />
+                follower && < ClubFollower paramsClub={paramsClub}/>
             }
             {
                 photo && <AllPhotos />

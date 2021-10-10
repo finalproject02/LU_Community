@@ -4,10 +4,10 @@ import { FaEllipsisV } from 'react-icons/fa';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Avatar from "../../../images/avatar.jpeg";
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 const Notification = () => {
-    const { post_notifications } = useSelector(state => state.posts);
+    const history = useHistory();
     const { people } = useSelector(state => state.people);
     const { currentUser } = useSelector(state => state.auth)
 
@@ -27,9 +27,49 @@ const Notification = () => {
         return person.map(u => u.name)
     }
     const getTypesInfo = (types) => {
-        if (types === 'user_post_like') return 'like your post';
-        if (types === 'user_post_comment') return 'comment your post';
-        if (types === 'user_commented_post') return 'comment a post where commented';
+        switch (types) {
+            case types === 'club_post':
+                return '';
+            case types === 'group_post':
+                return '';
+            case types === 'club_following':
+                return '';
+            case types === 'member_request':
+                return '';
+            case types === 'member_accepted':
+                return '';
+            case types === 'user_post_like':
+                return '';
+            case types === 'user_post_comment':
+                return '';
+            case types === 'user_commented_post':
+                return '';
+            case types === 'connection_accepted':
+                return '';
+            default:
+                return ''
+        }
+    }
+
+    const action = (types, documentId) => {
+        switch (types) {
+            case types === 'club_post':
+            case types === 'group_post':
+            case types === 'user_post_like':
+            case types === 'user_post_comment':
+            case types === 'user_commented_post':
+                return history.push(`/postDetails/${documentId}`)
+            case types === 'club_following':
+                return
+            case types === 'member_request':
+                return '';
+            case types === 'member_accepted':
+                return '';
+            case types === 'connection_accepted':
+                return '';
+            default:
+                return ''
+        }
     }
     return (
         <div>

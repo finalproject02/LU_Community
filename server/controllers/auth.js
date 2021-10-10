@@ -3,9 +3,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const createAccount = async (req, res) => {
+    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,100}/
     const { name, email, password, student_id, department, current_position, isTeacher } = req.body;
     if (!name || !email || !password) {
         return res.status(404).json({ message: 'Please enter all fields' })
+    }
+    if (!passwordPattern.test(password)) {
+        return res.status(404).json({ message: 'password should be at least 8 char long and should contain at least one number and one special character' })
     }
     if(student_id.length !== 10) {
         return res.status(400).json({ message:'Student id length should be 10' })

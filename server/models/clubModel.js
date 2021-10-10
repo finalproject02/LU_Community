@@ -7,6 +7,14 @@ const clubModel = new mongoose.Schema({
     },
     creator_id: String,
     creator_name: String,
+    profile_picture: {
+        type: String,
+        default: null
+    },
+    cover_picture: {
+        type: String,
+        default: null
+    },
     category: {
         type: String,
         required: true
@@ -29,7 +37,13 @@ const clubModel = new mongoose.Schema({
     events: {
         type: Array,
         default: []
+    },
+    type: {
+        type: String,
+        default: 'club'
     }
-})
+},
+    {timestamps: true}
+)
 
 export default mongoose.model('club', clubModel)

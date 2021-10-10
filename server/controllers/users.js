@@ -1,4 +1,6 @@
 import userModel from "../models/userModel.js";
+import groupModel from "../models/groupModel.js";
+import clubModel from "../models/clubModel.js";
 
 export const getAllUsers = async (req, res) => {
     try {
@@ -23,7 +25,10 @@ export const searchUser = async (req, res) => {
     try {
         const key = new RegExp(searchKey, 'i')
         const users = await userModel.find({ $or: [{name: key}, {department: key}, {batch: key}, {email: key}] }).select('-password').sort({isTeacher: -1});
-        res.status(200).json({ users })
+        const clubs = await clubModel.find({ $or: [{name: key}, {category: key}] }).sort({ createdAt: -1 });
+        const groups = await groupModel.find({ $and: [{name: key},  {visibility: 'visible'}] }).sort({ createdAt: -1 });
+        const searchResult = [...users, ...clubs, ...groups]
+        res.status(200).json({ searchResult })
     } catch (error) {
         res.status(500).json({ message: 'Something went error' })
     }
@@ -104,9 +109,8 @@ export const connect = async (req, res) => {
            const currentUser = await userModel.findById(currentUserId);
 
            if (!user.connection_requests.includes(currentUserId)) {
-               await user.updateOne({ $push: { connection_requests: [{userId: currentUserId, time: Date.now()}] , notifications: [{ notify_by: currentUserId, types: 'connection_request', time: Date.now(), isShow: false }] } });
+               await user.updateOne({ $push: { connection_requests:  currentUserId, notifications: [{ notify_by: currentUserId, types: 'connection_request', time: Date.now(), isShow: false }] } });
                await currentUser.updateOne({ $push: { connecting : userId } });
-
                const finalResult = await userModel.findById(currentUserId);
                res.status(200).json({ user: finalResult });
            } else {
@@ -117,7 +121,7 @@ export const connect = async (req, res) => {
             res.status(500).json({ message: 'Something went wrong' });
         }
     } else {
-        res.status(403).json({ message: 'You can not follow your self' })
+        res.status(403).json({ message: 'You can not connect your self' })
     }
 }
 
@@ -130,9 +134,9 @@ export const disconnect = async (req, res) => {
             const user = await userModel.findById(userId);
             const currentUser = await userModel.findById(currentUserId);
 
-            if (user.connecting.includes(currentUserId) || user.connection_requests.map(requests => requests.userId === currentUserId )) {
-                await user.updateOne({ $pull: { connecting: currentUserId, connection_requests: { userId: currentUserId }, notifications: { notify_by: currentUserId }} });
-                await currentUser.updateOne({ $pull: { connecting: userId, connection_requests: { userId }, notifications: { notify_by: userId } } });
+            if (user.connecting.includes(currentUserId) || user.connection_requests.includes(currentUserId)) {
+                await user.updateOne({ $pull: { connecting: currentUserId, connection_requests: currentUserId, notifications: { notify_by: currentUserId, types: 'connection_request' }} });
+                await currentUser.updateOne({ $pull: { connecting: userId, connection_requests: userId, notifications: { notify_by: userId, types: 'connection_request' } } });
                 const finalResult = await userModel.findById(currentUserId);
                 res.status(200).json({ user: finalResult })
             }
@@ -150,10 +154,10 @@ export const accept_connection_request = async (req, res) => {
     try {
         const user = await userModel.findOne({ _id: userId });
         const currentUser = await userModel.findOne({ _id: currentUserId });
-        if (currentUser.connection_requests.map(request => request.userId === userId)) {
+        if (currentUser.connection_requests.includes(userId)) {
             await user.updateOne({ $pull: { connecting: currentUserId} });
-            await currentUser.updateOne({ $pull: { connection_requests: {userId}, notifications: { notify_by: userId}} });
-            await user.updateOne({ $push: { connection: currentUserId} });
+            await currentUser.updateOne({ $pull: { connection_requests: userId, notifications: { notify_by: userId, types: 'connection_request'}} });
+            await user.updateOne({ $push: { connection: currentUserId, notifications: [{ notify_by: currentUserId, types: 'connection_accepted', time: Date.now(), isShow: false }] } });
             await currentUser.updateOne({ $push: { connection: userId} });
             const finalResult = await userModel.findOne({ _id: currentUserId });
             res.status(200).json({ user: finalResult })

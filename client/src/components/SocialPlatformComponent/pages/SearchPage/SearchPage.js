@@ -7,7 +7,7 @@ import SearchPeople from './SearchPeople';
 import SearchPost from './SearchPost';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
-import {searchPeople} from "../../../../actions/auth";
+import {search} from "../../../../actions/auth";
 import Loading from "../../../../services/Loading";
 
 function useQuery() {
@@ -18,14 +18,14 @@ const SearchPage = () => {
     const dispatch = useDispatch();
     const query = useQuery();
     const SearchKey = query.get('searchKey') || query.get('search');
-    console.log('Search: ', SearchKey)
     useEffect(() => {
-        dispatch(searchPeople(SearchKey));
+        dispatch(search(SearchKey));
     }, [SearchKey])
-    const { users } = useSelector(state => state.users)
-
+    const { searchResult } = useSelector(state => state.users);
+    const users = searchResult?.filter(result => result.type === 'user');
+    const groups = searchResult?.filter(result => result.type === 'group');
+    const clubs = searchResult?.filter(result => result.type === 'club');
     return (
-        isAuthenticated ? (
             <div>
                 <SocialNavbar />
                 <Container>
@@ -33,20 +33,25 @@ const SearchPage = () => {
                         <Col md="8">
                             <h3 className="mt-4">Search Results</h3>
                             <hr />
-                            <SearchPeople users={users}/>
-                            {/*<SearchPost />*/}
-                            {/*<SearchClub />*/}
-                            {/*<SearchGroup />*/}
+                            {searchResult.length !== 0 ? (
+                                <>
+                                    <SearchPeople users={users}/>
+                                    {/*<SearchPost />*/}
+                                    <SearchClub clubs={clubs}/>
+                                    <SearchGroup groups={groups}/>
+                                </>
+                            ) : (
+                                <>
+                                    <h6>No Result</h6>
+                                    <Loading type={'spin'} color={'black'}/>
+
+                                </>
+
+                            )}
                         </Col>
                     </Row>
                 </Container>
             </div>
-        ) : (
-            <>
-                <Loading color={'black'} type={'spin'}/>
-                <h5>Please Login first</h5>
-            </>
-        )
     );
 };
 

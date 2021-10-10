@@ -1,4 +1,4 @@
-import { LOADING, LOADED, CREATE_GROUP, ALL_GROUP } from "../actions/types";
+import {LOADING, LOADED, CREATE_GROUP, ALL_GROUP, GROUP_UPDATE, REJECT_REQUEST, ACCEPT_REQUEST} from "../actions/types";
 
 export default (state = { groups: [], isLoading: false}, action) => {
     switch (action.type) {
@@ -13,9 +13,12 @@ export default (state = { groups: [], isLoading: false}, action) => {
                 isLoading: false
             }
         case CREATE_GROUP:
+        case GROUP_UPDATE:
+        case REJECT_REQUEST:
+        case ACCEPT_REQUEST:
             return {
                 ...state,
-                groups: [...state.groups, action.payload],
+                groups: [action.payload, ...state.groups],
                 isLoading: false,
             }
         case ALL_GROUP: {

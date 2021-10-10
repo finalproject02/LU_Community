@@ -33,3 +33,15 @@ export const CREATE_CLUB = 'CREATE_CLUB';
 export const CREATE_GROUP = 'CREATE_GROUP';
 export const ALL_CLUB = 'ALL_CLUB';
 export const ALL_GROUP = 'ALL_GROUP';
+
+export const CLUB_UPDATE = 'CLUB_UPDATE';
+export const CLUB_UNFOLLOW = 'CLUB_UNFOLLOW';
+export const CLUB_FOLLOW = 'CLUB_FOLLOW';
+export const CLUB_POST = 'CLUB_POST';
+
+export const GROUP_UPDATE = 'GROUP_UPDATE';
+export const MEMBER_REQUEST = 'MEMBER_REQUEST';
+export const CANCEL_REQUEST = 'CANCEL_REQUEST';
+export const REJECT_REQUEST = 'REJECT_REQUEST';
+export const ACCEPT_REQUEST = 'ACCEPT_REQUEST';
+export const GROUP_POST = 'GROUP_POST';

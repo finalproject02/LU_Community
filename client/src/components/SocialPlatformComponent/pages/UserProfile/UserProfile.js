@@ -6,7 +6,6 @@ import Loading from "../../../../services/Loading";
 
 
 const UserProfile = () => {
-    const { currentUser } = useSelector(state => state.auth)
     return (
           <div>
                <SocialNavbar />

@@ -16,8 +16,6 @@ export const deleteJob= (getState, company_name) => axios.delete(`/api/jobs/${co
 export const connect = (getState, userId) => axios.patch(`/api/user/${userId}/connect`, { data: ''},  tokenConfig(getState));
 export const disconnect = (getState, userId) => axios.patch(`/api/user/${userId}/disconnect`, {data: ''}, tokenConfig(getState));
 export const accept_connection_request = (getState, userId) => axios.patch(`/api/user/${userId}/accept_connection_request`, {data: ''}, tokenConfig(getState));
-export const fetchFollowers = (getState) => axios.get('/api/followers', tokenConfig(getState));
-export const fetchFollowings= (getState) => axios.get('/api/followings', tokenConfig(getState));
 export const suggestions = (keyWord, getState) => axios.get(`/api/suggestions/${keyWord}`, tokenConfig(getState))
 
 export const newPost = (postData, getState) => axios.post('/api/posts', postData, tokenConfig(getState));
@@ -32,3 +30,14 @@ export const createClub = (clubDate, getState) => axios.post('/api/club/create',
 export const createGroup = (groupData, getState) => axios.post('/api/group/create', groupData, tokenConfig(getState));
 export const allGroup = (getState) => axios.get('/api/group', tokenConfig(getState));
 export const allClub = (getState) => axios.get('/api/club', tokenConfig(getState));
+export const clubUpdate = (getState, clubData, id) => axios.patch(`/api/club/${id}`, clubData, tokenConfig(getState));
+export const clubFollow = (getState, id) => axios.patch(`/api/club/${id}/follow`, {data: ''}, tokenConfig(getState));
+export const clubUnfollow = (getState, id) => axios.patch(`/api/club/${id}/unfollow`, {data: ''}, tokenConfig(getState));
+export const clubPost = (getState, postData, id) => axios.post(`/api/club/${id}/post`, postData, tokenConfig(getState));
+
+export const groupUpdate = (getState, groupData, id) => axios.patch(`/api/group/${id}`, groupData, tokenConfig(getState));
+export const member_request = (getState, id) => axios.patch(`/api/group/send_request/${id}`, {data: ''}, tokenConfig(getState));
+export const cancel_request = (getState, id) => axios.patch(`/api/group/cancel_request/${id}`, {data: ''}, tokenConfig(getState));
+export const reject_request = (getState, id, userId) => axios.patch(`/api/group/${id}/reject_request/${userId}`, {data: ''}, tokenConfig(getState));
+export const accept_request = (getState, id, userId) => axios.patch(`/api/group/${id}/accept_request/${userId}`, {data: ''}, tokenConfig(getState));
+export const groupPost = (getState, postData, id) => axios.post(`/api/group/${id}/post`, postData, tokenConfig(getState));

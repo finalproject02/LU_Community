@@ -10,8 +10,7 @@ export const admission = async (req, res) => {
         res.status(200).json({ application: newAdmission, success: true, message: 'Application successfully completed. We will with you contact very soon.' })
 
     } catch (error) {
-       // res.status(400).json({ message: error, success: false })
-        console.log(error)
+        res.status(400).json({ message: 'Something went wrong'})
     }
 
 

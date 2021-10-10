@@ -12,14 +12,14 @@ import path from "path";
 const ProfileHome = ({ setPhoto, setAbout, setConnection, setPost}) => {
     const {posts} = useSelector(state => state.posts);
     const {currentUser} = useSelector(state => state.auth);
-    const currentUserPost = posts.filter(currentUserPost => currentUserPost.owner_id === currentUser?._id );
+    const currentUserPost = posts.filter(currentUserPost => currentUserPost.owner_id === currentUser?._id && currentUserPost.owner_position === 'own_post');
     const currentUserPhotos = currentUserPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase() === '.jpg')
     return (
         <div>
             <Container>
                 <Row>
                     <Col md="8">
-                        <Post posts={currentUserPost}/>
+                        <Post details={currentUser} posts={currentUserPost}/>
                     </Col>
                     <Col md="4">
                         <ProfileIntro />

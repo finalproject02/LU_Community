@@ -111,7 +111,6 @@ const UserProfileCard = () => {
                                                     {isConnected.length !== 0 && (
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2">Message</Link>
-                                                            <Link to="#" className="btn btn-primary me-2">Share Profile</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Remove Connection</Link>
                                                         </div>
                                                     )}

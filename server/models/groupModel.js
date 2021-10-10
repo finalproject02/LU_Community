@@ -34,7 +34,13 @@ const groupModel = new mongoose.Schema({
     rules: {
         type: Array,
         default: []
+    },
+    type: {
+       type: String,
+       default: 'group'
     }
-})
+},
+    { timestamps: true }
+)
 
 export default mongoose.model('group', groupModel)

@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { SignUp } from "../../actions/auth";
 
 const SignupForm = () => {
-    const { message } = useSelector(state => state.auth)
+    const { message, Types } = useSelector(state => state.errors)
     const dispatch = useDispatch();
     const [signup, setSignup] = useState(false);
-    const [isTeacher, setIsTeacher] = useState(false)
+    const [isTeacher, setIsTeacher] = useState(false);
     const [data, setData] = useState();
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
@@ -17,12 +17,15 @@ const SignupForm = () => {
         if (isTeacher) {
             data.isTeacher = true;
         }
+        if (Types === 'SIGNUP_ERROR') {
+            document.documentElement.scrollTop = 0
+        }
         dispatch(SignUp(data))
     }
     return (
         <div className="mt-5 p-4">
             <h2 className="text-center textPrimary">{isTeacher ? 'Teacher Signup' : 'Student Signup'}</h2>
-            {message && <h3>{message}</h3>}
+            {Types === 'SIGNUP_ERROR' && <h6>{message}</h6>}
             <Form onSubmit={handleSubmit} className="shadow p-5">
                 <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>

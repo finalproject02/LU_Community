@@ -1,4 +1,4 @@
-import {LOADING, LOADED, CREATE_CLUB, ALL_CLUB} from "../actions/types";
+import {LOADING, LOADED, CREATE_CLUB, ALL_CLUB, CLUB_UPDATE} from "../actions/types";
 
 export default (state = { clubs: [], isLoading: false}, action) => {
     switch (action.type) {
@@ -13,9 +13,10 @@ export default (state = { clubs: [], isLoading: false}, action) => {
                 isLoading: false
             }
         case CREATE_CLUB:
+        case CLUB_UPDATE:
             return {
                 ...state,
-                clubs: [...state.clubs, action.payload],
+                clubs: [action.payload, ...state.clubs],
                 isLoading: false,
             }
         case ALL_CLUB:

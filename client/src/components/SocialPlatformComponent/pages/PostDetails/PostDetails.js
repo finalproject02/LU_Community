@@ -4,6 +4,7 @@ import jahed from "../../../../images/Jahed.jpg";
 import { FaEllipsisH, FaRegComment, FaRegHeart, FaShare } from 'react-icons/fa';
 
 const PostDetails = ({show, handleClose}) => {
+
     return (
         <div>
             <Modal show={show} onHide={handleClose} size="lg" centered>

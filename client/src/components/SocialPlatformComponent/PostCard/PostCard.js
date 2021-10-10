@@ -11,6 +11,7 @@ const PostCard = ({ posts }) => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth);
     const { people } = useSelector(state => state.people);
+    const { clubs } = useSelector(state => state.clubs);
     const [comment, setComment] = useState();
     const [showMore, setShowMore] = useState(false)
 
@@ -19,26 +20,40 @@ const PostCard = ({ posts }) => {
 
     const [index, setIndex] = useState(0);
 
-    const getUserName = (id) => {
-        const person = people.filter(usr => usr._id === id);
-        return person.map(u => u.name)
-    }
-    const getUserProfilePicture = (id) => {
-        const person = people.filter(usr => usr._id === id);
-        const pic = person.map(u => u.profile_picture);
-        const check = pic.map(i => i == null);
-        if (check.includes(true)) {
-            return null
+    const getUserName = (id, owner_position) => {
+        if (owner_position === 'club_post') {
+            const club = clubs.filter(cl => cl._id === id);
+            return club.map(u => u.name)
         } else {
-            return person.map(u => u.profile_picture)
+            const person = people.filter(usr => usr._id === id);
+            return person.map(u => u.name)
         }
 
-
+    }
+    const getUserProfilePicture = (id, owner_position) => {
+        if (owner_position === 'club_post') {
+            const club = clubs.filter(cl => cl._id === id);
+            const cb = club.map(u => u.profile_picture);
+            const check = cb.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return club.map(u => u.profile_picture)
+            }
+        } else {
+            const person = people.filter(usr => usr._id === id);
+            const pic = person.map(u => u.profile_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return person.map(u => u.profile_picture)
+            }
+        }
     }
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
     };
-
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             dispatch(Comment(comment.id, { comment: comment.comment }));
@@ -52,11 +67,17 @@ const PostCard = ({ posts }) => {
                     <Card.Body>
                         <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
                             <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                                <img src={getUserProfilePicture(post.owner_id) !== null ? `/api/files/storage/${getUserProfilePicture(post.owner_id)}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
+                                <img src={getUserProfilePicture(post.owner_position === 'club_post' ? post.post_to : post.owner_id, post.owner_position) !== null ? `/api/files/storage/${getUserProfilePicture(post.owner_id)}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
                                 <div className="d-flex align-items-center">
+
                                     <div>
-                                        <h6>{getUserName(post.owner_id)}</h6>
+                                        <h6>{getUserName(post.owner_position === 'club_post' ? post.post_to : post.owner_id, post.owner_position)}</h6>
                                         <small>{moment(post.createdAt).fromNow()}</small>
+                                        {post.owner_position === 'Group_admin' && (
+                                           <>
+                                            <h6>Admin post from computer club</h6>
+                                           </>
+                                        )}
                                     </div>
                                 </div>
                             </div>

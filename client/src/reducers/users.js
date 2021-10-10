@@ -4,18 +4,15 @@ import {
     LOADED,
     FOLLOWINGS,
     FOLLOWERS,
-    CONNECT,
-    DISCONNECT,
-    ACCEPT_CONNECTION_REQUEST
 } from "../actions/types";
 
-export default (state = { users: [], isLoading: false, message: null, following: [], followers: [] }, action) => {
+export default (state = { searchResult: [], isLoading: false, message: null, following: [], followers: [] }, action) => {
     switch (action.type) {
 
         case SEARCHING:
             return {
                 ...state,
-                users: action.payload.users,
+                searchResult: action.payload.searchResult,
                 isLoading: false
             };
         case LOADING:

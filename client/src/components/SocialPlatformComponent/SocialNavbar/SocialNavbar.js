@@ -8,18 +8,20 @@ import { Logout } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
 import { ShowPostNotifications } from "../../../actions/posts";
+import PostDetails from "../pages/PostDetails/PostDetails";
 import moment from "moment";
-import CreateGroup from '../CreateGroup/CreateGroup';
 
 const SocialNavbar = () => {
+    const [show, setShow] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [search, setSearch] = useState('');
     const { currentUser, token } = useSelector(state => state.auth);
-    const { notifications } = useSelector(state => state.posts);
     const { people } = useSelector(state => state.people);
 
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false)
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             history.push(`/search?searchKey=${search}`);
@@ -47,7 +49,9 @@ const SocialNavbar = () => {
                                 </Link>
                                 </li>
                                 <li><Link to="/connection" className="nav-link px-2 link-dark position-relative d-flex">
-                                    <Badge bg="success" className='connectionCount'>2</Badge>
+                                    {currentUser?.notifications.filter(notification => notification.isShow === false && notification.types === 'connection_request').length !== 0 && (
+                                        <Badge bg="success" className='connectionCount'>{currentUser?.notifications.filter(notification => notification.isShow === false && notification.types === 'connection_request').length}</Badge>
+                                    )}
                                     <FaUserPlus className="iconFont me-1" />
                                     <span className="d-none d-sm-block">Connection</span>
                                 </Link>
@@ -72,11 +76,11 @@ const SocialNavbar = () => {
                                         {currentUser?.notifications.filter(noti => noti !== 'connection_requests').slice(0, 4).sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
                                             <>
                                                 <NavDropdown.Item className="py-3">
-                                                    <Link to={`/post/${notification.document_id}`} className="text-decoration-none text-dark">
+                                                    <div to={`/post/${notification.document_id}`} className="text-decoration-none text-dark" onClick={handleShow}>
                                                         <FaUser className="me-1 mb-1" />
                                                         {getUserName(notification.notify_by)} {notification.position} your post
                                                         <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
-                                                    </Link>
+                                                    </div>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                             </>

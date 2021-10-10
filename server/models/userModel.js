@@ -85,13 +85,17 @@ const userModel = new mongoose.Schema({
         default:[]
     },
 
-    member_requests: {
+    memberships: {
         type: Array,
         default: []
     },
     jobs: {
         type: Array,
         default: []
+    },
+    type: {
+        type: String,
+        default: 'user'
     },
     language: String,
     website: String,

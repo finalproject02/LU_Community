@@ -102,13 +102,3 @@ export const Comments = async (req, res) => {
 }
 
 
-export const showNotifications = async (req, res) => {
-    const userId = req.user.id;
-    try {
-        await notificationModel.updateMany({ creator_id: userId }, { notification: false });
-        const afterUpdate = await notificationModel.find({ creator_id: userId }).sort({ createdAt: -1 });
-        res.status(200).json({ notifications: afterUpdate })
-    } catch (error) {
-        console.log(error)
-    }
-}
