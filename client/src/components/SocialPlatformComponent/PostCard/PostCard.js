@@ -102,15 +102,10 @@ const PostCard = ({ posts }) => {
                             </div>
                         </Card.Text>
                         <Card.Text as="div" className="d-flex justify-content-center">
-                            <Carousel activeIndex={index} onSelect={handleSelect} className="mb-2 w-75">
-                                <Carousel.Item>
-                                    <img
-                                        className="d-block w-100"
-                                        src={`/api/files/storage/${post.filename}`}
-                                        alt="First slide"
-                                    />
-                                </Carousel.Item>
-                            </Carousel>
+                            <img className="w-100 "
+                                src={`/api/files/storage/${post.filename}`} alt=".." />
+                            <video className="w-100 d-none" controls src={`/api/files/storage/${post.filename}`}></video>
+                            <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".."></iframe>
                         </Card.Text>
                         <Card.Text as="div">
                             <div className="d-flex align-items-center justify-content-between">

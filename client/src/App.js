@@ -23,9 +23,10 @@ import { People, Suggestions } from "./actions/people";
 import { ALlGroup } from "./actions/groups";
 import { ALlClub } from "./actions/clubs";
 import UserProfile from "./components/SocialPlatformComponent/pages/UserProfile/UserProfile";
-import PostDetails from "./components/SocialPlatformComponent/pages/PostDetails/PostDetails";
+import NotificationPostPage from "./components/SocialPlatformComponent/pages/NotificationPostPage/NotificationPostPage";
 import GroupInitial from "./components/SocialPlatformComponent/GroupInitial/GroupInitial";
 import ScrollToTop from "./ScrollToTop";
+import Message from "./components/SocialPlatformComponent/pages/Message/Message";
 
 function App() {
   const dispatch = useDispatch();

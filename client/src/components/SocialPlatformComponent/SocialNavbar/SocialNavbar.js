@@ -10,6 +10,7 @@ import Avatar from '../../../images/avatar.jpeg'
 import { ShowPostNotifications } from "../../../actions/posts";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import moment from "moment";
+import NotificationPostPage from '../pages/NotificationPostPage/NotificationPostPage';
 
 const SocialNavbar = () => {
     const [show, setShow] = useState(false);
@@ -18,10 +19,9 @@ const SocialNavbar = () => {
 
     const [search, setSearch] = useState('');
     const { currentUser, token } = useSelector(state => state.auth);
+    const { notifications } = useSelector(state => state.posts);
     const { people } = useSelector(state => state.people);
 
-    const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false)
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             history.push(`/search?searchKey=${search}`);
@@ -32,7 +32,7 @@ const SocialNavbar = () => {
         return user.map(usr => usr.name)
     }
     return (
-        <div>
+        <div className="sticky-top top-0">
             {token && (
                 <header className="p-3 sticky-top bg-light shadow-sm">
                     <Container>
@@ -77,10 +77,13 @@ const SocialNavbar = () => {
                                             <>
                                                 <NavDropdown.Item className="py-3">
                                                     <div to={`/post/${notification.document_id}`} className="text-decoration-none text-dark" onClick={handleShow}>
+                                                    <Link to="/postDetails" className="text-decoration-none text-dark">
                                                         <FaUser className="me-1 mb-1" />
                                                         {getUserName(notification.notify_by)} {notification.position} your post
                                                         <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
                                                     </div>
+                                                        <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
+                                                    </Link>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                             </>
