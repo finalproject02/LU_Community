@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, NavDropdown, Row } from 'react-bootstrap';
 import { FaCommentDots, FaPlus, FaMinus } from 'react-icons/fa';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Avatar from "../../../images/avatar.jpeg";
 import AboutClub from '../AboutClub/AboutClub';
 import AllPhotos from '../AllPhotos/AllPhotos';
@@ -9,18 +9,18 @@ import AllVideos from '../AllVideos/AllVideos';
 import ClubEvents from '../ClubEvents/ClubEvents';
 import ClubFollower from '../ClubFollower/ClubFollower';
 import ClubHome from '../ClubHome/ClubHome';
-import {useSelector, useDispatch} from "react-redux";
-import {ClubFollow, ClubUnfollow} from "../../../actions/clubs";
-import {v4 as uuidv4} from "uuid";
+import { useSelector, useDispatch } from "react-redux";
+import { ClubFollow, ClubUnfollow } from "../../../actions/clubs";
+import { v4 as uuidv4 } from "uuid";
 import path from "path";
-import {uploadFile} from "../../../actions/files";
-import {ClubUpdate} from "../../../actions/clubs";
+import { uploadFile } from "../../../actions/files";
+import { ClubUpdate } from "../../../actions/clubs";
 
 const ClubProfile = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const { id } = params;
-    const [clubData, setClubData]   = useState({})
+    const [clubData, setClubData] = useState({})
     const { clubs } = useSelector(state => state.clubs);
     const { currentUser } = useSelector(state => state.auth);
     const [about, setAbout] = useState(false);
@@ -123,7 +123,7 @@ const ClubProfile = () => {
                                 <Card.Body className="pt-0">
                                     <label htmlFor="coverPhoto" className="w-100">
                                         {
-                                            coverPhoto && coverPhoto.type.startsWith("image") ? (<div className={'picture-container'}><Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" /><button className="btn btn-warning confirmBtnPosition" onClick={uploadCover}>Confirm</button></div>) : (<Card.Img className="w-100 img-fluid" src={club.cover_picture ? `/api/files/storage/${club.cover_picture}`: Avatar} alt={club.name} style={{ width: "100%", height: "30vh" }} />)
+                                            coverPhoto && coverPhoto.type.startsWith("image") ? (<div className={'picture-container'}><Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" /><button className="btn btn-warning confirmBtnPosition" onClick={uploadCover}>Confirm</button></div>) : (<Card.Img className="w-100 img-fluid" src={club.cover_picture ? `/api/files/storage/${club.cover_picture}` : Avatar} alt={club.name} style={{ width: "100%", height: "30vh" }} />)
                                         }
                                         {isCreator?.length !== 0 && (
                                             <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
@@ -136,7 +136,7 @@ const ClubProfile = () => {
                                                 profilePhoto && profilePhoto.type.startsWith("image") ? (<><Card.Img style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" src={URL.createObjectURL(profilePhoto)} alt="name" /><button className="btn btn-warning confirmProfileBtn" onClick={uploadProfile}>Confirm</button></>) : (<img src={club.profile_picture ? `/api/files/storage/${club.profile_picture}` : Avatar} alt={club.name} style={{ width: "200px", height: "200px", borderRadius: "50%" }} className="p-2 bg-light" />)
                                             }
                                             {isCreator.length !== 0 && (
-                                                <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none" >
+                                                <Form.Control onChange={(e) => setProfilePhoto(e.target.files[0])} accept="image/*" id="profilePhoto" type="file" className="d-none">
                                                 </Form.Control>
                                             )}
                                         </label>
@@ -149,7 +149,7 @@ const ClubProfile = () => {
                                             {isCreator.length === 0 && (
                                                 <div className="mb-2 mt-4 d-flex">
                                                     {currentUser?.followings.includes(id) ? (
-                                                        <div style={{cursor: 'pointer'}} className="bgPrimary text-center rounded-3 w-25 me-2 mb-2" onClick={() => dispatch(ClubUnfollow(id))}>
+                                                        <div style={{ cursor: 'pointer' }} className="bgPrimary text-center rounded-3 w-25 me-2 mb-2" onClick={() => dispatch(ClubUnfollow(id))}>
                                                             <div className="btn text-white">
                                                                 <FaMinus className="me-2 mb-1" />
                                                                 Unfollow
@@ -157,7 +157,7 @@ const ClubProfile = () => {
                                                             </div>
                                                         </div>
                                                     ) : (
-                                                        <div style={{cursor: 'pointer'}} className="bgPrimary text-center rounded-3 w-25 me-2 mb-2" onClick={() => dispatch(ClubFollow(id))}>
+                                                        <div style={{ cursor: 'pointer' }} className="bgPrimary text-center rounded-3 w-25 me-2 mb-2" onClick={() => dispatch(ClubFollow(id))}>
                                                             <div className="btn text-white">
                                                                 <FaPlus className="me-2 mb-1" />
                                                                 Follow
@@ -165,7 +165,7 @@ const ClubProfile = () => {
                                                             </div>
                                                         </div>
                                                     )}
-                                                    <div style={{cursor: 'pointer'}} className="bgPrimary text-center rounded-3 w-25 mb-2">
+                                                    <div style={{ cursor: 'pointer' }} className="bgPrimary text-center rounded-3 w-25 mb-2">
                                                         <div className="btn text-white">
                                                             <FaCommentDots className="me-2 mb-1" />
                                                             Send Message
@@ -231,7 +231,7 @@ const ClubProfile = () => {
                 about && <AboutClub />
             }
             {
-                follower && < ClubFollower paramsClub={paramsClub}/>
+                follower && < ClubFollower paramsClub={paramsClub} />
             }
             {
                 photo && <AllPhotos />

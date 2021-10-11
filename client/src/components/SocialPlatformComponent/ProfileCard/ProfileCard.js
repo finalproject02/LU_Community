@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Dropdown, Form, Modal, Nav, Row } from 'react-bootstrap';
+import { Card, Col, Container, Dropdown, Form, Modal, Nav, NavDropdown, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "./ProfileCard.css";
 import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaPhone, FaUserCircle, FaLanguage, FaGlobe } from 'react-icons/fa';
@@ -167,15 +167,13 @@ const ProfileCard = () => {
                                         <Nav.Item>
                                             <Nav.Link className="nav-link link-dark ps-4 px-2" onClick={handleChangeConnection}>Connections</Nav.Link>
                                         </Nav.Item>
-                                        <Dropdown as="li">
-                                            <Dropdown.Toggle variant="light">
-                                                More
-                                            </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={handleChangePhoto}>Photos</Dropdown.Item>
-                                                <Dropdown.Item onClick={handleChangeVideo}>Videos</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                                        <NavDropdown className="navFontSize"
+                                            title={<span className="text-dark">More</span>}>
+                                            <NavDropdown.Item className="dropdownItem py-1" onClick={handleChangePhoto}>Photos
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item className="dropdownItem py-1" onClick={handleChangeVideo}>Videos
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
                                     </Nav>
                                     <ul class="nav">
                                         <li class="nav-item">
@@ -226,7 +224,7 @@ const ProfileCard = () => {
                             </div>
                             <div className="mb-2">
                                 <div className="d-flex align-items-center">
-                                    <FaGlobe className="fs-5"/>
+                                    <FaGlobe className="fs-5" />
                                     <h6 className="fs-6 ps-2 pt-2">Website</h6>
                                 </div>
                                 <Link href="#" className="textHover textPrimary ms-4">{currentUser?.website}</Link>
@@ -315,7 +313,7 @@ const ProfileCard = () => {
                 </Row>
             </div>
             {post && <ProfileHome setPhoto={setPhoto} setPost={setPost} setAbout={setAbout} setConnection={setConnection} />}
-            {about && <ProfileAbout/>}
+            {about && <ProfileAbout />}
             {connection && <AllFriend connections={currentUserConnections} />}
             {photo && <AllPhotos photos={currentUserPhotos} />}
             {video && <AllVideos />}
