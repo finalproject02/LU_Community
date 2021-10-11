@@ -83,7 +83,7 @@ const SocialNavbar = () => {
                                                     </div>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
-                                                <NavDropdown.Item className="py-3 d-none">
+                                                <NavDropdown.Item className="py-3">
                                                     <div to={`/post/${notification.document_id}`} className="text-decoration-none text-dark" onClick={handleShow}>
                                                         <div className="d-flex">
                                                             <img src={Avatar} alt="..." width="35" className="rounded-circle" />
@@ -95,7 +95,6 @@ const SocialNavbar = () => {
                                                         </div>
                                                     </div>
                                                 </NavDropdown.Item>
-                                                <NavDropdown.Divider />
                                             </>
                                         ))}
                                         <Dropdown.Item href="/allNotification">

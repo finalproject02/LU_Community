@@ -6,10 +6,10 @@ import { FaEllipsisH, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShar
 const PostDetails = ({ show, handleClose }) => {
     const [open, setOpen] = useState(false);
     return (
-        <div>
-            <Container className="bg-light pt-0 pt-sm-4">
+        <div className="bg-light">
+            <Container className="pt-0 pt-sm-4">
                 <Row className="pt-0 pt-sm-5">
-                    <Col md="7" className="p-1 bg-dark">
+                    <Col md="7" className="p-1 bg-light">
                         <img src={jahed} alt="name" className="img-fluid w-100" />
                     </Col>
                     <Col md="5">
@@ -86,7 +86,6 @@ const PostDetails = ({ show, handleClose }) => {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="reply">
                                     <div className="d-flex justify-content-start align-items-center ms-5 mb-2">

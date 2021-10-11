@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Carousel, Collapse, Dropdown, Form } from 'react-bootstrap';
-import { FaEllipsisV, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
+import { FaEllipsisH, FaEllipsisV, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
 import Avatar from "../../../images/avatar.jpeg";
 import "./PostCard.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -74,9 +74,9 @@ const PostCard = ({ posts }) => {
                                         <h6>{getUserName(post.owner_position === 'club_post' ? post.post_to : post.owner_id, post.owner_position)}</h6>
                                         <small>{moment(post.createdAt).fromNow()}</small>
                                         {post.owner_position === 'Group_admin' && (
-                                           <>
-                                            <h6>Admin post from computer club</h6>
-                                           </>
+                                            <>
+                                                <h6>Admin post from computer club</h6>
+                                            </>
                                         )}
                                     </div>
                                 </div>
@@ -124,17 +124,17 @@ const PostCard = ({ posts }) => {
                         <hr className="hr" />
                         <Card.Text as="div">
                             <div className="d-flex justify-content-between align-items-center">
-                                <div className="d-flex align-items-center ps-4 cursor" onClick={() => dispatch(LikeAndDislike(post._id))}>
+                                <div className="d-flex align-items-center ps-4 cardHover rounded-3 m-1 p-1" onClick={() => dispatch(LikeAndDislike(post._id))}>
                                     <FaRegHeart className="fs-5 mb-1" />
                                     <p className="ps-2 pt-2 fs-5">Like</p>
                                 </div>
-                                <div className="d-flex align-items-center cursor" onClick={() => setOpen(!open)}
+                                <div className="d-flex align-items-center cardHover rounded-3" onClick={() => setOpen(!open)}
                                     aria-controls="example-collapse-text"
                                     aria-expanded={open}>
                                     <FaRegComment className="fs-5 mb-1" />
                                     <p className="ps-2 pt-2 fs-5">Comment</p>
                                 </div>
-                                <div className="d-flex align-items-center cursor">
+                                <div className="d-flex align-items-center cardHover rounded-3">
                                     <FaShare className="fs-5 mb-1" />
                                     <p className="ps-2 pt-2 pe-4 fs-5">Share</p>
                                 </div>
@@ -156,46 +156,52 @@ const PostCard = ({ posts }) => {
                                     {showMore ?
                                         post.comments.sort((a, b) => { return new Date(b.time) - new Date(a.time) }).slice(3, post.comments.length).map(comment => (
                                             <>
-                                                <div className="reply">
+                                                <div className="reply d-flex justify-content-start align-items-center">
                                                     <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
-                                                        <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt="" />
+                                                        <img width="38" height="38" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt="" />
                                                         <div className="d-flex align-items-center">
-                                                            <div className="bgGray rounded p-2">
-                                                                <h6>{getUserName(comment.id)}</h6>
-                                                                <p>{comment.comment}</p>
+                                                            <div className="commentBg rounded-3">
+                                                                <strong>{getUserName(comment.id)}</strong>
+                                                                <p className="mb-0">{comment.comment}</p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="d-flex ps-5 ms-5">
-                                                        <p className="pe-2">Like</p>
-                                                        <div>
-                                                            <FaRegHeart className="fs-5 skyColor me-1" />
-                                                            <span className="pe-2 border-end">5</span>
-                                                        </div>
-                                                        <p className="ps-2">Reply</p>
-                                                    </div>
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                                            <FaEllipsisH />
+                                                        </Dropdown.Toggle>
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item href="#/action-1" onClick={() => dispatch(DeletePosts(post._id))}>Delete
+                                                                Comment</Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
                                                 </div>
                                             </>
                                         )) : post.comments.sort((a, b) => { return new Date(b.time) - new Date(a.time) }).slice(0, 3).map(comment => (
                                             <>
-                                                <div className="reply">
-                                                    <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
+                                                <div className="reply d-flex justify-content-start align-items-center">
+                                                    <div className="d-flex justify-content-start align-items-top ms-5 mb-2">
                                                         <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt=".." />
                                                         <div className="d-flex align-items-center">
-                                                            <div className="bgGray rounded p-2">
+                                                            <div className="commentBg rounded-3 p-2">
                                                                 <h6>{getUserName(comment.id)}</h6>
-                                                                <p>{comment.comment}</p>
+                                                                <p className="mb-0">{comment.comment}</p>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="d-flex ps-5 ms-5">
-                                                        <p className="pe-2">Like</p>
-                                                        <div>
-                                                            <FaRegHeart className="fs-5 skyColor me-1" />
-                                                            <span className="pe-2 border-end">5</span>
-                                                        </div>
-                                                        <p className="ps-2">Reply</p>
-                                                    </div>
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                                            <FaEllipsisH />
+                                                        </Dropdown.Toggle>
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item href="#/action-1">Delete
+                                                                Comment
+                                                            </Dropdown.Item>
+                                                            <Dropdown.Item href="#/action-1">Edit
+                                                                Comment
+                                                            </Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
                                                 </div>
                                             </>
                                         ))}
