@@ -71,27 +71,27 @@ const PostCard = ({ posts }) => {
                                 <div className="d-flex align-items-center">
 
                                     <div>
-                                        <h6>{getUserName(post.owner_position === 'club_post' ? post.post_to : post.owner_id, post.owner_position)}</h6>
-                                        <small>{moment(post.createdAt).fromNow()}</small>
+                                        <h6 className="mb-0">{getUserName(post.owner_position === 'club_post' ? post.post_to : post.owner_id, post.owner_position)}</h6>
                                         {post.owner_position === 'Group_admin' && (
                                             <>
-                                                <h6>Admin post from computer club</h6>
+                                                <strong>Admin </strong>
                                             </>
                                         )}
+                                        <small>{moment(post.createdAt).fromNow()}</small>
                                     </div>
                                 </div>
                             </div>
                             <div className="d-flex align-items-center pe-3 skyColor">
                                 {post.owner_id === currentUser?._id && (
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                            <FaEllipsisV />
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="#/action-1" onClick={() => dispatch(DeletePosts(post._id))}>Delete
-                                                Post</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+                                    <NavDropdown
+                                        className="navFontSize"
+                                        title={<FaEllipsisH className="text-dark" />}>
+                                        <NavDropdown.Item className="dropdownItem py-1" onClick={() => dispatch(DeletePosts(post._id))}>Delete
+                                            Post
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item className="dropdownItem py-1">Edit Post
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
                                 )}
 
                             </div>
