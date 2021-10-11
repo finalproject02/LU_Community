@@ -1,5 +1,6 @@
 import {NEW_APPLICATION, LOADED, LOADING, GET_ERRORS} from "./types";
 import * as API from "../api";
+import {getErrors} from "./errors";
 
 export const createApplication = (applicantData) => async (dispatch) => {
     try {
@@ -11,9 +12,6 @@ export const createApplication = (applicantData) => async (dispatch) => {
         })
         dispatch({ type: LOADED })
     } catch (error) {
-        dispatch({
-            type: GET_ERRORS,
-            payload: error.response.data
-        })
+        dispatch(getErrors(error.response.data, 'ONLINE_ADMISSION_ERROR'));
     }
 }

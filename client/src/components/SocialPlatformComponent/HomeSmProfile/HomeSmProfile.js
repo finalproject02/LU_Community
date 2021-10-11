@@ -21,11 +21,14 @@ const HomeSmProfile = () => {
                         </div>
                         <hr />
                         <div className="text-center mb-4">
-                            <strong className="">Studying at Leading University Department of CSE in BSc (46th batch)</strong>
+                            {currentUser?.isTeacher === true ? (
+                                <strong className="">working as a Teacher at Leading University Department of {currentUser?.department}</strong>
+                            ) : <strong className="">Studying at Leading University Department of {currentUser?.department} in BSc ({currentUser?.batch})</strong>}
+
                         </div>
                         <div className="d-flex justify-content-between align-items-center">
                             <p className="card-text">Total Connection</p>
-                            <span className="pb-3">40</span>
+                            <span className="pb-3">{currentUser?.connection.length}</span>
                         </div>
                         <div className="bgPrimary text-center rounded-3">
                             <Link to="/socialProfile" className="btn w-100 text-white">View profile</Link>

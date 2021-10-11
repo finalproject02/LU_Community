@@ -84,14 +84,22 @@ const userModel = new mongoose.Schema({
         type: Array,
         default:[]
     },
-    aboutMe: {
+
+    memberships: {
         type: Array,
         default: []
     },
-    member_requests: {
+    jobs: {
         type: Array,
         default: []
-    }
+    },
+    type: {
+        type: String,
+        default: 'user'
+    },
+    language: String,
+    website: String,
+    notifications: Array
 },
     { timestamps: true }
 

@@ -1,4 +1,7 @@
-import { LOADED, LOADING, NEW_APPLICATION } from "../actions/types";
+import {
+    LOADED, LOADING,
+    NEW_APPLICATION
+} from "../actions/types";
 
 export default (state = { isLoading: false, admission: [] }, action) => {
     switch (action.type) {

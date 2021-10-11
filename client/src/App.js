@@ -17,22 +17,26 @@ import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDe
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { LoadingCurrentUser } from "./actions/auth";
-import { getCurrentUserPosts, Notifications } from "./actions/posts";
+import { getCurrentUserPosts, PostNotifications } from "./actions/posts";
 import { ToastContainer } from "react-toastify";
 import { People, Suggestions } from "./actions/people";
+import { ALlGroup } from "./actions/groups";
+import { ALlClub } from "./actions/clubs";
 import UserProfile from "./components/SocialPlatformComponent/pages/UserProfile/UserProfile";
-import NotificationPostPage from "./components/SocialPlatformComponent/pages/NotificationPostPage/NotificationPostPage";
+import PostDetails from "./components/SocialPlatformComponent/pages/PostDetails/PostDetails";
 import GroupInitial from "./components/SocialPlatformComponent/GroupInitial/GroupInitial";
 import Message from "./components/SocialPlatformComponent/pages/Message/Message";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LoadingCurrentUser());
-    dispatch(Notifications())
+    dispatch(PostNotifications())
     dispatch(getCurrentUserPosts());
     dispatch(People());
-
+    dispatch(ALlClub());
+    dispatch(ALlGroup());
   }, []);
   const { currentUser } = useSelector(state => state.auth);
   const department = currentUser?.department
@@ -44,152 +48,151 @@ function App() {
     <div className="bg-light">
       <ToastContainer />
       <Router>
-        <Switch>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route path="/aboutus">
-            <Home />
-          </Route>
-          <Route path="/admissionpolicy">
-            <Home />
-          </Route>
-          <Route path="/scholarshipaid">
-            <Home />
-          </Route>
-          <Route path="/howtoapply">
-            <Home />
-          </Route>
-          <Route path="/academicprogram">
-            <Home />
-          </Route>
-          <Route path="/tutionfees">
-            <Home />
-          </Route>
-          <Route path="/academicpolicy">
-            <Home />
-          </Route>
-          <Route path="/onlineadmission">
-            <OnlineAdmissionBody />
-          </Route>
-          <Route path="/contact">
-            <Home />
-          </Route>
-          <Route path="/faq">
-            <Home />
-          </Route>
-          <Route path="/facultyofbba">
-            <Home />
-          </Route>
-          <Route path="/facultyofartandmodernlang">
-            <Home />
-          </Route>
-          <Route path="/facultyofsocialscience">
-            <Home />
-          </Route>
-          <Route path="/facultyofmodernscience">
-            <Home />
-          </Route>
-          <Route path="/departmentofbba">
-            <Home />
-          </Route>
-          <Route path="/departmentofcse">
-            <Home />
-          </Route>
-          <Route path="/departmentofeee">
-            <Home />
-          </Route>
-          <Route path="/departmentofcivil">
-            <Home />
-          </Route>
-          <Route path="/departmentofenglish">
-            <Home />
-          </Route>
-          <Route path="/departmentofarchitect">
-            <Home />
-          </Route>
-          <Route path="/departmentoflaw">
-            <Home />
-          </Route>
-          <Route path="/departmentofislamicstudies">
-            <Home />
-          </Route>
-          <Route path="/departmentoftourism">
-            <Home />
-          </Route>
-          <Route path="/departmentofbangla">
-            <Home />
-          </Route>
-          <Route path="/results">
-            <Home />
-          </Route>
-          <Route path="/paymentprocedure">
-            <Home />
-          </Route>
-          <Route path="/semesterregi">
-            <Home />
-          </Route>
-          <Route path="/classroom">
-            <Classroom />
-          </Route>
-          <Route path="/socialplatform">
-            <SocialPlatform />
-          </Route>
-          <Route path="/socialProfile">
-            <SocialProfile />
-          </Route>
-          <Route path="/profile/:id">
-            <UserProfile />
-          </Route>
-          <Route path="/allNotification">
-            <AllNotification />
-          </Route>
-          <Route path="/postDetails">
-            <NotificationPostPage />
-          </Route>
-          <Route path="/connection">
-            <Connection />
-          </Route>
-          <Route path="/message">
-            <Message />
-          </Route>
-          <Route path="/club">
-            <Club />
-          </Route>
-          <Route path="/clubDetails">
-            <ClubDetails />
-          </Route>
-          <Route path="/group">
-            <Group />
-          </Route>
-          <Route path="/groupInitial">
-            <GroupInitial />
-          </Route>
-          <Route exact path="/search">
-            <SearchPage />
-          </Route>
-          <Route path="/help">
-            <Home />
-          </Route>
-          <Route path="/iqac">
-            <Home />
-          </Route>
-          <Route path="/library">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
+        <ScrollToTop>
+          <Switch>
+            <Route exact path="/home">
+              <Home />
+            </Route>
+            <Route path="/aboutus">
+              <Home />
+            </Route>
+            <Route path="/admissionpolicy">
+              <Home />
+            </Route>
+            <Route path="/scholarshipaid">
+              <Home />
+            </Route>
+            <Route path="/howtoapply">
+              <Home />
+            </Route>
+            <Route path="/academicprogram">
+              <Home />
+            </Route>
+            <Route path="/tutionfees">
+              <Home />
+            </Route>
+            <Route path="/academicpolicy">
+              <Home />
+            </Route>
+            <Route path="/onlineadmission">
+              <OnlineAdmissionBody />
+            </Route>
+            <Route path="/contact">
+              <Home />
+            </Route>
+            <Route path="/faq">
+              <Home />
+            </Route>
+            <Route path="/facultyofbba">
+              <Home />
+            </Route>
+            <Route path="/facultyofartandmodernlang">
+              <Home />
+            </Route>
+            <Route path="/facultyofsocialscience">
+              <Home />
+            </Route>
+            <Route path="/facultyofmodernscience">
+              <Home />
+            </Route>
+            <Route path="/departmentofbba">
+              <Home />
+            </Route>
+            <Route path="/departmentofcse">
+              <Home />
+            </Route>
+            <Route path="/departmentofeee">
+              <Home />
+            </Route>
+            <Route path="/departmentofcivil">
+              <Home />
+            </Route>
+            <Route path="/departmentofenglish">
+              <Home />
+            </Route>
+            <Route path="/departmentofarchitect">
+              <Home />
+            </Route>
+            <Route path="/departmentoflaw">
+              <Home />
+            </Route>
+            <Route path="/departmentofislamicstudies">
+              <Home />
+            </Route>
+            <Route path="/departmentoftourism">
+              <Home />
+            </Route>
+            <Route path="/departmentofbangla">
+              <Home />
+            </Route>
+            <Route path="/results">
+              <Home />
+            </Route>
+            <Route path="/paymentprocedure">
+              <Home />
+            </Route>
+            <Route path="/semesterregi">
+              <Home />
+            </Route>
+            <Route path="/classroom">
+              <Classroom />
+            </Route>
+            <Route path="/socialplatform">
+              <SocialPlatform />
+            </Route>
+            <Route path="/socialProfile">
+              <SocialProfile />
+            </Route>
+            <Route path="/profile/:id">
+              <UserProfile />
+            </Route>
+            <Route path="/allNotification">
+              <AllNotification />
+            </Route>
+            <Route path="/post/:id">
+              <PostDetails />
+            </Route>
+            <Route path="/connection">
+              <Connection />
+            </Route>
+            <Route path="/club">
+              <Club />
+            </Route>
+            <Route path="/clubDetails/:id">
+              <ClubDetails />
+            </Route>
+            <Route path="/group/:id">
+              <Group />
+            </Route>
+            <Route path="/groupInitial">
+              <GroupInitial />
+            </Route>
+            <Route exact path="/search">
+              <SearchPage />
+            </Route>
+            <Route path="/help">
+              <Home />
+            </Route>
+            <Route path="/iqac">
+              <Home />
+            </Route>
+            <Route path="/library">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </ScrollToTop>
       </Router>
     </div>
   );

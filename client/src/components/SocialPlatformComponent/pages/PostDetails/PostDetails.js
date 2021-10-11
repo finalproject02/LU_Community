@@ -3,11 +3,11 @@ import { Col, NavDropdown, Row, Container, Collapse, Form } from "react-bootstra
 import jahed from "../../../../images/Jahed.jpg";
 import { FaEllipsisH, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
 
-const NotificationPostPage = () => {
+const PostDetails = ({ show, handleClose }) => {
     const [open, setOpen] = useState(false);
     return (
-        <div className="bg-light pt-0 pt-sm-4">
-            <Container>
+        <div>
+            <Container className="bg-light pt-0 pt-sm-4">
                 <Row className="pt-0 pt-sm-5">
                     <Col md="7" className="p-1 bg-dark">
                         <img src={jahed} alt="name" className="img-fluid w-100" />
@@ -109,4 +109,4 @@ const NotificationPostPage = () => {
     );
 };
 
-export default NotificationPostPage;
+export default PostDetails;

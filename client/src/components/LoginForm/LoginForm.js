@@ -5,10 +5,10 @@ import "./LoginForm.css";
 import {useDispatch, useSelector} from "react-redux";
 import {SignIn} from "../../actions/auth";
 import { useHistory } from "react-router-dom";
-import ShowToast from "../../services/ShowToast";
+import {clearError} from "../../actions/errors";
 
 const LoginForm = () => {
-    const { message } = useSelector(state => state.auth)
+    const { message, Types } = useSelector(state => state.errors)
     const history = useHistory();
     const dispatch = useDispatch();
     const [login, setLogin] = useState(false);
@@ -18,26 +18,28 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLogin(true);
-        dispatch(SignIn(data));
+        if (Types === 'SIGN_IN_ERROR') {
+            document.documentElement.scrollTop = 0
+        }
+        dispatch(SignIn(data, history));
 
     }
     useEffect(() => {
-        if (message) {
-            ShowToast(3, message)
-        }
-    }, [message])
+        dispatch(clearError())
+    }, [])
     return (
         <div className="mt-5 p-4">
             <h2 className="text-center textPrimary">Login</h2>
             <Form onSubmit={handleSubmit} className="shadow p-5">
+                {Types === 'SIGN_IN_ERROR' && <h6 style={{color: 'red'}}>{message}</h6>}
                 <Form.Group className="mb-3">
                     <Form.Label>Enter Student Id or Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" name={'email'} onChange={handleChange} required />
+                    <Form.Control type="email" placeholder="Enter email" name={'email'} onChange={handleChange}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name={'password'} onChange={handleChange} required />
+                    <Form.Control type="password" placeholder="Password" name={'password'} onChange={handleChange}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">

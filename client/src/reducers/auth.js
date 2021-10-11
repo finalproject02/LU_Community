@@ -6,7 +6,12 @@ import {
     LOGOUT_SUCCESS,
     CURRENT_USER,
     LOADING, GET_ERRORS,
-    LOADED, UPDATE_INFO
+    LOADED, UPDATE_INFO,
+    ACCEPT_CONNECTION_REQUEST,
+    CONNECT, DISCONNECT,
+    DELETE_EDUCATION_BACKGROUND, DELETE_JOB,
+    CLUB_FOLLOW, CLUB_UNFOLLOW, MEMBER_REQUEST,
+    CANCEL_REQUEST
 } from "../actions/types";
 
 export default (state = { token: localStorage.getItem('token'), currentUser: null, isAuthenticated: false, isLoading: false, message: '' }, action) => {
@@ -54,6 +59,10 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
                 isLoading: false
             };
         case UPDATE_INFO:
+        case CLUB_FOLLOW:
+        case CLUB_UNFOLLOW:
+        case MEMBER_REQUEST:
+        case CANCEL_REQUEST:
             return {
                 ...state,
                 currentUser: action.payload,
@@ -64,6 +73,19 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
                 ...state,
                 isAuthenticated: false,
                 message: action.payload.message
+            }
+        case ACCEPT_CONNECTION_REQUEST:
+        case CONNECT:
+        case DISCONNECT:
+            return {
+                ...state,
+                currentUser: action.payload
+            };
+        case DELETE_EDUCATION_BACKGROUND:
+        case DELETE_JOB:
+            return {
+                ...state,
+                currentUser: action.payload
             }
         default:
             return state

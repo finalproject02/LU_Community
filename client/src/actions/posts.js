@@ -6,8 +6,8 @@ import {
     DELETE_POST,
     LIKE_AND_DISLIKE,
     COMMENT,
-    NOTIFICATIONS,
-    SHOW_NOTIFICATIONS, GET_ERRORS
+    POST_NOTIFICATIONS,
+    SHOW_POST_NOTIFICATIONS, GET_ERRORS
 } from "./types";
 import * as api from '../api'
 
@@ -23,10 +23,7 @@ export const CreatePost = (postData) => async (dispatch, getState) => {
             type: LOADED
         })
     } catch (error) {
-        dispatch({
-            type: GET_ERRORS,
-            payload: error.response.data
-        })
+       console.log(error)
     }
 }
 
@@ -93,12 +90,12 @@ export const Comment = (id, commentContent) => async (dispatch, getState) => {
     }
 }
 
-export const Notifications = () => async (dispatch, getState) => {
+export const PostNotifications = () => async (dispatch, getState) => {
     try {
         dispatch({ type: LOADING });
-        const { data: { notifications } } = await api.notifications(getState)
+        const { data: { notifications } } = await api.postNotifications(getState)
         dispatch({
-           type: NOTIFICATIONS,
+           type: POST_NOTIFICATIONS,
            payload: notifications
         })
         dispatch({ type: LOADED })
@@ -107,12 +104,12 @@ export const Notifications = () => async (dispatch, getState) => {
     }
 }
 
-export const ShowNotifications = () => async (dispatch, getState) => {
+export const ShowPostNotifications = () => async (dispatch, getState) => {
     try {
         dispatch({ type: LOADING });
-        const { data: { notifications } } = await api.showNotifications(getState)
+        const { data: { notifications } } = await api.showPostNotifications(getState)
         dispatch({
-            type: SHOW_NOTIFICATIONS,
+            type: SHOW_POST_NOTIFICATIONS,
             payload: notifications
         })
         dispatch({ type: LOADED })

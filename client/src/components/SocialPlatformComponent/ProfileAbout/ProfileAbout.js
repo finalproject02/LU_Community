@@ -1,56 +1,34 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { FaGraduationCap, FaPencilAlt } from 'react-icons/fa';
+import {
+    FaGraduationCap,
+    FaPencilAlt, FaTrash,
+    FaBirthdayCake,
+    FaHome, FaEnvelopeOpen,
+    FaPhone, FaLanguage,
+    FaGlobe, FaBriefcase,
+
+} from 'react-icons/fa';
 import AboutModal from './AboutModal';
+import {useDispatch, useSelector} from "react-redux";
+import moment from "moment";
+import {DeleteJob} from "../../../actions/auth";
 
 const ProfileAbout = () => {
+    const dispatch = useDispatch()
     const [show, setShow] = useState(false);
-    const [showJob, setShowJob] = useState(false);
-    const [showCurrentTown, setShowCurrentTown] = useState(false);
-    const [showHomeTown, setShowHomeTown] = useState(false);
-    const [showMobile, setShowMobile] = useState(false);
-    const [showEmail, setShowEmail] = useState(false);
-    const [showWebsite, setShowWebsite] = useState(false);
-    const [showBirthday, setShowBirthday] = useState(false);
-    const [showLanguage, setShowLanguage] = useState(false);
+    const [editShow, setEditShow] = useState(false);
+    const [companyName, setCompanyName] = useState([])
+    const { currentUser } = useSelector(state => state.auth)
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleCloseEditShow = () => setEditShow(false);
+    const handleShowEditShow = () => setEditShow(true);
 
-    const handleJobClose = () => setShowJob(false);
-    const handleJobShow = () => setShowJob(true);
-
-    const handleCurrentTownClose = () => setShowCurrentTown(false);
-    const handleCurrentTownShow = () => setShowCurrentTown(true);
-
-    const handleHomeTownClose = () => setShowHomeTown(false);
-    const handleHomeTownShow = () => setShowHomeTown(true);
-
-    const handleMobileClose = () => setShowMobile(false);
-    const handleMobileShow = () => setShowMobile(true);
-
-    const handleEmailClose = () => setShowEmail(false);
-    const handleEmailShow = () => setShowEmail(true);
-
-    const handleWebsiteClose = () => setShowWebsite(false);
-    const handleWebsiteShow = () => setShowWebsite(true);
-
-    const handleBirthdayClose = () => setShowBirthday(false);
-    const handleBirthdayShow = () => setShowBirthday(true);
-
-    const handleLanguageClose = () => setShowLanguage(false);
-    const handleLanguageShow = () => setShowLanguage(true);
     return (
         <div>
-            <AboutModal show={show} handleClose={handleClose} value={{ first: "School", second: "Department", third: "Field of study" }} />
-            <AboutModal show={showJob} handleClose={handleJobClose} value={{ first: "Job", second: "Company", third: "Position" }} />
-            <AboutModal showInput={showCurrentTown} handleInputClose={handleCurrentTownClose} value={{ title: "Current Town" }} valueType={"text"} />
-            <AboutModal showInput={showHomeTown} handleInputClose={handleHomeTownClose} value={{ title: "Home Town" }} valueType={"text"} />
-            <AboutModal showInput={showMobile} handleInputClose={handleMobileClose} value={{ title: "Mobile" }} valueType={"number"} />
-            <AboutModal showInput={showEmail} handleInputClose={handleEmailClose} value={{ title: "Email" }} valueType={"text"} />
-            <AboutModal showInput={showWebsite} handleInputClose={handleWebsiteClose} value={{ title: "Website" }} valueType={"text"} />
-            <AboutModal showInput={showBirthday} handleInputClose={handleBirthdayClose} value={{ title: "Birthday" }} valueType={"text"} />
-            <AboutModal showInput={showLanguage} handleInputClose={handleLanguageClose} value={{ title: "Language" }} valueType={"text"} />
+
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="8">
@@ -60,125 +38,135 @@ const ProfileAbout = () => {
                                 <Card.Text as="div">
                                     <div className="d-flex justify-content-between align-items-center ps-2">
                                         <div className="d-flex align-items-center">
-                                            <h6>Add High School</h6>
-                                        </div>
-                                        <FaPencilAlt onClick={handleShow} />
-                                    </div>
-                                    <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>Safat Ullah High School</span>
-                                        <br />
-                                        <span className="ms-4">Science</span>
-                                        <br />
-                                        <span className="ms-4">2010-2015</span>
-                                    </div>
-                                </Card.Text>
-                                <Card.Text as="div">
-                                    <div className="d-flex justify-content-between align-items-center ps-2">
-                                        <div className="d-flex align-items-center">
-                                            <h6>Add College</h6>
-                                        </div>
-                                        <FaPencilAlt onClick={handleShow} />
-                                    </div>
-                                    <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>Dakshin Surma College</span>
-                                        <br />
-                                        <span className="ms-4">Science</span>
-                                        <br />
-                                        <span className="ms-4">2015-2017</span>
-                                    </div>
-                                </Card.Text>
-                                <Card.Text as="div">
-                                    <div className="d-flex justify-content-between align-items-center ps-2">
-                                        <div className="d-flex align-items-center">
-                                            <h6>Add University</h6>
-                                        </div>
-                                        <FaPencilAlt onClick={handleShow} />
-                                    </div>
-                                    <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>Leading University</span>
-                                        <br />
-                                        <span className="ms-4">Depertment of CSE</span>
-                                        <br />
-                                        <span className="ms-4">2017-2021</span>
-                                    </div>
-                                </Card.Text>
-                                <Card.Text as="div">
-                                    <div className="d-flex justify-content-between align-items-center ps-2">
-                                        <div className="d-flex align-items-center">
                                             <h6>Add Job</h6>
                                         </div>
-                                        <FaPencilAlt onClick={handleJobShow} />
+                                        <FaPencilAlt style={{cursor:'pointer'}} onClick={handleShow} />
+                                        <AboutModal show={show} handleClose={handleClose} />
+                                    </div>
+                                    {currentUser?.jobs.map(job => (
+                                        <div className="ms-4 mb-2">
+                                            <div>
+                                                <FaBriefcase className="me-2" />
+                                                <span>{job.job_title}</span>
+                                                <br />
+                                                <span className="ms-4">{job.position}</span>
+                                                <br/>
+                                                <span className="ms-4">{job.company_name}</span>
+                                                <br />
+                                                <span className="ms-4">{moment(job.start_date).year()} - {moment(job.end_date).year()}</span>
+                                            </div>
+                                            <div className="d-flex">
+                                                <FaPencilAlt style={{cursor: 'pointer'}} title="edit" className="fs-5" onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setCompanyName(job.company_name);
+                                                    handleShowEditShow();
+                                                }} />
+                                                <FaTrash style={{cursor: 'pointer'}} title="delete" className="fs-5 ms-2" onClick={() => {
+                                                    dispatch(DeleteJob(job.company_name))
+                                                }}/>
+                                                <AboutModal editShow={editShow} handleCloseEditShow={handleCloseEditShow} companyName={companyName}/>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Card.Text>
+                                <Card.Text as="div">
+                                    <div className="d-flex justify-content-between align-items-center ps-2">
+                                        <div className="d-flex align-items-center">
+                                            <h6>High School</h6>
+                                        </div>
+                                    </div>
+                                    {currentUser?.education_background.filter(education => education.degree.toLowerCase() === 'ssc').map(school => (
+                                        <div className="ms-4 mb-2">
+                                            <FaGraduationCap className="me-2" />
+                                            <span>{school.school}</span>
+                                            <br />
+                                            <span className="ms-4">{school.field_of_study}</span>
+                                            <br />
+                                            <span className="ms-4">{moment(school.start_date).year()} - {moment(school.end_date).year()}</span>
+                                        </div>
+                                    ))}
+                                </Card.Text>
+                                <Card.Text as="div">
+                                    <div className="d-flex justify-content-between align-items-center ps-2">
+                                        <div className="d-flex align-items-center">
+                                            <h6> College</h6>
+                                        </div>
+                                    </div>
+
+                                    {currentUser?.education_background.filter(eduction => eduction.degree.toLowerCase() === 'hsc').map(college => (
+                                        <div className="ms-4 mb-2">
+                                            <FaGraduationCap className="me-2" />
+                                            <span>{college.school}</span>
+                                            <br />
+                                            <span className="ms-4">{college.degree}</span>
+                                            <br />
+                                            <span className="ms-4">{moment(college.start_date).year()} - {moment(college.end_date).year()}</span>
+                                        </div>
+                                    ))}
+
+                                </Card.Text>
+                                <Card.Text as="div">
+                                    <div className="d-flex justify-content-between align-items-center ps-2">
+                                        <div className="d-flex align-items-center">
+                                            <h6>University</h6>
+                                        </div>
+                                    </div>
+                                    {currentUser?.education_background.filter(education => education.degree.toLowerCase() === 'b.sc').map(university => (
+                                        <div className="ms-4 mb-2">
+                                            <FaGraduationCap className="me-2" />
+                                            <span>{university.school}</span>
+                                            <br />
+                                            <span className="ms-4">{university.degree}</span>
+                                            <br />
+                                            <span className="ms-4">{moment(university.start_date).year()} - {moment(university.end_date).year()}</span>
+                                        </div>
+                                    ))}
+                                </Card.Text>
+
+                                <Card.Text as="div">
+                                </Card.Text>
+                                <Card.Text as="div">
+                                    <div className="d-flex justify-content-between align-items-center ps-2">
+                                        <div className="d-flex align-items-center">
+                                            <h6>Home Town</h6>
+                                        </div>
                                     </div>
                                     <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>Facebook</span>
-                                        <br />
-                                        <span className="ms-4">Web developer</span>
-                                        <br />
-                                        <span className="ms-4">2010-2015</span>
+                                        <FaHome className="me-2" />
+                                        <span>{currentUser?.permanent_address}</span>
                                     </div>
                                 </Card.Text>
                                 <Card.Text as="div">
                                     <div className="d-flex justify-content-between align-items-center ps-2">
                                         <div className="d-flex align-items-center">
-                                            <h6>Add Current Town</h6>
+                                            <h6>Mobile</h6>
                                         </div>
-                                        <FaPencilAlt onClick={handleCurrentTownShow} />
                                     </div>
                                     <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>Lives in Sylhet</span>
+                                        <FaPhone className="me-2" />
+                                        <span>{currentUser?.mobile}</span>
                                     </div>
                                 </Card.Text>
                                 <Card.Text as="div">
                                     <div className="d-flex justify-content-between align-items-center ps-2">
                                         <div className="d-flex align-items-center">
-                                            <h6>Add Home Town</h6>
+                                            <h6>Email</h6>
                                         </div>
-                                        <FaPencilAlt onClick={handleHomeTownShow} />
                                     </div>
                                     <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>From Sylhet</span>
+                                        <FaEnvelopeOpen className="me-2" />
+                                        <span>{currentUser?.email}</span>
                                     </div>
                                 </Card.Text>
                                 <Card.Text as="div">
                                     <div className="d-flex justify-content-between align-items-center ps-2">
                                         <div className="d-flex align-items-center">
-                                            <h6>Add Mobile</h6>
+                                            <h6>Website</h6>
                                         </div>
-                                        <FaPencilAlt onClick={handleMobileShow} />
                                     </div>
                                     <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>01797213005</span>
-                                    </div>
-                                </Card.Text>
-                                <Card.Text as="div">
-                                    <div className="d-flex justify-content-between align-items-center ps-2">
-                                        <div className="d-flex align-items-center">
-                                            <h6>Add Email</h6>
-                                        </div>
-                                        <FaPencilAlt onClick={handleEmailShow} />
-                                    </div>
-                                    <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>mdjahed@gmail.com</span>
-                                    </div>
-                                </Card.Text>
-                                <Card.Text as="div">
-                                    <div className="d-flex justify-content-between align-items-center ps-2">
-                                        <div className="d-flex align-items-center">
-                                            <h6>Add Website</h6>
-                                        </div>
-                                        <FaPencilAlt onClick={handleWebsiteShow} />
-                                    </div>
-                                    <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>mdjahed.com</span>
+                                        <FaGlobe className="me-2" />
+                                        <span>{currentUser?.website}</span>
                                     </div>
                                 </Card.Text>
                                 <Card.Text as="div">
@@ -186,11 +174,10 @@ const ProfileAbout = () => {
                                         <div className="d-flex align-items-center">
                                             <h6>Birthday</h6>
                                         </div>
-                                        <FaPencilAlt onClick={handleBirthdayShow} />
                                     </div>
                                     <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>16-01-1990</span>
+                                        <FaBirthdayCake className="me-2" />
+                                        <span>{moment(currentUser?.date_of_birth).format('MMMM:DD:YYYY')}</span>
                                     </div>
                                 </Card.Text>
                                 <Card.Text as="div">
@@ -198,11 +185,10 @@ const ProfileAbout = () => {
                                         <div className="d-flex align-items-center">
                                             <h6>Language</h6>
                                         </div>
-                                        <FaPencilAlt onClick={handleLanguageShow} />
                                     </div>
                                     <div className="ms-4 mb-2">
-                                        <FaGraduationCap className="me-2" />
-                                        <span>Bangla,Hindi,English</span>
+                                        <FaLanguage className="me-2" />
+                                        <span>{currentUser?.language}</span>
                                     </div>
                                 </Card.Text>
                             </Card.Body>

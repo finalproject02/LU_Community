@@ -5,46 +5,114 @@ import { FaCertificate, FaFile, FaImage, FaMapMarkedAlt, FaPhotoVideo, FaUserCir
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "../../../images/avatar.jpeg";
 import { v4 as uuidv4 } from 'uuid';
+import { ClubPost } from "../../../actions/clubs";
 import path from "path";
 import { CreatePost } from "../../../actions/posts";
 import { uploadFile } from "../../../actions/files";
-import isLoading from '../../../services/Loading'
-import Loading from "../../../services/Loading";
+import {GroupPost} from "../../../actions/groups";
+import {useParams} from "react-router-dom";
 
-const PostBox = () => {
+const PostBox = ({details}) => {
+    const params = useParams();
+    const { id } = params
     const dispatch = useDispatch();
-    const { currentUser } = useSelector(state => state.auth)
-    const { isLoading } = useSelector(state => state.posts)
+    const { currentUser } = useSelector(state => state.auth);
+    const { groups } = useSelector(state => state.groups);
     const [show, setShow] = useState(false);
     const [data, setData] = useState({ post_status: 'Friends', description: '' })
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setFile('')
+    };
     const handleShow = () => setShow(true);
     const [file, setFile] = useState();
     const [otherFile, setOtherFile] = useState();
+    const paramsGroup = groups?.filter(group => group._id === id);
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (details.type === 'club') {
+            if (file) {
+                const fileData = new FormData();
+                const filename = uuidv4() + path.extname(file.name);
+                data.filename = filename;
+                data.owner_position = 'club_post'
+                fileData.append('name', filename);
+                fileData.append('file', file);
+                dispatch(uploadFile(fileData))
+                dispatch(ClubPost(details._id, data))
+            } else {
+                dispatch(ClubPost(details._id, data));
+            }
+        } else if (details.type === 'user') {
+            if (file) {
+                const fileData = new FormData();
+                const filename = uuidv4() + path.extname(file.name);
+                data.filename = filename;
+                fileData.append('name', filename);
+                fileData.append('file', file);
+                dispatch(uploadFile(fileData))
+                dispatch(CreatePost(data));
+            } else {
+                dispatch(CreatePost(data));
+            }
+        } else if (details.type === 'group') {
+            if (paramsGroup.map(group => group.creator_id).toString() === currentUser?._id) {
+                if (file) {
+                    const fileData = new FormData();
+                    const filename = uuidv4() + path.extname(file.name);
+                    data.filename = filename;
+                    data.owner_position = 'Group_admin'
+                    fileData.append('name', filename);
+                    fileData.append('file', file);
+                    dispatch(uploadFile(fileData))
+                    dispatch(GroupPost(id, data));
+                } else {
+                    data.owner_position = 'Group_admin'
+                    dispatch(GroupPost(id,data));
+                }
 
-        if (file) {
-            const fileData = new FormData();
-            const filename = uuidv4() + path.extname(file.name);
-            data.filename = filename;
-            fileData.append('name', filename);
-            fileData.append('file', file);
-            dispatch(uploadFile(fileData))
-            dispatch(CreatePost(data));
+            } else if (currentUser?.memberships.includes(id)) {
+                if (file) {
+                    const fileData = new FormData();
+                    const filename = uuidv4() + path.extname(file.name);
+                    data.filename = filename;
+                    data.owner_position = 'Group_member'
+                    fileData.append('name', filename);
+                    fileData.append('file', file);
+                    dispatch(uploadFile(fileData))
+                    dispatch(GroupPost(id, data));
+                } else {
+                    data.owner_position = 'Group_member'
+                    dispatch(GroupPost(id,data));
+                }
+            } else {
+                if (file) {
+                    const fileData = new FormData();
+                    const filename = uuidv4() + path.extname(file.name);
+                    data.filename = filename;
+                    data.owner_position = 'Public'
+                    fileData.append('name', filename);
+                    fileData.append('file', file);
+                    dispatch(uploadFile(fileData))
+                    dispatch(GroupPost(id, data));
+                } else {
+                    data.owner_position = 'Public'
+                    dispatch(GroupPost(id,data));
+                }
+            }
         }
-        if (isLoading) {
-            return <Loading type={'spin'} color={'black'} />
-        }
-        handleClose()
+
+
+
+        handleClose();
 
     }
     return (
         <div>
             <Card className="w-100 shadow-sm mb-4 w-100 rounded-3">
                 <div className="d-flex justify-content-center pt-4">
-                    <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt="name" width="45" height="45" className="rounded-circle me-3" />
+                    <img src={details?.profile_picture ? `/api/files/storage/${details?.profile_picture}` : Avatar} alt="name" width="45" height="45" className="rounded-circle me-3" />
                     <input type="text" className="form-control ps-4 rounded-pill w-75"
                         placeholder="What's going on your mind?" onClick={handleShow} />
                 </div>
@@ -86,10 +154,10 @@ const PostBox = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                            <img src={`/api/files/storage/${currentUser?.profile_picture}`} alt="" width="50" height="50" className="rounded-circle me-2" />
+                            <img src={details?.profile_picture ? `/api/files/storage/${details?.profile_picture}` : Avatar} alt="" width="50" height="50" className="rounded-circle me-2" />
                             <div className="d-flex align-items-center">
                                 <div>
-                                    <h6>{currentUser?.name}</h6>
+                                    <h6>{details?.name}</h6>
                                     <Form.Select className="form-select rounded-pill" onChange={handleChange} name="post_status">
                                         <option value="">Friends</option>
                                         <option value="">Public</option>

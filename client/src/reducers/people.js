@@ -1,4 +1,8 @@
-import { SUGGESTIONS, LOADING, LOADED, ALL_USERS } from "../actions/types";
+import {
+    SUGGESTIONS,
+    LOADING, LOADED,
+    ALL_USERS
+} from "../actions/types";
 
 export default (state = { suggestions: [], isLoading: false, people: [] }, action) => {
     switch (action.type) {

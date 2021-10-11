@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, Col, Container, Dropdown, Form, Modal, Nav, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "./ProfileCard.css";
-import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaPhone, FaUserCircle } from 'react-icons/fa';
+import { FaAddressBook, FaBirthdayCake, FaConnectdevelop, FaEdit, FaEnvelopeOpen, FaPhone, FaUserCircle, FaLanguage, FaGlobe } from 'react-icons/fa';
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { updateProfile } from "../../../actions/auth";
@@ -22,7 +22,8 @@ const ProfileCard = () => {
     const { people } = useSelector(state => state.people);
     const { posts } = useSelector(state => state.posts);
     const currentUserConnections = people.filter(connect => currentUser?.connection.includes(connect._id));
-    const currentUserPhotos = posts.filter(post => currentUser?.connection.includes(post.creator_id));
+    const currentUserPost = posts.filter(post => post.owner_id === currentUser?._id);
+    const currentUserPhotos = currentUserPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase().toLowerCase() === '.jpg')
     const [userData, setUserData] = useState({})
     const [show, setShow] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
@@ -96,6 +97,7 @@ const ProfileCard = () => {
             dispatch(uploadFile(formData));
             userData.profile_picture = profile_picture;
             dispatch(updateProfile(userData))
+            window.location.reload();
         }
     }
     const uploadCover = () => {
@@ -106,7 +108,8 @@ const ProfileCard = () => {
             formData.append('file', coverPhoto);
             dispatch(uploadFile(formData));
             userData.cover_picture = cover_picture;
-            dispatch(updateProfile(userData))
+            dispatch(updateProfile(userData));
+            window.location.reload();
         }
     }
 
@@ -223,10 +226,26 @@ const ProfileCard = () => {
                             </div>
                             <div className="mb-2">
                                 <div className="d-flex align-items-center">
+                                    <FaGlobe className="fs-5"/>
+                                    <h6 className="fs-6 ps-2 pt-2">Website</h6>
+                                </div>
+                                <Link href="#" className="textHover textPrimary ms-4">{currentUser?.website}</Link>
+                            </div>
+
+
+                            <div className="mb-2">
+                                <div className="d-flex align-items-center">
                                     <FaBirthdayCake className="fs-5" />
                                     <h6 className="fs-6 ps-2 pt-2">Birthday</h6>
                                 </div>
                                 <p className="ms-4">{moment(currentUser?.date_of_birth).format('dddd, MMMM Do')}</p>
+                            </div>
+                            <div className="mb-2">
+                                <div className="d-flex align-items-center">
+                                    <FaLanguage className="fs-5" />
+                                    <h6 className="fs-6 ps-2 pt-2">Language</h6>
+                                </div>
+                                <Link href="#" className="textHover textPrimary ms-4">{currentUser?.language}</Link>
                             </div>
                             <div className="mb-2">
                                 <div className="d-flex align-items-center">
@@ -264,11 +283,20 @@ const ProfileCard = () => {
                                 </div>
                                 <div className="pt-3 mb-1">
                                     <h6 className="">Email</h6>
-                                    <Form.Control className="w-100" type="text" onChange={handleChange} defaultValue={currentUser?.email} name="email" />
+                                    <Form.Control className="w-100" type="text" onChange={handleChange} value={currentUser?.email} name="email" />
                                 </div>
                                 <div className="pt-3 mb-1">
                                     <h6 className="">Phone</h6>
                                     <Form.Control className="w-100" type="text" defaultValue={currentUser?.mobile} onChange={handleChange} name="mobile" />
+                                </div>
+
+                                <div className="pt-3 mb-1">
+                                    <h6 className="">Website</h6>
+                                    <Form.Control className="w-100" type="text" defaultValue={currentUser?.website} onChange={handleChange} name="website" />
+                                </div>
+                                <div className="pt-3 mb-1">
+                                    <h6 className="">Language</h6>
+                                    <Form.Control className="w-100" type="text" defaultValue={currentUser?.language} onChange={handleChange} name="language" />
                                 </div>
                                 <div className="pt-3 mb-1">
                                     <h6 className="">Address</h6>
@@ -286,8 +314,8 @@ const ProfileCard = () => {
                     </Modal>
                 </Row>
             </div>
-            {post && <ProfileHome />}
-            {about && <ProfileAbout />}
+            {post && <ProfileHome setPhoto={setPhoto} setPost={setPost} setAbout={setAbout} setConnection={setConnection} />}
+            {about && <ProfileAbout/>}
             {connection && <AllFriend connections={currentUserConnections} />}
             {photo && <AllPhotos photos={currentUserPhotos} />}
             {video && <AllVideos />}

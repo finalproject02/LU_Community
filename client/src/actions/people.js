@@ -1,5 +1,9 @@
 import * as api from '../api'
-import {LOADING, LOADED, SUGGESTIONS, ALL_USERS, GET_ERRORS} from "./types";
+import {
+    LOADING, LOADED,
+    SUGGESTIONS,
+    ALL_USERS
+} from "./types";
 
 export const People = () => async (dispatch, getState) => {
     try {

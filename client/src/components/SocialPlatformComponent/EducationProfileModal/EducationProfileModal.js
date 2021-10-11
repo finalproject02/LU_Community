@@ -35,12 +35,21 @@ const EducationProfileModal = ({ show, handleClose, DegreeName, newShow, closeNe
                             <Form.Control onChange={handleChange} defaultValue={formData.school} name={'school'} type="text" />
                         </Col>
                     </Row>
-                    <Row className="mb-2">
+                    {show ? (
+                        <Row className="mb-2">
+                            <Col md="12">
+                                <h6 class="">Degree</h6>
+                                <Form.Control name={'degree'}  value={formData.degree} onChange={handleChange} type="text" disabled/>
+                            </Col>
+                        </Row>
+                    ) : <Row className="mb-2">
                         <Col md="12">
                             <h6 class="">Degree</h6>
-                            <Form.Control name={'degree'} value={formData.degree} onChange={handleChange} type="text" />
+                            <Form.Control name={'degree'}  value={formData.degree} onChange={handleChange} type="text"/>
                         </Col>
-                    </Row>
+                       </Row>}
+
+
                     <Row className="mb-2">
                         <Col md="12">
                             <h6 class="">Field of Study</h6>
