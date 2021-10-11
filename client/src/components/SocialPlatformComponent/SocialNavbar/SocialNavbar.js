@@ -81,16 +81,29 @@ const SocialNavbar = () => {
                                                         {getUserName(notification.notify_by)} {notification.position} your post
                                                         <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
                                                     </div>
-                                                </NavDropdown.Item >
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                                <NavDropdown.Item className="py-3 d-none">
+                                                    <div to={`/post/${notification.document_id}`} className="text-decoration-none text-dark" onClick={handleShow}>
+                                                        <div className="d-flex">
+                                                            <img src={Avatar} alt="..." width="35" className="rounded-circle" />
+                                                            <div className="text-muted text-sm mt-1 ms-1"><strong>Md Jahed Miah</strong> requested to join your group</div>
+                                                        </div>
+                                                        <div className="mt-1">
+                                                            <div className="btn btn-primary me-2 btn-sm">Accept</div>
+                                                            <div className="btn btn-danger btn-sm">Reject</div>
+                                                        </div>
+                                                    </div>
+                                                </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                             </>
                                         ))}
                                         <Dropdown.Item href="/allNotification">
                                             See All Notifications
                                         </Dropdown.Item>
-                                    </NavDropdown >
-                                </div >
-                            </ul >
+                                    </NavDropdown>
+                                </div>
+                            </ul>
                             <Form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                                 <Form.Control type="search" placeholder="Search..." name={'search'} onChange={(e) => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
                             </Form>

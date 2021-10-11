@@ -25,7 +25,7 @@ const Online = () => {
                                     <div class="d-flex justify-content-between align-persons-center pt-3 mb-2">
                                         <div class="d-flex justify-content-start align-persons-center">
                                             <img src={person.profile_picture ? `/api/files/storage/${person.profile_picture}` : Avatar} width="45" height="45" className="rounded-circle me-2" alt="" />
-                                            <h6>{person.name}</h6>
+                                            <strong className="mt-2">{person.name}</strong>
                                         </div>
                                         <div class="pb-2">
                                             <FaDotCircle className="textSecondary" />
