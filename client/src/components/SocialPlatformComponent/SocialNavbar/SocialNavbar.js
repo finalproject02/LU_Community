@@ -77,19 +77,20 @@ const SocialNavbar = () => {
                                             <>
                                                 <NavDropdown.Item className="py-3">
                                                     <div to={`/post/${notification.document_id}`} className="text-decoration-none text-dark" onClick={handleShow}>
-                                                        <FaUser className="me-1 mb-1" />
-                                                        {getUserName(notification.notify_by)} {notification.position} your post
-                                                        <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
+                                                        <img src={Avatar} alt="..." width="30" className="rounded-circle" />
+                                                        <span className="ms-1"><strong>{getUserName(notification.notify_by)}</strong> {notification.position} your post</span>
+                                                        <div className="text-muted text-sm ms-4 mt-0">{moment(notification.time).fromNow()}</div>
                                                     </div>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
                                                 <NavDropdown.Item className="py-3">
                                                     <div to={`/post/${notification.document_id}`} className="text-decoration-none text-dark" onClick={handleShow}>
                                                         <div className="d-flex">
-                                                            <img src={Avatar} alt="..." width="35" className="rounded-circle" />
-                                                            <div className="text-muted text-sm mt-1 ms-1"><strong>Md Jahed Miah</strong> requested to join your group</div>
+                                                            <img src={Avatar} alt="..." width="30" className="rounded-circle" />
+                                                            <div className="text-muted text-sm ms-2"><strong>Md Jahed Miah</strong> requested to join your group</div>
                                                         </div>
-                                                        <div className="mt-1">
+                                                        <span className="text-muted text-sm ms-4">{moment(notification.time).fromNow()}</span>
+                                                        <div className="mt-1 ms-4">
                                                             <div className="btn btn-primary me-2 btn-sm">Accept</div>
                                                             <div className="btn btn-danger btn-sm">Reject</div>
                                                         </div>

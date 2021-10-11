@@ -102,9 +102,9 @@ const PostCard = ({ posts }) => {
                             </div>
                         </Card.Text>
                         <Card.Text as="div" className="d-flex justify-content-center">
-                            <img className="w-100 "
+                            <img className="w-100 d-none"
                                 src={`/api/files/storage/${post.filename}`} alt=".." />
-                            <video className="w-100 d-none" controls src={`/api/files/storage/${post.filename}`}></video>
+                            <video className="w-100" controls src={`/api/files/storage/${post.filename}`}></video>
                             <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".."></iframe>
                         </Card.Text>
                         <Card.Text as="div">
