@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Carousel, Collapse, Dropdown, Form } from 'react-bootstrap';
+import { Card, Carousel, Collapse, Dropdown, Form, NavDropdown } from 'react-bootstrap';
 import { FaEllipsisH, FaEllipsisV, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
 import Avatar from "../../../images/avatar.jpeg";
 import "./PostCard.css";
@@ -166,20 +166,22 @@ const PostCard = ({ posts }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <Dropdown>
-                                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                                            <FaEllipsisH />
-                                                        </Dropdown.Toggle>
-                                                        <Dropdown.Menu>
-                                                            <Dropdown.Item href="#/action-1" onClick={() => dispatch(DeletePosts(post._id))}>Delete
-                                                                Comment</Dropdown.Item>
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
+                                                    <NavDropdown
+                                                        className="navFontSize"
+                                                        title={<FaEllipsisH className="text-dark" />}
+                                                    >
+                                                        <NavDropdown.Item className="dropdownItem py-1">Delete
+                                                            Comment
+                                                        </NavDropdown.Item>
+                                                        <NavDropdown.Item className="dropdownItem py-1">Edit
+                                                            Comment
+                                                        </NavDropdown.Item>
+                                                    </NavDropdown>
                                                 </div>
                                             </>
                                         )) : post.comments.sort((a, b) => { return new Date(b.time) - new Date(a.time) }).slice(0, 3).map(comment => (
                                             <>
-                                                <div className="reply d-flex justify-content-start align-items-center">
+                                                <div className="reply">
                                                     <div className="d-flex justify-content-start align-items-top ms-5 mb-2">
                                                         <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt=".." />
                                                         <div className="d-flex align-items-center">
@@ -188,20 +190,18 @@ const PostCard = ({ posts }) => {
                                                                 <p className="mb-0">{comment.comment}</p>
                                                             </div>
                                                         </div>
+                                                        <NavDropdown
+                                                            className="navFontSize"
+                                                            title={<FaEllipsisH className="text-dark" />}
+                                                        >
+                                                            <NavDropdown.Item className="dropdownItem py-1">Delete
+                                                                Comment
+                                                            </NavDropdown.Item>
+                                                            <NavDropdown.Item className="dropdownItem py-1">Edit
+                                                                Comment
+                                                            </NavDropdown.Item>
+                                                        </NavDropdown>
                                                     </div>
-                                                    <Dropdown>
-                                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                                            <FaEllipsisH />
-                                                        </Dropdown.Toggle>
-                                                        <Dropdown.Menu>
-                                                            <Dropdown.Item href="#/action-1">Delete
-                                                                Comment
-                                                            </Dropdown.Item>
-                                                            <Dropdown.Item href="#/action-1">Edit
-                                                                Comment
-                                                            </Dropdown.Item>
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
                                                 </div>
                                             </>
                                         ))}
