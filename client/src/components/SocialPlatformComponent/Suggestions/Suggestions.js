@@ -28,10 +28,8 @@ const Suggestions = (props) => {
                                             <img src={suggestion.profile_picture ? `/api/files/storage/${suggestion.profile_picture}` : Avatar} alt={suggestion.name} style={{ cursor: 'pointer' }} width="52" height="52" className="rounded-circle me-2" onClick={() => history.push(`/profile/${suggestion._id}`)} />
                                             <div className="d-flex align-items-center">
                                                 <div>
-                                                    <h6>
-                                                        <span className="textHover text-dark" style={{ cursor: 'pointer' }} onClick={() => history.push(`/profile/${suggestion._id}`)}>{suggestion.name}</span>
-                                                    </h6>
-                                                    <span className="text-muted">{suggestion.current_position}</span>
+                                                    <h6 className="textHover text-dark mb-0 fw-bold" style={{ cursor: 'pointer' }} onClick={() => history.push(`/profile/${suggestion._id}`)}>{suggestion.name}</h6>
+                                                    <small className="text-muted">{suggestion.current_position}</small>
                                                 </div>
                                             </div>
                                         </div>
