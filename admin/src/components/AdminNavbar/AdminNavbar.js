@@ -18,8 +18,6 @@ function AdminNavbar() {
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={showSidebar} />
                     </Link>
-                    <Link className="text-decoration-none text-white" to="#">Home</Link>
-                    <Link className="text-decoration-none text-white" to="#">Noticication</Link>
                 </div>
                 <nav className={sidebar ? 'nav-menu active zIndex' : 'nav-menu zIndex'}>
                     <ul className='nav-menu-items' onClick={showSidebar}>
