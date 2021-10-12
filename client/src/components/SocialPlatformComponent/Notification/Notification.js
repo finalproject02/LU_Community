@@ -1,75 +1,119 @@
 import React from 'react';
 import { Card, Dropdown } from 'react-bootstrap';
 import { FaEllipsisV } from 'react-icons/fa';
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import moment from "moment";
 import Avatar from "../../../images/avatar.jpeg";
 import {Link, useHistory} from 'react-router-dom';
+import {updateProfile} from "../../../actions/auth";
 
 const Notification = () => {
-    const history = useHistory();
+    const dispatch = useDispatch()
     const { people } = useSelector(state => state.people);
+    const { clubs } = useSelector(state => state.clubs);
+    const { groups } = useSelector(state => state.groups);
     const { currentUser } = useSelector(state => state.auth)
 
-    const getUserProfilePicture = (id) => {
-        const person = people.filter(usr => usr._id === id);
-        const pic = person.map(u => u.profile_picture);
-        const check = pic.map(i => i == null);
-        if (check.includes(true)) {
-            return null
+    const getUserProfilePicture = (notify_by, types, documentId) => {
+        if (types === 'club_post') {
+            const person = clubs.filter(usr => usr._id === notify_by);
+            const pic = person.map(u => u.profile_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return person.map(u => u.profile_picture)
+            }
+        } else if(types === 'member_accepted') {
+            const person = groups.filter(usr => usr._id === notify_by);
+            const pic = person.map(u => u.cover_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return person.map(u => u.cover_picture)
+            }
         } else {
-            return person.map(u => u.profile_picture)
+            const person = people.filter(usr => usr._id === notify_by);
+            const pic = person.map(u => u.profile_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return person.map(u => u.profile_picture)
+            }
         }
+
     }
 
-    const getUserName = (id) => {
-        const person = people.filter(usr => usr._id === id);
+    const getUserName = (notify_by, types, documentId) => {
+        const person = people.filter(usr => usr._id === notify_by);
         return person.map(u => u.name)
     }
-    const getTypesInfo = (types) => {
+
+    const getClubOrGroupName = (notify_by, types, documentId, post_to) => {
+        if (types === 'club_post') {
+            const club = clubs.filter(club => club._id === notify_by);
+            return club.map(u => u.name)
+        } else if (types === 'club_following') {
+            const club = clubs.filter(club => club._id === documentId);
+            return club.map(u => u.name)
+        } else if (types === 'group_post') {
+            const group = groups.filter(group => group._id === post_to);
+            return group.map(u => u.name)
+        } else if (types === 'member_request') {
+            const group = groups.filter(group => group._id === documentId);
+            return group.map(u => u.name)
+        } else if (types === 'member_accepted') {
+            const group = groups.filter(group => group._id === notify_by);
+            return group.map(u => u.name)
+        }
+    }
+    const getTypesInfo = (notify_by, types, documentId, post_to) => {
         switch (types) {
-            case types === 'club_post':
-                return '';
-            case types === 'group_post':
-                return '';
-            case types === 'club_following':
-                return '';
-            case types === 'member_request':
-                return '';
-            case types === 'member_accepted':
-                return '';
-            case types === 'user_post_like':
-                return '';
-            case types === 'user_post_comment':
-                return '';
-            case types === 'user_commented_post':
-                return '';
-            case types === 'connection_accepted':
-                return '';
+            case 'club_post':
+                return `${getClubOrGroupName(notify_by, types, documentId, post_to)} add a new post`;
+            case 'group_post':
+                return `${getUserName(notify_by, types, documentId)} posted in ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'club_following':
+                return `${getUserName(notify_by, types, documentId)} started following ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'member_request':
+                return `${getUserName(notify_by, types, documentId)} requested to join ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'member_accepted':
+                return `Now you are member of ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'user_post_like':
+                return `${getUserName(notify_by, types, documentId)} likes a post`;
+            case  'user_post_comment':
+                return `${getUserName(notify_by, types, documentId)} comments a post`;
+            case  'user_commented_post':
+                return `${getUserName(notify_by, types, documentId)} commented a post where you comment`;
+            case  'connection_accepted':
+                return `Now you are connected with ${getUserName(notify_by, types, documentId)}`;
             default:
                 return ''
         }
     }
 
-    const action = (types, documentId) => {
+    const action = (types, documentId, notify_by) => {
         switch (types) {
-            case types === 'club_post':
-            case types === 'group_post':
-            case types === 'user_post_like':
-            case types === 'user_post_comment':
-            case types === 'user_commented_post':
-                return history.push(`/postDetails/${documentId}`)
-            case types === 'club_following':
-                return
-            case types === 'member_request':
-                return '';
-            case types === 'member_accepted':
-                return '';
-            case types === 'connection_accepted':
-                return '';
+            case 'club_post':
+            case 'group_post':
+            case 'user_post_like':
+            case 'user_post_comment':
+            case 'user_commented_post':
+                return `/post/${documentId}`
+            case 'club_following':
+                return `/clubDetails/${documentId}`
+            case 'member_request':
+                return `/group/${documentId}`
+            case 'member_accepted':
+                return `/group/${notify_by}`;
+            case 'connection_accepted':
+                return `/profile/${notify_by}`
             default:
                 return ''
         }
+
     }
     return (
         <div>
@@ -78,14 +122,14 @@ const Notification = () => {
                     <Card.Title>Notifications</Card.Title>
                     <Card.Text>
                         {
-                            currentUser?.notifications.filter(noti => noti.types !== 'connection_request').sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
+                            currentUser?.notifications.filter(notify => notify.types !== 'connection_request').sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
                                 <div className="d-flex justify-content-between align-items-center mb-2 cardHover">
-                                    <Link to="/notificationPostPage" className="d-flex align-items-center ps-2 text-decoration-none text-dark">
-                                        <img src={getUserProfilePicture(notification.notify_by) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by)}` : Avatar} alt={notification.creator_name} width="50" height="50" className="rounded-circle" />
+                                    <Link to={`${action(notification.types, notification.document_id, notification.notify_by)}`} className="d-flex align-items-center ps-2 text-decoration-none text-dark" onClick={() => dispatch(updateProfile({ isShow: true }))}>
+                                        <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt={notification.notify_by} width="50" height="50" className="rounded-circle" />
                                         <div className="d-flex align-items-center ms-2">
                                             <div className="pt-2">
                                                 <p className="mb-0 pt-1">
-                                                    <span>{getUserName(notification.notify_by)} {getTypesInfo(notification.types)}</span></p>
+                                                    <span>{getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}</span></p>
                                                 <p className="text-muted text-sm"><span>{moment(notification.time).fromNow()}</span></p>
                                             </div>
                                         </div>
@@ -95,7 +139,7 @@ const Notification = () => {
                                             <FaEllipsisV />
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item>Remove this notification</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => dispatch(updateProfile({ time: notification.time, types: notification.types }))}> Remove this notification</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>

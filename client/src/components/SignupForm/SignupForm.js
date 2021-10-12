@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,16 @@ const SignupForm = () => {
         }
         dispatch(SignUp(data))
     }
+
+    useEffect(() => {
+        window.onbeforeunload = function() {
+            return true;
+        };
+
+        return () => {
+            window.onbeforeunload = null;
+        };
+    }, [])
     return (
         <div className="mt-5 p-4">
             <h2 className="text-center textPrimary">{isTeacher ? 'Teacher Signup' : 'Student Signup'}</h2>

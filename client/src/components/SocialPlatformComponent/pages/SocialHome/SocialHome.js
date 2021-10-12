@@ -10,8 +10,12 @@ import { useSelector } from "react-redux";
 const SocialHome = () => {
     const { isAuthenticated } = useSelector(state => state.auth);
     const { posts } = useSelector(state => state.posts);
+    const { groups } = useSelector(state => state.groups)
+
     const { currentUser } = useSelector(state => state.auth);
-    const currentUserPost = posts.filter(currentPost => (currentUser?.connection.includes(currentPost.owner_id) && currentPost.owner_position === 'own_post') || currentPost.owner_id === currentUser?._id || currentUser?.followings.includes(currentPost.post_to) || currentUser?.memberships.includes(currentPost.post_to))
+    const groupInfo = groups?.filter(group => group.creator_id === currentUser?._id );
+    const groupOwner = groupInfo.map(gr => gr._id).toString();
+    const currentUserPost = posts.filter(currentPost => (currentUser?.connection.includes(currentPost.owner_id) && currentPost.owner_position === 'own_post') || currentPost.owner_id === currentUser?._id || currentUser?.followings.includes(currentPost.post_to) || currentUser?.memberships.includes(currentPost.post_to) || currentPost.post_to === groupOwner)
 
     return (
         <>

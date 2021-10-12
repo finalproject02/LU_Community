@@ -10,7 +10,8 @@ export const admission = async (req, res) => {
         res.status(200).json({ application: newAdmission, success: true, message: 'Application successfully completed. We will with you contact very soon.' })
 
     } catch (error) {
-        res.status(400).json({ message: 'Something went wrong'})
+        //res.status(400).json({ message: 'Something went wrong'})
+        console.log(error)
     }
 
 
@@ -50,7 +51,7 @@ export const verifySSCCredentialChecking = async (req, res) => {
     const { id } = req.params;
     try {
         const application = await admissions.findById(id);
-        let driver = await new Builder().forBrowser('firefox').build();
+        let driver = await new Builder().forBrowser('chrome').build();
         try {
             await driver.get('http://www.educationboardresults.gov.bd/');
             await selectExam("ssc", driver)
@@ -104,7 +105,7 @@ export const verifyHSCCredentialChecking = async (req, res) => {
     const { id } = req.params;
     try {
         const application = await admissions.findById(id);
-        let driver = await new Builder().forBrowser('firefox').build();
+        let driver = await new Builder().forBrowser('chrome').build();
 
         try {
             await driver.get('http://www.educationboardresults.gov.bd/');

@@ -7,10 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
-import { ShowPostNotifications } from "../../../actions/posts";
-import PostDetails from "../pages/PostDetails/PostDetails";
+import {updateProfile} from "../../../actions/auth";
 import moment from "moment";
-import NotificationPostPage from '../pages/NotificationPostPage/NotificationPostPage';
 
 const SocialNavbar = () => {
     const [show, setShow] = useState(false);
@@ -61,11 +59,11 @@ const SocialNavbar = () => {
                                     <span className="d-none d-sm-block">Messaging</span>
                                 </Link>
                                 </li>
-                                <div className='position-relative d-flex align-items-center'>
+                                <div className='position-relative d-flex align-items-center' >
                                     <NavDropdown
                                         className="navFontSize"
                                         title={
-                                            <div className="d-flex"  onClick={() => dispatch(ShowPostNotifications())}>
+                                            <div className="d-flex" >
                                             <FaRegBell className="iconFont me-1 text-dark" />
                                             {currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length !== 0 && (
                                                 <Badge bg="danger" className="notificationCount text-white fw-bold">{currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length}</Badge>
@@ -73,16 +71,13 @@ const SocialNavbar = () => {
                                             <span className="text-dark d-none d-sm-block">Notification</span>
                                         </div>}>
 
-                                        {currentUser?.notifications.filter(noti => noti !== 'connection_requests').slice(0, 4).sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
+                                        {currentUser?.notifications.filter(notify => notify !== 'connection_requests').slice(currentUser?.notifications.length - 4, currentUser?.notifications.length).sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
                                             <>
                                                 <NavDropdown.Item className="py-3">
-                                                    <div to={`/post/${notification.document_id}`} className="text-decoration-none text-dark" onClick={handleShow}>
                                                     <Link to="/postDetails" className="text-decoration-none text-dark">
                                                         <FaUser className="me-1 mb-1" />
-                                                        {getUserName(notification.notify_by)} {notification.position} your post
+                                                        {getUserName(notification.notify_by)} {notification.types} your post
                                                         <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
-                                                    </div>
-                                                        <div className="text-muted text-sm">{moment(notification.createdAt).fromNow()}</div>
                                                     </Link>
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />

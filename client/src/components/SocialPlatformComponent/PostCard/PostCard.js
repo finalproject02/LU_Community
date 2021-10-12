@@ -6,19 +6,18 @@ import "./PostCard.css";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { Comment, DeletePosts, LikeAndDislike } from "../../../actions/posts";
+import {useHistory} from "react-router-dom";
 
 const PostCard = ({ posts }) => {
+    const history = useHistory()
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth);
     const { people } = useSelector(state => state.people);
     const { clubs } = useSelector(state => state.clubs);
     const [comment, setComment] = useState();
-    const [showMore, setShowMore] = useState(false)
 
 
     const [open, setOpen] = useState(false);
-
-    const [index, setIndex] = useState(0);
 
     const getUserName = (id, owner_position) => {
         if (owner_position === 'club_post') {
@@ -51,13 +50,10 @@ const PostCard = ({ posts }) => {
             }
         }
     }
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-    };
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             dispatch(Comment(comment.id, { comment: comment.comment }));
-            setComment('')
+            setComment({comment: ''})
         }
     }
     return (
@@ -103,9 +99,9 @@ const PostCard = ({ posts }) => {
                         </Card.Text>
                         <Card.Text as="div" className="d-flex justify-content-center">
                             <img className="w-100 "
-                                src={`/api/files/storage/${post.filename}`} alt=".." />
+                                src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} style={{cursor: 'pointer'}}/>
                             <video className="w-100 d-none" controls src={`/api/files/storage/${post.filename}`}></video>
-                            <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".."></iframe>
+                            <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".." ></iframe>
                         </Card.Text>
                         <Card.Text as="div">
                             <div className="d-flex align-items-center justify-content-between">
@@ -132,7 +128,7 @@ const PostCard = ({ posts }) => {
                                     aria-controls="example-collapse-text"
                                     aria-expanded={open}>
                                     <FaRegComment className="fs-5 mb-1" />
-                                    <p className="ps-2 pt-2 fs-5">Comment</p>
+                                    <p className="ps-2 pt-2 fs-5" onClick={() => history.push(`/post/${post._id}`)}>Comment</p>
                                 </div>
                                 <div className="d-flex align-items-center cursor">
                                     <FaShare className="fs-5 mb-1" />
@@ -151,57 +147,6 @@ const PostCard = ({ posts }) => {
                                         <FaPhotoVideo title="photo/video" />
                                     </div>
                                 </div>
-
-                                <div id="commentShow">
-                                    {showMore ?
-                                        post.comments.sort((a, b) => { return new Date(b.time) - new Date(a.time) }).slice(3, post.comments.length).map(comment => (
-                                            <>
-                                                <div className="reply">
-                                                    <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
-                                                        <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt="" />
-                                                        <div className="d-flex align-items-center">
-                                                            <div className="bgGray rounded p-2">
-                                                                <h6>{getUserName(comment.id)}</h6>
-                                                                <p>{comment.comment}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="d-flex ps-5 ms-5">
-                                                        <p className="pe-2">Like</p>
-                                                        <div>
-                                                            <FaRegHeart className="fs-5 skyColor me-1" />
-                                                            <span className="pe-2 border-end">5</span>
-                                                        </div>
-                                                        <p className="ps-2">Reply</p>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        )) : post.comments.sort((a, b) => { return new Date(b.time) - new Date(a.time) }).slice(0, 3).map(comment => (
-                                            <>
-                                                <div className="reply">
-                                                    <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
-                                                        <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt=".." />
-                                                        <div className="d-flex align-items-center">
-                                                            <div className="bgGray rounded p-2">
-                                                                <h6>{getUserName(comment.id)}</h6>
-                                                                <p>{comment.comment}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="d-flex ps-5 ms-5">
-                                                        <p className="pe-2">Like</p>
-                                                        <div>
-                                                            <FaRegHeart className="fs-5 skyColor me-1" />
-                                                            <span className="pe-2 border-end">5</span>
-                                                        </div>
-                                                        <p className="ps-2">Reply</p>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        ))}
-
-                                </div>
-                                <span style={{ cursor: 'pointer' }} className="ps-3 textHover text-dark" onClick={() => setShowMore((prevalue => !prevalue))}> {showMore ? 'View Previous Comments' : 'View more comments'}</span>
                             </div>
                         </Collapse>
                     </Card.Body>

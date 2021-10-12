@@ -28,6 +28,7 @@ const PostBox = ({details}) => {
     const [file, setFile] = useState();
     const [otherFile, setOtherFile] = useState();
     const paramsGroup = groups?.filter(group => group._id === id);
+
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();

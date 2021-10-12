@@ -97,7 +97,9 @@ const ProfileCard = () => {
             dispatch(uploadFile(formData));
             userData.profile_picture = profile_picture;
             dispatch(updateProfile(userData))
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000)
         }
     }
     const uploadCover = () => {

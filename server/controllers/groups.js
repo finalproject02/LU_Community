@@ -138,10 +138,10 @@ export const groupPost = async (req, res) => {
     const posts = req.body;
     const { id } = req.params;
     try {
-        const post = await postModel.create({...posts, owner_id: req.user.id, owner_name: req.user.id, post_to: id });
+        const post = await postModel.create({...posts, owner_id: req.user.id, owner_name: req.user.name, post_to: id });
         const group =await groupModel.findById(id);
-        await userModel.updateOne({ _id: group.creator_id }, { $push: { notifications: [{ document_id: id, notify_by: req.user.id, types: 'group_post', time: Date.now(), isShow: false }] } })
-        await userModel.updateMany({ _id: group.members }, { $push: { notifications: [{ document_id: id, notify_by: req.user.id, types: 'group_post', time: Date.now(), isShow: false }] } })
+        await userModel.updateOne({ _id: group.creator_id }, { $push: { notifications: [{ document_id: post._id, notify_by: req.user.id, post_to: id, types: 'group_post', time: Date.now(), isShow: false }] } })
+        await userModel.updateMany({ _id: group.members }, { $push: { notifications: [{ document_id: post._id, notify_by: req.user.id, post_to: id, types: 'group_post', time: Date.now(), isShow: false }] } })
         res.status(200).json({ post })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
