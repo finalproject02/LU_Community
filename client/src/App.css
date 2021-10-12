@@ -57,7 +57,7 @@
   vertical-align: top;
 }
 .conversationListHover:hover {
-  background-color: rgb(102, 165, 247);
+  background-color: #6daf2c;
   cursor: pointer;
 }
 .commentBoxPostDetails {
@@ -68,4 +68,12 @@
 }
 .commentBg {
   background-color: whitesmoke;
+}
+.zIndex {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+.zindex2 {
+  z-index: 1;
 }

@@ -32,7 +32,7 @@ const SocialNavbar = () => {
         return user.map(usr => usr.name)
     }
     return (
-        <div className="sticky-top top-0">
+        <div className="zIndex">
             {token && (
                 <header className="p-3 sticky-top bg-light shadow-sm">
                     <Container>

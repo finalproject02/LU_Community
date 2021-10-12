@@ -24,7 +24,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                 <h2 className="textPrimary">Residential Info.</h2>
                                             </legend>
                                             <h6 className="card-title textSecondary">
-                                                Admission for Graduate Programs
+                                                Admission for Undergraduate Programs
                                             </h6>
                                             <fieldset>
                                                 <Row>
@@ -41,7 +41,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 placeholder="guardian's name"
                                                                 name={'guardian_name'}
                                                                 onChange={handleChange}
-                                                                required
+
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -59,7 +59,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 placeholder="guardian's contact no"
                                                                 name={'guardian_contact'}
                                                                 onChange={handleChange}
-                                                                required
+
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -81,7 +81,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 rows={5}
                                                                 onChange={handleChange}
                                                                 name={'permanent_address'}
-                                                                required
+
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -96,7 +96,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 rows={5}
                                                                 onChange={handleChange}
                                                                 name={'present_address'}
-                                                                required
+
                                                             />
                                                         </Form.Group>
                                                     </Col>

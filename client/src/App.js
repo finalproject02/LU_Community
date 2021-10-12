@@ -155,6 +155,9 @@ function App() {
             <Route path="/connection">
               <Connection />
             </Route>
+            <Route path="/message">
+              <Message />
+            </Route>
             <Route path="/club">
               <Club />
             </Route>
