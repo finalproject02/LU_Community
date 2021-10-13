@@ -10,9 +10,9 @@ import {
 
 } from 'react-icons/fa';
 import AboutModal from './AboutModal';
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import {DeleteJob} from "../../../actions/auth";
+import { DeleteJob } from "../../../actions/auth";
 
 const ProfileAbout = () => {
     const dispatch = useDispatch()
@@ -37,12 +37,12 @@ const ProfileAbout = () => {
                                 <Card.Title>About</Card.Title>
                                 <Card.Text as="div">
                                     <div className="d-flex justify-content-between align-items-center ps-2">
-                                        <div className="d-flex align-items-center">
+                                        <div className="">
                                             <h6>Add Job</h6>
                                         </div>
-                                        <FaPencilAlt style={{cursor:'pointer'}} onClick={handleShow} />
-                                        <AboutModal show={show} handleClose={handleClose} />
+                                        <FaPencilAlt style={{ cursor: 'pointer' }} onClick={handleShow} />
                                     </div>
+                                    <AboutModal show={show} handleClose={handleClose} />
                                     {currentUser?.jobs.map(job => (
                                         <div className="ms-4 mb-2">
                                             <div>
@@ -50,22 +50,22 @@ const ProfileAbout = () => {
                                                 <span>{job.job_title}</span>
                                                 <br />
                                                 <span className="ms-4">{job.position}</span>
-                                                <br/>
+                                                <br />
                                                 <span className="ms-4">{job.company_name}</span>
                                                 <br />
                                                 <span className="ms-4">{moment(job.start_date).year()} - {moment(job.end_date).year()}</span>
                                             </div>
                                             <div className="d-flex">
-                                                <FaPencilAlt style={{cursor: 'pointer'}} title="edit" className="fs-5" onClick={(e) => {
+                                                <FaPencilAlt style={{ cursor: 'pointer' }} title="edit" className="fs-5" onClick={(e) => {
                                                     e.stopPropagation();
                                                     setCompanyName(job.company_name);
                                                     handleShowEditShow();
                                                 }} />
-                                                <FaTrash style={{cursor: 'pointer'}} title="delete" className="fs-5 ms-2" onClick={() => {
+                                                <FaTrash style={{ cursor: 'pointer' }} title="delete" className="fs-5 ms-2" onClick={() => {
                                                     dispatch(DeleteJob(job.company_name))
-                                                }}/>
-                                                <AboutModal editShow={editShow} handleCloseEditShow={handleCloseEditShow} companyName={companyName}/>
+                                                }} />
                                             </div>
+                                            <AboutModal editShow={editShow} handleCloseEditShow={handleCloseEditShow} companyName={companyName} />
                                         </div>
                                     ))}
                                 </Card.Text>

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Card, Form, Modal } from 'react-bootstrap';
 import { FaCommentDots, FaEnvelopeOpen, FaGlobe, FaPhone, FaRegClock, FaRegEdit, FaTrashAlt, FaUsers } from 'react-icons/fa';
 import Collapsible from "react-collapsible-paragraph";
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import aboutClubData from './AboutClubData';
-import {useDispatch, useSelector} from "react-redux";
-import {ClubUpdate} from "../../../actions/clubs";
+import { useDispatch, useSelector } from "react-redux";
+import { ClubUpdate } from "../../../actions/clubs";
 
 const ClubInfo = () => {
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const ClubInfo = () => {
                                 <h5 className="mb-2 mt-2">General Information</h5>
                                 {isCreator.length !== 0 && (
                                     <FaRegEdit onClick={handleShow} className="fs-5" />
-                                ) }
+                                )}
                             </div>
                             <div className="p-3">
                                 <div className="mb-2">
@@ -55,8 +55,8 @@ const ClubInfo = () => {
                                             <FaGlobe className="mt-1" />
                                             <h6 className="ps-2 text-dark">Website</h6>
                                         </div>
-                                        {isCreator.length !== 0 &&(
-                                            <FaTrashAlt style={{cursor: 'pointer'}} onClick={() => dispatch(ClubUpdate({ website: '' }, club._id))}/>
+                                        {isCreator.length !== 0 && (
+                                            <FaTrashAlt style={{ cursor: 'pointer' }} onClick={() => dispatch(ClubUpdate({ website: '' }, club._id))} />
                                         )}
                                     </div>
                                     <p className="ms-4 textHover cursor" >{club.website}</p>
@@ -67,8 +67,8 @@ const ClubInfo = () => {
                                             <FaPhone className="mt-1" />
                                             <h6 className="ps-2 text-dark">Phone</h6>
                                         </div>
-                                        {isCreator.length !== 0 &&(
-                                            <FaTrashAlt style={{cursor: 'pointer'}} onClick={() => dispatch(ClubUpdate({ mobile: '' }, club._id))}/>
+                                        {isCreator.length !== 0 && (
+                                            <FaTrashAlt style={{ cursor: 'pointer' }} onClick={() => dispatch(ClubUpdate({ mobile: '' }, club._id))} />
                                         )}
                                     </div>
                                     <p className="ms-4 textHover cursor">{club.mobile}</p>
@@ -79,8 +79,8 @@ const ClubInfo = () => {
                                             <FaEnvelopeOpen className="mt-1" />
                                             <h6 className="ps-2 text-dark">Email</h6>
                                         </div>
-                                        {isCreator.length !== 0 &&(
-                                            <FaTrashAlt style={{cursor: 'pointer'}} onClick={() => dispatch(ClubUpdate({ email: '' }, club._id))}/>
+                                        {isCreator.length !== 0 && (
+                                            <FaTrashAlt style={{ cursor: 'pointer' }} onClick={() => dispatch(ClubUpdate({ email: '' }, club._id))} />
                                         )}
                                     </div>
                                     <p className="ms-4 textHover cursor">{club.email}</p>
@@ -89,8 +89,8 @@ const ClubInfo = () => {
                             <div className="mb-2 p-3">
                                 <div className="d-flex justify-content-between">
                                     <h5 className="mb-2">Details info</h5>
-                                    {isCreator.length !== 0 &&(
-                                        <FaTrashAlt style={{cursor: 'pointer'}} onClick={() => dispatch(ClubUpdate({ description: '' }, club._id))}/>
+                                    {isCreator.length !== 0 && (
+                                        <FaTrashAlt style={{ cursor: 'pointer' }} onClick={() => dispatch(ClubUpdate({ description: '' }, club._id))} />
                                     )}
                                 </div>
                                 <Collapsible lines={5}>{club.description}
@@ -112,6 +112,7 @@ const ClubInfo = () => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
+                centered
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Generel Info</Modal.Title>
@@ -124,7 +125,7 @@ const ClubInfo = () => {
                                 <label for="floatingInput">Website</label>
                             </Form.Floating>
                             <Form.Floating className="mb-3">
-                                <Form.Control type="text" placeholder="Phone" defaultValue={club.mobile}  onChange={handleChange} name="mobile" />
+                                <Form.Control type="text" placeholder="Phone" defaultValue={club.mobile} onChange={handleChange} name="mobile" />
                                 <label for="floatingInput">Phone</label>
                             </Form.Floating>
                             <Form.Floating className="mb-3">
@@ -136,7 +137,7 @@ const ClubInfo = () => {
                                 <Form.Label>Details Info</Form.Label>
                             </Form.Floating>
                             <div className="bgSecondary text-center mt-4 rounded-3">
-                                <input type="submit" value="Save Changes" className="btn w-100 text-white"/>
+                                <input type="submit" value="Save Changes" className="btn w-100 text-white" />
                             </div>
                         </Form>
                     ))}

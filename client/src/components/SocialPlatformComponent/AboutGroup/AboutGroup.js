@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { FaCalendar, FaEye, FaGlobe, FaRegEdit, FaTrashAlt, FaUsers, FaLock, FaEyeSlash } from 'react-icons/fa';
-import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import {GroupUpdate} from "../../../actions/groups";
+import { GroupUpdate } from "../../../actions/groups";
 
 
 const AboutGroup = () => {
@@ -48,7 +48,7 @@ const AboutGroup = () => {
                             <Card.Body>
                                 <div className="d-flex justify-content-between">
                                     <Card.Title className="m-3">About Group</Card.Title>
-                                    {isCreator.length !== 0 &&  <FaRegEdit className="m-3" onClick={handleShow} />}
+                                    {isCreator.length !== 0 && <FaRegEdit className="m-3" onClick={handleShow} />}
                                 </div>
                                 <hr />
                                 <Card.Text className="p-3">
@@ -108,7 +108,7 @@ const AboutGroup = () => {
                             <Card.Body>
                                 <div className="d-flex justify-content-between">
                                     <Card.Title className="m-3">Group rules from the admins</Card.Title>
-                                    {isCreator.length !==0 && <FaRegEdit className="m-3" onClick={handleShowSecond} />}
+                                    {isCreator.length !== 0 && <FaRegEdit className="m-3" onClick={handleShowSecond} />}
                                 </div>
                                 <hr />
                                 <Card.Text className="p-3">
@@ -116,7 +116,7 @@ const AboutGroup = () => {
                                         <Card.Text as="div">
                                             <div className="d-flex justify-content-between">
                                                 <h6 className="pt-2">{rule.title}</h6>
-                                                {isCreator.length !== 0 && <FaTrashAlt style={{cursor: 'pointer'}} onClick={() => dispatch(GroupUpdate({title: rule.title, description: rule.description}, id))}/>}
+                                                {isCreator.length !== 0 && <FaTrashAlt style={{ cursor: 'pointer' }} onClick={() => dispatch(GroupUpdate({ title: rule.title, description: rule.description }, id))} />}
                                             </div>
                                             <p>{rule.description}</p>
                                         </Card.Text>
@@ -133,6 +133,7 @@ const AboutGroup = () => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
+                centered
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Edit About</Modal.Title>
@@ -155,7 +156,7 @@ const AboutGroup = () => {
                                 <option value="hidden">Hidden</option>
                             </Form.Select>
                             <div className="bgSecondary text-center mt-4 rounded-3">
-                                <input type="submit" value="Save Changes" className="btn w-100 text-white"/>
+                                <input type="submit" value="Save Changes" className="btn w-100 text-white" />
                             </div>
                         </Form>
                     </Modal.Body>
@@ -170,6 +171,7 @@ const AboutGroup = () => {
                 onHide={handleCloseSecond}
                 backdrop="static"
                 keyboard={false}
+                centered
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Add Group Rules</Modal.Title>
