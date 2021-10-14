@@ -1,21 +1,27 @@
 import admissions from "../models/admissionModel.js";
 import { Builder, By, until } from 'selenium-webdriver';
 import { sendOfferLetterMessage, sendAccurateCredential } from "../services/mailService.js";
+
 export const admission = async (req, res) => {
-    const application = req.body;
+        try {
+            const newAdmission = new admissions(req.body);
+            await newAdmission.save()
+            res.status(200).json({ application: newAdmission, success: true, message: 'Application successfully completed. We will with you contact very soon.' })
 
-    try {
-        const newAdmission = new admissions(application);
-        await newAdmission.save()
-        res.status(200).json({ application: newAdmission, success: true, message: 'Application successfully completed. We will with you contact very soon.' })
-
-    } catch (error) {
-        //res.status(400).json({ message: 'Something went wrong'})
-        console.log(error)
-    }
-
-
+        } catch (error) {
+            res.status(500).json({ message: 'Something went wrong'})
+        }
 };
+
+export const deleteApplications = async (req, res) => {
+    const { id } = req.params
+    try {
+       await admissions.findByIdAndDelete(id);
+        res.status(200).json({ message: 'Application deleted' });
+    } catch (error) {
+        res.status(400).json({ message : 'Something went wrong' })
+    }
+}
 
 export const getApplications = async (req, res) => {
     try {
@@ -30,10 +36,11 @@ export const getApplication = async (req, res) => {
     const { id } = req.params
     try {
         const application = await admissions.findOne({ _id: id });
-        if (application.ssc_credential_authenticate === 'authenticated credential' && application.hsc_credential_authenticate === 'authenticated credential' && application.status === 'application padding') {
+        if (application.ssc_credential_authenticate === 'authenticated credential' && application.hsc_credential_authenticate === 'authenticated credential' && application.status === 'application pending') {
            await sendOfferLetterMessage(application.applicant_email, application.applicant_name);
            await admissions.findByIdAndUpdate(id, { status: 'sent email for payment' })
            res.status(200).json({ application: application })
+
         } else if (application.ssc_credential_authenticate === 'not authenticated' && application.hsc_credential_authenticate === 'not authenticated' && application.status === 'application pending') {
               await sendAccurateCredential(application.applicant_email, application.applicant_name);
               await admissions.findByIdAndUpdate(id, { status: 'sent email for accurate information' })
@@ -77,10 +84,10 @@ export const verifySSCCredentialChecking = async (req, res) => {
                         const correct = await FinalResult(result, application.applicant_name, application.ssc_gpa, application.applicant_fatherName, application.applicant_motherName);
                         if (correct === true) {
                             await admissions.findByIdAndUpdate( id, { ssc_credential_authenticate: 'authenticated credential' }, { new: true })
-                            res.status(200).json('authenticated credential');
+                            res.status(200).json({ message: 'SSC Credential is  valid' })
                         } else {
                             await admissions.findByIdAndUpdate( id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
-                            res.status(400).json('not authenticated');
+                            res.status(200).json({ message: 'SSC Credential is not valid' })
                         }
 
                     })
@@ -88,13 +95,12 @@ export const verifySSCCredentialChecking = async (req, res) => {
             } catch (error) {
                 console.log('Something went wrong');
                 await admissions.findByIdAndUpdate( id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
-                res.status(400).json('not authenticated');
+                res.status(200).json({ message: 'SSC Credential is not valid' })
                 await driver.quit();
             }
         } catch (error) {
-            console.log('Something went wrong');
             await admissions.findByIdAndUpdate( id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
-            res.status(400).json('not authenticated');
+            res.status(200).json({ message: 'SSC Credential is not valid' })
         }
     } catch (error) {
         res.status(400).json({msg:error})
@@ -133,10 +139,10 @@ export const verifyHSCCredentialChecking = async (req, res) => {
                         const correct = await FinalResult(result, application.applicant_name, application.hsc_gpa, application.applicant_fatherName, application.applicant_motherName);
                         if (correct === true) {
                             await admissions.findByIdAndUpdate( id, { hsc_credential_authenticate: 'authenticated credential' }, { new: true })
-                            res.status(200).json('authenticated credential');
+                            res.status(200).json({ message: 'HSC Credential is valid' })
                         } else {
                             await admissions.findByIdAndUpdate( id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
-                            res.status(400).json('not authenticated');
+                            res.status(200).json({ message: 'HSC Credential is not valid' })
                         }
 
                     })
@@ -144,13 +150,13 @@ export const verifyHSCCredentialChecking = async (req, res) => {
             } catch (error) {
                 console.log('Something went wrong');
                 await admissions.findByIdAndUpdate( id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
-                res.status(400).json('not authenticated');
+                res.status(200).json({ message: 'HSC Credential is not valid' })
                 await driver.quit();
             }
         } catch (error) {
             console.log('Something went wrong');
             await admissions.findByIdAndUpdate( id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
-            res.status(400).json('not authenticated');
+            res.status(200).json({ message: 'HSC Credential is not valid' });
             await driver.quit();
         }
     } catch (error) {

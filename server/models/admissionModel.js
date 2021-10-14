@@ -1,104 +1,36 @@
 import mongoose from "mongoose";
 
 const admissionSchema = new mongoose.Schema({
-    program_name: {
-        type: String,
-        required: true
-    },
-    applicant_name: {
-        type: String,
-        required: true
-    },
-    applicant_email: {
-        type: String,
-        required: true,
-    },
-    applicant_birth_or_nid_number: {
-        type: Number,
-        required: true,
-        minlength: 10,
-        maxlength: 17
-    },
-    applicant_mobile: {
-        type: String,
-        required: true,
-        maxlength: 14,
-        minlength: 11
-    },
-    applicant_fatherName: {
-        type: String,
-        required: true
-    },
-    applicant_motherName: {
-        type: String,
-        required: true
-    },
-    applicant_date_of_birth: {
-        type: String,
-        required: true
-    },
-    ssc_regis_no: {
-        type: Number,
-        required: true,
-        maxlength: 10,
-        minlength: 10
-    },
+    program_name: String,
+    applicant_name: String,
+    applicant_email: String,
+    applicant_birth_or_nid_number:Number,
+    applicant_mobile: String,
+
+    applicant_fatherName: String,
+    applicant_motherName: String,
+    applicant_date_of_birth: String,
+    ssc_regis_no: Number,
     ssc_institution_name: String,
-    ssc_roll_no: {
-        type: Number,
-        required: true,
-        minlength: 6,
-        maxlength: 6
-    },
+    ssc_roll_no: Number,
+
     ssc_group: String,
-    ssc_year: {
-        type: Number,
-        required: true,
-        minlength: 4,
-        maxlength: 4
-    },
-    ssc_board: {
-        type: String,
-        required: true
-    },
-    ssc_gpa: {
-        type: Number,
-        required: true
-    },
+    ssc_year: Number,
+    ssc_board: String,
+    ssc_gpa: Number,
     ssc_transcript: String,
     ssc_credential_authenticate: {
         type: String,
         default: 'Not checked'
     },
 
-    hsc_regis_no: {
-         type: Number,
-         required: true,
-         maxlength: 10,
-         minlength: 10
-    },
+    hsc_regis_no: Number,
     hsc_institution_name: String,
-    hsc_roll_no: {
-         type: Number,
-         required: true,
-         maxlength: 6,
-         minlength: 6
-    },
+    hsc_roll_no: Number,
     hsc_group: String,
-    hsc_year: {
-        type: Number,
-        required: true,
-        maxlength: 4,
-        minlength: 4
-    },
-    hsc_board: {
-        type: String,
-        required: true
-    },
-    hsc_gpa: {
-        type: Number,
-        required: true
-    },
+    hsc_year: Number,
+    hsc_board: String,
+    hsc_gpa: Number,
     hsc_transcript: String,
     hsc_credential_authenticate: {
         type: String,

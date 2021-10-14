@@ -1,6 +1,5 @@
 import express from 'express';
-import http from "http";
-import morgan from 'morgan'
+import morgan from 'morgan';
 import dotenv from 'dotenv';
 import methodOverride from 'method-override';
 import admissions from "./routes/admissions.js";
@@ -11,11 +10,12 @@ import auth from './routes/auth.js';
 import users from './routes/users.js'
 import clubs from "./routes/clubs.js";
 import groups from "./routes/groups.js";
+import messages from "./routes/messages.js"
 import DatabaseConnection from "./config/db.js";
 import cors from 'cors'
 
+
 const app = express();
-const server = http.createServer(app);
 dotenv.config({ path: './config/config.env' });
 await DatabaseConnection()
 
@@ -29,6 +29,8 @@ app.get('/', (req, res) => {
     res.send('Server running...')
 })
 
+
+
 app.use('/api', admissions);
 app.use('/api/files', fileService);
 app.use('/api/auth', auth);
@@ -36,6 +38,7 @@ app.use('/api', users);
 app.use('/api/posts', posts);
 app.use('/api/club', clubs);
 app.use('/api/group', groups);
+app.use('/api/messages', messages);
 app.use('/test', test)
 
 const PORT = process.env.PORT

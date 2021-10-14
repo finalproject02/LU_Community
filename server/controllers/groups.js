@@ -106,7 +106,8 @@ export const reject_membership_request = async (req, res) => {
             await user.updateOne({ $pull: { connecting: id } });
             await creator.updateOne({ $pull: { notifications: { document_id: id, notify_by: userId, types: 'member_request' }}  })
             const finalResult = await groupModel.findById(id);
-            res.status(200).json({ group: finalResult })
+            const findCreator = await userModel.findById(finalResult.creator_id)
+            res.status(200).json({ group: finalResult, creator: findCreator })
         }
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' });
@@ -127,7 +128,8 @@ export const accept_membership_request = async (req, res) => {
             await user.updateOne({ $push: { memberships: id, notifications: [{ notify_by: id, types: 'member_accepted', time: Date.now(), isShow: false }] } });
             await group.updateOne({ $push: { members: userId} });
             const finalResult = await groupModel.findOne({ _id: id });
-            res.status(200).json({ group: finalResult })
+            const findCreator = await userModel.findById(finalResult.creator_id)
+            res.status(200).json({ group: finalResult, creator: findCreator })
         }
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' })
