@@ -1,19 +1,28 @@
-import React, { useState } from "react";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
-import AdmissionFinalStep from "../AdmissionFinalStep/AdmissionFinalStep";
+import React, {useEffect, useState} from "react";
+import { Card, Col,Form, Row } from "react-bootstrap";
+import Header from "../../Header/Header";
+import MainNavbar from "../../MainNavbar/MainNavbar";
+import {useHistory} from "react-router-dom";
 
-const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
-    const [secondStep, setSecondStep] = useState(false);
+const AdmissionSecondStep = () => {
+    const history = useHistory();
     const [secondFormData, setSecondForm] = useState({ guardian_name: '', guardian_contact: '', present_address: '', permanent_address: '' });
-    const handleChange = (e) => setSecondForm({ ...firstFormData, ...secondFormData, [e.target.name]: e.target.value })
+    const handleChange = (e) => setSecondForm({ ...secondFormData, [e.target.name]: e.target.value })
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSecondStep(true)
+        console.log(secondFormData)
     }
+    useEffect(() => {
+         setSecondForm(JSON.parse(localStorage.getItem('secondStep')))
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('secondStep', JSON.stringify(secondFormData))
+    }, [secondFormData])
     return (
-        <Container>
+        <div>
+            <Header/>
+            <MainNavbar/>
             <Row className="justify-content-center">
-                {!secondStep ?
                     <Col md="8">
                         <Card className="w-100 shadow-sm rounded my-5">
                             <Card.Body className="p-4">
@@ -41,6 +50,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 placeholder="guardian's name"
                                                                 name={'guardian_name'}
                                                                 onChange={handleChange}
+                                                                value={secondFormData?.guardian_name}
                                                                 required
                                                             />
                                                         </Form.Group>
@@ -59,6 +69,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 placeholder="guardian's contact no"
                                                                 name={'guardian_contact'}
                                                                 onChange={handleChange}
+                                                                value={secondFormData?.guardian_contact}
                                                                 required
                                                             />
                                                         </Form.Group>
@@ -82,6 +93,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 onChange={handleChange}
                                                                 name={'permanent_address'}
                                                                 required
+                                                                value={secondFormData?.permanent_address}
                                                             />
                                                         </Form.Group>
                                                     </Col>
@@ -96,6 +108,7 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                                                 rows={5}
                                                                 onChange={handleChange}
                                                                 name={'present_address'}
+                                                                value={secondFormData?.present_address}
                                                                 required
                                                             />
                                                         </Form.Group>
@@ -105,10 +118,10 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                             <hr />
                                         </Row>
                                         <div className="d-flex align-items-center justify-content-between">
-                                            <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => setFirstStep((prevalue) => !prevalue)}>
+                                            <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => history.push('/firstStep')}>
                                                 Previous
                                             </button>
-                                            <button className="btn bg-primary text-white px-5" type={'submit'}>
+                                            <button className="btn bg-primary text-white px-5" type={'submit'} onClick={() => history.push('/finalStep')}>
                                                 Next
                                             </button>
                                         </div>
@@ -116,10 +129,9 @@ const AdmissionSecondStep = ({ firstFormData, setFirstStep }) => {
                                 </Form>
                             </Card.Body>
                         </Card>
-                    </Col> : <AdmissionFinalStep secondFormData={secondFormData} />
-                }
+                    </Col>
             </Row>
-        </Container>
+        </div>
     );
 };
 

@@ -8,10 +8,11 @@ import {
     LOADING, GET_ERRORS,
     LOADED, UPDATE_INFO,
     ACCEPT_CONNECTION_REQUEST,
-    CONNECT, DISCONNECT,
+    CONNECT, DISCONNECT, PEER,
     DELETE_EDUCATION_BACKGROUND, DELETE_JOB,
     CLUB_FOLLOW, CLUB_UNFOLLOW, MEMBER_REQUEST,
-    CANCEL_REQUEST
+    CANCEL_REQUEST, ACCEPT_REQUEST, REJECT_REQUEST,
+
 } from "../actions/types";
 
 export default (state = { token: localStorage.getItem('token'), currentUser: null, isAuthenticated: false, isLoading: false, message: '' }, action) => {
@@ -63,6 +64,7 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case CLUB_UNFOLLOW:
         case MEMBER_REQUEST:
         case CANCEL_REQUEST:
+        case PEER:
             return {
                 ...state,
                 currentUser: action.payload,
@@ -86,6 +88,12 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
             return {
                 ...state,
                 currentUser: action.payload
+            }
+        case ACCEPT_REQUEST:
+        case REJECT_REQUEST:
+            return {
+                ...state,
+                currentUser: action.payload.creator
             }
         default:
             return state

@@ -14,11 +14,16 @@ export default (state = { groups: [], isLoading: false}, action) => {
             }
         case CREATE_GROUP:
         case GROUP_UPDATE:
+            return {
+                ...state,
+                groups: [action.payload, ...state.groups],
+                isLoading: false,
+            }
         case REJECT_REQUEST:
         case ACCEPT_REQUEST:
             return {
                 ...state,
-                groups: [action.payload, ...state.groups],
+                groups: [action.payload.group, ...state.groups],
                 isLoading: false,
             }
         case ALL_GROUP: {

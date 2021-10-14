@@ -14,8 +14,9 @@ const SocialHome = () => {
 
     const { currentUser } = useSelector(state => state.auth);
     const groupInfo = groups?.filter(group => group.creator_id === currentUser?._id );
-    const groupOwner = groupInfo.map(gr => gr._id).toString();
-    const currentUserPost = posts.filter(currentPost => (currentUser?.connection.includes(currentPost.owner_id) && currentPost.owner_position === 'own_post') || currentPost.owner_id === currentUser?._id || currentUser?.followings.includes(currentPost.post_to) || currentUser?.memberships.includes(currentPost.post_to) || currentPost.post_to === groupOwner)
+    const groupOwner = groupInfo.map(gr => gr._id)
+    console.log('owner: ', groupOwner)
+    const currentUserPost = posts.filter(currentPost => (currentUser?.connection.includes(currentPost.owner_id) && currentPost.owner_position === 'own_post') || currentPost.owner_id === currentUser?._id || currentUser?.followings.includes(currentPost.post_to) || currentUser?.memberships.includes(currentPost.post_to) || currentPost.post_to === groupOwner || currentPost.admin_to === currentUser?._id)
 
     return (
         <>

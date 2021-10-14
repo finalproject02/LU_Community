@@ -1,19 +1,24 @@
-import React, {useState} from 'react';
-import { Card, Col, Container, Form, Row } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import { Card, Col, Form, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
 import { createApplication } from "../../../actions/applications";
 import { uploadFile } from "../../../actions/files";
 import { useDispatch } from "react-redux";
+import MainNavbar from "../../MainNavbar/MainNavbar";
+import Header from "../../Header/Header";
+import {useHistory} from "react-router-dom";
 
-const AdmissionFinalStep = ({secondFormData}) => {
+const AdmissionFinalStep = () => {
+    const history = useHistory();
     const [finalFormData, setFinalFormData] = useState({ ssc_regis_no: '', ssc_institution_name: '', ssc_roll_no: '', ssc_group: '', ssc_year: '', ssc_board: '', ssc_gpa: '', hsc_regis_no: '', hsc_institution_name: '', hsc_roll_no: '', hsc_group: '', hsc_year: '', hsc_board: '', hsc_gpa: ''});
     const [applicantPhoto, setApplicantPhoto] = useState('');
     const [guardianPhoto, setGuardianPhoto] = useState('');
     const [sscTranscript, setSscTranscript] = useState('');
     const [hscTranscript, setHscTranscript] = useState('');
     const dispatch = useDispatch();
-    const handleChange = (e) => setFinalFormData({...secondFormData, ...finalFormData, [e.target.name] : e.target.value});
+
+    const handleChange = (e) => setFinalFormData({...finalFormData, [e.target.name] : e.target.value});
     const handleSubmit =  async (e) => {
         e.preventDefault();
         if (!applicantPhoto) {
@@ -56,11 +61,24 @@ const AdmissionFinalStep = ({secondFormData}) => {
             dispatch(uploadFile(sscTranscriptData));
             dispatch(uploadFile(hscTranscriptData));
         }
-        await dispatch(createApplication(finalFormData))
+        await dispatch(createApplication(finalFormData, history))
 
     }
+
+    useEffect(() => {
+        const first = JSON.parse(localStorage.getItem('firstStep'))
+        const second = JSON.parse(localStorage.getItem('secondStep'))
+        const final = JSON.parse(localStorage.getItem('finalStep'));
+        setFinalFormData({...first, ...second, ...final})
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('finalStep', JSON.stringify(finalFormData))
+    }, [finalFormData])
+
         return (
-            <Container>
+            <div>
+                <Header/>
+                <MainNavbar/>
                 <Row className="justify-content-center">
                     <Col md="8">
                         <Card className="bg-light w-100 shadow rounded my-5">
@@ -83,6 +101,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             className="w-100"
                                                             placeholder="ssc registration number"
                                                             name={'ssc_regis_no'}
+                                                            value={finalFormData?.ssc_regis_no}
                                                             onChange={handleChange}
                                                             required
                                                         />
@@ -97,6 +116,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             placeholder="ssc institution name"
                                                             name={"ssc_institution_name"}
                                                             onChange={handleChange}
+                                                            value={finalFormData?.ssc_institution_name}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -109,6 +129,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             placeholder="ssc roll"
                                                             name={'ssc_roll_no'}
                                                             onChange={handleChange}
+                                                            value={finalFormData?.ssc_roll_no}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -121,12 +142,11 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             placeholder="ssc group"
                                                             onChange={handleChange}
                                                             name={'ssc_group'}
+                                                            value={finalFormData?.ssc_group}
                                                             required
                                                         />
                <div className="text-end">
-                          <button className="btn bg-primary text-white px-5" type={'submit'}>
-                            Next
-                          </button>
+
                         </div>                                      </Form.Group>
                                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                                         <Form.Label>Year
@@ -137,6 +157,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             placeholder="ssc year"
                                                             name={'ssc_year'}
                                                             onChange={handleChange}
+                                                            value={finalFormData?.ssc_year}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -150,6 +171,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             placeholder="ssc board"
                                                             onChange={handleChange}
                                                             name={'ssc_board'}
+                                                            value={finalFormData?.ssc_board}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -162,6 +184,8 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             name="ssc_gpa"
                                                             placeholder="ssc gpa"
                                                             onChange={handleChange}
+                                                            step={'any'}
+                                                            value={finalFormData?.ssc_gpa}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -179,6 +203,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             placeholder="hsc registration number"
                                                             onChange={handleChange}
                                                             name={'hsc_regis_no'}
+                                                            value={finalFormData?.hsc_regis_no}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -191,6 +216,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             className="w-100"
                                                             name="hsc_institution_name"
                                                             onChange={handleChange}
+                                                            value={finalFormData?.hsc_institution_name}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -203,6 +229,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             name="hsc_roll_no"
                                                             onChange={handleChange}
                                                             placeholder="hsc roll"
+                                                            value={finalFormData?.hsc_roll_no}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -215,6 +242,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             placeholder="hsc group"
                                                             onChange={handleChange}
                                                             name={'hsc_group'}
+                                                            value={finalFormData?.hsc_group}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -227,6 +255,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             name="hsc_year"
                                                             placeholder="hsc year"
                                                             onChange={handleChange}
+                                                            value={finalFormData?.hsc_year}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -239,6 +268,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             name="hsc_board"
                                                             placeholder="hsc board"
                                                             onChange={handleChange}
+                                                            value={finalFormData?.hsc_board}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -251,6 +281,8 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                                             name="hsc_gpa"
                                                             placeholder="hsc gpa"
                                                             onChange={handleChange}
+                                                            step={'any'}
+                                                            value={finalFormData?.hsc_gpa}
                                                             required
                                                         />
                                                     </Form.Group>
@@ -317,7 +349,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                                     </fieldset>
                                     <hr />
                                     <div className="d-flex align-items-center justify-content-between">
-                                        <button className="btn bg-primary text-white px-5" type={'button'}>
+                                        <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => history.push('/secondStep')}>
                                             Previous
                                         </button>
                                         <button className="btn bg-primary text-white px-5" type={'submit'}>
@@ -329,7 +361,7 @@ const AdmissionFinalStep = ({secondFormData}) => {
                         </Card>
                     </Col>
                 </Row>
-            </Container>
+            </div>
         );
     };
     export default AdmissionFinalStep

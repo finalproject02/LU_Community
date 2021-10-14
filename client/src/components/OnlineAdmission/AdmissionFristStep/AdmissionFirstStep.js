@@ -1,26 +1,42 @@
-import React, { useState } from "react";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
-import AdmissionSecondStep from "../AdmissionSecondStep/AdmissionSecondStep";
+import React, {useEffect, useState} from "react";
+import { Card, Col, Form, Row } from "react-bootstrap";
+import Header from "../../Header/Header";
+import MainNavbar from "../../MainNavbar/MainNavbar";
+import {useHistory} from "react-router-dom";
 
-const AdmissionFirstStep = ({step}) => {
-  const [firstStep, setFirstStep] = useState(false);
+const AdmissionFirstStep = () => {
+  const history = useHistory()
   const [firstFormData, setFirstFormData] = useState({ program_name: 'css', applicant_email: '', applicant_name: '', applicant_birth_or_nid_number: '', applicant_fatherName: '', applicant_date_of_birth: '', applicant_father_occupation: '', applicant_gender: 'male', applicant_motherName: '', applicant_religion: 'islam', applicant_mother_occupation: '', applicant_nationality: '', father_or_mother_nid: '', applicant_marital_status: '', applicant_mobile: '', applicant_blood_group: '' });
-  const handleChange = (e) => setFirstFormData({ ...firstFormData, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFirstStep(true)
+    console.log(firstFormData)
+    history.push('secondStep')
   }
-  if(!window.location.reload) {
-        alert('ho')
+  const handleChange = (e) => setFirstFormData({ ...firstFormData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    setFirstFormData(JSON.parse(localStorage.getItem('firstStep')))
+  }, [])
+  useEffect(() => {
+    localStorage.setItem('firstStep', JSON.stringify(firstFormData))
+  }, [firstFormData])
+  const AreYouSure = () => {
+    const confirm = window.confirm("Do you want close? if close it! Your data will lost")
+    if (confirm) {
+      localStorage.removeItem('firstStep')
+      localStorage.removeItem('secondStep')
+      localStorage.removeItem('finalStep')
+      history.push('/')
+    }
   }
   return (
-      <Container>
+      <div>
+          <Header/>
+          <MainNavbar/>
         <Row className="justify-content-center">
-          {!firstStep ?
               <Col md="8">
                 <Card className="card w-100 shadow-sm rounded my-5">
                   <Card.Body className="card-body p-4">
-                    <Form onSubmit={handleSubmit} return false>
+                    <Form onSubmit={handleSubmit}>
                       <fieldset>
                         <div className="row">
                           <legend>
@@ -39,6 +55,7 @@ const AdmissionFirstStep = ({step}) => {
                                   className="w-100"
                                   name="program_name"
                                   onChange={handleChange}
+
                               >
                                 <option value="cse">CSE</option>
                                 <option value="eee">EEE</option>
@@ -57,6 +74,7 @@ const AdmissionFirstStep = ({step}) => {
                                   type="text"
                                   placeholder="applicant name"
                                   name={'applicant_name'}
+                                  value={firstFormData?.applicant_name}
                                   onChange={handleChange}
                                   required
                               />
@@ -73,21 +91,21 @@ const AdmissionFirstStep = ({step}) => {
                                   placeholder="applicant father name"
                                   name={'applicant_fatherName'}
                                   onChange={handleChange}
-                                  required
+                                  value={firstFormData?.applicant_fatherName}
+                                  reqired
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>
                                 Applicant's Father's Occupation
-                                <span className="text-danger fw-bolder">*</span>
                               </Form.Label>
                               <Form.Control
                                   type="text"
                                   className="w-100"
                                   placeholder="applicant's father occupation"
                                   onChange={handleChange}
+                                  value={firstFormData?.applicant_father_occupation}
                                   name={'applicant_father_occupation'}
-                                  required
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -100,14 +118,14 @@ const AdmissionFirstStep = ({step}) => {
                                   className="w-100"
                                   placeholder="applicant's mother name"
                                   name={'applicant_motherName'}
+                                  value={firstFormData?.applicant_motherName}
                                   onChange={handleChange}
-                                  required
+                                  reqired
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>
                                 Applicant's Mother Occupation
-                                <span className="text-danger fw-bolder">*</span>
                               </Form.Label>
                               <Form.Control
                                   type="text"
@@ -115,7 +133,7 @@ const AdmissionFirstStep = ({step}) => {
                                   placeholder="applicant's mother occupation"
                                   onChange={handleChange}
                                   name={'applicant_mother_occupation'}
-                                  required
+                                  value={firstFormData?.applicant_mother_occupation}
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -129,8 +147,9 @@ const AdmissionFirstStep = ({step}) => {
                                   id="nid"
                                   placeholder="father's/mother's nid"
                                   name={'father_or_mother_nid'}
+                                  value={firstFormData?.father_or_mother_nid}
                                   onChange={handleChange}
-                                  required
+                                  reqired
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -144,7 +163,8 @@ const AdmissionFirstStep = ({step}) => {
                                   placeholder="applicant's mobile"
                                   name={'applicant_mobile'}
                                   onChange={handleChange}
-                                  required
+                                  value={firstFormData?.applicant_mobile}
+                                  reqired
                               />
                             </Form.Group>
                           </Col>
@@ -160,7 +180,8 @@ const AdmissionFirstStep = ({step}) => {
                                   placeholder="applicant's email"
                                   name={'applicant_email'}
                                   onChange={handleChange}
-                                  required
+                                  value={firstFormData?.applicant_email}
+                                  reqired
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -174,7 +195,8 @@ const AdmissionFirstStep = ({step}) => {
                                   placeholder="applicant's nid/birth certificate no. "
                                   onChange={handleChange}
                                   name={'applicant_birth_or_nid_number'}
-                                  required
+                                  value={firstFormData?.applicant_birth_or_nid_number}
+                                  reqired
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -189,18 +211,20 @@ const AdmissionFirstStep = ({step}) => {
                                   placeholder="applicant's date of birth"
                                   onChange={handleChange}
                                   name={'applicant_date_of_birth'}
-                                  required
+                                  value={firstFormData?.applicant_date_of_birth}
+                                  reqired
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>
                                 Applicant's Gender
-                                <span className="text-danger fw-bolder">*</span>
                               </Form.Label>
                               <Form.Select
                                   className="w-100 "
                                   name="applicant_gender"
                                   onChange={handleChange}
+                                  value={firstFormData?.applicant_gender}
+                                  reqired
                               >
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -210,12 +234,12 @@ const AdmissionFirstStep = ({step}) => {
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>
                                 Applicant's Religion
-                                <span className="text-danger fw-bolder">*</span>
                               </Form.Label>
                               <Form.Select
                                   className="w-100 "
                                   name="applicant_religion"
                                   onChange={handleChange}
+                                  value={firstFormData?.applicant_religion}
                               >
                                 <option value="islam">Islam</option>
                                 <option value="chirstian">Chirstian</option>
@@ -235,13 +259,13 @@ const AdmissionFirstStep = ({step}) => {
                                   placeholder="applicant's nationality"
                                   name={'applicant_nationality'}
                                   onChange={handleChange}
-                                  required
+                                  value={firstFormData?.applicant_nationality}
+                                  reqired
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>
                                 Applicant's Marital Status
-                                <span className="text-danger fw-bolder">*</span>
                               </Form.Label>
                               <Form.Control
                                   type="text"
@@ -249,13 +273,12 @@ const AdmissionFirstStep = ({step}) => {
                                   name="applicant_marital_status"
                                   onChange={handleChange}
                                   placeholder="applicant's marital status"
-                                  required
+                                  value={firstFormData?.applicant_marital_status}
                               />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>
                                 Applicant's Blood Group
-                                <span className="text-danger fw-bolder">*</span>
                               </Form.Label>
                               <Form.Control
                                   type="text"
@@ -263,28 +286,26 @@ const AdmissionFirstStep = ({step}) => {
                                   name="applicant_blood_group"
                                   onChange={handleChange}
                                   placeholder="applicant's blood group"
-                                  required
+                                  value={firstFormData?.applicant_blood_group}
                               />
                             </Form.Group>
                           </Col>
                           <hr />
                         </div>
                           <div className="d-flex align-items-center justify-content-between">
-                              <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => step(prevalue => !prevalue)}>
-                                  Cancel
-                              </button>
-                              <button className="btn bg-primary text-white px-5" type={'submit'}>
-                                  Next
-                              </button>
+                              <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => {
+                                  AreYouSure()
+                              }}>Cancel</button>
+                              <button className="btn bg-primary text-white px-5" type={'submit'}>Next</button>
                           </div>
                       </fieldset>
                     </Form>
                   </Card.Body>
                 </Card>
-              </Col> : <AdmissionSecondStep firstFormData={firstFormData} setFirstStep={setFirstStep}/>
-          }
+              </Col>
+
         </Row>
-      </Container>
+      </div>
   );
 };
 

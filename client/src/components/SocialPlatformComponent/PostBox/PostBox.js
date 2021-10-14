@@ -78,13 +78,15 @@ const PostBox = ({details}) => {
                     const fileData = new FormData();
                     const filename = uuidv4() + path.extname(file.name);
                     data.filename = filename;
-                    data.owner_position = 'Group_member'
+                    data.owner_position = 'Group_member';
+                    data.admin_to = paramsGroup?.map(group => group.creator_id).toString()
                     fileData.append('name', filename);
                     fileData.append('file', file);
                     dispatch(uploadFile(fileData))
                     dispatch(GroupPost(id, data));
                 } else {
-                    data.owner_position = 'Group_member'
+                    data.owner_position = 'Group_member';
+                    data.admin_to = paramsGroup?.map(group => group.creator_id).toString()
                     dispatch(GroupPost(id,data));
                 }
             } else {
@@ -92,13 +94,15 @@ const PostBox = ({details}) => {
                     const fileData = new FormData();
                     const filename = uuidv4() + path.extname(file.name);
                     data.filename = filename;
-                    data.owner_position = 'Public'
+                    data.owner_position = 'Group_public'
+                    data.admin_to = paramsGroup?.map(group => group.creator_id).toString()
                     fileData.append('name', filename);
                     fileData.append('file', file);
                     dispatch(uploadFile(fileData))
                     dispatch(GroupPost(id, data));
                 } else {
-                    data.owner_position = 'Public'
+                    data.owner_position = 'Group_public';
+                    data.admin_to = paramsGroup?.map(group => group.creator_id).toString()
                     dispatch(GroupPost(id,data));
                 }
             }

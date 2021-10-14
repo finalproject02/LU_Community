@@ -6,6 +6,7 @@ import moment from "moment";
 import Avatar from "../../../images/avatar.jpeg";
 import {Link, useHistory} from 'react-router-dom';
 import {updateProfile} from "../../../actions/auth";
+import {AcceptRequest, RejectRequest} from "../../../actions/groups";
 
 const Notification = () => {
     const dispatch = useDispatch()
@@ -124,24 +125,54 @@ const Notification = () => {
                         {
                             currentUser?.notifications.filter(notify => notify.types !== 'connection_request').sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
                                 <div className="d-flex justify-content-between align-items-center mb-2 cardHover">
-                                    <Link to={`${action(notification.types, notification.document_id, notification.notify_by)}`} className="d-flex align-items-center ps-2 text-decoration-none text-dark" onClick={() => dispatch(updateProfile({ isShow: true }))}>
-                                        <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt={notification.notify_by} width="50" height="50" className="rounded-circle" />
-                                        <div className="d-flex align-items-center ms-2">
-                                            <div className="pt-2">
-                                                <p className="mb-0 pt-1">
-                                                    <span>{getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}</span></p>
-                                                <p className="text-muted text-sm"><span>{moment(notification.time).fromNow()}</span></p>
+                                    {notification.types !== 'member_request' ? (
+                                        <>
+                                            <Link to={`${action(notification.types, notification.document_id, notification.notify_by)}`} className="d-flex align-items-center ps-2 text-decoration-none text-dark" onClick={() => dispatch(updateProfile({ isShow: true }))}>
+                                                <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt={notification.notify_by} width="50" height="50" className="rounded-circle" />
+                                                <div className="d-flex align-items-center ms-2">
+                                                    <div className="pt-2">
+                                                        <p className="mb-0 pt-1">
+                                                            <span>{getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}</span></p>
+                                                        <p className="text-muted text-sm"><span>{moment(notification.time).fromNow()}</span></p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="light">
+                                                    <FaEllipsisV />
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item onClick={() => dispatch(updateProfile({ time: notification.time, types: notification.types }))}> Remove this notification</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div  className="text-decoration-none text-dark" >
+                                                <div className="d-flex">
+                                                    <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" className="rounded-circle" />
+                                                    <Link to={`${action(notification.types, notification.document_id, notification.notify_by)}`} style={{textDecoration: 'none'}} className="text-muted text-sm ms-2"><strong>{getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}</strong></Link>
+                                                </div>
+                                                <span className="text-muted text-sm ms-4">{moment(notification.time).fromNow()}</span>
+                                                <div className="mt-1 ms-4">
+                                                    <div  className="btn btn-primary me-2 btn-sm" onClick={(e) => dispatch(AcceptRequest(notification.document_id, notification.notify_by))}>Accept</div>
+                                                    <div className="btn btn-danger btn-sm" onClick={(e) => {
+                                                        dispatch(RejectRequest(notification.document_id, notification.notify_by))
+                                                    }}>Reject</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="light">
-                                            <FaEllipsisV />
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item onClick={() => dispatch(updateProfile({ time: notification.time, types: notification.types }))}> Remove this notification</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="light">
+                                                    <FaEllipsisV />
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item onClick={() => dispatch(updateProfile({ time: notification.time, types: notification.types }))}> Remove this notification</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+
+                                        </>
+                                    )}
                                 </div>
                             ))
                         }

@@ -9,9 +9,9 @@ import { useHistory } from "react-router-dom";
 import Avatar from '../../../images/avatar.jpeg'
 import {updateProfile} from "../../../actions/auth";
 import moment from "moment";
+import {AcceptRequest, RejectRequest} from "../../../actions/groups";
 
 const SocialNavbar = () => {
-    const [show, setShow] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -19,18 +19,118 @@ const SocialNavbar = () => {
     const { currentUser, token } = useSelector(state => state.auth);
     const { notifications } = useSelector(state => state.posts);
     const { people } = useSelector(state => state.people);
+    const { groups } = useSelector(state => state.groups);
+    const { clubs } = useSelector(state => state.clubs);
 
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
             history.push(`/search?searchKey=${search}`);
         }
     }
-    const getUserName = (id) => {
-        const user = people.filter(person => person._id === id);
-        return user.map(usr => usr.name)
+
+    const getUserProfilePicture = (notify_by, types, documentId) => {
+        if (types === 'club_post') {
+            const person = clubs.filter(usr => usr._id === notify_by);
+            const pic = person.map(u => u.profile_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return person.map(u => u.profile_picture)
+            }
+        } else if(types === 'member_accepted') {
+            const person = groups.filter(usr => usr._id === notify_by);
+            const pic = person.map(u => u.cover_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return person.map(u => u.cover_picture)
+            }
+        } else {
+            const person = people.filter(usr => usr._id === notify_by);
+            const pic = person.map(u => u.profile_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return person.map(u => u.profile_picture)
+            }
+        }
+
+    }
+
+    const getUserName = (notify_by, types, documentId) => {
+        const person = people.filter(usr => usr._id === notify_by);
+        return person.map(u => u.name)
+    }
+
+    const getClubOrGroupName = (notify_by, types, documentId, post_to) => {
+        if (types === 'club_post') {
+            const club = clubs.filter(club => club._id === notify_by);
+            return club.map(u => u.name)
+        } else if (types === 'club_following') {
+            const club = clubs.filter(club => club._id === documentId);
+            return club.map(u => u.name)
+        } else if (types === 'group_post') {
+            const group = groups.filter(group => group._id === post_to);
+            return group.map(u => u.name)
+        } else if (types === 'member_request') {
+            const group = groups.filter(group => group._id === documentId);
+            return group.map(u => u.name)
+        } else if (types === 'member_accepted') {
+            const group = groups.filter(group => group._id === notify_by);
+            return group.map(u => u.name)
+        }
+    }
+    const getTypesInfo = (notify_by, types, documentId, post_to) => {
+        switch (types) {
+            case 'club_post':
+                return `${getClubOrGroupName(notify_by, types, documentId, post_to)} add a new post`;
+            case 'group_post':
+                return `${getUserName(notify_by, types, documentId)} posted in ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'club_following':
+                return `${getUserName(notify_by, types, documentId)} started following ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'member_request':
+                return `${getUserName(notify_by, types, documentId)} requested to join ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'member_accepted':
+                return `Now you are member of ${getClubOrGroupName(notify_by, types, documentId, post_to)}`;
+            case 'user_post_like':
+                return `${getUserName(notify_by, types, documentId)} likes a post`;
+            case  'user_post_comment':
+                return `${getUserName(notify_by, types, documentId)} comments a post`;
+            case  'user_commented_post':
+                return `${getUserName(notify_by, types, documentId)} commented a post where you comment`;
+            case  'connection_accepted':
+                return `Now you are connected with ${getUserName(notify_by, types, documentId)}`;
+            default:
+                return ''
+        }
+    }
+
+    const action = (types, documentId, notify_by) => {
+        switch (types) {
+            case 'club_post':
+            case 'group_post':
+            case 'user_post_like':
+            case 'user_post_comment':
+            case 'user_commented_post':
+                return `/post/${documentId}`
+            case 'club_following':
+                return `/clubDetails/${documentId}`
+            case 'member_request':
+                return `/group/${documentId}`
+            case 'member_accepted':
+                return `/group/${notify_by}`;
+            case 'connection_accepted':
+                return `/profile/${notify_by}`
+            default:
+                return ''
+        }
+
     }
     return (
-        <div className="sticky-top top-0">
+        <div className="sticky-top top-0 zIndex">
             {token && (
                 <header className="p-3 sticky-top bg-light shadow-sm">
                     <Container>
@@ -73,14 +173,43 @@ const SocialNavbar = () => {
 
                                         {currentUser?.notifications.filter(notify => notify !== 'connection_requests').slice(currentUser?.notifications.length - 4, currentUser?.notifications.length).sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (
                                             <>
-                                                <NavDropdown.Item className="py-3">
-                                                    <Link to="/postDetails" className="text-decoration-none text-dark">
-                                                        <FaUser className="me-1 mb-1" />
-                                                        {getUserName(notification.notify_by)} {notification.types} your post
-                                                        <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
-                                                    </Link>
-                                                </NavDropdown.Item>
-                                                <NavDropdown.Divider />
+                                                {notification.types !== 'member_request' ? (
+                                                    <>
+                                                        <NavDropdown.Item className="py-3">
+                                                            <Link to={`${action(notification.types, notification.document_id, notification.notify_by)}`} className="text-decoration-none text-dark" onClick={() => dispatch(updateProfile({ isShow: true }))}>
+                                                                <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" className="rounded-circle" />
+                                                                {getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}
+                                                                <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
+                                                            </Link>
+                                                        </NavDropdown.Item>
+                                                        <NavDropdown.Divider />
+                                                    </>
+                                                ): (
+                                                    <>
+                                                        <NavDropdown.Item className="py-3">
+                                                            <div  className="text-decoration-none text-dark" >
+                                                                <div className="d-flex">
+                                                                    <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" className="rounded-circle" />
+                                                                    <Link to={action(notification.types, notification.document_id, notification.notify_by)} style={{textDecoration: 'none'}} className="text-muted text-sm ms-2"><strong>{getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}</strong></Link>
+                                                                </div>
+                                                                <span className="text-muted text-sm ms-4">{moment(notification.time).fromNow()}</span>
+                                                                <div className="mt-1 ms-4">
+                                                                    <div className="btn btn-primary me-2 btn-sm" onClick={(e) => {
+                                                                        dispatch(AcceptRequest(notification.document_id, notification.notify_by));
+                                                                        e.stopPropagation();
+                                                                    }}>Accept</div>
+                                                                    <div className="btn btn-danger btn-sm" onClick={(e) => {
+                                                                        dispatch(RejectRequest(notification.document_id, notification.notify_by));
+                                                                        e.stopPropagation();
+                                                                    }}>Reject</div>
+                                                                </div>
+                                                            </div>
+                                                        </NavDropdown.Item>
+                                                        <NavDropdown.Divider />
+                                                    </>
+                                                )}
+
+
                                             </>
                                         ))}
                                         <Dropdown.Item href="/allNotification">

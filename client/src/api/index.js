@@ -41,3 +41,7 @@ export const cancel_request = (getState, id) => axios.patch(`/api/group/cancel_r
 export const reject_request = (getState, id, userId) => axios.patch(`/api/group/${id}/reject_request/${userId}`, {data: ''}, tokenConfig(getState));
 export const accept_request = (getState, id, userId) => axios.patch(`/api/group/${id}/accept_request/${userId}`, {data: ''}, tokenConfig(getState));
 export const groupPost = (getState, postData, id) => axios.post(`/api/group/${id}/post`, postData, tokenConfig(getState));
+
+export const peers = (getState, id) => axios.patch(`/api/messages/peer/${id}`, {data: ''}, tokenConfig(getState));
+export const sendMessage = (getState, message) => axios.post(`/api/messages`, message, tokenConfig(getState));
+export const getMessage = (getState) => axios.get('/api/messages', tokenConfig(getState));

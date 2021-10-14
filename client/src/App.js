@@ -16,7 +16,7 @@ import SearchPage from "./components/SocialPlatformComponent/pages/SearchPage/Se
 import ClubDetails from "./components/SocialPlatformComponent/ClubDetails/ClubDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { LoadingCurrentUser } from "./actions/auth";
+import {LoadingCurrentUser, updateProfile} from "./actions/auth";
 import { getCurrentUserPosts, PostNotifications } from "./actions/posts";
 import { ToastContainer } from "react-toastify";
 import { People, Suggestions } from "./actions/people";
@@ -27,6 +27,11 @@ import GroupInitial from "./components/SocialPlatformComponent/GroupInitial/Grou
 import ScrollToTop from "./ScrollToTop";
 import Message from "./components/SocialPlatformComponent/pages/Message/Message";
 import PostDetails from "./components/SocialPlatformComponent/pages/PostDetails/PostDetails";
+import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
+import AdmissionSecondStep from "./components/OnlineAdmission/AdmissionSecondStep/AdmissionSecondStep";
+import AdmissionFinalStep from "./components/OnlineAdmission/AdmissionFinalStep/AdmissionFinalStep";
+import {Messages} from "./actions/messages";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,6 +41,8 @@ function App() {
     dispatch(People());
     dispatch(ALlClub());
     dispatch(ALlGroup());
+    dispatch(Messages())
+    dispatch(updateProfile({ lastLogin: Date.now() }))
   }, []);
   const { currentUser } = useSelector(state => state.auth);
   const department = currentUser?.department
@@ -119,7 +126,16 @@ function App() {
               <Home />
             </Route>
             <Route path="/departmentoftourism">
-              <Home />
+              <Home/>
+            </Route>
+            <Route path={'/firstStep'}>
+              <AdmissionFirstStep/>
+            </Route>
+            <Route path={'/secondStep'}>
+              <AdmissionSecondStep/>
+            </Route>
+            <Route path={'/finalStep'}>
+              <AdmissionFinalStep/>
             </Route>
             <Route path="/departmentofbangla">
               <Home />

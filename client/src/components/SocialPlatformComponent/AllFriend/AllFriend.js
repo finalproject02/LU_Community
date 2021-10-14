@@ -1,11 +1,14 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { FaLink } from 'react-icons/fa';
+import {updateProfile} from "../../../actions/auth";
 import { useHistory } from 'react-router-dom';
 import Avatar from '../../../images/avatar.jpeg'
+import {useDispatch} from "react-redux";
+import {Peer} from "../../../actions/messages";
 
 const AllFriend = ({ connections, paramsConnection, setPost }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
     return (
         <div className="mb-4">
             <Container>
@@ -34,7 +37,10 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                                                     <h6>{connection.position}</h6>
                                                     <Card.Text as="div" className="mt-2">
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
-                                                            <strong className="btn w-100 text-white">Chat</strong>
+                                                            <strong className="btn w-100 text-white" onClick={() => {
+                                                                dispatch(Peer(connection._id))
+                                                                history.push(`message`);
+                                                            }}>Chat</strong>
                                                         </div>
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
                                                             <button className="btn w-100 text-white" onClick={() => {

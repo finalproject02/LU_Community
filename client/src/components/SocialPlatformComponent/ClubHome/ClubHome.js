@@ -7,6 +7,7 @@ import VideoCard from '../VideoCard/VideoCard';
 import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import PostCard from "../PostCard/PostCard";
+import path from "path";
 
 const ClubHome = () => {
     const { clubs } = useSelector(state => state.clubs);
@@ -14,7 +15,8 @@ const ClubHome = () => {
     const params = useParams();
     const { id } = params;
     const {posts} = useSelector(state => state.posts);
-    const clubPost = posts?.filter(post => post.post_to === id)
+    const clubPost = posts?.filter(post => post.post_to === id);
+    const clubPhotos = clubPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase() === '.jpg')
     const paramClub = clubs?.filter(club => club._id === id)
     return (
         <div>
@@ -31,7 +33,7 @@ const ClubHome = () => {
                         <PostCard posts={clubPost}/>
                     </Col>
                     <Col md="4">
-                        <PhotoCard  photos={posts}/>
+                        <PhotoCard  photos={clubPhotos}/>
                         <VideoCard />
                         <ClubSuggestionsCard />
                     </Col>
