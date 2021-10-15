@@ -36,7 +36,7 @@ export const searchUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     const { id } = req.user;
-    const { school, degree, field_of_study, job_title, position, company_name  } = req.body
+    const { school, degree, field_of_study, job_title, position, company_name, time, types, isShow  } = req.body
     try {
         if (school && degree && field_of_study) {
             const findUser = await userModel.findById(id);
@@ -65,6 +65,16 @@ export const updateUser = async (req, res) => {
                 res.status(200).json({ user: user })
             }
 
+        }
+        else if (time && types) {
+            await userModel.updateOne({ _id: req.user.id }, {$pull: { notifications: { time, types }}});
+            const user = await userModel.findById(req.user.id);
+            res.status(200).json({ user })
+        }
+        else if (isShow) {
+            await userModel.updateOne({"_id": req.user.id, "notifications.isShow": false } , { $set: { "notifications.$.isShow": true } });
+            const findUser = await userModel.findById(req.user.id);
+            res.status(200).json({ user: findUser })
         }
         else {
             const updateDate = await userModel.findByIdAndUpdate(id, req.body, {new: true});

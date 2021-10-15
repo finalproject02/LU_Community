@@ -45,3 +45,7 @@ export const CANCEL_REQUEST = 'CANCEL_REQUEST';
 export const REJECT_REQUEST = 'REJECT_REQUEST';
 export const ACCEPT_REQUEST = 'ACCEPT_REQUEST';
 export const GROUP_POST = 'GROUP_POST';
+
+export const PEER = 'PEER';
+export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const MESSAGES = 'MESSAGES';

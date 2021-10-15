@@ -8,8 +8,9 @@ import people from "./people";
 import clubs from "./clubs";
 import groups from "./groups";
 import errors from "./errors";
+import messages from './messages'
 
 export default combineReducers({
     application, files, auth,
-    users, posts, people, clubs, groups, errors
+    users, posts, people, clubs, groups, errors, messages
 })

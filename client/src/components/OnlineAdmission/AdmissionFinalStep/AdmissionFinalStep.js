@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
-import { Card, Col, Container, Form, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Card, Col, Form, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
 import { createApplication } from "../../../actions/applications";
 import { uploadFile } from "../../../actions/files";
 import { useDispatch } from "react-redux";
+import MainNavbar from "../../MainNavbar/MainNavbar";
+import Header from "../../Header/Header";
+import { useHistory } from "react-router-dom";
 
-const AdmissionFinalStep = ({ secondFormData }) => {
+const AdmissionFinalStep = () => {
+    const history = useHistory();
     const [finalFormData, setFinalFormData] = useState({ ssc_regis_no: '', ssc_institution_name: '', ssc_roll_no: '', ssc_group: '', ssc_year: '', ssc_board: '', ssc_gpa: '', hsc_regis_no: '', hsc_institution_name: '', hsc_roll_no: '', hsc_group: '', hsc_year: '', hsc_board: '', hsc_gpa: '' });
     const [applicantPhoto, setApplicantPhoto] = useState('');
     const [guardianPhoto, setGuardianPhoto] = useState('');
     const [sscTranscript, setSscTranscript] = useState('');
     const [hscTranscript, setHscTranscript] = useState('');
     const dispatch = useDispatch();
-    const handleChange = (e) => setFinalFormData({ ...secondFormData, ...finalFormData, [e.target.name]: e.target.value });
+
+    const handleChange = (e) => setFinalFormData({ ...finalFormData, [e.target.name]: e.target.value });
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!applicantPhoto) {
@@ -56,11 +61,22 @@ const AdmissionFinalStep = ({ secondFormData }) => {
             dispatch(uploadFile(sscTranscriptData));
             dispatch(uploadFile(hscTranscriptData));
         }
-        await dispatch(createApplication(finalFormData))
+        await dispatch(createApplication(finalFormData, history))
 
     }
+    useEffect(() => {
+        const first = JSON.parse(localStorage.getItem('firstStep'))
+        const second = JSON.parse(localStorage.getItem('secondStep'))
+        const final = JSON.parse(localStorage.getItem('finalStep'));
+        setFinalFormData({ ...first, ...second, ...final })
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('finalStep', JSON.stringify(finalFormData))
+    }, [finalFormData])
     return (
-        <Container>
+        <div>
+            <Header />
+            <MainNavbar />
             <Row className="justify-content-center">
                 <Col md="8">
                     <Card className="bg-light w-100 shadow rounded my-5">
@@ -71,7 +87,7 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                         <legend>
                                             <h2 className="textPrimary">Academic Info.</h2>
                                         </legend>
-                                        <h6 className="card-title textSecondary">Admission for Undergraduate Programs</h6>
+                                        <h6 className="card-title textSecondary">Admission for Graduate Programs</h6>
                                         <div className="col-md-6">
                                             <fieldset>
                                                 <legend>SSC Info.</legend>
@@ -83,8 +99,9 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         className="w-100"
                                                         placeholder="ssc registration number"
                                                         name={'ssc_regis_no'}
+                                                        value={finalFormData?.ssc_regis_no}
                                                         onChange={handleChange}
-
+                                                        required
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -97,7 +114,8 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         placeholder="ssc institution name"
                                                         name={"ssc_institution_name"}
                                                         onChange={handleChange}
-
+                                                        value={finalFormData?.ssc_institution_name}
+                                                        required
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -109,7 +127,8 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         placeholder="ssc roll"
                                                         name={'ssc_roll_no'}
                                                         onChange={handleChange}
-
+                                                        value={finalFormData?.ssc_roll_no}
+                                                        required
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -118,9 +137,13 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
                                                     <Form.Select
+                                                        type="text"
                                                         className="w-100"
-                                                        name={'ssc_group'}
+                                                        placeholder="ssc group"
                                                         onChange={handleChange}
+                                                        name={'ssc_group'}
+                                                        value={finalFormData?.ssc_group}
+                                                        required
                                                     >
                                                         <option>--select group--</option>
                                                         <option value="science">Science</option>
@@ -132,9 +155,13 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                     <Form.Label>Year
                                                         <span className="text-danger fw-bolder">*</span></Form.Label>
                                                     <Form.Select
+                                                        type="number"
                                                         className="w-100"
+                                                        placeholder="ssc year"
                                                         name={'ssc_year'}
-                                                        onChange={handleChange}>
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.ssc_year}
+                                                        required>
                                                         <option >--select year--</option>
                                                         <option value="2030">2030</option>
                                                         <option value="2029">2029</option>
@@ -185,9 +212,14 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
                                                     <Form.Select
+                                                        type="text"
                                                         className="w-100"
-                                                        name={'ssc_board'}
+                                                        id="ssc_board"
+                                                        placeholder="ssc board"
                                                         onChange={handleChange}
+                                                        name={'ssc_board'}
+                                                        value={finalFormData?.ssc_board}
+                                                        required
                                                     >
                                                         <option >--select board--</option>
                                                         <option value="barisal">Barisal</option>
@@ -213,7 +245,9 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         name="ssc_gpa"
                                                         placeholder="ssc gpa"
                                                         onChange={handleChange}
-
+                                                        step={'any'}
+                                                        value={finalFormData?.ssc_gpa}
+                                                        required
                                                     />
                                                 </Form.Group>
                                             </fieldset>
@@ -230,7 +264,8 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         placeholder="hsc registration number"
                                                         onChange={handleChange}
                                                         name={'hsc_regis_no'}
-
+                                                        value={finalFormData?.hsc_regis_no}
+                                                        required
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -242,7 +277,8 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         className="w-100"
                                                         name="hsc_institution_name"
                                                         onChange={handleChange}
-
+                                                        value={finalFormData?.hsc_institution_name}
+                                                        required
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -254,7 +290,8 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         name="hsc_roll_no"
                                                         onChange={handleChange}
                                                         placeholder="hsc roll"
-
+                                                        value={finalFormData?.hsc_roll_no}
+                                                        required
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -263,9 +300,13 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
                                                     <Form.Select
+                                                        type="text"
                                                         className="w-100"
-                                                        name={'hsc_group'}
+                                                        placeholder="hsc group"
                                                         onChange={handleChange}
+                                                        name={'hsc_group'}
+                                                        value={finalFormData?.hsc_group}
+                                                        required
                                                     >
                                                         <option>--select group--</option>
                                                         <option value="science">Science</option>
@@ -277,9 +318,13 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                     <Form.Label>Year
                                                         <span className="text-danger fw-bolder">*</span></Form.Label>
                                                     <Form.Select
+                                                        type="number"
                                                         className="w-100"
-                                                        name={'hsc_year'}
-                                                        onChange={handleChange}>
+                                                        name="hsc_year"
+                                                        placeholder="hsc year"
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.hsc_year}
+                                                        required>
                                                         <option >--select year--</option>
                                                         <option value="2030">2030</option>
                                                         <option value="2029">2029</option>
@@ -330,9 +375,13 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
                                                     <Form.Select
+                                                        type="text"
                                                         className="w-100"
-                                                        name={'hsc_board'}
+                                                        name="hsc_board"
+                                                        placeholder="hsc board"
                                                         onChange={handleChange}
+                                                        value={finalFormData?.hsc_board}
+                                                        required
                                                     >
                                                         <option >--select board--</option>
                                                         <option value="barisal">Barisal</option>
@@ -358,7 +407,9 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                                         name="hsc_gpa"
                                                         placeholder="hsc gpa"
                                                         onChange={handleChange}
-
+                                                        step={'any'}
+                                                        value={finalFormData?.hsc_gpa}
+                                                        required
                                                     />
                                                 </Form.Group>
                                             </fieldset>
@@ -424,7 +475,7 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                                 </fieldset>
                                 <hr />
                                 <div className="d-flex align-items-center justify-content-between">
-                                    <button className="btn bg-primary text-white px-5" type={'button'}>
+                                    <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => history.push('/secondStep')}>
                                         Previous
                                     </button>
                                     <button className="btn bg-primary text-white px-5" type={'submit'}>
@@ -436,7 +487,7 @@ const AdmissionFinalStep = ({ secondFormData }) => {
                     </Card>
                 </Col>
             </Row>
-        </Container>
+        </div>
     );
 };
 export default AdmissionFinalStep

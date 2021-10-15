@@ -28,6 +28,7 @@ const postModel = new mongoose.Schema({
         type: Array,
         default: []
     },
+    admin_to: String,
     post_status: {
         type: String,
         default: 'Public',

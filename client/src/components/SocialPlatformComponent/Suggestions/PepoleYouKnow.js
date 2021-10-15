@@ -2,11 +2,13 @@ import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { FaLink } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Avatar from '../../../images/avatar.jpeg'
 import { useHistory } from "react-router-dom";
+import {Connect} from "../../../actions/auth";
 
 const PepoleYouKnow = () => {
+    const dispatch = useDispatch()
     const history = useHistory();
     const { suggestions } = useSelector(state => state.people);
     const { currentUser } = useSelector(state => state.auth);
@@ -33,13 +35,9 @@ const PepoleYouKnow = () => {
                                                 <Card.Body>
                                                     <Card.Title onClick={() => history.push(`/profile/${suggestion._id}`)} style={{ cursor: 'pointer' }}>{suggestion.name}</Card.Title>
                                                     <h6>{suggestion.current_position}</h6>
-                                                    <small className="card-subtitle text-muted">
-                                                        <FaLink className="me-2" />
-                                                        <span>{suggestion.mutual}</span> Mutual Friends
-                                                    </small>
                                                     <Card.Text as="div" className="mt-2">
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
-                                                            <Link to="#" className="btn w-100 text-white">Connect</Link>
+                                                            <Link to="#" className="btn w-100 text-white" onClick={() => { dispatch(Connect(suggestion._id)) }}>Connect</Link>
                                                         </div>
                                                     </Card.Text>
                                                 </Card.Body>

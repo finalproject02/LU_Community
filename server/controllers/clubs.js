@@ -75,10 +75,10 @@ export const clubPost = async (req, res) => {
     const { id } = req.params;
     try {
         const post = await postModel.create({...posts, owner_id: req.user.id, owner_name: req.user.id, post_to: id });
-        const group =await clubModel.findById(id)
-        await userModel.updateMany({ _id: group.followers }, { $push: { notifications: [{ document_id: id, notify_by: req.user.id, types: 'club_post', time: Date.now(), isShow: false }] } })
+        const group =await clubModel.findById(id);
+        await userModel.updateMany({ _id: group.followers }, { $push: { notifications: [{ document_id: post._id, notify_by: id, types: 'club_post', time: Date.now(), isShow: false }] } })
         res.status(200).json({ post })
     } catch (error) {
-        res.status(500).json({ message: 'Something went wrong' })
+         res.status(500).json({ message: 'Something went wrong' })
     }
 }

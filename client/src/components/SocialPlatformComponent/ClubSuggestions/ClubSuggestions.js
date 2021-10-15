@@ -1,52 +1,45 @@
-import React, { useState } from 'react';
-import { Card, Col, Collapse, Row } from 'react-bootstrap';
-import { FaLink } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import clubSuggestions from "./ClubSuggestionsData";
-
-const ClubSuggestions = () => {
-    const [open, setOpen] = useState(false);
+import { Card, Col, Row } from 'react-bootstrap';
+import {Link, useHistory} from 'react-router-dom';
+import Avatar from '../../../images/avatar.jpeg'
+import {ClubFollow} from "../../../actions/clubs";
+import {useDispatch} from "react-redux";
+const ClubSuggestions = ({clubSuggestions}) => {
+    const dispatch = useDispatch()
+    const history = useHistory();
     return (
         <div className="mb-4">
-            <Card className="w-100">
-                <Card.Body>
-                    <Card.Title>
-                        <div className="d-flex justify-content-between align-items-center">
-                            <h5 className="card-title">You May Follow</h5>
-                            <Link to="#" className="mb-2 textHover text-dark" onClick={() => setOpen(!open)}
-                                aria-controls="example-collapse-text"
-                                aria-expanded={open}>See all</Link>
-                        </div>
-                    </Card.Title>
-                    <Card.Text as="div">
-                        <Row>
-                            {
-                                clubSuggestions.map(item => (
-                                    <Collapse in={open}>
+            {clubSuggestions.length !== 0 && (
+                <Card className="w-100">
+                    <Card.Body>
+                        <Card.Title>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h5 className="card-title">You May Follow</h5>
+                            </div>
+                        </Card.Title>
+                        <Card.Text as="div">
+                            <Row>
+                                {
+                                    clubSuggestions.map(item => (
                                         <Col key={item.id} md="3" className="mb-2">
                                             <Card className="w-100">
-                                                <Card.Img src={item.imageUrl} style={{ cursor: 'pointer', height: "20vh" }} className="card-img-top rounded-3 w-100" alt="name" />
+                                                <Card.Img src={item.profile_picture ? `/api/files/storage/${item.profile_picture}` : Avatar} style={{ cursor: 'pointer', height: "20vh" }} className="card-img-top rounded-3 w-100" alt="name" onClick={() => history.push(`/clubDetails/${item._id}`)}/>
                                                 <Card.Body>
-                                                    <Card.Title>{item.name}</Card.Title>
-                                                    <small className="card-subtitle text-muted">
-                                                        <FaLink className="me-2" />
-                                                        <span>{item.following}</span>is following
-                                                    </small>
+                                                    <Card.Title style={{cursor: 'pointer'}} onClick={() => history.push(`/clubDetails/${item._id}`)}>{item.name}</Card.Title>
                                                     <Card.Text as="div" className="mt-2">
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
-                                                            <Link to="#" className="btn w-100 text-white">Follow</Link>
+                                                            <Link to="#" className="btn w-100 text-white" onClick={() => dispatch(ClubFollow(item._id))}> Follow</Link>
                                                         </div>
                                                     </Card.Text>
                                                 </Card.Body>
                                             </Card>
                                         </Col>
-                                    </Collapse>
-                                ))
-                            }
-                        </Row>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+                                    ))
+                                }
+                            </Row>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            )}
         </div>
     );
 };

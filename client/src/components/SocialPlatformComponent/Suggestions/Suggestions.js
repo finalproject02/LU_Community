@@ -2,11 +2,13 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "./Suggestions.css";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Avatar from "../../../images/avatar.jpeg";
 import { useHistory } from "react-router-dom";
+import {Connect} from "../../../actions/auth";
 
 const Suggestions = (props) => {
+    const dispatch = useDispatch()
     const history = useHistory();
     const { suggestions } = useSelector(state => state.people);
     const { currentUser } = useSelector(state => state.auth);
@@ -33,7 +35,7 @@ const Suggestions = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <strong class="textSecondary cursor">Connect</strong>
+                                        <strong class="textSecondary cursor" onClick={() => { dispatch(Connect(suggestion._id)) }}>Connect</strong>
                                     </div>
                                 ))
                             }

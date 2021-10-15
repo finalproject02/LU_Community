@@ -1,38 +1,51 @@
 import React, { useState } from 'react';
-import { Card, Carousel, Collapse, Dropdown, Form, NavDropdown } from 'react-bootstrap';
-import { FaEllipsisH, FaEllipsisV, FaPhotoVideo, FaRegComment, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
+import { Card, Dropdown, NavDropdown } from 'react-bootstrap';
+import { FaEllipsisH, FaEllipsisV, FaRegComment, FaRegHeart, FaShare } from 'react-icons/fa';
 import Avatar from "../../../images/avatar.jpeg";
 import "./PostCard.css";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
-import { Comment, DeletePosts, LikeAndDislike } from "../../../actions/posts";
+import { DeletePosts, LikeAndDislike } from "../../../actions/posts";
+import { useHistory } from "react-router-dom";
 
 const PostCard = ({ posts }) => {
+    const history = useHistory()
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth);
     const { people } = useSelector(state => state.people);
     const { clubs } = useSelector(state => state.clubs);
-    const [comment, setComment] = useState();
-    const [showMore, setShowMore] = useState(false)
+    const { groups } = useSelector(state => state.groups);
 
 
     const [open, setOpen] = useState(false);
 
-    const [index, setIndex] = useState(0);
-
-    const getUserName = (id, owner_position) => {
+    const getUserName = (id, owner_position, post_to) => {
         if (owner_position === 'club_post') {
-            const club = clubs.filter(cl => cl._id === id);
+            const club = clubs?.filter(cl => cl._id === post_to);
             return club.map(u => u.name)
+        } else if (owner_position.startsWith('Group')) {
+            const group = groups?.filter(usr => usr._id === post_to);
+            return group.map(u => u.name)
         } else {
-            const person = people.filter(usr => usr._id === id);
+            const person = people?.filter(usr => usr._id === id);
             return person.map(u => u.name)
         }
 
     }
-    const getUserProfilePicture = (id, owner_position) => {
+
+    const action = (owner_id, owner_position, post_to) => {
         if (owner_position === 'club_post') {
-            const club = clubs.filter(cl => cl._id === id);
+            return history.push(`/clubDetails/${post_to}`)
+        } else if (owner_position.startsWith('Group')) {
+            return history.push(`/group/${post_to}`)
+        } else {
+            return history.push(`/profile/${owner_id}`)
+        }
+
+    }
+    const getUserProfilePicture = (id, owner_position, post_to) => {
+        if (owner_position === 'club_post') {
+            const club = clubs.filter(cl => cl._id === post_to);
             const cb = club.map(u => u.profile_picture);
             const check = cb.map(i => i == null);
             if (check.includes(true)) {
@@ -40,7 +53,7 @@ const PostCard = ({ posts }) => {
             } else {
                 return club.map(u => u.profile_picture)
             }
-        } else {
+        } else if (owner_position === 'own_post') {
             const person = people.filter(usr => usr._id === id);
             const pic = person.map(u => u.profile_picture);
             const check = pic.map(i => i == null);
@@ -49,15 +62,15 @@ const PostCard = ({ posts }) => {
             } else {
                 return person.map(u => u.profile_picture)
             }
-        }
-    }
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-    };
-    const handleKeyDown = (e) => {
-        if (e.keyCode === 13) {
-            dispatch(Comment(comment.id, { comment: comment.comment }));
-            setComment('')
+        } else {
+            const group = groups.filter(usr => usr._id === post_to);
+            const pic = group.map(u => u.cover_picture);
+            const check = pic.map(i => i == null);
+            if (check.includes(true)) {
+                return null
+            } else {
+                return group.map(u => u.cover_picture)
+            }
         }
     }
     return (
@@ -67,14 +80,27 @@ const PostCard = ({ posts }) => {
                     <Card.Body>
                         <Card.Text as="div" className="d-flex justify-content-between align-items-center ps-3">
                             <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                                <img src={getUserProfilePicture(post.owner_position === 'club_post' ? post.post_to : post.owner_id, post.owner_position) !== null ? `/api/files/storage/${getUserProfilePicture(post.owner_id)}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
+                                <img src={getUserProfilePicture(post.owner_id, post.owner_position, post.post_to) !== null ? `/api/files/storage/${getUserProfilePicture(post.owner_id, post.owner_position, post.post_to)}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
                                 <div className="d-flex align-items-center">
 
                                     <div>
-                                        <h6 className="mb-0">{getUserName(post.owner_position === 'club_post' ? post.post_to : post.owner_id, post.owner_position)}</h6>
-                                        {post.owner_position === 'Group_admin' && (
+
+                                        {post.owner_position.startsWith('Group') ? (
+                                            post.owner_position === 'Group_admin' ? (
+                                                <>
+                                                    <h6 style={{ cursor: 'pointer', marginTop: '12px', marginBottom: '-1px' }} onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</h6>
+                                                    <small style={{ marginTop: '-1px' }}>{moment(post.createdAt).fromNow()}</small>
+                                                    <p style={{ cursor: 'pointer', marginTop: '-1px' }} onClick={() => action(post.owner_id, 'user_post')}>Admin post</p>
+                                                </>
+                                            ) : <>
+                                                <h6 style={{ cursor: 'pointer', marginTop: '12px', marginBottom: '-1px' }} onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</h6>
+                                                <small style={{ marginTop: '-1px' }}>{moment(post.createdAt).fromNow()}</small>
+                                                <p style={{ cursor: 'pointer', marginTop: '-1px' }} onClick={() => action(post.owner_id, 'user_post')}>{getUserName(post.owner_id, 'user_post')}</p>
+                                            </>
+                                        ) : (
                                             <>
-                                                <strong>Admin </strong>
+                                                <h6 style={{ cursor: 'pointer' }} onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</h6>
+                                                <small>{moment(post.createdAt).fromNow()}</small>
                                             </>
                                         )}
                                         <small>{moment(post.createdAt).fromNow()}</small>
@@ -102,10 +128,10 @@ const PostCard = ({ posts }) => {
                             </div>
                         </Card.Text>
                         <Card.Text as="div" className="d-flex justify-content-center">
-                            <img className="w-100 d-none"
-                                src={`/api/files/storage/${post.filename}`} alt=".." />
-                            <video className="w-100" controls src={`/api/files/storage/${post.filename}`}></video>
-                            <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".."></iframe>
+                            <img className="w-100 img-fluid"
+                                src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} style={{ cursor: 'pointer' }} />
+                            <video className="w-100 d-none" controls src={`/api/files/storage/${post.filename}`}></video>
+                            <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".." ></iframe>
                         </Card.Text>
                         <Card.Text as="div">
                             <div className="d-flex align-items-center justify-content-between">
@@ -116,7 +142,7 @@ const PostCard = ({ posts }) => {
                                     <small id="totalLike" className="text-dark textHover fs-5">{post.likes?.length}</small>
                                 </div>
                                 <div className="d-flex align-items-center py-2 fs-5">
-                                    <small className="anchor text-dark textHover pe-3"><span
+                                    <small className="anchor text-dark textHover pe-3" style={{ cursor: 'pointer' }} onClick={() => history.push(`/post/${post._id}`)}><span
                                         className="pe-2">{post.comments?.length}</span>comment</small>
                                 </div>
                             </div>
@@ -132,7 +158,7 @@ const PostCard = ({ posts }) => {
                                     aria-controls="example-collapse-text"
                                     aria-expanded={open}>
                                     <FaRegComment className="fs-5 mb-1" />
-                                    <p className="ps-2 pt-2 fs-5">Comment</p>
+                                    <p className="ps-2 pt-2 fs-5" onClick={() => history.push(`/post/${post._id}`)}>Comment</p>
                                 </div>
                                 <div className="d-flex align-items-center cardHover rounded-3">
                                     <FaShare className="fs-5 mb-1" />
@@ -141,75 +167,6 @@ const PostCard = ({ posts }) => {
                             </div>
                         </Card.Text>
                         <hr className="hr" />
-                        <Collapse in={open}>
-                            <div className="mt-2">
-                                <div className="d-flex justify-content-between position-relative pt-2">
-                                    <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt="" width="35" height="35" className="rounded-circle me-2" />
-                                    <Form.Control type="text" className="ps-4 rounded-pill me-5 mb-3" placeholder="Put your comment" onKeyDown={handleKeyDown} onChange={(e) => setComment({ comment: e.target.value, id: post._id })} />
-                                    <div className="commentBoxPosition">
-                                        <FaRegSmile title="add emoji" className="me-2" />
-                                        <FaPhotoVideo title="photo/video" />
-                                    </div>
-                                </div>
-
-                                <div id="commentShow">
-                                    {showMore ?
-                                        post.comments.sort((a, b) => { return new Date(b.time) - new Date(a.time) }).slice(3, post.comments.length).map(comment => (
-                                            <>
-                                                <div className="reply d-flex justify-content-start align-items-center">
-                                                    <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
-                                                        <img width="38" height="38" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt="" />
-                                                        <div className="d-flex align-items-center">
-                                                            <div className="commentBg rounded-3">
-                                                                <strong>{getUserName(comment.id)}</strong>
-                                                                <p className="mb-0">{comment.comment}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <NavDropdown
-                                                        className="navFontSize"
-                                                        title={<FaEllipsisH className="text-dark" />}
-                                                    >
-                                                        <NavDropdown.Item className="dropdownItem py-1">Delete
-                                                            Comment
-                                                        </NavDropdown.Item>
-                                                        <NavDropdown.Item className="dropdownItem py-1">Edit
-                                                            Comment
-                                                        </NavDropdown.Item>
-                                                    </NavDropdown>
-                                                </div>
-                                            </>
-                                        )) : post.comments.sort((a, b) => { return new Date(b.time) - new Date(a.time) }).slice(0, 3).map(comment => (
-                                            <>
-                                                <div className="reply">
-                                                    <div className="d-flex justify-content-start align-items-top ms-5 mb-2">
-                                                        <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt=".." />
-                                                        <div className="d-flex align-items-center">
-                                                            <div className="commentBg rounded-3 p-2">
-                                                                <h6>{getUserName(comment.id)}</h6>
-                                                                <p className="mb-0">{comment.comment}</p>
-                                                            </div>
-                                                        </div>
-                                                        <NavDropdown
-                                                            className="navFontSize"
-                                                            title={<FaEllipsisH className="text-dark" />}
-                                                        >
-                                                            <NavDropdown.Item className="dropdownItem py-1">Delete
-                                                                Comment
-                                                            </NavDropdown.Item>
-                                                            <NavDropdown.Item className="dropdownItem py-1">Edit
-                                                                Comment
-                                                            </NavDropdown.Item>
-                                                        </NavDropdown>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        ))}
-
-                                </div>
-                                <span style={{ cursor: 'pointer' }} className="ps-3 textHover text-dark" onClick={() => setShowMore((prevalue => !prevalue))}> {showMore ? 'View Previous Comments' : 'View more comments'}</span>
-                            </div>
-                        </Collapse>
                     </Card.Body>
                 </Card>
             ))}

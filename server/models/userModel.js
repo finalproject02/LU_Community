@@ -99,7 +99,9 @@ const userModel = new mongoose.Schema({
     },
     language: String,
     website: String,
-    notifications: Array
+    notifications: Array,
+    peers: Array,
+    lastLogin: Date,
 },
     { timestamps: true }
 

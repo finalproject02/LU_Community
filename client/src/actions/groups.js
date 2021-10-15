@@ -88,10 +88,10 @@ export const CancelRequest = (id) => async (dispatch, getState) => {
 export const RejectRequest = (id, userId) => async (dispatch, getState) => {
     try {
         dispatch({ type: LOADING })
-        const { data: { group } } = await api.reject_request(getState, id, userId)
+        const { data: { group, creator } } = await api.reject_request(getState, id, userId)
         dispatch({
             type: REJECT_REQUEST,
-            payload: group
+            payload: { group, creator }
         })
         dispatch({ type: LOADED })
     } catch (error) {
@@ -102,10 +102,10 @@ export const RejectRequest = (id, userId) => async (dispatch, getState) => {
 export const AcceptRequest = (id, userId) => async (dispatch, getState) => {
     try {
         dispatch({ type: LOADING })
-        const { data: { group } } = await api.accept_request(getState, id, userId)
+        const { data: { group, creator } } = await api.accept_request(getState, id, userId)
         dispatch({
             type: ACCEPT_REQUEST,
-            payload: group
+            payload: { group, creator}
         })
         dispatch({ type: LOADED })
     } catch (error) {

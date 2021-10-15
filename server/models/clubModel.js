@@ -41,7 +41,8 @@ const clubModel = new mongoose.Schema({
     type: {
         type: String,
         default: 'club'
-    }
+    },
+    peers: Array
 },
     {timestamps: true}
 )

@@ -2,8 +2,10 @@ import postModel from "../models/postModel.js";
 import { v4 as uuidv4 } from "uuid";
 import userModel from "../models/userModel.js";
 
+
 export const createPost = async (req, res)  => {
     const posts = req.body;
+
     try {
        const post = await postModel.create({ ...posts, owner_id: req.user.id, owner_name: req.user.name });
        res.status(200).json({ post: post })
