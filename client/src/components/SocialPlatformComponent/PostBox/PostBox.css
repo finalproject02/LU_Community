@@ -1,2 +1,5 @@
-.smallProfile {
+.postModalPosition {
+  position: fixed;
+  z-index: auto;
+  overflow: scroll;
 }

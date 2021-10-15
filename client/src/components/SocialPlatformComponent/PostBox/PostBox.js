@@ -9,10 +9,10 @@ import { ClubPost } from "../../../actions/clubs";
 import path from "path";
 import { CreatePost } from "../../../actions/posts";
 import { uploadFile } from "../../../actions/files";
-import {GroupPost} from "../../../actions/groups";
-import {useParams} from "react-router-dom";
+import { GroupPost } from "../../../actions/groups";
+import { useParams } from "react-router-dom";
 
-const PostBox = ({details}) => {
+const PostBox = ({ details }) => {
     const params = useParams();
     const { id } = params
     const dispatch = useDispatch();
@@ -69,7 +69,7 @@ const PostBox = ({details}) => {
                     dispatch(GroupPost(id, data));
                 } else {
                     data.owner_position = 'Group_admin'
-                    dispatch(GroupPost(id,data));
+                    dispatch(GroupPost(id, data));
                 }
 
             } else if (currentUser?.memberships.includes(id)) {
@@ -84,7 +84,7 @@ const PostBox = ({details}) => {
                     dispatch(GroupPost(id, data));
                 } else {
                     data.owner_position = 'Group_member'
-                    dispatch(GroupPost(id,data));
+                    dispatch(GroupPost(id, data));
                 }
             } else {
                 if (file) {
@@ -98,7 +98,7 @@ const PostBox = ({details}) => {
                     dispatch(GroupPost(id, data));
                 } else {
                     data.owner_position = 'Public'
-                    dispatch(GroupPost(id,data));
+                    dispatch(GroupPost(id, data));
                 }
             }
         }
@@ -142,11 +142,11 @@ const PostBox = ({details}) => {
             </Card>
 
             <Modal
+                centered
                 show={show}
                 onHide={handleClose}
-                backdrop="static"
                 keyboard={false}
-                size="lg"
+                className="postModalPosition"
             >
                 <Form onSubmit={handleSubmit}>
                     <Modal.Header closeButton>
