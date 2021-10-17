@@ -31,6 +31,7 @@ import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/
 import AdmissionSecondStep from "./components/OnlineAdmission/AdmissionSecondStep/AdmissionSecondStep";
 import AdmissionFinalStep from "./components/OnlineAdmission/AdmissionFinalStep/AdmissionFinalStep";
 import { Messages } from "./actions/messages";
+import ChatBody from "./components/SocialPlatformComponent/pages/Chat/ChatBody/ChatBody";
 
 function App() {
   const dispatch = useDispatch();
@@ -172,6 +173,9 @@ function App() {
             </Route>
             <Route path="/message">
               <Message />
+            </Route>
+            <Route path="/chat">
+              <ChatBody />
             </Route>
             <Route path="/club">
               <Club />

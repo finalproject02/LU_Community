@@ -1,4 +1,4 @@
-import { GET_APPLICATIONS, LOADING, LOADED, CHECKED_HSC_RESULT, CHECKED_SSC_RESULT, GET_APPLICATION } from "../actions/types";
+import { GET_APPLICATIONS, LOADING, LOADED, CHECKED_HSC_RESULT, CHECKED_SSC_RESULT, GET_APPLICATION, DELETE_APPLICATIONS } from "../actions/types";
 
 export default (state = { applications: [], isLoading: false, message : null }, action) => {
     switch (action.type) {
@@ -13,6 +13,11 @@ export default (state = { applications: [], isLoading: false, message : null }, 
                 ...state,
                 application: action.payload,
                 isLoading: false
+            }
+        case DELETE_APPLICATIONS:
+            return {
+                ...state,
+                applications: state.applications.filter(app => app._id !== action.payload)
             }
         case LOADING:
             return {

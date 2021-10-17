@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileInfo from "./ProfileInfo";
 import Avatar from "../../../../images/avatar.jpeg";
 import { FaPaperclip } from "react-icons/fa";
-import { SendMessage } from "../../../../actions/messages";
+import { RealTimeMessage, SendMessage } from "../../../../actions/messages";
 import { io } from 'socket.io-client'
 
 
 const Message = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const [onlineConnection, setOnlineConnection] = useState([])
     const { people } = useSelector(state => state.people);
     const { currentUser } = useSelector(state => state.auth);
     const peerConnect = people?.filter(person => currentUser?.peers.includes(person._id));
@@ -26,15 +27,32 @@ const Message = () => {
     const [text, setText] = useState("");
     const onEnterPress = (event) => {
         if (event.keyCode === 13) {
-            dispatch(SendMessage({ message: text, receiver: chat }))
+            dispatch(SendMessage({ message: text, receiver: chat }));
+            socket.current.emit('sendMessage', {
+                sender: currentUser?._id,
+                receiver: chat,
+                message: text,
+                createdAt: Date.now()
+            })
             setText('')
         }
     };
 
     useEffect(() => {
         socket.current = io("ws://localhost:8900");
+        socket.current.on('getMessage', (data) => {
+            dispatch(RealTimeMessage(data))
+
+        })
     }, [])
 
+    useEffect(() => {
+        socket.current.emit('currentUser', currentUser?._id);
+        socket.current.on('getUser', (users) => {
+            setOnlineConnection(currentUser?.connection.filter(con => users.some((u) => u.userId === con)))
+        });
+
+    }, [])
     return (
         <div className="overflow-hidden">
             <SocialNavbar />
@@ -60,21 +78,25 @@ const Message = () => {
                             <>
                                 <div>
                                     <Conversation currentPeer={chat} />
-                                </div>
-                                <div className="reply">
-                                    <div className="searchContainer d-flex align-items-center w-100">
-                                        <label htmlFor="otherFile">
-                                            <FaPaperclip className="me-2 ms-2 fs-5" />
-                                            <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
-                                        </label>
-                                        <Form.Control type="text" className="w-100"
-                                            placeholder="Type a message"
-                                            value={text}
-                                            onKeyDown={onEnterPress}
-                                            onChange={(e) => setText(e.target.value)}
-                                        />
+                                    <div className="position-relative">
+                                        <div className="chatBox">
+                                            <div className="searchContainer d-flex align-items-center w-100">
+                                                <label htmlFor="otherFile">
+                                                    <FaPaperclip className="me-2 ms-2 fs-5" />
+                                                    <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
+                                                </label>
+                                                <Form.Control type="text" className="w-100"
+                                                    placeholder="Type a message"
+                                                    value={text}
+                                                    onKeyDown={onEnterPress}
+                                                    onChange={(e) => setText(e.target.value)}
+                                                />
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </>
 
                         ) : (

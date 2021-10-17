@@ -154,7 +154,7 @@ const SocialNavbar = () => {
                                     <span className="d-none d-sm-block">Connection</span>
                                 </Link>
                                 </li>
-                                <li><Link to="/message" className="nav-link px-2 link-dark d-flex">
+                                <li><Link to="/chat" className="nav-link px-2 link-dark d-flex">
                                     <FaRegCommentDots className="iconFont me-1 text-primary" />
                                     <span className="d-none d-sm-block">Messaging</span>
                                 </Link>
@@ -176,11 +176,14 @@ const SocialNavbar = () => {
                                                 {notification.types !== 'member_request' ? (
                                                     <>
                                                         <NavDropdown.Item className="py-3">
-                                                            <Link to={`${action(notification.types, notification.document_id, notification.notify_by)}`} className="text-decoration-none text-dark" onClick={() => dispatch(updateProfile({ isShow: true }))}>
+                                                            <div className="text-decoration-none text-dark" onClick={() => {
+                                                                dispatch(updateProfile({ isShow: true }))
+                                                                history.push(action(notification.types, notification.document_id, notification.notify_by))
+                                                            }}>
                                                                 <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" height="30" className="rounded-circle me-2" />
                                                                 {getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}
                                                                 <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
-                                                            </Link>
+                                                            </div>
                                                         </NavDropdown.Item>
                                                         <NavDropdown.Divider />
                                                     </>
