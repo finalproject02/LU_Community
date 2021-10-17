@@ -21,23 +21,23 @@ const Footer = () => {
           </Col>
           <Col md="6" className="text-end">
             <FontAwesomeIcon
-              className="textSecondary fs-2 me-2 iconHover"
+              className="text-info fs-2 me-2 iconHover"
               icon={faFacebook}
             />
             <FontAwesomeIcon
-              className="textSecondary fs-2 me-2 iconHover"
+              className="text-info fs-2 me-2 iconHover"
               icon={faTwitter}
             />
             <FontAwesomeIcon
-              className="textSecondary fs-2 me-2 iconHover"
+              className="text-info fs-2 me-2 iconHover"
               icon={faInstagram}
             />
             <FontAwesomeIcon
-              className="textSecondary fs-2 me-2 iconHover"
+              className="text-info fs-2 me-2 iconHover"
               icon={faYoutube}
             />
             <FontAwesomeIcon
-              className="textSecondary fs-2 me-2 iconHover"
+              className="text-info fs-2 me-2 iconHover"
               icon={faLinkedin}
             />
           </Col>
@@ -45,22 +45,8 @@ const Footer = () => {
       </Container>
       <Container>
         <Row className="text-center">
-          <Col md="4">
-            <h2 className="textSecondary mb-3">Leading University</h2>
-            <p className="text-white">
-              Welcome all to Leading University. The vision of LU is to produce
-              professionally competent and accomplished graduates who will be
-              able to encounter any challenges at home and abroad.
-            </p>
-          </Col>
-          <Col md="4">
-            <h2 className="textSecondary mb-3">Useful Links</h2>
-            <p className="text-white textHover">facebook</p>
-            <p className="text-white textHover">linkedin</p>
-            <p className="text-white textHover">Instagram</p>
-          </Col>
-          <Col md="4">
-            <h2 className="textSecondary mb-3">Contact</h2>
+          <Col md="6">
+            <h2 className="textSecondary mb-3 mt-2">Contact</h2>
             <p className="text-white textHover">
               Phone: 01313084499. <br />
               info@lus.ac.bd

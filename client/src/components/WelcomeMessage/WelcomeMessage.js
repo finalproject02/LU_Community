@@ -27,8 +27,8 @@ const WelcomeMessage = () => {
                 <Card.Text as='div' className="text-center mb-2 textSecondary fs-6">
                   Welcome Message
                 </Card.Text>
-                <Card.Text as='div' className="text-center">
-                  <Collapsible lines={23}>{msg.message}</Collapsible>
+                <Card.Text as='div' className="textJustify">
+                  <Collapsible lines={28}>{msg.message}</Collapsible>
                 </Card.Text>
                 <Card.Text as='div' className="text-center">{msg.name}</Card.Text>
               </Card.Body>

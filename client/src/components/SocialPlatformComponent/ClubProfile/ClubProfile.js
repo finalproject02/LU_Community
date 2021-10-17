@@ -187,10 +187,10 @@ const ClubProfile = () => {
                                                 aria-current="page" onClick={handleChangeHome}>Home</p>
                                         </li>
                                         <li className="nav-item cardHover rounded-3">
-                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeAbout}>About</p>
+                                            <p className="nav-link link-dark px-2" onClick={handleChangeAbout}>About</p>
                                         </li>
                                         <li className="nav-item cardHover rounded-3">
-                                            <p className="nav-link link-dark ps-4 px-2" onClick={handleChangeFollower}>Follower</p>
+                                            <p className="nav-link link-dark px-2" onClick={handleChangeFollower}>Follower</p>
                                         </li>
 
                                         <NavDropdown className="navFontSize text-dark cardHover rounded-3"
@@ -231,7 +231,7 @@ const ClubProfile = () => {
                 about && <AboutClub />
             }
             {
-                follower && < ClubFollower paramsClub={paramsClub} />
+                follower && <ClubFollower paramsClub={paramsClub} />
             }
             {
                 photo && <AllPhotos />

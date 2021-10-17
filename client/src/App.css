@@ -41,31 +41,6 @@
 .overFlowY {
   overflow-y: scroll;
 }
-.aside {
-  width: 100%;
-  height: 800px;
-  background-color: #ffffff;
-  display: inline-block;
-  font-size: 15px;
-  vertical-align: top;
-}
-.chat {
-  width: 100%;
-  height: 90%;
-  display: inline-block;
-  font-size: 16px;
-  vertical-align: top;
-}
-.conversationListHover:hover {
-  background-color: #6daf2c;
-  cursor: pointer;
-}
-.commentBoxPostDetails {
-  position: absolute;
-  right: 18%;
-  bottom: 40%;
-  font-size: 15px;
-}
 .commentBg {
   background-color: whitesmoke;
 }

@@ -23,7 +23,7 @@ const EducationProfileModal = ({ show, handleClose, DegreeName, newShow, closeNe
         clear()
     }
     return (
-        <Modal show={show ? show : newShow} onHide={show ? clear : closeNewShow}>
+        <Modal centered show={show ? show : newShow} onHide={show ? clear : closeNewShow}>
             <Modal.Header closeButton>
                 <Modal.Title>{show ? 'Edit Education' : 'Add Education'}</Modal.Title>
             </Modal.Header>
@@ -39,15 +39,15 @@ const EducationProfileModal = ({ show, handleClose, DegreeName, newShow, closeNe
                         <Row className="mb-2">
                             <Col md="12">
                                 <h6 class="">Degree</h6>
-                                <Form.Control name={'degree'}  value={formData.degree} onChange={handleChange} type="text" disabled/>
+                                <Form.Control name={'degree'} value={formData.degree} onChange={handleChange} type="text" disabled />
                             </Col>
                         </Row>
                     ) : <Row className="mb-2">
                         <Col md="12">
                             <h6 class="">Degree</h6>
-                            <Form.Control name={'degree'}  value={formData.degree} onChange={handleChange} type="text"/>
+                            <Form.Control name={'degree'} value={formData.degree} onChange={handleChange} type="text" />
                         </Col>
-                       </Row>}
+                    </Row>}
 
 
                     <Row className="mb-2">

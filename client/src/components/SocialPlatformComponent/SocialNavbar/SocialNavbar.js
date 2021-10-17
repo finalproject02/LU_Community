@@ -136,13 +136,13 @@ const SocialNavbar = () => {
                     <Container>
                         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                             <div>
-                                <Link to="/socialplatform" className="d-flex align-items-center pb-1 mb-lg-0 text-dark text-decoration-none fs-2 fw-bold">
+                                <Link to="/socialplatform" className="d-flex align-items-center pb-1 mb-lg-0 text-dark text-decoration-none fs-2 fw-bold bgPrimary rounded-3 px-2 text-white">
                                     LUSP
                                 </Link>
                             </div>
                             <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 ms-4">
                                 <li><Link to="/socialplatform" className="nav-link px-2 link-secondary d-flex">
-                                    <FaHome className="iconFont me-1" />
+                                    <FaHome className="iconFont me-1 textSecondary" />
                                     <span className="d-none d-sm-block">Home</span>
                                 </Link>
                                 </li>
@@ -150,12 +150,12 @@ const SocialNavbar = () => {
                                     {currentUser?.notifications.filter(notification => notification.isShow === false && notification.types === 'connection_request').length !== 0 && (
                                         <Badge bg="success" className='connectionCount'>{currentUser?.notifications.filter(notification => notification.isShow === false && notification.types === 'connection_request').length}</Badge>
                                     )}
-                                    <FaUserPlus className="iconFont me-1" />
+                                    <FaUserPlus className="iconFont me-1 text-success" />
                                     <span className="d-none d-sm-block">Connection</span>
                                 </Link>
                                 </li>
                                 <li><Link to="/message" className="nav-link px-2 link-dark d-flex">
-                                    <FaRegCommentDots className="iconFont me-1" />
+                                    <FaRegCommentDots className="iconFont me-1 text-primary" />
                                     <span className="d-none d-sm-block">Messaging</span>
                                 </Link>
                                 </li>
@@ -164,7 +164,7 @@ const SocialNavbar = () => {
                                         className="navFontSize"
                                         title={
                                             <div className="d-flex" >
-                                                <FaRegBell className="iconFont me-1 text-dark" />
+                                                <FaRegBell className="iconFont me-1 text-info" />
                                                 {currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length !== 0 && (
                                                     <Badge bg="danger" className="notificationCount text-white fw-bold">{currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length}</Badge>
                                                 )}
@@ -177,7 +177,7 @@ const SocialNavbar = () => {
                                                     <>
                                                         <NavDropdown.Item className="py-3">
                                                             <Link to={`${action(notification.types, notification.document_id, notification.notify_by)}`} className="text-decoration-none text-dark" onClick={() => dispatch(updateProfile({ isShow: true }))}>
-                                                                <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" className="rounded-circle" />
+                                                                <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" height="30" className="rounded-circle me-2" />
                                                                 {getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}
                                                                 <div className="text-muted text-sm">{moment(notification.time).fromNow()}</div>
                                                             </Link>
@@ -189,8 +189,8 @@ const SocialNavbar = () => {
                                                         <NavDropdown.Item className="py-3">
                                                             <div className="text-decoration-none text-dark" >
                                                                 <div className="d-flex">
-                                                                    <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" className="rounded-circle" />
-                                                                    <Link to={action(notification.types, notification.document_id, notification.notify_by)} style={{ textDecoration: 'none' }} className="text-muted text-sm ms-2"><strong>{getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}</strong></Link>
+                                                                    <img src={getUserProfilePicture(notification.notify_by, notification.types, notification.document_id) !== null ? `/api/files/storage/${getUserProfilePicture(notification.notify_by, notification.types, notification.document_id)}` : Avatar} alt="..." width="30" height="30" className="rounded-circle" />
+                                                                    <Link to={action(notification.types, notification.document_id, notification.notify_by)} className="text-muted text-sm ms-2 text-decoration-none"><strong>{getTypesInfo(notification.notify_by, notification.types, notification.document_id, notification.post_to)}</strong></Link>
                                                                 </div>
                                                                 <span className="text-muted text-sm ms-4">{moment(notification.time).fromNow()}</span>
                                                                 <div className="mt-1 ms-4">
@@ -208,8 +208,6 @@ const SocialNavbar = () => {
                                                         <NavDropdown.Divider />
                                                     </>
                                                 )}
-
-
                                             </>
                                         ))}
                                         <Dropdown.Item href="/allNotification">

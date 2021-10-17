@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import {updateProfile} from "../../../actions/auth";
+import { updateProfile } from "../../../actions/auth";
 import { useHistory } from 'react-router-dom';
 import Avatar from '../../../images/avatar.jpeg'
-import {useDispatch} from "react-redux";
-import {Peer} from "../../../actions/messages";
+import { useDispatch } from "react-redux";
+import { Peer } from "../../../actions/messages";
 
 const AllFriend = ({ connections, paramsConnection, setPost }) => {
     const history = useHistory();
@@ -16,7 +16,7 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                     <Card.Body>
                         <Card.Title>
                             <div className="d-flex justify-content-between align-connections-center">
-                                {connections?.length !== 0 || paramsConnection?.length !== 0 &&  <h5 className="card-title">All Connections</h5>}
+                                {connections?.length !== 0 || paramsConnection?.length !== 0 && <h5 className="card-title">All Connections</h5>}
                             </div>
                         </Card.Title>
                         <Card.Text as="div">
@@ -25,12 +25,12 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                                     connections?.map(connection => (
                                         <Col key={connection.id} md="3" className="mb-2">
                                             <Card className="w-100">
-                                                <Card.Img src={connection.profile_picture ? `/api/files/storage/${connection.profile_picture}` : Avatar} style={{ height: "20vh" }} className="card-img-top rounded-3 cursor" alt="..." onClick={() => {
+                                                <Card.Img src={connection.profile_picture ? `/api/files/storage/${connection.profile_picture}` : Avatar} style={{ height: "22vh" }} className="card-img-top rounded-3 cursor" alt="..." onClick={() => {
                                                     history.push(`/profile/${connection._id}`);
                                                     document.documentElement.scrollTop = 0
                                                 }} />
                                                 <Card.Body>
-                                                    <Card.Title style={{cursor: 'pointer'}} onClick={() => {
+                                                    <Card.Title style={{ cursor: 'pointer' }} onClick={() => {
                                                         history.push(`/profile/${connection._id}`);
                                                         document.documentElement.scrollTop = 0;
                                                     }}>{connection.name}</Card.Title>
@@ -65,7 +65,7 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                                                     document.documentElement.scrollTop = 0;
                                                 }} />
                                                 <Card.Body>
-                                                    <Card.Title style={{cursor: 'pointer'}} onClick={() => {
+                                                    <Card.Title style={{ cursor: 'pointer' }} onClick={() => {
                                                         history.push(`/profile/${PConnection._id}`);
                                                         document.documentElement.scrollTop = 0;
                                                     }}>{PConnection.name}</Card.Title>

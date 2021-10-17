@@ -82,28 +82,25 @@ const PostCard = ({ posts }) => {
                             <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
                                 <img src={getUserProfilePicture(post.owner_id, post.owner_position, post.post_to) !== null ? `/api/files/storage/${getUserProfilePicture(post.owner_id, post.owner_position, post.post_to)}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
                                 <div className="d-flex align-items-center">
-
                                     <div>
-
                                         {post.owner_position.startsWith('Group') ? (
                                             post.owner_position === 'Group_admin' ? (
                                                 <>
-                                                    <h6 style={{ cursor: 'pointer', marginTop: '12px', marginBottom: '-1px' }} onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</h6>
-                                                    <small style={{ marginTop: '-1px' }}>{moment(post.createdAt).fromNow()}</small>
+                                                    <strong className="mb-0" onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</strong>
+                                                    <small style={{ marginTop: '-1px' }}>{moment(post.createdAt).fromNow()}</small><br />
                                                     <p style={{ cursor: 'pointer', marginTop: '-1px' }} onClick={() => action(post.owner_id, 'user_post')}>Admin post</p>
                                                 </>
                                             ) : <>
-                                                <h6 style={{ cursor: 'pointer', marginTop: '12px', marginBottom: '-1px' }} onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</h6>
+                                                <strong onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</strong><br />
                                                 <small style={{ marginTop: '-1px' }}>{moment(post.createdAt).fromNow()}</small>
                                                 <p style={{ cursor: 'pointer', marginTop: '-1px' }} onClick={() => action(post.owner_id, 'user_post')}>{getUserName(post.owner_id, 'user_post')}</p>
                                             </>
                                         ) : (
                                             <>
-                                                <h6 style={{ cursor: 'pointer' }} onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</h6>
+                                                <strong onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</strong><br />
                                                 <small>{moment(post.createdAt).fromNow()}</small>
                                             </>
                                         )}
-                                        <small>{moment(post.createdAt).fromNow()}</small>
                                     </div>
                                 </div>
                             </div>
@@ -128,8 +125,8 @@ const PostCard = ({ posts }) => {
                             </div>
                         </Card.Text>
                         <Card.Text as="div" className="d-flex justify-content-center">
-                            <img className="w-100 img-fluid"
-                                src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} style={{ cursor: 'pointer' }} />
+                            <img className="w-100 img-fluid cursor"
+                                src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} />
                             <video className="w-100 d-none" controls src={`/api/files/storage/${post.filename}`}></video>
                             <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".." ></iframe>
                         </Card.Text>
@@ -150,17 +147,17 @@ const PostCard = ({ posts }) => {
                         <hr className="hr" />
                         <Card.Text as="div">
                             <div className="d-flex justify-content-between align-items-center">
-                                <div className="d-flex align-items-center ps-4 cardHover rounded-3 m-1 p-1" onClick={() => dispatch(LikeAndDislike(post._id))}>
+                                <div className="d-flex align-items-center cursor ps-4 rounded-3" onClick={() => dispatch(LikeAndDislike(post._id))}>
                                     <FaRegHeart className="fs-5 mb-1" />
                                     <p className="ps-2 pt-2 fs-5">Like</p>
                                 </div>
-                                <div className="d-flex align-items-center cardHover rounded-3" onClick={() => setOpen(!open)}
+                                <div className="d-flex align-items-center cursor rounded-3" onClick={() => setOpen(!open)}
                                     aria-controls="example-collapse-text"
                                     aria-expanded={open}>
                                     <FaRegComment className="fs-5 mb-1" />
                                     <p className="ps-2 pt-2 fs-5" onClick={() => history.push(`/post/${post._id}`)}>Comment</p>
                                 </div>
-                                <div className="d-flex align-items-center cardHover rounded-3">
+                                <div className="d-flex align-items-center cursor rounded-3">
                                     <FaShare className="fs-5 mb-1" />
                                     <p className="ps-2 pt-2 pe-4 fs-5">Share</p>
                                 </div>

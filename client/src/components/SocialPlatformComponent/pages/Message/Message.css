@@ -20,10 +20,6 @@
   background: #f0f0f0;
   padding: 10px;
   align-items: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 .messageContainer {
   flex-direction: column;
@@ -53,4 +49,68 @@
   background: #ededed;
   align-items: center;
   gap: 10px;
+}
+.aside {
+  width: 100%;
+  height: 800px;
+  background-color: #ffffff;
+  display: inline-block;
+  font-size: 15px;
+  vertical-align: top;
+}
+.chat {
+  width: 100%;
+  height: 90vh;
+  display: inline-block;
+  font-size: 16px;
+  vertical-align: top;
+}
+.conversationListHover:hover {
+  background-color: #6daf2c;
+  cursor: pointer;
+}
+.commentBoxPostDetails {
+  position: absolute;
+  right: 18%;
+  bottom: 40%;
+  font-size: 15px;
+}
+
+.conversation {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100%;
+  /*width: 100%;*/
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  /*overflow-y: auto;*/
+}
+.heading {
+  padding: 10px 16px 10px 15px;
+  margin: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #ededed;
+  z-index: 1000;
+}
+.message {
+  padding: 0 !important;
+  margin: 0 !important;
+  background-size: cover;
+  overflow-y: auto;
+  border: 1px solid #f7f7f7;
+  height: calc(100% - 220px);
+}
+.message-body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+.reply {
+  height: 60px;
+  width: 100%;
+  background-color: #f5f1ee;
+  padding: 10px 5px 10px 5px !important;
+  margin: 0 !important;
+  z-index: 1000;
 }

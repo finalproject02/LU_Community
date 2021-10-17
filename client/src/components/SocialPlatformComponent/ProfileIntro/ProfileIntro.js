@@ -26,7 +26,7 @@ const ProfileIntro = () => {
                 <Card.Body>
                     <Card.Text as="div" className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title pt-2">Intro</h5>
-                        <FaRegEdit style={{cursor: 'pointer'}} className="fs-5" onClick={handleShow} />
+                        <FaRegEdit style={{ cursor: 'pointer' }} className="fs-5" onClick={handleShow} />
                     </Card.Text>
                     <hr />
                     <Card.Text as="div" className="d-flex align-items-center mb-2">
@@ -112,7 +112,7 @@ const ProfileIntro = () => {
                 </Card.Body>
             </Card>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit intro</Modal.Title>
                 </Modal.Header>

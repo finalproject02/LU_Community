@@ -14,7 +14,7 @@ function Events() {
             <Card className="w-100 shadow-sm mb-4">
               <Card.Img className="w-100" variant="top" src={item.url} />
               <Card.Body className="text-center p-4">
-                <Card.Title className="bgSecondary fs-4 text-white d-flex w-50 p-2 position-absolute top-50 start-0">
+                <Card.Title className="bgSecondary fs-4 text-white d-flex w-75 p-2 position-absolute top-50 start-0">
                   {item.date}
                 </Card.Title>
                 <Link to="#" className="textHover textSecondary text-uppercase">

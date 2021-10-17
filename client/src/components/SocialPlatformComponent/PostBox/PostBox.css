@@ -1,5 +1,11 @@
 .postModalPosition {
-  position: fixed;
+  box-sizing: content-box;
+  display: flex;
+  position: static;
   z-index: auto;
-  overflow: scroll;
+  float: none;
+  line-height: 16px;
+}
+.height {
+  min-height: 26px;
 }

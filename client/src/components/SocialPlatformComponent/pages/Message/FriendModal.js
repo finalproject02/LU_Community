@@ -7,7 +7,7 @@ const FriendModal = ({ show, handleClose }) => {
     return (
         <div>
             {show &&
-                <Modal show={show} onHide={handleClose}>
+                <Modal centered show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>User Info</Modal.Title>
                     </Modal.Header>

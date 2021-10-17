@@ -126,20 +126,20 @@ const PostBox = ({ details }) => {
                         <hr className="hrWidth" />
                     </Card.Text>
                     <Card.Text as="div" className="d-flex align-items-center ps-5">
-                        <Card.Text as="div" className="ps-4 text-center" onClick={handleShow}>
-                            <FaImage title="photo" className="fs-4" />
+                        <Card.Text as="div" className="ps-4 text-center cursor" onClick={handleShow}>
+                            <FaImage title="photo" className="fs-4 text-primary" />
                             <p>Photo</p>
                         </Card.Text>
-                        <Card.Text as="div" className="ps-4 text-center" onClick={handleShow}>
-                            <FaVideo title="video" className="fs-4" />
+                        <Card.Text as="div" className="ps-4 text-center cursor" onClick={handleShow}>
+                            <FaVideo title="video" className="fs-4 text-primary" />
                             <p>Video</p>
                         </Card.Text>
-                        <Card.Text as="div" className="ps-4 text-center" onClick={handleShow}>
-                            <FaFile title="file" className="fs-4" />
+                        <Card.Text as="div" className="ps-4 text-center cursor" onClick={handleShow}>
+                            <FaFile title="file" className="fs-4 text-info" />
                             <p>File</p>
                         </Card.Text>
-                        <Card.Text as="div" className="ps-4 text-center" onClick={handleShow}>
-                            <FaCertificate className="fs-4" />
+                        <Card.Text as="div" className="ps-4 text-center cursor" onClick={handleShow}>
+                            <FaCertificate className="fs-4 text-success" />
                             <p>Celebration</p>
                         </Card.Text>
                     </Card.Text>
@@ -171,41 +171,42 @@ const PostBox = ({ details }) => {
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className="height">
                             <Form.Control as="textarea" onChange={handleChange} name="description" rows={8} placeholder="what you would like to write?" />
                         </div>
-                        {
-                            file && file.type.startsWith("image") && (<img className="w-100 img-fluid img-thumbnail mt-1" src={URL.createObjectURL(file)} alt="name" />)
-                        }
-                        {
-                            file && file.type.startsWith("video") && (<video className="p-1 shadow-sm" src={URL.createObjectURL(file)} width="320" height="240" autoPlay />)
-                        }
-                        {
-                            otherFile && (<p className="fw-bold fs-5 p-2">{otherFile.name}</p>)
-                        }
-
-                        <Card>
+                        <div className="w-75 bg-light">
+                            {
+                                file && file.type.startsWith("image") && (<img className="w-100 img-fluid img-thumbnail mt-1" src={URL.createObjectURL(file)} alt="name" />)
+                            }
+                            {
+                                file && file.type.startsWith("video") && (<video className="p-1 shadow-sm" src={URL.createObjectURL(file)} width="320" height="240" autoPlay />)
+                            }
+                            {
+                                otherFile && (<p className="fw-bold fs-5 p-2">{otherFile.name}</p>)
+                            }
+                        </div>
+                        <Card className="mt-2">
                             <div className="d-flex justify-content-between p-3">
                                 <span>Add to your post</span>
                                 <div>
                                     <label htmlFor="file">
-                                        <FaPhotoVideo className="me-3 fs-3" title="photo/video" />
+                                        <FaPhotoVideo className="me-3 fs-3 text-primary" title="photo/video" />
                                         <Form.Control onChange={(e) => setFile(e.target.files[0])} accept="image/*,video/*" id="file" type="file" className="d-none" ></Form.Control>
                                     </label>
 
                                     <label htmlFor="otherFile">
-                                        <FaFile className="me-3 fs-3" title="file" />
+                                        <FaFile className="me-3 fs-3 text-info" title="file" />
                                         <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
                                     </label>
 
-                                    <FaUserCircle className="me-3 fs-3" title="tag friends" />
-                                    <FaMapMarkedAlt className="me-3 fs-3" title="check in" />
+                                    <FaUserCircle className="me-3 fs-3 text-warning" title="tag friends" />
+                                    <FaMapMarkedAlt className="me-3 fs-3 text-danger" title="check in" />
                                 </div>
                             </div>
                         </Card>
                     </Modal.Body>
                     <Modal.Footer>
-                        <button type="submit" className="btn btn-primary px-5 py-2 fs-5 rounded-3">Post</button>
+                        <button type="submit" className="btn btn-primary px-4 py-2 fs-6 rounded-3">Post</button>
                     </Modal.Footer>
                 </Form>
             </Modal>

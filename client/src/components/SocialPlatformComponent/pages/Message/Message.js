@@ -1,13 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Row, Col, Form} from "react-bootstrap";
+import React, { useEffect, useRef, useState } from 'react';
+import { Row, Col, Form } from "react-bootstrap";
 import SocialNavbar from "../../SocialNavbar/SocialNavbar"
 import ConversationList from './ConversationList';
 import Conversation from './Conversation';
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileInfo from "./ProfileInfo";
 import Avatar from "../../../../images/avatar.jpeg";
-import {FaPaperclip} from "react-icons/fa";
-import {SendMessage} from "../../../../actions/messages";
+import { FaPaperclip } from "react-icons/fa";
+import { SendMessage } from "../../../../actions/messages";
 import { io } from 'socket.io-client'
 
 
@@ -35,7 +35,6 @@ const Message = () => {
         socket.current = io("ws://localhost:8900");
     }, [])
 
-
     return (
         <div className="overflow-hidden">
             <SocialNavbar />
@@ -43,7 +42,7 @@ const Message = () => {
                 <Row>
                     <Col md="4 pe-0">
                         <div className="d-flex align-items-center p-2 ms-2 shadow-sm pb-3">
-                            <img width="45" className="rounded-circle me-2 cursor" src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt=".." onClick={handleShow} />
+                            <img width="45" height="45" className="rounded-circle me-2 cursor" src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt=".." onClick={handleShow} />
 
                             <Form className="w-100">
                                 <Form.Control type="search" placeholder="Search" />
@@ -52,36 +51,33 @@ const Message = () => {
                         <ProfileInfo show={show} handleClose={handleClose} />
                         {peerConnect.map(connect => (
                             <div onClick={() => setChat(connect._id)}>
-                                <ConversationList peerConnect={connect}/>
+                                <ConversationList peerConnect={connect} />
                             </div>
                         ))}
                     </Col>
-                    <Col md="8" className="shadow border-end overFlowY aside ps-0 ms-0 d-none d-md-block">
+                    <Col md="8" className="shadow border-end overFlowY ps-0 ms-0 d-none d-md-block">
                         {chat ? (
                             <>
-                            <div>
-                                <Conversation  currentPeer={chat}/>
-                            </div>
-                                <div className="position-relative">
-                                    <div className="chatBox">
-                                        <div className="searchContainer d-flex align-items-center w-100">
-                                            <label htmlFor="otherFile">
-                                                <FaPaperclip className="me-2 ms-2 fs-5" />
-                                                <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
-                                            </label>
-                                            <Form.Control type="text" className="w-100"
-                                                          placeholder="Type a message"
-                                                          value={text}
-                                                          onKeyDown={onEnterPress}
-                                                          onChange={(e) => setText(e.target.value)}
-                                            />
-
-                                        </div>
+                                <div>
+                                    <Conversation currentPeer={chat} />
+                                </div>
+                                <div className="reply">
+                                    <div className="searchContainer d-flex align-items-center w-100">
+                                        <label htmlFor="otherFile">
+                                            <FaPaperclip className="me-2 ms-2 fs-5" />
+                                            <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
+                                        </label>
+                                        <Form.Control type="text" className="w-100"
+                                            placeholder="Type a message"
+                                            value={text}
+                                            onKeyDown={onEnterPress}
+                                            onChange={(e) => setText(e.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </>
 
-                        ): (
+                        ) : (
                             <></>
                         )}
                     </Col>

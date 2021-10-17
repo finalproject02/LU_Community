@@ -7,3 +7,7 @@
   width: 150px;
   height: 120px;
 }
+.textJustify {
+  text-align: justify;
+  text-justify: inter-word;
+}

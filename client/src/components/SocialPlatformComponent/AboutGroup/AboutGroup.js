@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Col, Form, Modal, Row } from 'react-bootstrap';
-import { FaCalendar, FaEye, FaGlobe, FaRegEdit, FaTrashAlt, FaUsers, FaLock, FaEyeSlash } from 'react-icons/fa';
+import { FaCalendar, FaEye, FaGlobe, FaRegEdit, FaTrashAlt, FaUsers, FaLock, FaEyeSlash, FaInfo } from 'react-icons/fa';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
@@ -51,7 +51,14 @@ const AboutGroup = () => {
                                     {isCreator.length !== 0 && <FaRegEdit className="m-3" onClick={handleShow} />}
                                 </div>
                                 <hr />
-                                <Card.Text className="p-3">
+                                <Card.Text as="div" className="ps-3">
+                                    <h6 className="pt-2">
+                                        <FaInfo className="me-2" />
+                                        Group Info
+                                    </h6>
+                                    <p className="ms-4">This is group of 46 th batch of cse department</p>
+                                </Card.Text>
+                                <Card.Text as="div" className="p-3">
                                     {group.privacy === 'public' ?
                                         <Card.Text as="div">
                                             <h6 className="pt-2">
@@ -144,6 +151,10 @@ const AboutGroup = () => {
                             <Form.Floating className="mb-3">
                                 <Form.Control type="text" placeholder="Group Name" defaultValue={group.name} onChange={handleChange} name="name" />
                                 <label for="floatingInput">Group Name</label>
+                            </Form.Floating>
+                            <Form.Floating className="mb-3">
+                                <Form.Control type="text" placeholder="Group info" defaultValue={group.info} onChange={handleChange} name="info" />
+                                <label for="floatingInput">Group Info</label>
                             </Form.Floating>
                             <Form.Select className="mb-3 py-2" onChange={handleChange} name="privacy" defaultValue={group.privacy}>
                                 <option>Choose Privacy</option>
