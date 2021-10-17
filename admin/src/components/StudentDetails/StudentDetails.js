@@ -1,23 +1,34 @@
 import React, {useEffect, useState} from 'react';
-import jahed from "../../images/jahed.jpg";
 import { Container, Row, Col, Card, Form } from "react-bootstrap";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Button from '@restart/ui/esm/Button';
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {checkSSCResult, checkHSCResult, getApplication} from "../../actions/applications";
+import {checkSSCResult, checkHSCResult, getApplication, DeleteApplication} from "../../actions/applications";
 import fileDownload from "js-file-download";
 import axios from "axios";
 import avatar_pic from '../../images/avatar.jpeg'
 
 const StudentDetails = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const params = useParams();
     const { id } = params;
-    const { application } = useSelector(state => state.applications)
+    const { application } = useSelector(state => state.applications);
+
 
     useEffect(() => {
-        dispatch(getApplication(id))
+        dispatch(getApplication(id));
+        if (application?.ssc_credential_authenticate === 'authenticated credential' && application?.hsc_credential_authenticate === 'authenticated credential' && application?.status === 'application pending') {
+           setTimeout(() => {
+               window.location.reload()
+           }, 1000)
+        }else if (application?.ssc_credential_authenticate === 'not authenticated' && application?.hsc_credential_authenticate === 'not authenticated' && application?.status === 'application pending') {
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000)
+        }
+
     }, [id])
 
     const handleDownload = (filename) => {
@@ -459,7 +470,7 @@ const StudentDetails = () => {
                                             <br />
                                             <div className="d-flex justify-content-between px-3">
                                                 <div>
-                                                    <input type="submit" value="Reject Request" className="btn btn-danger" />
+                                                    <input type="button" value="Reject Request" className="btn btn-danger" onClick={() => dispatch(DeleteApplication(application._id, history))}/>
                                                 </div>
                                                 <div>
                                                     <input type="submit" value="Accept Request" className="btn btn-success" />

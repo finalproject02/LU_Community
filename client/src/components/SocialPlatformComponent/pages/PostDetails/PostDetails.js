@@ -97,7 +97,7 @@ const NotificationPostPage = () => {
                                     <div className="d-flex justify-content-start align-items-center">
                                         <img style={{cursor: 'pointer'}}  onClick={() => action(item.owner_id, item.owner_position, item.post_to)}  src={getUserProfilePicture(item.owner_id, item.owner_position, item.post_to) !== null ? `/api/files/storage/${getUserProfilePicture(item.owner_id, item.owner_position, item.post_to)}` : Avatar} alt="name" width="65" className="rounded-circle me-2" />
                                         <div style={{marginTop: '1px'}}>
-                                            {item.owner_position.startsWith('Group') ? (
+                                            {item.owner_position.startsWith('Group') && (
                                                 item.owner_position === 'Group_admin'? (
                                                     <>
                                                         <h6 style={{cursor:'pointer', marginTop: '12px', marginBottom: '-1px'}}   onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
@@ -107,14 +107,23 @@ const NotificationPostPage = () => {
                                                 ) : <>
                                                     <h6 style={{cursor:'pointer', marginTop: '12px', marginBottom: '-1px'}}   onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                     <small style={{marginTop: '-1px'}}>{moment(item.createdAt).fromNow()}</small>
-                                                    <p style={{cursor: 'pointer', marginTop: '-1px'}} onClick={() => action(item.owner_id, 'own_post')}>{getUserName(item.owner_id, 'own_post')}</p>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <h6 style={{cursor:'pointer'}}   onClick={() => action(post.owner_id, post.owner_position, post.post_to)}>{getUserName(post.owner_id, post.owner_position, post.post_to)}</h6>
-                                                    <small>{moment(post.createdAt).fromNow()}</small>
+                                                    <p style={{cursor: 'pointer', marginTop: '-1px'}} onClick={() => action(item.owner_id, 'own_post')}>{getUserName(item.owner_id, 'own_post', '')}</p>
                                                 </>
                                             )}
+
+                                            {item.owner_position === 'own_post' ? (
+                                                <>
+                                                    <h6 style={{cursor:'pointer'}}   onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                    <small>{moment(item.createdAt).fromNow()}</small>
+                                                </>
+                                                ) : (
+                                                <>
+                                                    <h6 style={{cursor:'pointer'}}   onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                    <small>{moment(item.createdAt).fromNow()}</small>
+                                                </>
+                                            )
+                                            }
+
                                         </div>
                                     </div>
                                 </div>
@@ -177,10 +186,10 @@ const NotificationPostPage = () => {
 
                                         <div className="reply">
                                             <div className="d-flex justify-content-start align-items-center ms-5 mb-2">
-                                                <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id) ? `/api/files/storage/${getUserProfilePicture(comment.id)}` : Avatar} alt="" />
+                                                <img width="35" height="35" className="rounded-circle me-2" src={getUserProfilePicture(comment.id, 'own_post', '') ? `/api/files/storage/${getUserProfilePicture(comment.id, 'own_post', '')}` : Avatar} alt="" />
                                                 <div className="d-flex align-items-center">
                                                     <div className="bgGray rounded p-2">
-                                                        <h6>{getUserName(comment.id)}</h6>
+                                                        <h6>{getUserName(comment.id, 'own_post','')}</h6>
                                                         <p>{comment.comment}</p>
                                                     </div>
                                                 </div>

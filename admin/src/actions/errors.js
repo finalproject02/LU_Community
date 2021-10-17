@@ -1,14 +1,14 @@
-import { GET_ERRORS, CLEAR_ERROR } from "./types";
+import {CLEAR_ERRORS, GET_ERRORS} from "./types";
 
-export const getError = (message, status, id = null) => dispatch => {
-   return {
-       type: GET_ERRORS,
-       payload: { message, status, id }
-   }
+export const clearError = () => {
+    return {
+        type: CLEAR_ERRORS
+    }
 }
 
-export const clearErrors = () => {
+export const getErrors = (message, Types) => {
     return {
-        type: CLEAR_ERROR
+        type: GET_ERRORS,
+        payload: { message, Types }
     }
 }
