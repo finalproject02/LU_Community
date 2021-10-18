@@ -45,7 +45,8 @@ const Topics = () => {
         },
         {
             item: "44",
-            subject: "Admission Request",
+            path: "/publishResults",
+            subject: "Publish Results",
         },
     ]
 }

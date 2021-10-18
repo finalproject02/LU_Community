@@ -20,6 +20,7 @@ import ViewCourses from "../src/components/Teacher/ViewCourses";
 import CourseStudent from "../src/components/Teacher/CourseStudent";
 import ApproveResult from './components/DepHead/ApproveResult';
 import ApproveResultCourse from './components/DepHead/ApproveResultCourse';
+import PublishResult from './components/ExamController/PublishResult';
 
 
 function App() {
@@ -60,6 +61,9 @@ function App() {
           </Route>
           <Route path="/approveResultCourse">
             <ApproveResultCourse />
+          </Route>
+          <Route path="/publishResults">
+            <PublishResult />
           </Route>
           <Route path="*">
             <NotFound />
