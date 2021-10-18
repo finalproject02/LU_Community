@@ -22,7 +22,7 @@ const ApproveResultCourse = () => {
                             <td>1732020020</td>
                             <td>Md Jahed Miah</td>
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
                         </tr>
@@ -31,7 +31,7 @@ const ApproveResultCourse = () => {
                             <td>Md Jahed Miah</td>
 
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
                         </tr>
@@ -40,7 +40,7 @@ const ApproveResultCourse = () => {
                             <td>Md Jahed Miah</td>
 
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
                         </tr>
@@ -49,7 +49,7 @@ const ApproveResultCourse = () => {
                             <td>Md Jahed Miah</td>
 
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
                         </tr>
@@ -58,7 +58,7 @@ const ApproveResultCourse = () => {
                             <td>Md Jahed Miah</td>
 
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
                         </tr>
@@ -67,7 +67,7 @@ const ApproveResultCourse = () => {
                             <td>Md Jahed Miah</td>
 
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
 
@@ -77,7 +77,7 @@ const ApproveResultCourse = () => {
                             <td>Md Jahed Miah</td>
 
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
                         </tr>
@@ -86,7 +86,7 @@ const ApproveResultCourse = () => {
                             <td>Md Jahed Miah</td>
 
                             <td>
-                                <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
+                                <input className="form-control w-75" type="text" name placeholder="mark" /></td>
 
                             <td><input className="form-control w-75" type="text" name placeholder="Grade" /></td>
                         </tr>
