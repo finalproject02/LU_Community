@@ -40,7 +40,8 @@ const Topics = () => {
         },
         {
             item: "44",
-            subject: "Admission Request",
+            path: "/approveResult",
+            subject: "Approve Results",
         },
         {
             item: "44",

@@ -18,6 +18,8 @@ import Signup from './components/Signup/Signup';
 import ApproveAdReq from './components/ApproveAdReq/ApproveAdReq';
 import ViewCourses from "../src/components/Teacher/ViewCourses";
 import CourseStudent from "../src/components/Teacher/CourseStudent";
+import ApproveResult from './components/DepHead/ApproveResult';
+import ApproveResultCourse from './components/DepHead/ApproveResultCourse';
 
 
 function App() {
@@ -52,6 +54,12 @@ function App() {
           </Route>
           <Route path="/courseStudents">
             <CourseStudent />
+          </Route>
+          <Route path="/approveResult">
+            <ApproveResult />
+          </Route>
+          <Route path="/approveResultCourse">
+            <ApproveResultCourse />
           </Route>
           <Route path="*">
             <NotFound />
