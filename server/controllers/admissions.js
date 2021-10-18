@@ -2,6 +2,29 @@ import admissions from "../models/admissionModel.js";
 import { Builder, By, until } from 'selenium-webdriver';
 import { sendOfferLetterMessage, sendAccurateCredential } from "../services/mailService.js";
 
+export const firstStepForm = async (req, res) => {
+    try {
+
+    } catch (error) {
+
+    }
+}
+
+export const secondStepForm = async (req, res) => {
+    try {
+
+    } catch (error) {
+
+    }
+}
+
+export const finalStepForm = async (req, res) => {
+    try {
+
+    } catch (error) {
+
+    }
+}
 export const admission = async (req, res) => {
     const namePattern = /[A-Za-z ]{3,30}/i;
     const emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/;

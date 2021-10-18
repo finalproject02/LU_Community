@@ -82,7 +82,7 @@ const AdmissionFirstStep = () => {
                           name={'applicant_name'}
                           value={firstFormData?.applicant_name}
                           onChange={handleChange}
-                          required
+                          
                         />
                       </Form.Group>
                       <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -51,7 +51,7 @@ const AdmissionSecondStep = () => {
                                                             name={'guardian_name'}
                                                             onChange={handleChange}
                                                             value={secondFormData?.guardian_name}
-                                                            required
+                                                            
                                                         />
                                                     </Form.Group>
                                                 </Col>
@@ -70,7 +70,7 @@ const AdmissionSecondStep = () => {
                                                             name={'guardian_contact'}
                                                             onChange={handleChange}
                                                             value={secondFormData?.guardian_contact}
-                                                            required
+                                                            
                                                         />
                                                     </Form.Group>
                                                 </Col>
@@ -92,7 +92,7 @@ const AdmissionSecondStep = () => {
                                                             rows={5}
                                                             onChange={handleChange}
                                                             name={'permanent_address'}
-                                                            required
+                                                            
                                                             value={secondFormData?.permanent_address}
                                                         />
                                                     </Form.Group>
@@ -109,7 +109,7 @@ const AdmissionSecondStep = () => {
                                                             onChange={handleChange}
                                                             name={'present_address'}
                                                             value={secondFormData?.present_address}
-                                                            required
+                                                            
                                                         />
                                                     </Form.Group>
                                                 </Col>

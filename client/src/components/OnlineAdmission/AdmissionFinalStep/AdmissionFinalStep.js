@@ -101,7 +101,7 @@ const AdmissionFinalStep = () => {
                                                         name={'ssc_regis_no'}
                                                         value={finalFormData?.ssc_regis_no}
                                                         onChange={handleChange}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -115,7 +115,7 @@ const AdmissionFinalStep = () => {
                                                         name={"ssc_institution_name"}
                                                         onChange={handleChange}
                                                         value={finalFormData?.ssc_institution_name}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -128,7 +128,7 @@ const AdmissionFinalStep = () => {
                                                         name={'ssc_roll_no'}
                                                         onChange={handleChange}
                                                         value={finalFormData?.ssc_roll_no}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -143,7 +143,7 @@ const AdmissionFinalStep = () => {
                                                         onChange={handleChange}
                                                         name={'ssc_group'}
                                                         value={finalFormData?.ssc_group}
-                                                        required
+                                                        
                                                     >
                                                         <option>--select group--</option>
                                                         <option value="science">Science</option>
@@ -161,7 +161,7 @@ const AdmissionFinalStep = () => {
                                                         name={'ssc_year'}
                                                         onChange={handleChange}
                                                         value={finalFormData?.ssc_year}
-                                                        required>
+                                                        >
                                                         <option >--select year--</option>
                                                         <option value="2030">2030</option>
                                                         <option value="2029">2029</option>
@@ -219,7 +219,7 @@ const AdmissionFinalStep = () => {
                                                         onChange={handleChange}
                                                         name={'ssc_board'}
                                                         value={finalFormData?.ssc_board}
-                                                        required
+                                                        
                                                     >
                                                         <option >--select board--</option>
                                                         <option value="barisal">Barisal</option>
@@ -247,7 +247,7 @@ const AdmissionFinalStep = () => {
                                                         onChange={handleChange}
                                                         step={'any'}
                                                         value={finalFormData?.ssc_gpa}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                             </fieldset>
@@ -265,7 +265,7 @@ const AdmissionFinalStep = () => {
                                                         onChange={handleChange}
                                                         name={'hsc_regis_no'}
                                                         value={finalFormData?.hsc_regis_no}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -278,7 +278,7 @@ const AdmissionFinalStep = () => {
                                                         name="hsc_institution_name"
                                                         onChange={handleChange}
                                                         value={finalFormData?.hsc_institution_name}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -291,7 +291,7 @@ const AdmissionFinalStep = () => {
                                                         onChange={handleChange}
                                                         placeholder="hsc roll"
                                                         value={finalFormData?.hsc_roll_no}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -306,7 +306,7 @@ const AdmissionFinalStep = () => {
                                                         onChange={handleChange}
                                                         name={'hsc_group'}
                                                         value={finalFormData?.hsc_group}
-                                                        required
+                                                        
                                                     >
                                                         <option>--select group--</option>
                                                         <option value="science">Science</option>
@@ -324,7 +324,7 @@ const AdmissionFinalStep = () => {
                                                         placeholder="hsc year"
                                                         onChange={handleChange}
                                                         value={finalFormData?.hsc_year}
-                                                        required>
+                                                        >
                                                         <option >--select year--</option>
                                                         <option value="2030">2030</option>
                                                         <option value="2029">2029</option>
@@ -381,7 +381,7 @@ const AdmissionFinalStep = () => {
                                                         placeholder="hsc board"
                                                         onChange={handleChange}
                                                         value={finalFormData?.hsc_board}
-                                                        required
+                                                        
                                                     >
                                                         <option >--select board--</option>
                                                         <option value="barisal">Barisal</option>
@@ -409,7 +409,7 @@ const AdmissionFinalStep = () => {
                                                         onChange={handleChange}
                                                         step={'any'}
                                                         value={finalFormData?.hsc_gpa}
-                                                        required
+                                                        
                                                     />
                                                 </Form.Group>
                                             </fieldset>
