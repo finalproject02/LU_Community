@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, Container } from 'react-bootstrap';
-import {Link, useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import avatar from '../../images/avatar.jpeg'
@@ -19,14 +19,17 @@ const AdmissionRequest = () => {
                                     <Card.Img className="img-fluid w-100 img-thumbnail" variant="top" src={!applicants.applicant_photo ? avatar : `/api/files/storage/${applicants.applicant_photo}`} />
                                     <Card.Body>
                                         <Card.Title>Name: <b>{applicants.applicant_name}</b></Card.Title>
-                                        <Card.Text>
+                                        <Card.Text as="div">
                                             Program: <b>{applicants.program_name}</b>
                                         </Card.Text>
-                                        <Card.Text>
+                                        <Card.Text as="div">
                                             Email: <b>{applicants.applicant_email}</b>
                                         </Card.Text>
-                                        <Card.Text>
+                                        <Card.Text as="div">
                                             Phone: <b>{applicants.applicant_mobile}</b>
+                                        </Card.Text>
+                                        <Card.Text as="div">
+                                            Request: <b>pending</b>
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer>

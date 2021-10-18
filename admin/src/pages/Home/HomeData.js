@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const Topics = () => {
-    const { applications } = useSelector(state =>  state.applications)
+    const { applications } = useSelector(state => state.applications)
     return [
         {
             item: applications.length,
@@ -10,8 +10,8 @@ const Topics = () => {
         },
         {
             item: "44",
-            path: "/semesterRegistration",
-            subject: "Semester Registration",
+            path: "/approveRequest",
+            subject: "Approve Request",
         },
         {
             item: "44",
@@ -35,7 +35,8 @@ const Topics = () => {
         },
         {
             item: "44",
-            subject: "Admission Request",
+            path: "/viewCourses",
+            subject: "View Courses",
         },
         {
             item: "44",

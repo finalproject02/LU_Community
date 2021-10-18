@@ -15,6 +15,9 @@ import store from "./store";
 import { getAllApplication } from "./actions/applications";
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import ApproveAdReq from './components/ApproveAdReq/ApproveAdReq';
+import ViewCourses from "../src/components/Teacher/ViewCourses";
+import CourseStudent from "../src/components/Teacher/CourseStudent";
 
 
 function App() {
@@ -40,6 +43,15 @@ function App() {
           </Route>
           <Route path="/studentDetails/:id">
             <StudentDetails />
+          </Route>
+          <Route path="/approveRequest">
+            <ApproveAdReq />
+          </Route>
+          <Route path="/viewCourses">
+            <ViewCourses />
+          </Route>
+          <Route path="/courseStudents">
+            <CourseStudent />
           </Route>
           <Route path="*">
             <NotFound />
