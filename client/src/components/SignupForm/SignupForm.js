@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
@@ -24,7 +24,7 @@ const SignupForm = () => {
     }
 
     useEffect(() => {
-        window.onbeforeunload = function() {
+        window.onbeforeunload = function () {
             return true;
         };
 
@@ -34,7 +34,7 @@ const SignupForm = () => {
     }, [])
     return (
         <div className="mt-5 p-4">
-            <h2 className="text-center textPrimary">{isTeacher ? 'Teacher Signup' : 'Student Signup'}</h2>
+            <h2 className="text-center textPrimary">Student Signup</h2>
             {Types === 'SIGNUP_ERROR' && <h6>{message}</h6>}
             <Form onSubmit={handleSubmit} className="shadow p-5">
                 <Form.Group className="mb-3">
@@ -74,12 +74,8 @@ const SignupForm = () => {
                 <div className="bgSecondary text-center">
                     <input type="submit" value="SIGN UP" className="btn w-100 text-white" />
                 </div>
-                <div className="text-center mt-3">
-                    <Link to="#" className="textSecondary textHover" onClick={() => setIsTeacher(prevalue => !prevalue)}>{isTeacher ? 'Signup as a Student' : 'Signup as aTeacher'}</Link>
-                </div>
-
             </Form>
-        </div >
+        </div>
     );
 };
 

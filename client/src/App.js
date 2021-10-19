@@ -32,6 +32,7 @@ import AdmissionSecondStep from "./components/OnlineAdmission/AdmissionSecondSte
 import AdmissionFinalStep from "./components/OnlineAdmission/AdmissionFinalStep/AdmissionFinalStep";
 import { Messages } from "./actions/messages";
 import ChatBody from "./components/SocialPlatformComponent/pages/Chat/ChatBody/ChatBody";
+import Results from "./components/Results/Results";
 
 function App() {
   const dispatch = useDispatch();
@@ -142,7 +143,7 @@ function App() {
               <Home />
             </Route>
             <Route path="/results">
-              <Home />
+              <Results />
             </Route>
             <Route path="/paymentprocedure">
               <Home />
