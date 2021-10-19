@@ -21,6 +21,7 @@ import CourseStudent from "../src/components/Teacher/CourseStudent";
 import ApproveResult from './components/DepHead/ApproveResult';
 import ApproveResultCourse from './components/DepHead/ApproveResultCourse';
 import PublishResult from './components/ExamController/PublishResult';
+import StudentResults from './components/ExamController/StudentResults';
 
 
 function App() {
@@ -64,6 +65,9 @@ function App() {
           </Route>
           <Route path="/publishResults">
             <PublishResult />
+          </Route>
+          <Route path="/publishStudentResults">
+            <StudentResults />
           </Route>
           <Route path="*">
             <NotFound />
