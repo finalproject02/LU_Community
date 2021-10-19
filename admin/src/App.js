@@ -22,6 +22,8 @@ import ApproveResult from './components/DepHead/ApproveResult';
 import ApproveResultCourse from './components/DepHead/ApproveResultCourse';
 import PublishResult from './components/ExamController/PublishResult';
 import StudentResults from './components/ExamController/StudentResults';
+import AssignCourse from './components/DepHead/AssignCourse';
+import AssignCourseList from './components/DepHead/AssignCourseList';
 
 
 function App() {
@@ -59,6 +61,12 @@ function App() {
           </Route>
           <Route path="/approveResult">
             <ApproveResult />
+          </Route>
+          <Route path="/assignCourses">
+            <AssignCourse />
+          </Route>
+          <Route path="/assignCourseList">
+            <AssignCourseList />
           </Route>
           <Route path="/approveResultCourse">
             <ApproveResultCourse />
