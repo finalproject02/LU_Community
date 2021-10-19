@@ -15,7 +15,7 @@ const Signup = () => {
                     <Col md="8">
                         <SignupForm />
                     </Col>
-                    <Col md="4">
+                    <Col md="4" className="mt-5">
                         <MainSidebar />
                     </Col>
                 </Row>
