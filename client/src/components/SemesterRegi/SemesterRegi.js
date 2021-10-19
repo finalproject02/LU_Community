@@ -98,6 +98,35 @@ const SemesterRegi = () => {
                                                         </select>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        <Form.Label>
+                                                            Add Course
+                                                        </Form.Label>
+                                                    </td>
+                                                    <td colSpan="3">
+                                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                            <Form.Select
+                                                                className="w-100"
+                                                                name="program_name"
+
+                                                            >
+                                                                <option value="cse">--Add course--</option>
+                                                                <option value="cse">English Reading &amp; Speaking</option>
+                                                                <option value="cse">Introduction to computer</option>
+                                                                <option value="english">Introduction to computer</option>
+                                                                <option value="eee">Introduction to computer</option>
+                                                                <option value="civil">Introduction to computer</option>
+                                                                <option value="civil">Introduction to computer</option>
+                                                                <option value="civil">Introduction to computer</option>
+                                                                <option value="civil">Introduction to computer</option>
+                                                                <option value="civil">Introduction to computer</option>
+                                                                <option value="civil">Introduction to computer</option>
+                                                                <option value="bangla">Introduction to computer</option>
+                                                            </Form.Select>
+                                                        </Form.Group>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
