@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import MainSidebar from "../MainSidebar/MainSidebar";
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import jahed from "../../images/Jahed.jpg";
+import prof from "../../images/Prof.jpg";
 import { Link } from 'react-router-dom';
 import { FaEnvelopeOpen, FaPhone, FaUser } from "react-icons/fa";
 
@@ -28,7 +28,7 @@ const FacultyCSE = () => {
                                                     </h6>
                                                 </div>
                                                 <div className="text-center mt-2">
-                                                    <img src={jahed} alt="user-avatar" className="rounded-circle img-fluid" width="100" height="100" />
+                                                    <img src={prof} alt="user-avatar" className="rounded-circle img-fluid" width="100" height="100" />
                                                 </div>
                                             </div>
                                             <div className="mb-2 mt-0">
@@ -61,7 +61,7 @@ const FacultyCSE = () => {
                                                     </h6>
                                                 </div>
                                                 <div className="text-center mt-2">
-                                                    <img src={jahed} alt="user-avatar" className="rounded-circle img-fluid" width="100" height="100" />
+                                                    <img src={prof} alt="user-avatar" className="rounded-circle img-fluid" width="100" height="100" />
                                                 </div>
                                             </div>
                                             <div className="mb-2">

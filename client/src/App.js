@@ -36,6 +36,7 @@ import Results from "./components/Results/Results";
 import SemesterRegi from "./components/SemesterRegi/SemesterRegi";
 import FacultyCSE from "./components/FacultyMembers/FacultyCSE";
 import TeacherDetails from "./components/FacultyMembers/TeacherDetails";
+import Payment from "./components/Payment/Payment";
 
 function App() {
   const dispatch = useDispatch();
@@ -156,6 +157,9 @@ function App() {
             </Route>
             <Route path="/semesterRegi">
               <SemesterRegi />
+            </Route>
+            <Route path="/payment">
+              <Payment />
             </Route>
             <Route path="/classroom">
               <Classroom />

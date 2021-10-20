@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import MainNavbar from '../MainNavbar/MainNavbar';
 import MainSidebar from '../MainSidebar/MainSidebar';
-import jahed from "../../images/Jahed.jpg";
+import prof from "../../images/Prof.jpg";
 import { FaTools } from "react-icons/fa";
 
 const TeacherDetails = () => {
@@ -31,7 +31,7 @@ const TeacherDetails = () => {
                                 <Card.Body>
                                     <Row>
                                         <Col md="3" className="mb-2">
-                                            <img className="img-fluid" style={{ width: 120 }} src={jahed} alt=".." />
+                                            <img className="img-fluid" style={{ width: 120 }} src={prof} alt=".." />
                                         </Col>
                                         <Col md="9">
                                             <Row>

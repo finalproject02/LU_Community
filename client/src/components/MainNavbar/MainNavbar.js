@@ -192,7 +192,7 @@ const MainNavbar = () => {
               </NavDropdown.Item>
               <NavDropdown.Item
                 className="dropdownItem py-3"
-                href="/paymentprocedure"
+                href="/payment"
               >
                 Payment Procedure
               </NavDropdown.Item>
