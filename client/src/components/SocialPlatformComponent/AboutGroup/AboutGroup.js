@@ -172,9 +172,6 @@ const AboutGroup = () => {
                         </Form>
                     </Modal.Body>
                 ))}
-                <Modal.Footer>
-
-                </Modal.Footer>
             </Modal>
 
             <Modal

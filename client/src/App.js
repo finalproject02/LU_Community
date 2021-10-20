@@ -34,6 +34,8 @@ import { Messages } from "./actions/messages";
 import ChatBody from "./components/SocialPlatformComponent/pages/Chat/ChatBody/ChatBody";
 import Results from "./components/Results/Results";
 import SemesterRegi from "./components/SemesterRegi/SemesterRegi";
+import FacultyCSE from "./components/FacultyMembers/FacultyCSE";
+import TeacherDetails from "./components/FacultyMembers/TeacherDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,8 +109,11 @@ function App() {
             <Route path="/departmentofbba">
               <Home />
             </Route>
-            <Route path="/departmentofcse">
-              <Home />
+            <Route path="/departmentofCSE">
+              <FacultyCSE />
+            </Route>
+            <Route path="/teacherDetails">
+              <TeacherDetails />
             </Route>
             <Route path="/departmentofeee">
               <Home />
