@@ -25,6 +25,11 @@ const Topics = () => {
         },
         {
             item: "44",
+            path: "/semesterRegistrationRequest",
+            subject: "Semester Registration Request",
+        },
+        {
+            item: "44",
             path: "/approveResult",
             subject: "Approve Results",
         },

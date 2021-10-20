@@ -24,6 +24,8 @@ import PublishResult from './components/ExamController/PublishResult';
 import StudentResults from './components/ExamController/StudentResults';
 import AssignCourse from './components/DepHead/AssignCourse';
 import AssignCourseList from './components/DepHead/AssignCourseList';
+import SemesterRegistrationReq from './components/SemesterRegistration/SemesterRegistrationReq';
+import SemesterRegiDetails from './components/SemesterRegistration/SemesterRegiDetails';
 
 
 function App() {
@@ -67,6 +69,12 @@ function App() {
           </Route>
           <Route path="/assignCourseList">
             <AssignCourseList />
+          </Route>
+          <Route path="/semesterRegistrationRequest">
+            <SemesterRegistrationReq />
+          </Route>
+          <Route path="/semesterRegiDetails">
+            <SemesterRegiDetails />
           </Route>
           <Route path="/approveResultCourse">
             <ApproveResultCourse />

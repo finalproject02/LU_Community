@@ -9,8 +9,8 @@ const AssignCourseList = () => {
             <AdminNavbar />
             <div>
                 <Container>
-                    <Row>
-                        <Col>
+                    <Row className="d-flex justify-content-center">
+                        <Col md="10">
                             <Card className="mt-4">
                                 <Card.Body>
                                     <div className="d-flex justify-content-between align-items-center">
