@@ -15,6 +15,16 @@ const Topics = () => {
         },
         {
             item: "44",
+            path: "/addDepartment",
+            subject: "Add Department",
+        },
+        {
+            item: "44",
+            path: "/addDepartmentWise",
+            subject: "Add DepartmentWise",
+        },
+        {
+            item: "44",
             path: "/viewCourses",
             subject: "View Courses",
         },

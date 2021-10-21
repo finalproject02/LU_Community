@@ -26,6 +26,11 @@ import AssignCourse from './components/DepHead/AssignCourse';
 import AssignCourseList from './components/DepHead/AssignCourseList';
 import SemesterRegistrationReq from './components/SemesterRegistration/SemesterRegistrationReq';
 import SemesterRegiDetails from './components/SemesterRegistration/SemesterRegiDetails';
+import AddDepartmentWise from './components/Add/AddDepartmentWise';
+import AddStudent from './components/Add/AddStudent';
+import AddFacultyMember from './components/Add/AddFacultyMember';
+import AddCourse from './components/Add/AddCourse';
+import AddDepartment from './components/Add/AddDepartment';
 
 
 function App() {
@@ -54,6 +59,21 @@ function App() {
           </Route>
           <Route path="/approveRequest">
             <ApproveAdReq />
+          </Route>
+          <Route path="/addDepartment">
+            <AddDepartment />
+          </Route>
+          <Route path="/addDepartmentWise">
+            <AddDepartmentWise />
+          </Route>
+          <Route path="/addCourse">
+            <AddCourse />
+          </Route>
+          <Route path="/addFacultyMember">
+            <AddFacultyMember />
+          </Route>
+          <Route path="/addStudent">
+            <AddStudent />
           </Route>
           <Route path="/viewCourses">
             <ViewCourses />
