@@ -1,7 +1,9 @@
 import axios from "axios";
 import {tokenConfig} from "../actions/auth";
 
-export const newAdmission = (applicantData) => axios.post('/api/onlineAdmission', applicantData);
+export const admissionFirstStep = (applicantData) => axios.post('/api/admissionFirstStep', applicantData);
+export const admissionSecondStep = (applicantData) => axios.post('/api/admissionSecondStep', applicantData);
+export const admissionFinalStep = (applicantData) => axios.post('/api/admissionFinalStep', applicantData);
 export const fileUpload = (fileData) => axios.post('/api/files/storage', fileData);
 export const createAccount = (userData) => axios.post('/api/auth/createAccount', userData);
 export const loginAccount = (userData) => axios.post('/api/auth/loginAccount', userData);

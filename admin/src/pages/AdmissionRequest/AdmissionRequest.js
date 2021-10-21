@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, Container } from 'react-bootstrap';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import avatar from '../../images/avatar.jpeg'

@@ -57,13 +57,11 @@ export const checkSSCResult = (id) => async (dispatch) => {
     try {
         dispatch({ type: LOADING });
         const {data: { message }} = await api.checkSscCredential(id);
-        setTimeout(() => {
-            window.location.reload();
-        }, 3000)
         dispatch({
             type: CHECKED_SSC_RESULT,
             payload: message
         })
+        window.location.reload();
         dispatch({ type: LOADED })
     } catch (error) {
        dispatch(getErrors(error.response.data, 'Verify_error'))
@@ -72,16 +70,14 @@ export const checkSSCResult = (id) => async (dispatch) => {
 
 export const checkHSCResult = (id) => async (dispatch) => {
     try {
-
         dispatch({ type: LOADING })
         const { data: { message } } = await api.checkHscCredential(id);
-        setTimeout(() => {
-            window.location.reload();
-        }, 3000)
+        window.location.reload();
         dispatch({
             type: CHECKED_HSC_RESULT,
             payload: message
-        })
+        });
+        window.location.reload();
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch(getErrors(error.response.data, 'Verify_error'))

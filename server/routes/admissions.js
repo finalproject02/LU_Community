@@ -1,10 +1,14 @@
 import express from "express";
-import {admission, getApplications, getApplication, verifySSCCredentialChecking, verifyHSCCredentialChecking, deleteApplications} from "../controllers/admissions.js";
+import {getApplications, getApplication, admissionFirstStep, admissionSecondStep,
+    verifySSCCredentialChecking, verifyHSCCredentialChecking, admissionFinalStep,
+    deleteApplications} from "../controllers/admissions.js";
 
 
 const router = express.Router();
 
-router.post('/onlineAdmission', admission);
+router.post('/admissionFirstStep', admissionFirstStep)
+router.post('/admissionSecondStep', admissionSecondStep)
+router.post('/admissionFinalStep', admissionFinalStep)
 router.get('/onlineAdmissions/', getApplications);
 router.get('/onlineAdmission/:id', getApplication);
 router.delete('/onlineAdmission/:id', deleteApplications);

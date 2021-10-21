@@ -56,7 +56,6 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case LOADED:
             return {
                 ...state,
-                isAuthenticated: true,
                 isLoading: false
             };
         case UPDATE_INFO:

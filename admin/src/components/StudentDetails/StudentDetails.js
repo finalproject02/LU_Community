@@ -19,15 +19,6 @@ const StudentDetails = () => {
 
     useEffect(() => {
         dispatch(getApplication(id));
-        if (application?.ssc_credential_authenticate === 'authenticated credential' && application?.hsc_credential_authenticate === 'authenticated credential' && application?.status === 'application pending') {
-           setTimeout(() => {
-               window.location.reload()
-           }, 1000)
-        }else if (application?.ssc_credential_authenticate === 'not authenticated' && application?.hsc_credential_authenticate === 'not authenticated' && application?.status === 'application pending') {
-            setTimeout(() => {
-                window.location.reload()
-            }, 1000)
-        }
 
     }, [id])
 

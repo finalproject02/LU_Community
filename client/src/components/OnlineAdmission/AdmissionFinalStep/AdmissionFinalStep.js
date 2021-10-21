@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
-import { createApplication } from "../../../actions/applications";
+import { ApplicationFinalStep } from "../../../actions/applications";
 import { uploadFile } from "../../../actions/files";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import MainNavbar from "../../MainNavbar/MainNavbar";
 import Header from "../../Header/Header";
 import { useHistory } from "react-router-dom";
 
 const AdmissionFinalStep = () => {
+    const { message, field } = useSelector(state => state.errors)
     const history = useHistory();
     const [finalFormData, setFinalFormData] = useState({ ssc_regis_no: '', ssc_institution_name: '', ssc_roll_no: '', ssc_group: '', ssc_year: '', ssc_board: '', ssc_gpa: '', hsc_regis_no: '', hsc_institution_name: '', hsc_roll_no: '', hsc_group: '', hsc_year: '', hsc_board: '', hsc_gpa: '' });
     const [applicantPhoto, setApplicantPhoto] = useState('');
@@ -21,19 +22,26 @@ const AdmissionFinalStep = () => {
     const handleChange = (e) => setFinalFormData({ ...finalFormData, [e.target.name]: e.target.value });
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!applicantPhoto) {
-            alert('Please provide your Photo')
-        } else {
-            if (applicantPhoto.size > 1000000) {
-                alert('You should provide image blow of 1MB')
-            }
-            const applicantPhotoName = uuidv4() + path.extname(applicantPhoto.name);
-            finalFormData.applicant_photo = applicantPhotoName
-            const fileDate = new FormData();
-            fileDate.append('name', applicantPhotoName);
-            fileDate.append('file', applicantPhoto)
-            await dispatch(uploadFile(fileDate))
 
+         if (applicantPhoto) {
+             if (applicantPhoto.size > 1000000) {
+                 alert('You should provide image blow of 1MB')
+             } else {
+                 const applicantPhotoName = uuidv4() + path.extname(applicantPhoto.name);
+                 finalFormData.applicant_photo = applicantPhotoName
+                 const fileDate = new FormData();
+                 fileDate.append('name', applicantPhotoName);
+                 fileDate.append('file', applicantPhoto)
+                 await dispatch(uploadFile(fileDate))
+             }
+
+         }
+
+        if (
+            field === 'ssc_regis_no' || field === 'hsc_regis_no' || field === 'ssc_roll_no'
+            || field === 'hsc_roll_no' || field === 'ssc_institute' || field === 'hsc_institute'
+        ) {
+            document.documentElement.scrollTop = 1
         }
         if (guardianPhoto || sscTranscript || hscTranscript) {
             const guardianPhotoName = uuidv4() + path.extname(guardianPhoto.name)
@@ -61,7 +69,7 @@ const AdmissionFinalStep = () => {
             dispatch(uploadFile(sscTranscriptData));
             dispatch(uploadFile(hscTranscriptData));
         }
-        await dispatch(createApplication(finalFormData, history))
+        await dispatch(ApplicationFinalStep(finalFormData, history));
 
     }
     useEffect(() => {
@@ -94,6 +102,9 @@ const AdmissionFinalStep = () => {
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Registration no.of SSC
                                                         <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                    {field === 'ssc_regis_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Control
                                                         type="number"
                                                         className="w-100"
@@ -108,6 +119,9 @@ const AdmissionFinalStep = () => {
                                                     <Form.Label>Name of the
                                                         Institution (SSC)
                                                         <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        {field === 'ssc_institute' && (
+                                                            <h6 style={{color: 'red'}}>{message}</h6>
+                                                        )}
                                                     <Form.Control
                                                         type="text"
                                                         className="w-100"
@@ -120,7 +134,11 @@ const AdmissionFinalStep = () => {
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Roll
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_roll_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Control
                                                         type="number"
                                                         className="w-100"
@@ -136,6 +154,9 @@ const AdmissionFinalStep = () => {
                                                         Group
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
+                                                    {field === 'ssc_group' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Select
                                                         type="text"
                                                         className="w-100"
@@ -153,7 +174,11 @@ const AdmissionFinalStep = () => {
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Year
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_year' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Select
                                                         type="number"
                                                         className="w-100"
@@ -211,6 +236,9 @@ const AdmissionFinalStep = () => {
                                                         Board
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
+                                                    {field === 'ssc_board' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Select
                                                         type="text"
                                                         className="w-100"
@@ -238,7 +266,11 @@ const AdmissionFinalStep = () => {
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>GPA
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_gpa' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Control
                                                         type="number"
                                                         className="w-100"
@@ -257,7 +289,11 @@ const AdmissionFinalStep = () => {
                                                 <legend>HSC Info.</legend>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Registration no.of HSC
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_regis_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Control
                                                         type="number"
                                                         className="w-100"
@@ -271,7 +307,11 @@ const AdmissionFinalStep = () => {
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Name of the
                                                         Institution (HSC)
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_institute' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Control
                                                         type="text"
                                                         className="w-100"
@@ -283,7 +323,11 @@ const AdmissionFinalStep = () => {
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Roll
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_roll_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Control
                                                         type="number"
                                                         className="w-100"
@@ -299,6 +343,9 @@ const AdmissionFinalStep = () => {
                                                         Group
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
+                                                    {field === 'hsc_group' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Select
                                                         type="text"
                                                         className="w-100"
@@ -316,7 +363,11 @@ const AdmissionFinalStep = () => {
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Year
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_year' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Select
                                                         type="number"
                                                         className="w-100"
@@ -374,6 +425,9 @@ const AdmissionFinalStep = () => {
                                                         Board
                                                         <span className="text-danger fw-bolder">*</span>
                                                     </Form.Label>
+                                                    {field === 'hsc_board' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Select
                                                         type="text"
                                                         className="w-100"
@@ -400,7 +454,11 @@ const AdmissionFinalStep = () => {
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>GPA
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_gpa' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
                                                     <Form.Control
                                                         type="number"
                                                         className="w-100"
@@ -423,7 +481,11 @@ const AdmissionFinalStep = () => {
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label>Upload Applicant's Photo
                                                     (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
+                                                    <span className="text-danger fw-bolder">*</span>
+                                                </Form.Label>
+                                                {field === 'applicant_photo' && (
+                                                    <h6 style={{color: 'red'}}>{message}</h6>
+                                                )}
                                                 <Form.Control
                                                     type="file"
                                                     className="w-100"
