@@ -32,6 +32,11 @@ import AdmissionSecondStep from "./components/OnlineAdmission/AdmissionSecondSte
 import AdmissionFinalStep from "./components/OnlineAdmission/AdmissionFinalStep/AdmissionFinalStep";
 import { Messages } from "./actions/messages";
 import ChatBody from "./components/SocialPlatformComponent/pages/Chat/ChatBody/ChatBody";
+import Results from "./components/Results/Results";
+import SemesterRegi from "./components/SemesterRegi/SemesterRegi";
+import FacultyCSE from "./components/FacultyMembers/FacultyCSE";
+import TeacherDetails from "./components/FacultyMembers/TeacherDetails";
+import Payment from "./components/Payment/Payment";
 
 function App() {
   const dispatch = useDispatch();
@@ -105,8 +110,11 @@ function App() {
             <Route path="/departmentofbba">
               <Home />
             </Route>
-            <Route path="/departmentofcse">
-              <Home />
+            <Route path="/departmentofCSE">
+              <FacultyCSE />
+            </Route>
+            <Route path="/teacherDetails">
+              <TeacherDetails />
             </Route>
             <Route path="/departmentofeee">
               <Home />
@@ -142,13 +150,16 @@ function App() {
               <Home />
             </Route>
             <Route path="/results">
-              <Home />
+              <Results />
             </Route>
             <Route path="/paymentprocedure">
               <Home />
             </Route>
-            <Route path="/semesterregi">
-              <Home />
+            <Route path="/semesterRegi">
+              <SemesterRegi />
+            </Route>
+            <Route path="/payment">
+              <Payment />
             </Route>
             <Route path="/classroom">
               <Classroom />

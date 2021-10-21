@@ -15,28 +15,28 @@ const Topics = () => {
         },
         {
             item: "44",
-            path: "/results",
-            subject: "Results",
+            path: "/addDepartment",
+            subject: "Add Department",
         },
         {
             item: "44",
-            path: "/latestNews",
-            subject: "Latest News",
-        },
-        {
-            item: "44",
-            path: "/Events",
-            subject: "Events",
-        },
-        {
-            item: "44",
-            path: "/notice",
-            subject: "Notice",
+            path: "/addDepartmentWise",
+            subject: "Add DepartmentWise",
         },
         {
             item: "44",
             path: "/viewCourses",
             subject: "View Courses",
+        },
+        {
+            item: "44",
+            path: "/assignCourses",
+            subject: "Assign Course",
+        },
+        {
+            item: "44",
+            path: "/semesterRegistrationRequest",
+            subject: "Semester Registration Request",
         },
         {
             item: "44",
@@ -48,6 +48,17 @@ const Topics = () => {
             path: "/publishResults",
             subject: "Publish Results",
         },
+        {
+            item: "44",
+            path: "/Events",
+            subject: "Events",
+        },
+        {
+            item: "44",
+            path: "/notice",
+            subject: "Notice",
+        },
+
     ]
 }
 export default Topics;

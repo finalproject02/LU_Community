@@ -16,7 +16,7 @@ const Login = () => {
                     <Col md="8">
                         <LoginForm />
                     </Col>
-                    <Col md="4">
+                    <Col md="4" className="mt-5">
                         <MainSidebar />
                     </Col>
                 </Row>

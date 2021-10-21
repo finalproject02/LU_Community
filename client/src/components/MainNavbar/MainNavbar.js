@@ -192,7 +192,7 @@ const MainNavbar = () => {
               </NavDropdown.Item>
               <NavDropdown.Item
                 className="dropdownItem py-3"
-                href="/paymentprocedure"
+                href="/payment"
               >
                 Payment Procedure
               </NavDropdown.Item>
@@ -232,9 +232,6 @@ const MainNavbar = () => {
               <>
                 <Nav.Link className="navFontSize" href="/login">
                   Login
-                </Nav.Link>
-                <Nav.Link className="navFontSize" href="/signup">
-                  Signup
                 </Nav.Link>
               </>
             )}

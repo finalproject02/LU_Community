@@ -9,12 +9,12 @@ import SocialMediaCard from '../SocialMediaCard/SocialMediaCard';
 const MainSidebar = () => {
     return (
         <div>
-            <AdmissionGoingOn></AdmissionGoingOn>
-            <HomeSideCard></HomeSideCard>
-            <NoticeBoard></NoticeBoard>
-            <OfficeOrder></OfficeOrder>
-            <SocialMediaCard></SocialMediaCard>
-            <HomeSideMenu></HomeSideMenu>
+            <AdmissionGoingOn />
+            <HomeSideCard />
+            <NoticeBoard />
+            <OfficeOrder />
+            <SocialMediaCard />
+            <HomeSideMenu />
         </div>
     );
 };
