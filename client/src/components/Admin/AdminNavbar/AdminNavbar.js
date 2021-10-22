@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
 import "./AdminNavbar.css";
+import { FaRegBell } from 'react-icons/fa';
+import { Nav, NavDropdown } from "react-bootstrap";
+import jahed from "../../../images/Jahed.jpg";
 
 const AdminNavbar = () => {
     const [sidebar, setSidebar] = useState(false);
@@ -18,6 +21,51 @@ const AdminNavbar = () => {
                         <Link to='#' className='menu-bars'>
                             <FaIcons.FaBars onClick={showSidebar} />
                         </Link>
+                        <Nav>
+                            <NavDropdown
+                                className="nav-dropdown navFontSize mt-2"
+                                title={<FaRegBell className="fs-5" />}
+                                id="collasible-nav-dropdown"
+                            >
+                                <NavDropdown.Item
+                                    className="dropdownItem py-3"
+                                    href="#"
+                                >
+                                    notification
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown
+                                className="me-4 nav-dropdown navFontSize"
+                                title={<div className="d-flex align-items-center">
+                                    <img src={jahed} alt="" widths="45" height="45" className="rounded-circle me-2" />
+                                    <div>
+                                        <small className="text-warning">Administator</small>
+                                        <h6 className="text-white">Md Jahed Miah</h6>
+                                    </div>
+                                </div>}
+                                id="collasible-nav-dropdown"
+                            >
+                                <NavDropdown.Item
+                                    className="dropdownItem py-3"
+                                    href="/teacherProfile"
+                                >
+                                    <FaIcons.FaUser className="me-2" />View Profile
+                                </NavDropdown.Item>
+                                <NavDropdown.Item
+                                    className="dropdownItem py-3"
+                                    href="/facultyofbba"
+                                >
+                                    <FaIcons.FaToolbox className="me-3" />Account Setting
+                                </NavDropdown.Item>
+                                <hr className="hr" />
+                                <NavDropdown.Item
+                                    className="dropdownItem py-3"
+                                    href="/facultyofbba"
+                                >
+                                    <FaIcons.FaArrowCircleRight className="me-2" />Sign out
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
                     </div>
                     <nav className={sidebar ? 'nav-menu active zIndex' : 'nav-menu zIndex'}>
                         <ul className='nav-menu-items' onClick={showSidebar}>

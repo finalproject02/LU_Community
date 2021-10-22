@@ -34,19 +34,19 @@ const Department = () => {
                                     <Accordion.Body>
                                         <div className="text-center">
                                             <Link to="/addCourses" className="textHover text-dark d-flex justify-content-start align-items-center">
-                                                Add Course
+                                                Course
                                             </Link>
                                         </div>
                                         <hr />
                                         <div className="text-center">
                                             <Link to="/addFacultyMembers" className="textHover text-dark d-flex justify-content-start align-items-center">
-                                                Add Faculty Member
+                                                Faculty Member
                                             </Link>
                                         </div>
                                         <hr />
                                         <div className="text-center">
                                             <Link to="/addStudents" className="textHover text-dark d-flex justify-content-start align-items-center">
-                                                Add Student
+                                                Student
                                             </Link>
                                         </div>
                                         <hr />
@@ -286,6 +286,10 @@ const Department = () => {
                         <Form.Floating className="mb-3">
                             <Form.Control type="text" onChange={handleChange} name="faculty" placeholder="Faculty" />
                             <label for="floatingInput">Faculty</label>
+                        </Form.Floating>
+                        <Form.Floating className="mb-3">
+                            <Form.Control type="number" onChange={handleChange} name="Tutuion_fee" placeholder="Tutuion Fee Per Credit" />
+                            <label for="floatingInput">Tutuion fee per Credit</label>
                         </Form.Floating>
                         <div className="bgSecondary text-center mt-4 rounded-3">
                             <input type="submit" value="Save Changes" className="btn w-100 text-white" onClick={handleClose} />

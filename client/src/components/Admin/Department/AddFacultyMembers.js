@@ -69,10 +69,6 @@ const AddFacultyMembers = () => {
                             <label for="floatingInput">Designation</label>
                         </Form.Floating>
                         <Form.Floating className="mb-3">
-                            <Form.Control type="text" onChange={handleChange} name="Department" placeholder="Department" />
-                            <label for="floatingInput">Department</label>
-                        </Form.Floating>
-                        <Form.Floating className="mb-3">
                             <Form.Control type="number" onChange={handleChange} name="cell_phone" placeholder="Cell Phone" />
                             <label for="floatingInput">Cell Phone</label>
                         </Form.Floating>

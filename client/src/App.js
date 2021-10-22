@@ -52,6 +52,9 @@ import AddFacultyMembers from "./components/Admin/Department/AddFacultyMembers";
 import SemesterRegi from "./components/Admin/Student/SemesterRegi";
 import Payment from "./components/Admin/Student/Payment";
 import Results from "./components/Admin/Student/Results";
+import StudentProfile from "./components/Admin/Student/Studentprofile";
+import CourseDetails from "./components/Admin/Student/CourseDetails";
+import TeacherProfile from "./components/Admin/Teacher/TeacherProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -280,6 +283,15 @@ function App() {
             </Route>
             <Route path="/paymentHistory">
               <Payment />
+            </Route>
+            <Route path="/studentProfile">
+              <StudentProfile />
+            </Route>
+            <Route path="/courseDetails">
+              <CourseDetails />
+            </Route>
+            <Route path="/teacherProfile">
+              <TeacherProfile />
             </Route>
             <Route exact path="/">
               <Home />
