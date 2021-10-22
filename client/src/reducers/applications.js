@@ -12,7 +12,7 @@ export default (state = { isLoading: false, admission: [] }, action) => {
                 isLoading: false
             }
         case LOADING:
-            return  {
+            return {
                 ...state,
                 isLoading: true
             }

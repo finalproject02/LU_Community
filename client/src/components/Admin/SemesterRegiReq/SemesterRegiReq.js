@@ -1,20 +1,16 @@
 import React from 'react';
 import { Accordion, Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import MainNavbar from '../MainNavbar/MainNavbar';
-import MainSidebar from '../MainSidebar/MainSidebar';
+import AdminNavbar from '../AdminNavbar/AdminNavbar';
 
-const Payment = () => {
+const SemesterRegiReq = () => {
     return (
         <div>
-            <Header />
-            <MainNavbar />
+            <AdminNavbar />
             <Container>
                 <Row className="d-flex justify-content-center mt-5">
                     <Col md="8">
-                        <h2 className="text-center mb-2">Payment History</h2>
+                        <h2 className="text-center mb-2">Semester Registration Request</h2>
                         <Card className="mb-2 rounded-3">
                             <Card.Body>
                                 <Accordion>
@@ -24,52 +20,70 @@ const Payment = () => {
                                             <Col md="12">
                                                 <Row>
                                                     <Col md="4">
-                                                        <Card class="p-3">
-                                                            <Card.Body>
-                                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                                <p className="text-center textSecondary fs-2">15</p>
-                                                            </Card.Body>
-                                                        </Card>
+                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
+                                                            <Card class="p-3">
+                                                                <Card.Body>
+                                                                    <h6>Name : Md Jahed Miah</h6>
+                                                                    <p>ID: 173200009</p>
+                                                                    <p>Batch: 46th</p>
+                                                                </Card.Body>
+                                                            </Card>
+                                                        </Link>
                                                     </Col>
                                                     <Col md="4">
-                                                        <Card class="p-3">
-                                                            <Card.Body>
-                                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                                <p className="text-center textSecondary fs-2">15</p>
-                                                            </Card.Body>
-                                                        </Card>
+                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
+                                                            <Card class="p-3">
+                                                                <Card.Body>
+                                                                    <h6>Name : Md Jahed Miah</h6>
+                                                                    <p>ID: 173200009</p>
+                                                                    <p>Batch: 46th</p>
+                                                                </Card.Body>
+                                                            </Card>
+                                                        </Link>
                                                     </Col>
                                                     <Col md="4">
-                                                        <Card class="p-3">
-                                                            <Card.Body>
-                                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                                <p className="text-center textSecondary fs-2">15</p>
-                                                            </Card.Body>
-                                                        </Card>
+                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
+                                                            <Card class="p-3">
+                                                                <Card.Body>
+                                                                    <h6>Name : Md Jahed Miah</h6>
+                                                                    <p>ID: 173200009</p>
+                                                                    <p>Batch: 46th</p>
+                                                                </Card.Body>
+                                                            </Card>
+                                                        </Link>
                                                     </Col>
                                                     <Col md="4">
-                                                        <Card class="p-3">
-                                                            <Card.Body>
-                                                                <Card.Title className="text-center fs-5">Tution Fees</Card.Title>
-                                                                <p className="text-center textSecondary fs-2">৳ 4,275.00</p>
-                                                            </Card.Body>
-                                                        </Card>
+                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
+                                                            <Card class="p-3">
+                                                                <Card.Body>
+                                                                    <h6>Name : Md Jahed Miah</h6>
+                                                                    <p>ID: 173200009</p>
+                                                                    <p>Batch: 46th</p>
+                                                                </Card.Body>
+                                                            </Card>
+                                                        </Link>
                                                     </Col>
                                                     <Col md="4">
-                                                        <Card class="p-3">
-                                                            <Card.Body>
-                                                                <Card.Title className="text-center fs-5">Other Fees</Card.Title>
-                                                                <p className="text-center textSecondary fs-2">৳ 5,000.00</p>
-                                                            </Card.Body>
-                                                        </Card>
+                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
+                                                            <Card class="p-3">
+                                                                <Card.Body>
+                                                                    <h6>Name : Md Jahed Miah</h6>
+                                                                    <p>ID: 173200009</p>
+                                                                    <p>Batch: 46th</p>
+                                                                </Card.Body>
+                                                            </Card>
+                                                        </Link>
                                                     </Col>
                                                     <Col md="4">
-                                                        <Card class="p-3">
-                                                            <Card.Body>
-                                                                <Card.Title className="text-center fs-5">Total Fees</Card.Title>
-                                                                <p className="text-center textSecondary fs-2">৳ 9,275.00</p>
-                                                            </Card.Body>
-                                                        </Card>
+                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
+                                                            <Card class="p-3">
+                                                                <Card.Body>
+                                                                    <h6>Name : Md Jahed Miah</h6>
+                                                                    <p>ID: 173200009</p>
+                                                                    <p>Batch: 46th</p>
+                                                                </Card.Body>
+                                                            </Card>
+                                                        </Link>
                                                     </Col>
                                                 </Row>
                                             </Col>
@@ -343,14 +357,10 @@ const Payment = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md="4" className="mt-5">
-                        <MainSidebar />
-                    </Col>
                 </Row>
             </Container>
-            <Footer />
         </div>
     );
 };
 
-export default Payment;
+export default SemesterRegiReq;

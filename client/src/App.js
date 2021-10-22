@@ -32,11 +32,26 @@ import AdmissionSecondStep from "./components/OnlineAdmission/AdmissionSecondSte
 import AdmissionFinalStep from "./components/OnlineAdmission/AdmissionFinalStep/AdmissionFinalStep";
 import { Messages } from "./actions/messages";
 import ChatBody from "./components/SocialPlatformComponent/pages/Chat/ChatBody/ChatBody";
-import Results from "./components/Results/Results";
-import SemesterRegi from "./components/SemesterRegi/SemesterRegi";
 import FacultyCSE from "./components/FacultyMembers/FacultyCSE";
 import TeacherDetails from "./components/FacultyMembers/TeacherDetails";
-import Payment from "./components/Payment/Payment";
+import Dashboard from "./components/Admin/Dashboard/Dashboard";
+import ViewCourses from "./components/Admin/Teacher/ViewCourses";
+import CourseStudent from "./components/Admin/Teacher/CourseStudent";
+import AssignCourses from "./components/Admin/DepartmentHead/AssignCourses";
+import AssignCourseList from "./components/Admin/DepartmentHead/AssignCourseList";
+import ApproveResults from "./components/Admin/DepartmentHead/ApproveResults";
+import ApproveResultCourse from "./components/Admin/DepartmentHead/ApproveResultCourse";
+import PublishResult from "./components/Admin/ExamController/PublishResults";
+import StudentResults from "./components/Admin/ExamController/StudentResults";
+import SemesterRegiReq from "./components/Admin/SemesterRegiReq/SemesterRegiReq";
+import SemesterRegiDetails from "./components/Admin/SemesterRegiReq/SemesterRegiDetails";
+import Department from "./components/Admin/Department/Department";
+import AddCourses from "./components/Admin/Department/AddCourses";
+import AddStudents from "./components/Admin/Department/AddStudents";
+import AddFacultyMembers from "./components/Admin/Department/AddFacultyMembers";
+import SemesterRegi from "./components/Admin/Student/SemesterRegi";
+import Payment from "./components/Admin/Student/Payment";
+import Results from "./components/Admin/Student/Results";
 
 function App() {
   const dispatch = useDispatch();
@@ -149,17 +164,8 @@ function App() {
             <Route path="/departmentofbangla">
               <Home />
             </Route>
-            <Route path="/results">
-              <Results />
-            </Route>
             <Route path="/paymentprocedure">
               <Home />
-            </Route>
-            <Route path="/semesterRegi">
-              <SemesterRegi />
-            </Route>
-            <Route path="/payment">
-              <Payment />
             </Route>
             <Route path="/classroom">
               <Classroom />
@@ -217,6 +223,63 @@ function App() {
             </Route>
             <Route path="/signup">
               <Signup />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route path="/viewCourses">
+              <ViewCourses />
+            </Route>
+            <Route path="/courseStudents">
+              <CourseStudent />
+            </Route>
+            <Route path="/assignCourses">
+              <AssignCourses />
+            </Route>
+            <Route path="/assignCourseList">
+              <AssignCourseList />
+            </Route>
+            <Route path="/approveResults">
+              <ApproveResults />
+            </Route>
+            <Route path="/approveCourseResults">
+              <ApproveResultCourse />
+            </Route>
+            <Route path="/publishResults">
+              <PublishResult />
+            </Route>
+            <Route path="/publishStudentResults">
+              <StudentResults />
+            </Route>
+            <Route path="/semesterRegistrationRequest">
+              <SemesterRegiReq />
+            </Route>
+            <Route path="/semesterRegiDetails">
+              <SemesterRegiDetails />
+            </Route>
+            <Route path="/department">
+              <Department />
+            </Route>
+            <Route path="/semesterRegiDetails">
+              <SemesterRegiDetails />
+            </Route>
+            <Route path="/addCourses">
+              <AddCourses />
+            </Route>
+            <Route path="/AddStudents">
+              <AddStudents />
+            </Route>
+            <Route path="/AddFacultyMembers">
+              <AddFacultyMembers />
+            </Route>
+            <Route path="/results">
+              <Results />
+            </Route>
+            <Route path="/semesterRegistration">
+              <SemesterRegi />
+            </Route>
+            <Route path="/paymentHistory">
+              <Payment />
             </Route>
             <Route exact path="/">
               <Home />
