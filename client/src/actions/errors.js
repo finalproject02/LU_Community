@@ -1,4 +1,4 @@
-import {CLEAR_ERRORS, GET_ERRORS} from "./types";
+import { CLEAR_ERRORS, GET_ERRORS } from "./types";
 
 export const clearError = () => {
     return {

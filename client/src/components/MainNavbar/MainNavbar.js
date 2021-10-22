@@ -11,8 +11,7 @@ const MainNavbar = () => {
     <Navbar
       collapseOnSelect
       expand="lg"
-      className="bgPrimary sticky-top borderBottom"
-      variant="dark"
+      className="sticky-top borderBottom" style={{ backgroundColor: "#187875" }}
     >
       <Container>
         <Navbar.Brand href="#home"></Navbar.Brand>
@@ -25,7 +24,7 @@ const MainNavbar = () => {
             <Nav.Link href="/home" className="text-white me-4 navFontSize">
               Home
             </Nav.Link>
-            <Nav.Link className="me-4 navFontSize" href="/aboutus">
+            <Nav.Link className="me-4 navFontSize " href="/aboutus">
               About Us
             </Nav.Link>
             <NavDropdown
