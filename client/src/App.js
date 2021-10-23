@@ -55,6 +55,7 @@ import Results from "./components/Admin/Student/Results";
 import StudentProfile from "./components/Admin/Student/Studentprofile";
 import CourseDetails from "./components/Admin/Student/CourseDetails";
 import TeacherProfile from "./components/Admin/Teacher/TeacherProfile";
+import Settings from "./components/Admin/Settings/Settings";
 
 function App() {
   const dispatch = useDispatch();
@@ -292,6 +293,9 @@ function App() {
             </Route>
             <Route path="/teacherProfile">
               <TeacherProfile />
+            </Route>
+            <Route path="/settings">
+              <Settings />
             </Route>
             <Route exact path="/">
               <Home />
