@@ -1,7 +1,7 @@
 import Button from '@restart/ui/esm/Button';
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 
 const AddCourses = () => {
     const [show, setShow] = useState(false);

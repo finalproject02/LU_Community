@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Accordion, Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 
 const Department = () => {
     const [show, setShow] = useState(false);

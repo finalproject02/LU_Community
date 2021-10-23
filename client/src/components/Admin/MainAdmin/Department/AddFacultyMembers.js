@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
-import prof from "../../../images/Prof.jpg";
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
+import prof from "../../../../images/Prof.jpg";
 
 const AddFacultyMembers = () => {
     const [show, setShow] = useState(false);

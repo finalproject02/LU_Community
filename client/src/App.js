@@ -43,12 +43,12 @@ import ApproveResults from "./components/Admin/DepartmentHead/ApproveResults";
 import ApproveResultCourse from "./components/Admin/DepartmentHead/ApproveResultCourse";
 import PublishResult from "./components/Admin/ExamController/PublishResults";
 import StudentResults from "./components/Admin/ExamController/StudentResults";
-import SemesterRegiReq from "./components/Admin/SemesterRegiReq/SemesterRegiReq";
-import SemesterRegiDetails from "./components/Admin/SemesterRegiReq/SemesterRegiDetails";
-import Department from "./components/Admin/Department/Department";
-import AddCourses from "./components/Admin/Department/AddCourses";
-import AddStudents from "./components/Admin/Department/AddStudents";
-import AddFacultyMembers from "./components/Admin/Department/AddFacultyMembers";
+import SemesterRegiReq from "./components/Admin/DepartmentHead/SemesterRegiReq/SemesterRegiReq";
+import SemesterRegiDetails from "./components/Admin/DepartmentHead/SemesterRegiReq/SemesterRegiDetails";
+import Department from "./components/Admin/MainAdmin/Department/Department";
+import AddCourses from "./components/Admin/MainAdmin/Department/AddCourses";
+import AddStudents from "./components/Admin/MainAdmin/Department/AddStudents";
+import AddFacultyMembers from "./components/Admin/MainAdmin/Department/AddFacultyMembers";
 import SemesterRegi from "./components/Admin/Student/SemesterRegi";
 import Payment from "./components/Admin/Student/Payment";
 import Results from "./components/Admin/Student/Results";
@@ -56,6 +56,7 @@ import StudentProfile from "./components/Admin/Student/Studentprofile";
 import CourseDetails from "./components/Admin/Student/CourseDetails";
 import TeacherProfile from "./components/Admin/Teacher/TeacherProfile";
 import Settings from "./components/Admin/Settings/Settings";
+import AddSimpleStudent from "./components/Admin/MainAdmin/Department/AddSimpleStudent";
 
 function App() {
   const dispatch = useDispatch();
@@ -296,6 +297,9 @@ function App() {
             </Route>
             <Route path="/settings">
               <Settings />
+            </Route>
+            <Route path="/addSimpleStudent">
+              <AddSimpleStudent />
             </Route>
             <Route exact path="/">
               <Home />

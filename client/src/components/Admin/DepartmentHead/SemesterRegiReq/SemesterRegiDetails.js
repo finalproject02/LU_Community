@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 
 const SemesterRegiDetails = () => {
     return (
