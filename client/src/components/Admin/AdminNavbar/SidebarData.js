@@ -29,7 +29,7 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Semester Registration',
+        title: 'Semester Registration Req',
         path: '/semesterRegistrationRequest',
         icon: <FaIcons.FaEnvelopeOpenText />,
         cName: 'nav-text'

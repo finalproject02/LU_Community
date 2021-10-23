@@ -122,125 +122,123 @@ const AddSimpleStudent = () => {
                                 </Row>
                             </Form>
                             <Card.Body className="card-body">
-                                <Form onSubmit={handleSubmit}>
-                                    <Row className="d-flex justify-content-center">
-                                        <Col md="12">
-                                            <Table striped bordered hover>
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">ID</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Department</th>
-                                                        <th scope="col">Semester</th>
-                                                        <th scope="col">Section</th>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Phone</th>
-                                                        <th scope="col">DOB</th>
-                                                        <th scope="col">Address</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                        <td><FaRegEdit className="fs-5 text-success me-2 cursor" /><FaTrashAlt className="fs-5 text-danger cursor" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1732020009</td>
-                                                        <td>Md Jahed Miah</td>
-                                                        <td>CSE</td>
-                                                        <td>1</td>
-                                                        <td>B</td>
-                                                        <td>mdjahedahmed12@gmail.com</td>
-                                                        <td>0179713005</td>
-                                                        <td>14-02-1998</td>
-                                                        <td>Lalabazar, Bishwanath, Sylhet</td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                            <div className="row">
-                                                <div className="col-md-12 text-end">
-                                                    <button className="btn btn-success mr-5 rounded-3" href="#">Approve all</button>
-                                                </div>
+                                <Row className="d-flex justify-content-center">
+                                    <Col md="12">
+                                        <Table striped bordered hover>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Department</th>
+                                                    <th scope="col">Semester</th>
+                                                    <th scope="col">Section</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Phone</th>
+                                                    <th scope="col">DOB</th>
+                                                    <th scope="col">Address</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                    <td><FaRegEdit className="fs-5 text-success me-2 cursor" /><FaTrashAlt className="fs-5 text-danger cursor" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1732020009</td>
+                                                    <td>Md Jahed Miah</td>
+                                                    <td>CSE</td>
+                                                    <td>1</td>
+                                                    <td>B</td>
+                                                    <td>mdjahedahmed12@gmail.com</td>
+                                                    <td>0179713005</td>
+                                                    <td>14-02-1998</td>
+                                                    <td>Lalabazar, Bishwanath, Sylhet</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                        <div className="row">
+                                            <div className="col-md-12 text-end">
+                                                <button className="btn btn-success mr-5 rounded-3" href="#">Approve all</button>
                                             </div>
+                                        </div>
 
-                                        </Col>
-                                    </Row>
-                                </Form>
+                                    </Col>
+                                </Row>
                             </Card.Body>
                         </Card>
                     </Col>

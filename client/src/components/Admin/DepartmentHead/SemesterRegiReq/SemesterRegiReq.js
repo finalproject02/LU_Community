@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, Card, Col, Container, Row } from "react-bootstrap";
+import { Accordion, Card, Col, Container, Row, Table } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 
@@ -17,76 +17,58 @@ const SemesterRegiReq = () => {
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header className="d-flex justify-content-center">1st Semester</Accordion.Header>
                                         <Accordion.Body>
-                                            <Col md="12">
-                                                <Row>
-                                                    <Col md="4">
-                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
-                                                            <Card class="p-3">
-                                                                <Card.Body>
-                                                                    <h6>Name : Md Jahed Miah</h6>
-                                                                    <p>ID: 173200009</p>
-                                                                    <p>Batch: 46th</p>
-                                                                </Card.Body>
-                                                            </Card>
-                                                        </Link>
-                                                    </Col>
-                                                    <Col md="4">
-                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
-                                                            <Card class="p-3">
-                                                                <Card.Body>
-                                                                    <h6>Name : Md Jahed Miah</h6>
-                                                                    <p>ID: 173200009</p>
-                                                                    <p>Batch: 46th</p>
-                                                                </Card.Body>
-                                                            </Card>
-                                                        </Link>
-                                                    </Col>
-                                                    <Col md="4">
-                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
-                                                            <Card class="p-3">
-                                                                <Card.Body>
-                                                                    <h6>Name : Md Jahed Miah</h6>
-                                                                    <p>ID: 173200009</p>
-                                                                    <p>Batch: 46th</p>
-                                                                </Card.Body>
-                                                            </Card>
-                                                        </Link>
-                                                    </Col>
-                                                    <Col md="4">
-                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
-                                                            <Card class="p-3">
-                                                                <Card.Body>
-                                                                    <h6>Name : Md Jahed Miah</h6>
-                                                                    <p>ID: 173200009</p>
-                                                                    <p>Batch: 46th</p>
-                                                                </Card.Body>
-                                                            </Card>
-                                                        </Link>
-                                                    </Col>
-                                                    <Col md="4">
-                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
-                                                            <Card class="p-3">
-                                                                <Card.Body>
-                                                                    <h6>Name : Md Jahed Miah</h6>
-                                                                    <p>ID: 173200009</p>
-                                                                    <p>Batch: 46th</p>
-                                                                </Card.Body>
-                                                            </Card>
-                                                        </Link>
-                                                    </Col>
-                                                    <Col md="4">
-                                                        <Link to="/semesterRegiDetails" className="textHover text-dark">
-                                                            <Card class="p-3">
-                                                                <Card.Body>
-                                                                    <h6>Name : Md Jahed Miah</h6>
-                                                                    <p>ID: 173200009</p>
-                                                                    <p>Batch: 46th</p>
-                                                                </Card.Body>
-                                                            </Card>
-                                                        </Link>
-                                                    </Col>
-                                                </Row>
-                                            </Col>
+                                            <Row className="d-flex justify-content-center">
+                                                <Col md="12">
+                                                    <Table striped bordered hover>
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">ID</th>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Section</th>
+                                                                <th scope="col">Email</th>
+                                                                <th scope="col">Phone</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1732020009</td>
+                                                                <td>Md Jahed Miah</td>
+                                                                <td>B</td>
+                                                                <td>mdjahedahmed12@gmail.com</td>
+                                                                <td>0179713005</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1732020009</td>
+                                                                <td>Md Jahed Miah</td>
+                                                                <td>B</td>
+                                                                <td>mdjahedahmed12@gmail.com</td>
+                                                                <td>0179713005</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1732020009</td>
+                                                                <td>Md Jahed Miah</td>
+                                                                <td>B</td>
+                                                                <td>mdjahedahmed12@gmail.com</td>
+                                                                <td>0179713005</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1732020009</td>
+                                                                <td>Md Jahed Miah</td>
+                                                                <td>B</td>
+                                                                <td>mdjahedahmed12@gmail.com</td>
+                                                                <td>0179713005</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1732020009</td>
+                                                                <td>Md Jahed Miah</td>
+                                                                <td>B</td>
+                                                                <td>mdjahedahmed12@gmail.com</td>
+                                                                <td>0179713005</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </Table>
+                                                </Col>
+                                            </Row>
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>

@@ -60,6 +60,8 @@ import AddSimpleStudent from "./components/Admin/MainAdmin/Department/AddSimpleS
 import AdminProfile from "./components/Admin/MainAdmin/AdminProfile";
 import AdminHome from "./components/Admin/MainAdmin/AdminHome";
 import AdmissionRequest from "./components/Admin/MainAdmin/AdmissionRequest";
+import HeadProfile from "./components/Admin/DepartmentHead/HeadProfile";
+import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
 
 
 function App() {
@@ -248,6 +250,12 @@ function App() {
             <Route path="/assignCourseList">
               <AssignCourseList />
             </Route>
+            <Route path="/headProfile">
+              <HeadProfile />
+            </Route>
+            <Route path="/headHome">
+              <HeadHome />
+            </Route>
             <Route path="/approveResults">
               <ApproveResults />
             </Route>
@@ -257,14 +265,14 @@ function App() {
             <Route path="/publishResults">
               <PublishResult />
             </Route>
-            <Route path="/publishStudentResults">
-              <StudentResults />
-            </Route>
             <Route path="/semesterRegistrationRequest">
               <SemesterRegiReq />
             </Route>
             <Route path="/semesterRegiDetails">
               <SemesterRegiDetails />
+            </Route>
+            <Route path="/publishStudentResults">
+              <StudentResults />
             </Route>
             <Route path="/department">
               <Department />

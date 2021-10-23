@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container, Form, Row, Table } from "react-bootstrap";
+import { Card, Col, Container, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn } from "react-icons/all";
