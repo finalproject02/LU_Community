@@ -1,9 +1,5 @@
 import React from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
-import Header from '../../Header/Header';
-import MainNavbar from '../../MainNavbar/MainNavbar';
-import MainSidebar from '../../MainSidebar/MainSidebar';
-import Footer from '../../Footer/Footer';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 
 const SemesterRegi = () => {

@@ -7,7 +7,7 @@ const CourseStudent = () => {
         <div>
             <AdminNavbar />
             <Container>
-                <h2 className="text-center my-2">Couse Title: Introduction to Computer <br /> Course Code: CSE-1111</h2>
+                <h2 className="text-center my-2 textPrimary">Couse Title: Introduction to Computer <br /> Course Code: CSE-1111</h2>
                 <Table className="table table-hover">
                     <thead>
                         <tr className="text-center">
