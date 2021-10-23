@@ -53,4 +53,13 @@ export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const MESSAGES = 'MESSAGES';
 export const REAL_TIME_MESSAGE = 'REAL_TIME_MESSAGE';
 
+export const ADD_DEPARTMENT = 'ADD_DEPARTMENT';
+export const ALL_DEPARTMENT = 'ALL_DEPARTMENT';
+export const ADD_COURSE = 'ADD_COURSE';
+export const ALL_COURSE = 'ALL_COURSE';
+export const ADD_TEACHER = 'ADD_TEACHER';
+export const ALL_TEACHER = 'ALL_TEACHER';
+export const ADD_STUDENT = 'ADD_STUDENT';
+export const ALL_STUDENT = 'ALL_STUDENT';
+
 

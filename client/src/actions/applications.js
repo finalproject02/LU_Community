@@ -1,11 +1,8 @@
 import {
-    NEW_APPLICATION,
-    LOADED,
-    LOADING,
-    GET_ERRORS,
-    FIRST_STEP,
+    LOADED, LOADING,
     ADMISSION_FIRST_STEP,
-    ADMISSION_SECOND_STEP, ADMISSION_FINAL_STEP
+    ADMISSION_SECOND_STEP,
+    ADMISSION_FINAL_STEP
 } from "./types";
 import * as API from "../api";
 import {getErrors} from "./errors";

@@ -47,3 +47,10 @@ export const groupPost = (getState, postData, id) => axios.post(`/api/group/${id
 export const peers = (getState, id) => axios.patch(`/api/messages/peer/${id}`, {data: ''}, tokenConfig(getState));
 export const sendMessage = (getState, message) => axios.post(`/api/messages`, message, tokenConfig(getState));
 export const getMessage = (getState) => axios.get('/api/messages', tokenConfig(getState));
+
+export const addDepartment = (getState, departmentData) => axios.post('/api/department', departmentData, tokenConfig(getState));
+export const departments = (getState) => axios.get('/api/department',tokenConfig(getState));
+export const addCourse = (getState, courseData) => axios.post('/api/department/course', courseData, tokenConfig(getState));
+export const courses = (getState) => axios.get('/api/department/course', tokenConfig(getState));
+export const addTeacher = (getState, teacherData) => axios.post('/api/department/teacher', teacherData, tokenConfig(getState));
+export const teachers = (getState) => axios.get('/api/department/teacher', tokenConfig(getState));

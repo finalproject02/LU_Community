@@ -52,10 +52,14 @@ import AddFacultyMembers from "./components/Admin/Department/AddFacultyMembers";
 import SemesterRegi from "./components/Admin/Student/SemesterRegi";
 import Payment from "./components/Admin/Student/Payment";
 import Results from "./components/Admin/Student/Results";
+import {Departments, Course, Teacher} from "./actions/departments";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(Departments());
+    dispatch(Course());
+    dispatch(Teacher())
     dispatch(LoadingCurrentUser());
     dispatch(PostNotifications())
     dispatch(getCurrentUserPosts());
@@ -263,13 +267,13 @@ function App() {
             <Route path="/semesterRegiDetails">
               <SemesterRegiDetails />
             </Route>
-            <Route path="/addCourses">
+            <Route path="/addCourses/:id">
               <AddCourses />
             </Route>
-            <Route path="/AddStudents">
+            <Route path="/AddStudents/:id">
               <AddStudents />
             </Route>
-            <Route path="/AddFacultyMembers">
+            <Route path="/AddFacultyMembers/:id">
               <AddFacultyMembers />
             </Route>
             <Route path="/results">

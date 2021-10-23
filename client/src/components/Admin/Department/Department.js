@@ -2,17 +2,29 @@ import React, { useState } from 'react';
 import { Accordion, Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
-
+import {useDispatch, useSelector} from "react-redux";
+import {departmentAdd} from "../../../actions/departments";
+import {clearError} from "../../../actions/errors";
 const Department = () => {
+    const dispatch = useDispatch();
+    const { departments } = useSelector(state => state.departments)
+    const { message, Types } =  useSelector(state => state.errors)
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        dispatch(clearError())
+        setShow(false);
+        setData({department_name: '', faculty: ''})
+    };
     const handleShow = () => setShow(true);
 
-    const [data, setData] = useState();
+    const [data, setData] = useState({ department_name: '', faculty: '' });
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleClose()
+        console.log(data)
+        dispatch(departmentAdd(data, handleClose));
+        dispatch(clearError())
+
     }
     return (
         <div>
@@ -26,251 +38,39 @@ const Department = () => {
                             </div>
                         </Card.Body>
                     </Card>
-                    <Card className="mb-2 rounded-3">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header className="d-flex justify-content-center">Department of CSE</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div className="text-center">
-                                            <Link to="/addCourses" className="textHover text-dark d-flex justify-content-start align-items-center">
-                                                Add Course
-                                            </Link>
-                                        </div>
-                                        <hr />
-                                        <div className="text-center">
-                                            <Link to="/addFacultyMembers" className="textHover text-dark d-flex justify-content-start align-items-center">
-                                                Add Faculty Member
-                                            </Link>
-                                        </div>
-                                        <hr />
-                                        <div className="text-center">
-                                            <Link to="/addStudents" className="textHover text-dark d-flex justify-content-start align-items-center">
-                                                Add Student
-                                            </Link>
-                                        </div>
-                                        <hr />
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of BBA</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
+                {departments?.map(department => (
+
+                        <Card className="mb-2 rounded-3">
+                            <Card.Body>
+                                <Accordion>
+                                    <Accordion.Item eventKey="0">
+                                        <Accordion.Header className="d-flex justify-content-center">Department of {department.department_name}</Accordion.Header>
+                                        <Accordion.Body>
+                                            <div className="text-center">
+                                                <Link to={`/addCourses/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
+                                                    Course
+                                                </Link>
+                                            </div>
                                             <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
+                                            <div className="text-center">
+                                                <Link to={`/addFacultyMembers/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
+                                                    Faculty Member
+                                                </Link>
+                                            </div>
                                             <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
+                                            <div className="text-center">
+                                                <Link to={`/addStudents/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
+                                                   Student
+                                                </Link>
+                                            </div>
                                             <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of EEE</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of Civil</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of English</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of Bangla</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of Law</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of Islamic Studies</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of Publuich Health</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mb-2">
-                        <Card.Body>
-                            <Accordion>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Department of Hotel Management</Accordion.Header>
-                                    <Accordion.Body>
-                                        <div >
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                            <hr />
-                                            <a href="introtocomputer.html">Course Code: Introduction To Computer <br /> Course Titel: CSE-1111</a>
-                                        </div>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            </Accordion>
-                        </Card.Body>
-                    </Card>
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </Card.Body>
+                        </Card>
+
+                ))}
                 </Col>
             </Row>
             <Modal show={show} onHide={handleClose} centered>
@@ -279,6 +79,10 @@ const Department = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
+                        {Types === 'ADD_DEPARTMENT_ERROR' && (
+                            <h6 style={{color: 'red'}}>{message}</h6>
+                        )}
+
                         <Form.Floating className="mb-3">
                             <Form.Control type="text" onChange={handleChange} name="department_name" placeholder="Department Name" />
                             <label for="floatingInput">Department Name</label>
@@ -288,7 +92,7 @@ const Department = () => {
                             <label for="floatingInput">Faculty</label>
                         </Form.Floating>
                         <div className="bgSecondary text-center mt-4 rounded-3">
-                            <input type="submit" value="Save Changes" className="btn w-100 text-white" onClick={handleClose} />
+                            <input type="submit" value="Save Changes" className="btn w-100 text-white"/>
                         </div>
                     </Form>
                 </Modal.Body>

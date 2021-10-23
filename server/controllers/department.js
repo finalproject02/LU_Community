@@ -9,24 +9,33 @@ export const addDepartment = async (req, res) => {
     const { department_name, faculty } = req.body;
    try {
         const isExists = await departmentModel.findOne({  department_name  });
-        if (!department_name || faculty) {
+        if (!department_name || !faculty) {
             res.status(400).json({ message: 'Please enter all fields' })
         }
         else if (isExists) {
             res.status(400).json({ message: 'Please change department name' })
         } else {
-            await departmentModel.create({ department_name, faculty })
+            const department = await departmentModel.create({ department_name, faculty });
+            res.status(200).json({ department })
         }
    } catch (error) {
-       res.status(500).json({  message: 'Something went wrong..'  })
+       //res.status(500).json({  message: 'Something went wrong..'  });
+       console.log(error)
    }
+}
+
+export const Departments = async (req, res) => {
+    try {
+        const departments = await departmentModel.find();
+        res.status(200).json({ departments })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
 }
 
 export const addCourse = async (req, res) => {
     const { course_code, course_title, course_prerequisite, credit, curriculum, semester, department_id, department_name } = req.body
     try {
-        const check_course_code = await courseModel.findOne({ course_code  });
-        const check_course_title = await courseModel.findOne({ course_title  });
         if (!course_code) {
             res.status(400).json({ message: 'Please enter course code' })
         }
@@ -39,17 +48,22 @@ export const addCourse = async (req, res) => {
         else if (!semester) {
             res.status(400).json({ message: 'Please enter semester' })
         }
-        else if (check_course_code) {
-            res.status(400).json({ message: 'Please change course code. Course code should be unique' });
-        } else if (check_course_title) {
-            res.status(400).json({ message: 'Please change course title.It should be different from other' });
-        } else {
+        else {
             const course = await courseModel.create({course_code, course_title, course_prerequisite, credit, curriculum, semester, department_id, department_name});
             res.status(200).json({ course })
         }
 
     } catch (error) {
-        res.status(500).json({  message: 'Something went wrong..'  })
+       res.status(500).json({  message: 'Something went wrong..'  })
+    }
+}
+
+export const Courses = async (req, res) => {
+    try {
+        const courses = await courseModel.find();
+        res.status(200).json({ courses })
+    } catch (error) {
+       res.status(500).json({ message: 'Something went wrong' })
     }
 }
 
@@ -77,10 +91,10 @@ export const deleteCourse = async (req, res) => {
 export const addTeacher = async (req, res) => {
     const emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/;
     const phonePattern = /[0-9]{11,13}/;
-    const { name, email, mobile, department, designation, profile_picture } = req.body
+    const { name, email, mobile, department, designation, profile_picture, teacher_id } = req.body
     try {
         const isExists = await userModel.findOne({ email })
-        if (!name || !email || !mobile || !department || !designation || !profile_picture) {
+        if (!name || !email || !mobile  || !designation || !profile_picture || !teacher_id) {
             res.status(400).json({ message: 'Please enter all fields' });
         } else if (!emailPattern.test(email)) {
             res.status(400).json({ message: 'Please provide a valid email' });
@@ -92,12 +106,21 @@ export const addTeacher = async (req, res) => {
            const password = generateUniquePassword();
            addTeacherSMS(name, mobile, designation, department, email, password)
            const hashedPassword = await bcrypt.hash(password, 10)
-           const teacher = await userModel.create({name, email, mobile, department, designation, profile_picture, isTeacher: true, password: hashedPassword});
+           const teacher = await userModel.create({name, email, mobile, department, designation, profile_picture, isTeacher: true, password: hashedPassword, position: 'Teacher', teacher_id });
            res.status(200).json({ teacher })
         }
 
     } catch (error) {
         res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
+
+export const Teachers = async (req, res) => {
+    try {
+        const teachers = await userModel.find({ $or: [ {isTeacher: true}, {position: 'Teacher'} ] }).sort({ position: 'Professor' });
+        res.status(200).json({ teachers })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
     }
 }
 

@@ -10,6 +10,7 @@ const courseModel = new mongoose.Schema({
     semester: Number,
     course_prerequisite: String,
     department_id: String,
+    department_name: String,
     curriculum: String,
 })
 export default mongoose.model('course', courseModel)

@@ -34,7 +34,7 @@ export const SignIn = (userData, history)  => async (dispatch) => {
             type: LOGIN_ACCOUNT_SUCCESS,
             payload: { user, token }
         });
-        history.push('/socialplatform')
+        history.push('/dashboard')
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch(getErrors(error.response.data, 'SIGN_IN_ERROR'))

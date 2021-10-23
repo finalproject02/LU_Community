@@ -55,6 +55,7 @@ const userModel = new mongoose.Schema({
     education_background: Array,
     memberships: Array,
     jobs: Array,
+    teacher_id: Number,
     isTeacher: {
         type: Boolean,
         default: false
