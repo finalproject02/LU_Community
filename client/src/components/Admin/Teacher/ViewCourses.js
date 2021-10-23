@@ -8,7 +8,7 @@ const ViewCourses = () => {
         <>
             <AdminNavbar />
             <Row className="d-flex justify-content-center mt-5">
-                <Col md="8">
+                <Col md="10">
                     <h2 className="text-center mb-2">Department of CSE</h2>
                     <Card className="mb-2 rounded-3">
                         <Card.Body>

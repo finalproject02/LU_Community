@@ -29,7 +29,7 @@ function TeacherProfile() {
             <AdminNavbar />
             <Container>
                 <Row className="justify-content-center my-5">
-                    <Col md="8">
+                    <Col md="10">
                         <Card className="shadow-sm p-5 mb-4">
                             <Card.Title className="textPrimary mb-4 fs-4">About Me</Card.Title>
                             <Card.Body>

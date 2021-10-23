@@ -8,7 +8,7 @@ const CourseDetails = () => {
             <AdminNavbar />
             <Container>
                 <Row className="d-flex justify-content-center mt-5">
-                    <Col md="8">
+                    <Col md="10">
                         <Card >
                             <Card.Title className="p-4 textPrimary">English Reading and Speaking</Card.Title>
                             <Card.Body>

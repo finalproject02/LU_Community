@@ -8,7 +8,7 @@ const SemesterRegi = () => {
             <AdminNavbar />
             <Container>
                 <Row className="justify-content-center my-5">
-                    <Col md="8">
+                    <Col md="10">
                         <Card className="shadow-sm p-5">
                             <Card.Title className="text-center textPrimary mb-4 fs-4">Semester Registration</Card.Title>
                             <Card.Body>

@@ -7,7 +7,7 @@ const StudentHome = () => {
         <div>
             <Container>
                 <Row className="d-flex justify-content-center">
-                    <Col md="8">
+                    <Col md="10">
                         <h2 className="text-center textSecondary my-2">Welcome Jahed!</h2>
                         <Row>
                             <Col md="4" className="mb-2">

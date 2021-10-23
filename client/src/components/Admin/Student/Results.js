@@ -16,7 +16,7 @@ const Results = () => {
             <AdminNavbar />
             <Container>
                 <Row className="justify-content-center my-5">
-                    <Col md="8">
+                    <Col md="10">
                         <Card className="shadow-sm p-5">
                             <Form onSubmit={handleSubmit}>
                                 <h2 className="textPrimary">Check Result</h2>
@@ -67,7 +67,7 @@ const Results = () => {
                             </Row>
                             <div className="my-2">
                                 <h2 className="textPrimary">Fall - 2017</h2>
-                                <Table className="table table-sm text-muted">
+                                <Table striped bordered hover>
                                     <thead>
                                         <tr>
                                             <th scope="col">Course Code</th>
