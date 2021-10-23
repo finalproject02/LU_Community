@@ -57,6 +57,10 @@ import CourseDetails from "./components/Admin/Student/CourseDetails";
 import TeacherProfile from "./components/Admin/Teacher/TeacherProfile";
 import Settings from "./components/Admin/Settings/Settings";
 import AddSimpleStudent from "./components/Admin/MainAdmin/Department/AddSimpleStudent";
+import AdminProfile from "./components/Admin/MainAdmin/AdminProfile";
+import AdminHome from "./components/Admin/MainAdmin/AdminHome";
+import AdmissionRequest from "./components/Admin/MainAdmin/AdmissionRequest";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -298,8 +302,17 @@ function App() {
             <Route path="/settings">
               <Settings />
             </Route>
-            <Route path="/addSimpleStudent">
+            <Route path="/allStudents">
               <AddSimpleStudent />
+            </Route>
+            <Route path="/adminHome">
+              <AdminHome />
+            </Route>
+            <Route path="/adminProfile">
+              <AdminProfile />
+            </Route>
+            <Route path="/admissionRequest">
+              <AdmissionRequest />
             </Route>
             <Route exact path="/">
               <Home />
