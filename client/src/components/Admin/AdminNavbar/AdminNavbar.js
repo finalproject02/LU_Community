@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -8,9 +8,21 @@ import "./AdminNavbar.css";
 import { FaRegBell } from 'react-icons/fa';
 import { Nav, NavDropdown } from "react-bootstrap";
 import jahed from "../../../images/Jahed.jpg";
+import { Logout } from "../../../actions/auth";
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 const AdminNavbar = () => {
+    const history = useHistory();
     const [sidebar, setSidebar] = useState(false);
+    const { token } = useSelector(state => state.auth)
+    const dispatch = useDispatch();
+    const sideBarData = SidebarData()
+    useEffect(() => {
+        if (!token) {
+            history.push('/');
+        }
+    }, [token])
 
     const showSidebar = () => setSidebar(!sidebar);
     return (
@@ -60,9 +72,12 @@ const AdminNavbar = () => {
                                 <hr className="hr" />
                                 <NavDropdown.Item
                                     className="dropdownItem py-3"
-                                    href="/facultyofbba"
+                                    onClick={() => {
+                                        dispatch(Logout());
+                                        history.push('/')
+                                    }}
                                 >
-                                    <FaIcons.FaArrowCircleRight className="me-2" />Sign out
+                                    <FaIcons.FaArrowCircleRight className="me-2"  />Sign out
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
@@ -74,7 +89,7 @@ const AdminNavbar = () => {
                                     <AiIcons.AiOutlineClose />
                                 </Link>
                             </li>
-                            {SidebarData.map((item, index) => {
+                            {sideBarData.map((item, index) => {
                                 return (
                                     <li key={index} className={item.cName}>
                                         <Link to={item.path}>
