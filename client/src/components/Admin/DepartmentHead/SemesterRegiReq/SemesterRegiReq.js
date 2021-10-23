@@ -1,7 +1,7 @@
 import React from 'react';
 import { Accordion, Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 
 const SemesterRegiReq = () => {
     return (

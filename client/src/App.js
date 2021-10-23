@@ -55,6 +55,8 @@ import Results from "./components/Admin/Student/Results";
 import StudentProfile from "./components/Admin/Student/Studentprofile";
 import CourseDetails from "./components/Admin/Student/CourseDetails";
 import TeacherProfile from "./components/Admin/Teacher/TeacherProfile";
+import Settings from "./components/Admin/Settings/Settings";
+import AddSimpleStudent from "./components/Admin/MainAdmin/Department/AddSimpleStudent";
 import {Departments, Course, Teacher} from "./actions/departments";
 
 function App() {
@@ -296,6 +298,12 @@ function App() {
             </Route>
             <Route path="/teacherProfile">
               <TeacherProfile />
+            </Route>
+            <Route path="/settings">
+              <Settings />
+            </Route>
+            <Route path="/addSimpleStudent">
+              <AddSimpleStudent />
             </Route>
             <Route exact path="/">
               <Home />

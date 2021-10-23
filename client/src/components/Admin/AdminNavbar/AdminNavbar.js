@@ -65,7 +65,7 @@ const AdminNavbar = () => {
                                 </NavDropdown.Item>
                                 <NavDropdown.Item
                                     className="dropdownItem py-3"
-                                    href="/facultyofbba"
+                                    href="/settings"
                                 >
                                     <FaIcons.FaToolbox className="me-3" />Account Setting
                                 </NavDropdown.Item>
