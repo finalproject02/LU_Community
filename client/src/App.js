@@ -277,9 +277,6 @@ function App() {
             <Route path="/semesterRegistrationRequest">
               <SemesterRegiReq />
             </Route>
-            <Route path="/semesterRegiDetails">
-              <SemesterRegiDetails />
-            </Route>
             <Route path="/publishStudentResults">
               <StudentResults />
             </Route>

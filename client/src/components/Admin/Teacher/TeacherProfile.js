@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Card, Col, Container, Row, Modal, Form } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
-import jahed from "../../../images/Jahed.jpg";
 import { FaRegEdit } from "react-icons/fa";
 import Avatar from "../../../images/avatar.jpeg";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import moment from "moment";
 
 function TeacherProfile() {
@@ -53,21 +52,15 @@ function TeacherProfile() {
                                             <Col md="4">
                                                 <p className="text-lead">Name:</p>
                                                 <p className="text-lead">Gender:</p>
-                                                <p className="text-lead">Father Name:</p>
-                                                <p className="text-lead">Mother Name:</p>
-                                                <p className="text-lead">Religion:</p>
                                                 <p className="text-lead">ID:</p>
                                                 <p className="text-lead">E-Mail:</p>
                                                 <p className="text-lead">Phone:</p>
-                                                <p className="text-lead">Adress::</p>
+                                                <p className="text-lead">Address:</p>
                                                 <p className="text-lead">Joining Date:</p>
                                             </Col>
                                             <Col md="8">
                                                 <p className="fw-bold">{currentUser?.name}</p>
                                                 <p className="fw-bold">Male</p>
-                                                <p className="fw-bold">Md Surman Ali</p>
-                                                <p className="fw-bold">MST. Sharifa Khatun</p>
-                                                <p className="fw-bold">Islam</p>
                                                 <p className="fw-bold">{currentUser?.teacher_id}</p>
                                                 <p className="fw-bold">{currentUser?.email}</p>
                                                 <p className="fw-bold">{currentUser?.mobile}</p>

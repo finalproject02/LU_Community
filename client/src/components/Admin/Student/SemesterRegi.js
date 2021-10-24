@@ -1,10 +1,9 @@
 import React from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
-import use
+import { FaTimesCircle } from "react-icons/fa";
 
 const SemesterRegi = () => {
-     const [section, setSection] = useState()
     return (
         <div>
             <AdminNavbar />
@@ -13,12 +12,12 @@ const SemesterRegi = () => {
                     <Col md="10">
                         <Card className="shadow-sm p-5">
                             <Card.Title className="text-center textPrimary mb-4 fs-4">Semester Registration</Card.Title>
-                            <Card.Body>
+                            <Card.Body className="overflow-scroll">
                                 <div className="d-flex justify-content-between">
                                     <p className="card-text fs-5 fw-bolder">Regular Courses</p>
                                     <Form.Group className="w-25">
                                         <label htmlFor="inputSection" className="form-label fw-bold">Section</label>
-                                        <select name id className="form-select px-2" >
+                                        <select name id className="form-select px-2">
                                             <option value={1}>1</option>
                                             <option value={2}>2</option>
                                             <option value={3}>3</option>
@@ -41,6 +40,7 @@ const SemesterRegi = () => {
                                             <th scope="col">Course Code</th>
                                             <th scope="col">Credit</th>
                                             <th scope="col">Section</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,6 +53,7 @@ const SemesterRegi = () => {
                                                     <option value={1}>1</option>
                                                 </select>
                                             </td>
+                                            <td className="text-center cursor"><FaTimesCircle /></td>
                                         </tr>
                                         <tr>
                                             <td>English Reading &amp; Speaking</td>
@@ -63,6 +64,7 @@ const SemesterRegi = () => {
                                                     <option value={1}>1</option>
                                                 </select>
                                             </td>
+                                            <td className="text-center cursor"><FaTimesCircle /></td>
                                         </tr>
                                         <tr>
                                             <td>English Reading &amp; Speaking</td>
@@ -73,6 +75,7 @@ const SemesterRegi = () => {
                                                     <option value={1}>1</option>
                                                 </select>
                                             </td>
+                                            <td className="text-center cursor"><FaTimesCircle /></td>
                                         </tr>
                                         <tr>
                                             <td>English Reading &amp; Speaking</td>
@@ -83,6 +86,7 @@ const SemesterRegi = () => {
                                                     <option value={1}>1</option>
                                                 </select>
                                             </td>
+                                            <td className="text-center cursor"><FaTimesCircle /></td>
                                         </tr>
                                         <tr>
                                             <td>English Reading &amp; Speaking</td>
@@ -93,21 +97,22 @@ const SemesterRegi = () => {
                                                     <option value={1}>1</option>
                                                 </select>
                                             </td>
+                                            <td className="text-center cursor"><FaTimesCircle /></td>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td colSpan="3">
                                                 <Form.Label>
                                                     Add Course
                                                 </Form.Label>
                                             </td>
-                                            <td colSpan="3">
-                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                            <td colSpan="2" className="d-flex align-items-start text-center">
+                                                <Form.Group className="mb-3 me-2" controlId="formBasicEmail">
                                                     <Form.Select
                                                         className="w-100"
                                                         name="program_name"
 
                                                     >
-                                                        <option value="cse">--Add course--</option>
+                                                        <option value="cse">Select Course</option>
                                                         <option value="cse">English Reading &amp; Speaking</option>
                                                         <option value="cse">Introduction to computer</option>
                                                         <option value="english">Introduction to computer</option>
@@ -121,6 +126,9 @@ const SemesterRegi = () => {
                                                         <option value="bangla">Introduction to computer</option>
                                                     </Form.Select>
                                                 </Form.Group>
+                                                <div className="bgSecondary rounded-3">
+                                                    <button className="btn">Add</button>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
-import { FaRegEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const TeacherHome = () => {
