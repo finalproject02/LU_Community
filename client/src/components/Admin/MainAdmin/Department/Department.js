@@ -44,7 +44,7 @@ const Department = () => {
                             <Card.Body>
                                 <Accordion>
                                     <Accordion.Item eventKey="0">
-                                        <Accordion.Header className="d-flex justify-content-center">Department of {department.department_name}</Accordion.Header>
+                                        <Accordion.Header className="d-flex justify-content-center">{department.department_name}</Accordion.Header>
                                         <Accordion.Body>
                                             <div className="text-center">
                                                 <Link to={`/addCourses/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
