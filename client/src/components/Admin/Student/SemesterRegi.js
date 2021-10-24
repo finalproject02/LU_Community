@@ -1,8 +1,10 @@
 import React from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import use
 
 const SemesterRegi = () => {
+     const [section, setSection] = useState()
     return (
         <div>
             <AdminNavbar />
@@ -16,7 +18,7 @@ const SemesterRegi = () => {
                                     <p className="card-text fs-5 fw-bolder">Regular Courses</p>
                                     <Form.Group className="w-25">
                                         <label htmlFor="inputSection" className="form-label fw-bold">Section</label>
-                                        <select name id className="form-select px-2">
+                                        <select name id className="form-select px-2" >
                                             <option value={1}>1</option>
                                             <option value={2}>2</option>
                                             <option value={3}>3</option>

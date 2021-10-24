@@ -52,10 +52,10 @@ const AddCourses = () => {
                                                 <p><span className="fw-bold">Course Credit:</span> {course.credit}</p>
                                                 <p><span className="fw-bold">Course Semester:</span> {course.semester}</p>
                                                 {course.course_prerequisite && (
-                                                    <p><span className="fw-bold">Course Prerequisite: {course.course_prerequisite}</span></p>
+                                                    <p><span className="fw-bold">Course Prerequisite:</span> {course.course_prerequisite}</p>
                                                 )}
                                                 {course.curriculum && (
-                                                    <p><span className="fw-bold">Course Curriculum: {course.curriculum}</span></p>
+                                                    <p><span className="fw-bold">Course Curriculum:</span> {course.curriculum}</p>
                                                 )}
                                             </Card.Body>
                                         </Card>

@@ -60,7 +60,7 @@ export const addCourse = async (req, res) => {
 
 export const Courses = async (req, res) => {
     try {
-        const courses = await courseModel.find();
+        const courses = await courseModel.find().sort({ semester: 1  });
         res.status(200).json({ courses })
     } catch (error) {
        res.status(500).json({ message: 'Something went wrong' })
