@@ -3,14 +3,18 @@ import { Card, Col, Form, Row } from "react-bootstrap";
 import Header from "../../Header/Header";
 import MainNavbar from "../../MainNavbar/MainNavbar";
 import { useHistory } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {ApplicationSecondStep} from "../../../actions/applications";
 
 const AdmissionSecondStep = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const { message, field } = useSelector(state => state.errors)
     const [secondFormData, setSecondForm] = useState({ guardian_name: '', guardian_contact: '', present_address: '', permanent_address: '' });
     const handleChange = (e) => setSecondForm({ ...secondFormData, [e.target.name]: e.target.value })
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(secondFormData)
+        dispatch(ApplicationSecondStep(secondFormData, history))
     }
     useEffect(() => {
         setSecondForm(JSON.parse(localStorage.getItem('secondStep')))
@@ -44,6 +48,10 @@ const AdmissionSecondStep = () => {
                                                             Guardian's Name
                                                             <span className="text-danger fw-bolder">*</span>
                                                         </Form.Label>
+                                                        {field === 'guardian_name' && (
+                                                            <h6 style={{color: 'red'}}>{message}</h6>
+                                                        )}
+
                                                         <Form.Control
                                                             type="text"
                                                             className="w-100"
@@ -51,7 +59,7 @@ const AdmissionSecondStep = () => {
                                                             name={'guardian_name'}
                                                             onChange={handleChange}
                                                             value={secondFormData?.guardian_name}
-                                                            required
+                                                            
                                                         />
                                                     </Form.Group>
                                                 </Col>
@@ -62,6 +70,9 @@ const AdmissionSecondStep = () => {
                                                             Guardian's Contact No
                                                             <span className="text-danger fw-bolder">*</span>
                                                         </Form.Label>
+                                                        {field === 'guardian_contact' && (
+                                                            <h6 style={{color: 'red'}}>{message}</h6>
+                                                        )}
                                                         <Form.Control
                                                             type="text"
                                                             className="w-100"
@@ -70,7 +81,7 @@ const AdmissionSecondStep = () => {
                                                             name={'guardian_contact'}
                                                             onChange={handleChange}
                                                             value={secondFormData?.guardian_contact}
-                                                            required
+                                                            
                                                         />
                                                     </Form.Group>
                                                 </Col>
@@ -86,13 +97,16 @@ const AdmissionSecondStep = () => {
                                                             Permanent Address
                                                             <span className="text-danger fw-bolder">*</span>
                                                         </Form.Label>
+                                                        {field === 'permanent_address' && (
+                                                            <h6 style={{color: 'red'}}>{message}</h6>
+                                                        )}
                                                         <Form.Control
                                                             className="w-100"
                                                             as="textarea"
                                                             rows={5}
                                                             onChange={handleChange}
                                                             name={'permanent_address'}
-                                                            required
+                                                            
                                                             value={secondFormData?.permanent_address}
                                                         />
                                                     </Form.Group>
@@ -102,6 +116,9 @@ const AdmissionSecondStep = () => {
                                                         <Form.Label> Present Address
                                                             <span className="text-danger fw-bolder">*</span>
                                                         </Form.Label>
+                                                        {field === 'present_address' && (
+                                                            <h6 style={{color: 'red'}}>{message}</h6>
+                                                        )}
                                                         <Form.Control
                                                             className="w-100"
                                                             as="textarea"
@@ -109,7 +126,7 @@ const AdmissionSecondStep = () => {
                                                             onChange={handleChange}
                                                             name={'present_address'}
                                                             value={secondFormData?.present_address}
-                                                            required
+                                                            
                                                         />
                                                     </Form.Group>
                                                 </Col>
@@ -121,7 +138,7 @@ const AdmissionSecondStep = () => {
                                         <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => history.push('/firstStep')}>
                                             Previous
                                         </button>
-                                        <button className="btn bg-primary text-white px-5" type={'submit'} onClick={() => history.push('/finalStep')}>
+                                        <button className="btn bg-primary text-white px-5" type={'submit'}>
                                             Next
                                         </button>
                                     </div>

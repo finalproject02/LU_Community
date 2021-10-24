@@ -1,12 +1,14 @@
 import axios from "axios";
 import {tokenConfig} from "../actions/auth";
 
-export const newAdmission = (applicantData) => axios.post('/api/onlineAdmission', applicantData);
+export const admissionFirstStep = (applicantData) => axios.post('/api/admissionFirstStep', applicantData);
+export const admissionSecondStep = (applicantData) => axios.post('/api/admissionSecondStep', applicantData);
+export const admissionFinalStep = (applicantData) => axios.post('/api/admissionFinalStep', applicantData);
 export const fileUpload = (fileData) => axios.post('/api/files/storage', fileData);
 export const createAccount = (userData) => axios.post('/api/auth/createAccount', userData);
 export const loginAccount = (userData) => axios.post('/api/auth/loginAccount', userData);
+export const changePassword = (userData, getState) => axios.patch('/api/auth/changePassword', userData, tokenConfig(getState));
 export const getCurrentUser = (getState) => axios.get('/api/user', tokenConfig(getState));
-
 
 export const fetchAllUsers = (getState) => axios.get('/api/AllUsers', tokenConfig(getState));
 export const searchUser = (getState, searchKey) => axios.get(`/api/search?searchKey=${searchKey}`, tokenConfig(getState));
@@ -45,3 +47,12 @@ export const groupPost = (getState, postData, id) => axios.post(`/api/group/${id
 export const peers = (getState, id) => axios.patch(`/api/messages/peer/${id}`, {data: ''}, tokenConfig(getState));
 export const sendMessage = (getState, message) => axios.post(`/api/messages`, message, tokenConfig(getState));
 export const getMessage = (getState) => axios.get('/api/messages', tokenConfig(getState));
+
+export const addDepartment = (getState, departmentData) => axios.post('/api/department', departmentData, tokenConfig(getState));
+export const departments = (getState) => axios.get('/api/department',tokenConfig(getState));
+export const addCourse = (getState, courseData) => axios.post('/api/department/course', courseData, tokenConfig(getState));
+export const courses = (getState) => axios.get('/api/department/course', tokenConfig(getState));
+export const addTeacher = (getState, teacherData) => axios.post('/api/department/teacher', teacherData, tokenConfig(getState));
+export const teachers = (getState) => axios.get('/api/department/teacher', tokenConfig(getState));
+export const addStudent = (getState, studentData) => axios.post('/api/department/student', studentData, tokenConfig(getState));
+export const students = (getState) => axios.get('/api/department/student', tokenConfig(getState));

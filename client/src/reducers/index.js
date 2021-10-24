@@ -8,9 +8,10 @@ import people from "./people";
 import clubs from "./clubs";
 import groups from "./groups";
 import errors from "./errors";
-import messages from './messages'
+import messages from './messages';
+import departments from "./departments";
 
 export default combineReducers({
-    application, files, auth,
+    application, files, auth, departments,
     users, posts, people, clubs, groups, errors, messages
 })

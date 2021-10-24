@@ -3,11 +3,15 @@ import { Card, Col, Container, Row, Modal, Form } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import jahed from "../../../images/Jahed.jpg";
 import { FaRegEdit } from "react-icons/fa";
+import Avatar from "../../../images/avatar.jpeg";
+import {useSelector} from "react-redux";
+import moment from "moment";
 
 function TeacherProfile() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const { currentUser } = useSelector(state => state.auth)
     const [data, setData] = useState();
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
@@ -34,13 +38,13 @@ function TeacherProfile() {
                             <Card.Title className="textPrimary mb-4 fs-4">About Me</Card.Title>
                             <Card.Body>
                                 <div className="d-flex align-items-center mb-4">
-                                    <img src={jahed} alt="" width="100" height="100" className="rounded-3 me-3" />
+                                    <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt="" width="100" height="100" className="rounded-3 me-3" />
                                     <div>
                                         <div className="d-flex justify-content-between align-items-start">
-                                            <h5 className="fw-bold">Md Jahed Miah</h5>
+                                            <h5 className="fw-bold">{currentUser?.name}</h5>
                                             <FaRegEdit className="fs-5" onClick={handleShow} />
                                         </div>
-                                        <small>Professor | Department of Computer science and engineering</small>
+                                        <small>{currentUser?.designation} | Department of {currentUser?.department}</small>
                                     </div>
                                 </div>
                                 <Row>
@@ -59,16 +63,16 @@ function TeacherProfile() {
                                                 <p className="text-lead">Joining Date:</p>
                                             </Col>
                                             <Col md="8">
-                                                <p className="fw-bold">Md Jahed Miah</p>
+                                                <p className="fw-bold">{currentUser?.name}</p>
                                                 <p className="fw-bold">Male</p>
                                                 <p className="fw-bold">Md Surman Ali</p>
                                                 <p className="fw-bold">MST. Sharifa Khatun</p>
                                                 <p className="fw-bold">Islam</p>
-                                                <p className="fw-bold">415646</p>
-                                                <p className="fw-bold">mdjahedahmed12@gmail.com</p>
-                                                <p className="fw-bold">01797213005</p>
+                                                <p className="fw-bold">{currentUser?.teacher_id}</p>
+                                                <p className="fw-bold">{currentUser?.email}</p>
+                                                <p className="fw-bold">{currentUser?.mobile}</p>
                                                 <p className="fw-bold">Tengra, Lalabazar, Bishwanath, Sylhet</p>
-                                                <p className="fw-bold">27-08-2017</p>
+                                                <p className="fw-bold">{moment(currentUser?.createdAt).format('DD-MM-YYYY')}</p>
                                             </Col>
                                             <Modal show={show} onHide={handleClose} centered>
                                                 <Modal.Header closeButton>

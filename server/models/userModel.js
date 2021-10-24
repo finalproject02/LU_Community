@@ -1,102 +1,72 @@
 import mongoose from "mongoose";
 
 const userModel = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    name: String,
+    email:String,
+    program_name: String,
+    birth_or_nid_number: Number,
+    father_name: String,
+    mother_name: String,
+
+    ssc_regis_no: Number,
+    ssc_institute_name: String,
+    ssc_roll_no: Number,
+    ssc_board: String,
+    ssc_gpa: Number,
+
+    hsc_regis_no: Number,
+    hsc_institute_name: String,
+    hsc_roll_no: Number,
+    hsc_board: String,
+    hsc_gpa: Number,
+
+    guardian_name: String,
+    religion: String,
+    guardian_contact: String,
+    guardian_photo: String,
+    marital_status: String,
+    gender: String,
+    nationality: String,
+    blood_group: String,
+    password: String,
     student_id: {
         type: Number,
         minlength: 10,
         maxlength: 10
     },
-    profile_picture: {
-        type: String,
-        default: null
-    },
-    cover_picture: {
-        type: String,
-        default: null
-    },
-    date_of_birth: {
-      type: String,
-      default: null
-    },
-    current_position: {
-        type: String,
-        default: null
-    },
-    batch: {
-        type: String,
-        default: null
-    },
-    present_address: {
-        type: String,
-        default: null
-    },
-    permanent_address: {
-        type: String,
-        default: null
-    },
-    department: {
-        type: String,
-        default: null
-    },
+    profile_picture: String,
+    cover_picture: String,
+    date_of_birth: String,
+    current_position: String,
+    batch: String,
+    present_address: String,
+    permanent_address: String,
+    department: String,
+    mobile: String,
+    connection: Array,
+    connecting: Array,
+    connection_requests: Array,
+    followings: Array,
+    semester: String,
+    section: String,
+    current_course: Array,
+    completed_course: Array,
+    payment_history: Array,
+    reference_code: Number,
+    education_background: Array,
+    memberships: Array,
+    jobs: Array,
+    teacher_id: Number,
     isTeacher: {
         type: Boolean,
         default: false
     },
-    mobile: {
-        type: String,
-        default: null
-    },
-    class_rooms: {
-        type: Array,
-        default: []
-    },
-    connection: {
-        type: Array,
-        default: []
-    },
-    connecting: {
-        type: Array,
-        default: []
-    },
-    connection_requests: {
-        type: Array,
-        default: []
-    },
-    followings: {
-        type: Array,
-        default: []
-    },
-    education_background: {
-        type: Array,
-        default:[]
-    },
-
-    memberships: {
-        type: Array,
-        default: []
-    },
-    jobs: {
-        type: Array,
-        default: []
-    },
+    position: String,
     type: {
         type: String,
         default: 'user'
     },
+    designation: String,
     language: String,
     website: String,
     notifications: Array,

@@ -3,11 +3,12 @@ import {
     LOGIN_ACCOUNT_SUCCESS,
     LOGOUT_SUCCESS, CURRENT_USER,
     LOADING, LOADED, UPDATE_INFO,
-    SEARCHING, CONNECT,
+    SEARCHING, CONNECT, CHANGE_PASSWORD,
     DISCONNECT, ACCEPT_CONNECTION_REQUEST, DELETE_EDUCATION_BACKGROUND, DELETE_JOB
 } from "./types";
 import * as api from '../api';
-import {getErrors} from "./errors";
+import {clearError, getErrors} from "./errors";
+import ShowToast from "../services/ShowToast";
 
 
 export const SignUp = (userData) => async (dispatch) => {
@@ -34,10 +35,28 @@ export const SignIn = (userData, history)  => async (dispatch) => {
             type: LOGIN_ACCOUNT_SUCCESS,
             payload: { user, token }
         });
-        history.push('/socialplatform')
+        history.push('/dashboard')
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch(getErrors(error.response.data, 'SIGN_IN_ERROR'))
+    }
+}
+
+export const ChangePassword = (userData)  => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data : { user }} = await api.changePassword(userData, getState);
+        ShowToast(1, 'Password change success');
+        setTimeout(() => {
+            window.location.reload()
+        }, 1000)
+        dispatch({
+            type: CHANGE_PASSWORD,
+            payload: user
+        });
+        dispatch({ type: LOADED })
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'CHANGE_PASSWORD_ERROR'))
     }
 }
 

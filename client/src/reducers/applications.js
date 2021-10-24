@@ -1,11 +1,11 @@
 import {
     LOADED, LOADING,
-    NEW_APPLICATION
+    ADMISSION_FIRST_STEP
 } from "../actions/types";
 
 export default (state = { isLoading: false, admission: [] }, action) => {
     switch (action.type) {
-        case NEW_APPLICATION:
+        case ADMISSION_FIRST_STEP:
             return {
                 ...state,
                 admission: action.payload,

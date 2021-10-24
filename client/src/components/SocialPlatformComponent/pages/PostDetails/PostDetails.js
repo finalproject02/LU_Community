@@ -112,12 +112,12 @@ const NotificationPostPage = () => {
                                                     </>
                                                 )}
 
-                                                {item.owner_position === 'own_post' ? (
+                                                {item.owner_position === 'own_post' && (
                                                     <>
                                                         <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>
                                                     </>
-                                                ) : (
+                                                )} {item.owner_position === 'club_post' && (
                                                     <>
                                                         <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>

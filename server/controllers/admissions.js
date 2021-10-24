@@ -1,77 +1,174 @@
 import admissions from "../models/admissionModel.js";
 import { Builder, By, until } from 'selenium-webdriver';
 import { sendOfferLetterMessage, sendAccurateCredential } from "../services/mailService.js";
+import admissionModel from "../models/admissionModel.js";
 
-export const admission = async (req, res) => {
+export const admissionFirstStep = async (req, res) => {
+    const { applicant_name, applicant_email, applicant_birth_or_nid_number, applicant_mobile, program_name,
+        applicant_fatherName, applicant_motherName, applicant_date_of_birth, father_or_mother_nid} = req.body;
+
+    const fullNamePattern = /^[a-z,',-]+(\s)[a-z,',-]+$/i;
     const namePattern = /[A-Za-z ]{3,30}/i;
     const emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/;
-    const mobilePattern = /(\+88)?-?01[3-9]\d{8}/;
     const nid_or_birth_pattern = /[0-9]{8,17}/;
-    const addressPattern = /[A-Za-z0-9'\.\-\s\,]{3, 100}/;
-    const registrationNumber = /[0-9]{10}/;
-    const rollNumber = /[0-9]{6}/;
-    const gpa = /^[0-4]\.\d{2}/;
-
-    const { program_name, applicant_name, applicant_email, applicant_birth_or_nid_number, applicant_mobile, applicant_fatherName, applicant_motherName, applicant_date_of_birth, ssc_regis_no, ssc_institution_name, ssc_roll_no, ssc_group, ssc_year, ssc_board, ssc_gpa, ssc_transcript, hsc_regis_no, hsc_institution_name, hsc_roll_no, hsc_group, hsc_year, hsc_board, hsc_gpa, hsc_transcript, applicant_gender, applicant_nationality, applicant_religion, applicant_marital_status, applicant_father_occupation, applicant_mother_occupation, applicant_photo, guardian_name, guardian_contact, guardian_photo, permanent_address, present_address, father_or_mother_nid, applicant_blood_group } = req.body;
-
-
-    if (!applicant_name || !applicant_email || !applicant_birth_or_nid_number || !applicant_mobile || !applicant_fatherName || !applicant_motherName || !applicant_date_of_birth || !applicant_nationality || !applicant_father_occupation || !applicant_mother_occupation || !father_or_mother_nid || !applicant_blood_group) {
-        if (!namePattern.test(applicant_name) || !namePattern.test(applicant_fatherName) || !namePattern.test(applicant_motherName) || !namePattern.test(applicant_nationality) || !namePattern.test(applicant_father_occupation) || !namePattern.test(applicant_mother_occupation)) {
-            res.status(400).json({ message: 'It should be 3-30 char long' });
-        }
-        if (!emailPattern.test(applicant_email)) {
-            res.status(400).json({ message: 'please give a valid email' });
-        }
-        if (!mobilePattern.test(applicant_mobile)) {
-            res.status(400).json({ message: 'please give a valid phone number' });
-        }
-        if (!nid_or_birth_pattern.test(applicant_birth_or_nid_number) || !nid_or_birth_pattern.test(father_or_mother_nid)) {
-            res.status(400).json({ message: 'provide valid info' });
-        }
-        else {
-            res.status(400).json({ message: 'Please fil all field' });
-        }
-    }
-    else if (!permanent_address || !present_address || !guardian_name || !guardian_contact) {
-        if (!namePattern.test(guardian_name)) {
-            res.status(400).json({ message: 'It should be 3-30 char long' });
-        }
-        if (!mobilePattern.test(guardian_contact)) {
-            res.status(400).json({ message: 'please give a valid phone number' });
-        }
-        if (!addressPattern.test(permanent_address) || !addressPattern.test(present_address)) {
-            res.status(400).json({ message: 'Address should be within 100 char' });
-        }
-        else {
-            res.status(400).json({ message: 'Please fil all field' });
-        }
-    }
-    else if (!ssc_regis_no || !ssc_institution_name || !ssc_roll_no || !ssc_gpa || !ssc_transcript || !hsc_regis_no || !hsc_institution_name || !hsc_roll_no || !hsc_gpa || !hsc_transcript || !applicant_photo || !guardian_photo) {
-        if (!namePattern.test(ssc_institution_name) || !namePattern.test(hsc_institution_name)) {
-            res.status(400).json({ message: 'It should be 3-30 char long' });
-        }
-        if (!registrationNumber.test(ssc_regis_no) || !registrationNumber.test(hsc_regis_no)) {
-            res.status(400).json({ message: 'Invalid Registration number' });
-        }
-        if (!rollNumber.test(ssc_roll_no) || !rollNumber.test(hsc_roll_no)) {
-            res.status(400).json({ message: 'Invalid Roll number' });
-        }
-        if (!gpa.test(ssc_gpa) || !gpa.test(hsc_gpa)) {
-            res.status(400).json({ message: 'Invalid GPA example : 3.10' });
-        }
-        else {
-            res.status(400).json({ message: 'Please fil all field' });
-        }
-    }
+    const phonePattern = /[0-9]{11,13}/;
     try {
-        const newAdmission = new admissions(req.body);
-        await newAdmission.save()
-        res.status(200).json({ application: newAdmission, success: true, message: 'Application successfully completed. We will with you contact very soon.' })
+        if (!program_name) {
+            res.status(400).json({ message: 'Please select a program', field: 'program_name' });
+        }
+        else if (!applicant_name) {
+            res.status(400).json({ message: 'Please provide name', field: 'applicant_name'});
+        }
+        else if(!fullNamePattern.test(applicant_name)){
+            res.status(400).json({ message: 'Please provide your full name', field: 'applicant_name' });
+        }
+        else if (!applicant_email) {
+            res.status(400).json({ message: 'Please provide email', field: 'applicant_email' });
+        }
+        else if (!emailPattern.test(applicant_email)) {
+            res.status(400).json({ message: 'Please provide a proper email', field: 'applicant_email' });
+        }
+        else if (!applicant_birth_or_nid_number) {
+            res.status(400).json({ message: 'Please provide  birth or nid number', field: 'nid_or_birth' });
+        }
+        else if (!nid_or_birth_pattern.test(applicant_birth_or_nid_number)) {
+            res.status(400).json({ message: 'Check birth or nid number length', field: 'nid_or_birth' });
+        }
+        else if (!applicant_fatherName) {
+            res.status(400).json({ message: 'Please provide father name', field: 'applicant_fatherName'});
+        }
+        else if(!namePattern.test(applicant_fatherName)){
+            res.status(400).json({ message: 'Father name should be 3-30 char long', field: 'applicant_fatherName' });
+        }
+        else if (!applicant_motherName) {
+            res.status(400).json({ message: 'Please provide Mother name', field: 'applicant_motherName'});
+        }
+        else if(!namePattern.test(applicant_motherName)){
+            res.status(400).json({ message: 'Mother name should be 3-30 char long', field: 'applicant_motherName' });
+        }
+        else if (!applicant_mobile) {
+            res.status(400).json({ message: 'Please mobile  number', field: 'applicant_mobile' });
+        }
+        else if (!phonePattern.test(applicant_mobile)) {
+            res.status(400).json({ message: 'Please check  length', field: 'applicant_mobile' });
+        }
+        else if (!applicant_date_of_birth) {
+            res.status(400).json({ message: 'Please provide date of birth', field: 'applicant_date_of_birth' });
+        } else if (father_or_mother_nid && !nid_or_birth_pattern.test(father_or_mother_nid)) {
+            res.status(400).json({ message: 'Please check  nid length', field: 'father_or_mother_nid' });
+        } else {
+            res.status(200).json({ message: 'firstForm validation competed' })
+        }
 
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
     }
-};
+}
+
+export const admissionSecondStep = async (req, res) => {
+    const { permanent_address, present_address, guardian_name, guardian_contact } = req.body;
+    const namePattern = /[A-Za-z ]{3,30}/i;
+    const phonePattern = /[0-9]{11,13}/
+    try {
+        if (!guardian_name) {
+            res.status(400).json({ message: 'Please provide guardian name', field: 'guardian_name' })
+        } else if (!namePattern.test(guardian_name)) {
+            res.status(400).json({ message: 'Guardian name should be 3-30 char long', field: 'guardian_name' });
+        }else if (!guardian_contact) {
+            res.status(400).json({ message: 'Please provide guardian contact', field: 'guardian_contact' })
+        } else if (!phonePattern.test(guardian_contact)) {
+            res.status(400).json({ message: 'Please check length', field: 'guardian_contact' })
+        }
+        else if (!permanent_address) {
+            res.status(400).json({ message: 'Please provide permanent address', field: 'permanent_address' })
+        } else if (!present_address) {
+            res.status(400).json({ message: 'Please provide present address', field: 'present_address' })
+        } else {
+            res.status(200).json({ message: 'Second form validation completed' })
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
+}
+
+export const admissionFinalStep = async (req, res) => {
+
+    const institutePattern = /[A-Za-z ]{10,15}/i;
+    const registrationNumberPattern = /[0-9]{10}/;
+    const rollNumber = /[0-9]{6}/;
+    const { ssc_regis_no, ssc_institution_name, ssc_roll_no, ssc_gpa, hsc_regis_no,
+        hsc_institution_name, hsc_roll_no, hsc_gpa, applicant_photo,
+        ssc_group, hsc_group, ssc_year, hsc_year, ssc_board, hsc_board
+    } = req.body
+    try {
+        if (!ssc_regis_no) {
+            res.status(400).json({ message: 'Please provide SSC registration number', field: 'ssc_regis_no' })
+        } else if (!registrationNumberPattern.test(ssc_regis_no)) {
+            res.status(400).json({ message: 'Please check SSC registration number length', field: 'ssc_regis_no' })
+        }
+        else if (!hsc_regis_no) {
+            res.status(400).json({ message: 'Please provide HSC registration number', field: 'hsc_regis_no' })
+        } else if (!registrationNumberPattern.test(hsc_regis_no)) {
+            res.status(400).json({ message: 'Please check HSC registration number length', field: 'hsc_regis_no' })
+        }
+        else if (!ssc_institution_name) {
+            res.status(400).json({ message: 'Please provide SSC institute name', field: 'ssc_institute' })
+        } else if (!institutePattern.test(ssc_institution_name)) {
+            res.status(400).json({ message: 'Please provide institute full name', field: 'ssc_institute' })
+        }
+        else if (!hsc_institution_name) {
+            res.status(400).json({ message: 'Please provide HSC institute name', field: 'hsc_institute' })
+        } else if (!institutePattern.test(hsc_institution_name)) {
+            res.status(400).json({ message: 'Please provide institute full name', field: 'hsc_institute' })
+        }
+        else if (!ssc_roll_no) {
+            res.status(400).json({ message: 'Please provide SSC roll number', field: 'ssc_roll_no' })
+        } else if (!rollNumber.test(ssc_roll_no)) {
+            res.status(400).json({ message: 'Please check SSC roll number length', field: 'ssc_roll_no' })
+        }
+        else if (!hsc_roll_no) {
+            res.status(400).json({ message: 'Please provide HSC roll number', field: 'hsc_roll_no' })
+        } else if (!rollNumber.test(hsc_roll_no)) {
+            res.status(400).json({ message: 'Please check HSC roll number length', field: 'hsc_roll_no' })
+        }
+        else if (!ssc_group) {
+            res.status(400).json({ message: 'Please select SSC group', field: 'ssc_group' })
+        }
+        else if (!hsc_group) {
+            res.status(400).json({ message: 'Please select HSC group', field: 'hsc_group' })
+        }
+        else if (!ssc_year) {
+            res.status(400).json({ message: 'Please select SSC year', field: 'ssc_year' })
+        }
+        else if (!hsc_year) {
+            res.status(400).json({ message: 'Please select HSC year', field: 'hsc_year' })
+        }
+        else if (!ssc_board) {
+            res.status(400).json({ message: 'Please select SSC board', field: 'ssc_board' })
+        }
+        else if (!hsc_board) {
+            res.status(400).json({ message: 'Please select HSC board', field: 'hsc_board' })
+        }
+        else if (!ssc_gpa) {
+            res.status(400).json({ message: 'Please provide SSC GPA number', field: 'ssc_gpa' })
+        } else if (ssc_gpa > 5) {
+            res.status(400).json({ message: 'Please provide proper GPA number', field: 'ssc_gpa' })
+        }
+        else if (!hsc_gpa) {
+            res.status(400).json({ message: 'Please provide HSC GPA number', field: 'hsc_gpa' })
+        } else if (hsc_gpa > 5) {
+            res.status(400).json({ message: 'Please provide proper GPA number', field: 'hsc_gpa' })
+        } else if (!applicant_photo) {
+            res.status(400).json({ message: 'Please provide applicant photo', field: 'applicant_photo' })
+        } else {
+            const application = await admissionModel.create(req.body);
+            res.status(200).json({ application })
+        }
+
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong..' })
+    }
+}
 
 export const deleteApplications = async (req, res) => {
     const { id } = req.params
@@ -118,7 +215,7 @@ export const verifySSCCredentialChecking = async (req, res) => {
     const { id } = req.params;
     try {
         const application = await admissions.findById(id);
-        let driver = await new Builder().forBrowser('chrome').build();
+        let driver = await new Builder().forBrowser('firefox').build();
         try {
             await driver.get('http://www.educationboardresults.gov.bd/');
             await selectExam("ssc", driver)
@@ -171,7 +268,7 @@ export const verifyHSCCredentialChecking = async (req, res) => {
     const { id } = req.params;
     try {
         const application = await admissions.findById(id);
-        let driver = await new Builder().forBrowser('chrome').build();
+        let driver = await new Builder().forBrowser('firefox').build();
 
         try {
             await driver.get('http://www.educationboardresults.gov.bd/');

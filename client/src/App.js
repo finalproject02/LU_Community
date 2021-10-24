@@ -27,9 +27,6 @@ import GroupInitial from "./components/SocialPlatformComponent/GroupInitial/Grou
 import ScrollToTop from "./ScrollToTop";
 import Message from "./components/SocialPlatformComponent/pages/Message/Message";
 import PostDetails from "./components/SocialPlatformComponent/pages/PostDetails/PostDetails";
-import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
-import AdmissionSecondStep from "./components/OnlineAdmission/AdmissionSecondStep/AdmissionSecondStep";
-import AdmissionFinalStep from "./components/OnlineAdmission/AdmissionFinalStep/AdmissionFinalStep";
 import { Messages } from "./actions/messages";
 import ChatBody from "./components/SocialPlatformComponent/pages/Chat/ChatBody/ChatBody";
 import FacultyCSE from "./components/FacultyMembers/FacultyCSE";
@@ -65,10 +62,14 @@ import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
 import ControllerProfile from "../src/components//Admin//ExamController/ControllerProfile.js";
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 
+import { Departments, Course, Teacher } from "./actions/departments";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(Departments());
+    dispatch(Course());
+    dispatch(Teacher())
     dispatch(LoadingCurrentUser());
     dispatch(PostNotifications())
     dispatch(getCurrentUserPosts());
@@ -288,13 +289,13 @@ function App() {
             <Route path="/semesterRegiDetails">
               <SemesterRegiDetails />
             </Route>
-            <Route path="/addCourses">
+            <Route path="/addCourses/:id">
               <AddCourses />
             </Route>
-            <Route path="/AddStudents">
+            <Route path="/AddStudents/:id">
               <AddStudents />
             </Route>
-            <Route path="/AddFacultyMembers">
+            <Route path="/AddFacultyMembers/:id">
               <AddFacultyMembers />
             </Route>
             <Route path="/results">
@@ -318,7 +319,7 @@ function App() {
             <Route path="/settings">
               <Settings />
             </Route>
-            <Route path="/allStudents">
+            <Route path="/addSimpleStudent/:id">
               <AddSimpleStudent />
             </Route>
             <Route path="/adminHome">

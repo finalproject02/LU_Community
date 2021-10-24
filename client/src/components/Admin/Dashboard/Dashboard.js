@@ -1,14 +1,12 @@
 import React from 'react';
-import { Card, Col, Container, Row } from "react-bootstrap";
-import Header from '../../Header/Header';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import StudentHome from '../Student/StudentHome';
 import TeacherHome from '../Teacher/TeacherHome';
 import "./Dashboard.css";
-import topics from "./DashboardData";
-
+import {useSelector} from "react-redux";
 
 function Dashboard() {
+    const { currentUser } = useSelector(state =>  state.auth)
     return (
         <>
             <AdminNavbar />
@@ -34,8 +32,14 @@ function Dashboard() {
                     </Row>
                 </Container>
             </div> */}
-            <StudentHome />
-            {/* <TeacherHome /> */}
+            {currentUser?.position === 'Teacher' && (
+                <TeacherHome />
+            )}
+            {currentUser?.position === 'Student' && (
+                <StudentHome />
+            )}
+
+
         </>
     )
 }
