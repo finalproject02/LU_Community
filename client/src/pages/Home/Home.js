@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Header />
       <MainNavbar />
       <MainCarousel />
