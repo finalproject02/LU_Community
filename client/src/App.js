@@ -63,6 +63,7 @@ import AdmissionRequest from "./components/Admin/MainAdmin/AdmissionRequest";
 import HeadProfile from "./components/Admin/DepartmentHead/HeadProfile";
 import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
 import ControllerProfile from "../src/components//Admin//ExamController/ControllerProfile.js";
+import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 
 
 function App() {
@@ -164,15 +165,18 @@ function App() {
             <Route path="/departmentoftourism">
               <Home />
             </Route>
-            <Route path={'/firstStep'}>
-              <AdmissionFirstStep />
+            <Route path="/admissionForm">
+              <AdmissionSimple />
             </Route>
-            <Route path={'/secondStep'}>
-              <AdmissionSecondStep />
-            </Route>
-            <Route path={'/finalStep'}>
-              <AdmissionFinalStep />
-            </Route>
+            {/*<Route path={'/firstStep'}>*/}
+            {/*  <AdmissionFirstStep />*/}
+            {/*</Route>*/}
+            {/*<Route path={'/secondStep'}>*/}
+            {/*  <AdmissionSecondStep />*/}
+            {/*</Route>*/}
+            {/*<Route path={'/finalStep'}>*/}
+            {/*  <AdmissionFinalStep />*/}
+            {/*</Route>*/}
             <Route path="/departmentofbangla">
               <Home />
             </Route>
