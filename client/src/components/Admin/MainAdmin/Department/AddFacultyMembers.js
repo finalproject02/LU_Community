@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import AdminNavbar from '../../AdminNavbar/AdminNavbar';
-import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {clearError} from "../../../../actions/errors";
-import {TeacherAdd} from "../../../../actions/departments";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearError } from "../../../../actions/errors";
+import { TeacherAdd } from "../../../../actions/departments";
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
-import {uploadFile} from "../../../../actions/files";
+import { uploadFile } from "../../../../actions/files";
 
 const AddFacultyMembers = () => {
     const params = useParams();
@@ -17,7 +17,7 @@ const AddFacultyMembers = () => {
     const { Types, message } = useSelector(state => state.errors);
     const { courses, departments, teachers } = useSelector(state => state.departments);
     const currentDepartment = departments?.filter(department => department._id === id);
-    const currentDepartmentTeachers = teachers?.filter(teachers => teachers.department ===  currentDepartment?.map(department => department.department_name).toString());
+    const currentDepartmentTeachers = teachers?.filter(teachers => teachers.department === currentDepartment?.map(department => department.department_name).toString());
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false);
@@ -53,26 +53,26 @@ const AddFacultyMembers = () => {
                                 </div>
                                 <Card.Text as="div" className="mt-4">
 
-                                                {currentDepartmentTeachers?.map(teacher => (
-                                             <Card className="mb-2">
-                                                 <Card.Body>
-                                                    <Row>
-                                                        <Col md="6">
-                                                            <p><span className="fw-bold">ID:</span> {teacher.teacher_id}</p>
-                                                            <p><span className="fw-bold">Name:</span> {teacher.name}</p>
-                                                            <p><span className="fw-bold">Designation:</span> {teacher.designation}</p>
-                                                            <p><span className="fw-bold">Department:</span> {teacher.department}</p>
-                                                            <p><span className="fw-bold">Cell Phone:</span> {teacher.mobile}</p>
-                                                            <p><span className="fw-bold">E-mail:</span> faruq_cse@lus.ac.bd</p>
-                                                        </Col>
-                                                        <Col md="4">
-                                                            <img src={`/api/files/storage/${teacher.profile_picture}`} alt="" width="140" height="140" className="rounded-3 p-1" />
-                                                        </Col>
+                                    {currentDepartmentTeachers?.map(teacher => (
+                                        <Card className="mb-2">
+                                            <Card.Body>
+                                                <Row>
+                                                    <Col md="6">
+                                                        <p><span className="fw-bold">ID:</span> {teacher.teacher_id}</p>
+                                                        <p><span className="fw-bold">Name:</span> {teacher.name}</p>
+                                                        <p><span className="fw-bold">Designation:</span> {teacher.designation}</p>
+                                                        <p><span className="fw-bold">Department:</span> {teacher.department}</p>
+                                                        <p><span className="fw-bold">Cell Phone:</span> {teacher.mobile}</p>
+                                                        <p><span className="fw-bold">E-mail:</span> {teacher.email}</p>
+                                                    </Col>
+                                                    <Col md="4">
+                                                        <img src={`/api/files/storage/${teacher.profile_picture}`} alt="" width="140" height="140" className="rounded-3 p-1" />
+                                                    </Col>
 
-                                                    </Row>
-                                                 </Card.Body>
-                                             </Card>
-                                                ))}
+                                                </Row>
+                                            </Card.Body>
+                                        </Card>
+                                    ))}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -87,7 +87,7 @@ const AddFacultyMembers = () => {
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
                         {Types === 'ADD_TEACHER_ERROR' && (
-                            <h6 style={{color: 'red'}}>{message}</h6>
+                            <h6 style={{ color: 'red' }}>{message}</h6>
                         )}
                         <Form.Floating className="mb-3">
                             <Form.Control type="text" onChange={handleChange} name="teacher_id" placeholder="ID" />
@@ -114,7 +114,7 @@ const AddFacultyMembers = () => {
                             <Form.Control type="file" onChange={(e) => setFile(e.target.files[0])} name="image" />
                         </Form.Group>
                         <div className="bgSecondary text-center mt-4 rounded-3">
-                            <input type="submit" value="Save Changes" className="btn w-100 text-white"/>
+                            <input type="submit" value="Save Changes" className="btn w-100 text-white" />
                         </div>
                     </Form>
                 </Modal.Body>

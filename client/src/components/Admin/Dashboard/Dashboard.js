@@ -3,13 +3,12 @@ import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import StudentHome from '../Student/StudentHome';
 import TeacherHome from '../Teacher/TeacherHome';
 import "./Dashboard.css";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 function Dashboard() {
-    const { currentUser } = useSelector(state =>  state.auth)
+    const { currentUser } = useSelector(state => state.auth)
     return (
         <>
-            <AdminNavbar />
             {/* <div className='home mt-5'>
                 <Container>
                     <Row className="index">
