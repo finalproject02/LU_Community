@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 import {useDispatch, useSelector} from "react-redux";
-import {courseAdd} from "../../../actions/departments";
-import {clearError} from "../../../actions/errors";
+import {courseAdd} from "../../../../actions/departments";
+import {clearError} from "../../../../actions/errors";
 import {useParams} from "react-router-dom";
 
 const AddCourses = () => {
@@ -23,7 +23,7 @@ const AddCourses = () => {
     }
     const handleShow = () => setShow(true);
 
-    const [data, setData] = useState();
+    const [data, setData] = useState({});
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {clearError} from "../../../actions/errors";
-import {TeacherAdd} from "../../../actions/departments";
+import {clearError} from "../../../../actions/errors";
+import {TeacherAdd} from "../../../../actions/departments";
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
-import {uploadFile} from "../../../actions/files";
+import {uploadFile} from "../../../../actions/files";
 
 const AddFacultyMembers = () => {
     const params = useParams();

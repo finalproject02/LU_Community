@@ -1,13 +1,24 @@
 import React, {useState} from 'react';
 import AdminNavbar from "../../AdminNavbar/AdminNavbar";
 import {Card, Col, Container, Form, Row} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {StudentAdd} from "../../../../actions/departments";
+import {useParams} from "react-router-dom";
 
 const AddSimpleStudent = () => {
-    const [Data, setData] = useState({ name: '',id:'',semester:'',blood_group:'',section:'',dob:'',religion:'',present_address:'', email: '',phone:'',permanent_address:'' });
+    const dispatch = useDispatch();
+    const params = useParams();
+    const { id } = params;
+    const { Types, message } = useSelector(state => state.errors);
+    const { departments } = useSelector(state => state.departments);
+    const currentDepartment = departments?.filter(department => department._id === id)
+    const [data, setData] = useState({});
     const handleSubmit = (e) => {
         e.preventDefault();
+        data.department = currentDepartment?.map(department => department.department_name).toString();
+        dispatch(StudentAdd(data))
     }
-    const handleChange = (e) => setData({ ...Data, [e.target.name]: e.target.value });
+    const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     return (
         <div>
             <AdminNavbar />
@@ -18,6 +29,9 @@ const AddSimpleStudent = () => {
                             <Card.Title className="p-4 textPrimary">Add New Student</Card.Title>
                             <Card.Body className="card-body">
                                 <Form onSubmit={handleSubmit}>
+                                    {Types === 'ADD_STUDENT_ERROR' && (
+                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                    )}
                                     <Row>
                                         <Col md="3">
                                             <Form.Floating className="mb-3">
@@ -25,7 +39,7 @@ const AddSimpleStudent = () => {
                                                 <label>Name</label>
                                             </Form.Floating>
                                             <Form.Floating className="mb-3">
-                                                <Form.Control type="number" onChange={handleChange} name="id" placeholder="ID" />
+                                                <Form.Control type="number" onChange={handleChange} name="student_id" placeholder="ID" />
                                                 <label>ID</label>
                                             </Form.Floating>
                                             <Form.Floating className="mb-3">
@@ -35,7 +49,7 @@ const AddSimpleStudent = () => {
                                         </Col>
                                         <Col md="3">
                                             <Form.Floating className="mb-3">
-                                                <Form.Control type="text" onChange={handleChange} name="Gender" placeholder="Gender" />
+                                                <Form.Control type="text" onChange={handleChange} name="gender" placeholder="Gender" />
                                                 <label>Gender</label>
                                             </Form.Floating>
                                             <Form.Floating className="mb-3">
@@ -53,7 +67,7 @@ const AddSimpleStudent = () => {
                                                 <label>Email</label>
                                             </Form.Floating>
                                             <Form.Floating className="mb-3">
-                                                <Form.Control type="text" onChange={handleChange} name="phone" placeholder="Phone" />
+                                                <Form.Control type="text" onChange={handleChange} name="mobile" placeholder="Phone" />
                                                 <label>Phone</label>
                                             </Form.Floating>
                                             <Form.Floating className="mb-3">
@@ -63,7 +77,7 @@ const AddSimpleStudent = () => {
                                         </Col>
                                         <Col md="3">
                                             <Form.Floating className="mb-3">
-                                                <Form.Control type="text" onChange={handleChange} name="dob" placeholder="Date Of Birth" />
+                                                <Form.Control type="text" onChange={handleChange} name="date_of_birth" placeholder="Date Of Birth" />
                                                 <label>Date Of Birth</label>
                                             </Form.Floating>
                                             <Form.Floating className="mb-3">

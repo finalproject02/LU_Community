@@ -6,7 +6,7 @@ import multer from "multer";
 
 const router = express.Router()
 
-const mongoURI = 'mongodb://localhost:27017/LU_Community';
+const mongoURI = 'mongodb+srv://Rezaul123:X8ZIKUlb0aS4BZX2@cluster0.gbm1r.mongodb.net/LU_Community?retryWrites=true&w=majority';
 const conn = mongoose.createConnection(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

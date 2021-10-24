@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Accordion, Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 import {useDispatch, useSelector} from "react-redux";
-import {departmentAdd} from "../../../actions/departments";
-import {clearError} from "../../../actions/errors";
+import {departmentAdd} from "../../../../actions/departments";
+import {clearError} from "../../../../actions/errors";
 const Department = () => {
     const dispatch = useDispatch();
     const { departments } = useSelector(state => state.departments)
@@ -59,7 +59,7 @@ const Department = () => {
                                             </div>
                                             <hr />
                                             <div className="text-center">
-                                                <Link to={`/addStudents/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
+                                                <Link to={`/addSimpleStudent/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
                                                    Student
                                                 </Link>
                                             </div>

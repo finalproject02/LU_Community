@@ -7,8 +7,8 @@ export const admissionFinalStep = (applicantData) => axios.post('/api/admissionF
 export const fileUpload = (fileData) => axios.post('/api/files/storage', fileData);
 export const createAccount = (userData) => axios.post('/api/auth/createAccount', userData);
 export const loginAccount = (userData) => axios.post('/api/auth/loginAccount', userData);
+export const changePassword = (userData, getState) => axios.patch('/api/auth/changePassword', userData, tokenConfig(getState));
 export const getCurrentUser = (getState) => axios.get('/api/user', tokenConfig(getState));
-
 
 export const fetchAllUsers = (getState) => axios.get('/api/AllUsers', tokenConfig(getState));
 export const searchUser = (getState, searchKey) => axios.get(`/api/search?searchKey=${searchKey}`, tokenConfig(getState));
@@ -54,3 +54,5 @@ export const addCourse = (getState, courseData) => axios.post('/api/department/c
 export const courses = (getState) => axios.get('/api/department/course', tokenConfig(getState));
 export const addTeacher = (getState, teacherData) => axios.post('/api/department/teacher', teacherData, tokenConfig(getState));
 export const teachers = (getState) => axios.get('/api/department/teacher', tokenConfig(getState));
+export const addStudent = (getState, studentData) => axios.post('/api/department/student', studentData, tokenConfig(getState));
+export const students = (getState) => axios.get('/api/department/student', tokenConfig(getState));

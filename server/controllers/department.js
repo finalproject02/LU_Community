@@ -2,7 +2,7 @@ import departmentModel from "../models/departmentModel.js";
 import courseModel from "../models/courseModel.js";
 import userModel from "../models/userModel.js";
 import {generateUniquePassword} from "../services/functions.js";
-import {addTeacherSMS} from "../services/smsService.js";
+import {addTeacherSMS, addStudentSMS} from "../services/smsService.js";
 import bcrypt from "bcryptjs";
 
 export const addDepartment = async (req, res) => {
@@ -125,10 +125,54 @@ export const Teachers = async (req, res) => {
 }
 
 export const addStudent = async (req, res) => {
-    const { name, email, mobile, department, profile_picture, student_id } = req.body
+    const emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/;
+    const phonePattern = /[0-9]{11,13}/;
+    const { name, gender, email, date_of_birth,  student_id, blood_group, mobile, religion, semester, section, permanent_address, present_address, department } = req.body
     try {
-
+        const isExists = await userModel.findOne({ email })
+        if (!name) {
+            res.status(400).json({ message: 'Please provide student name' });
+        }else if (!student_id) {
+            res.status(400).json({ message: 'Please provide student ID' });
+        }else if (!semester) {
+            res.status(400).json({ message: 'Please provide semester' });
+        }else if (!gender) {
+            res.status(400).json({ message: 'Please provide gender' });
+        }else if(!email) {
+            res.status(400).json({ message: 'Please provide Email' });
+        }else if (isExists) {
+            res.status(400).json({ message: 'Please change email address. It already exists' });
+        }else if (!emailPattern.test(email)) {
+            res.status(400).json({ message: 'Please provide a valid email' });
+        }else if (!mobile) {
+            res.status(400).json({ message: 'Please provide Phone number' });
+        }else if (!phonePattern.test(mobile)) {
+            res.status(400).json({ message: 'Please check phone number length' });
+        }else if (!permanent_address) {
+            res.status(400).json({ message: 'Please provide permanent address' });
+        }else if (!date_of_birth) {
+            res.status(400).json({ message: 'Please provide data of birth' });
+        }else if (!religion) {
+            res.status(400).json({ message: 'Please provide religion' });
+        }else if (!permanent_address) {
+            res.status(400).json({ message: 'Please provide present address' });
+        }else {
+            const password = generateUniquePassword();
+            addStudentSMS(name, mobile, department, email, password)
+            const hashedPassword = await bcrypt.hash(password, 10)
+            const student = await userModel.create({name, student_id, semester, gender, blood_group, section, email, mobile, permanent_address, date_of_birth, religion, present_address, department, password: hashedPassword, position: 'Student'});
+            res.status(200).json({ student })
+        }
     } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong..' })
+    }
+}
 
+export const Students = async (req, res) => {
+    try {
+        const students = await userModel.find({ position: 'Student' }).sort({ student_id: -1 });
+        res.status(200).json({ students })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
     }
 }

@@ -2,6 +2,7 @@ import { ADD_DEPARTMENT, ADD_COURSE, ADD_STUDENT, ADD_TEACHER,
     ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING } from "./types";
 import {clearError, getErrors} from "./errors";
 import * as api from '../api'
+import ShowToast from "../services/ShowToast";
 
 
 export const departmentAdd = (departmentData, handleClose) => async (dispatch, getState) => {
@@ -88,6 +89,38 @@ export const Teacher = () => async (dispatch, getState) => {
         dispatch({ type: LOADED });
     } catch (error) {
         dispatch(getErrors(error.response.data, 'TEACHERS_ERROR'))
+    }
+}
+
+export const StudentAdd = (studentData) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { student } } = await api.addStudent(getState, studentData);
+        ShowToast(1, 'Student add success');
+        setTimeout(() => {
+            window.location.reload()
+        }, 1000)
+        dispatch({
+            type: ADD_STUDENT,
+            payload: student
+        })
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'ADD_STUDENT_ERROR'))
+    }
+}
+
+export const Student = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { students } } = await api.students(getState)
+        dispatch({
+            type: ALL_STUDENT,
+            payload: students
+        })
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'STUDENTS_ERROR'))
     }
 }
 

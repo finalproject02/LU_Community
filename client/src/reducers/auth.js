@@ -4,7 +4,7 @@ import {
     CREATE_ACCOUNT_FAILED,
     LOGIN_ACCOUNT_FAILED,
     LOGOUT_SUCCESS,
-    CURRENT_USER,
+    CURRENT_USER, CHANGE_PASSWORD,
     LOADING, GET_ERRORS,
     LOADED, UPDATE_INFO,
     ACCEPT_CONNECTION_REQUEST,
@@ -64,6 +64,7 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case MEMBER_REQUEST:
         case CANCEL_REQUEST:
         case PEER:
+        case CHANGE_PASSWORD:
             return {
                 ...state,
                 currentUser: action.payload,

@@ -2,14 +2,16 @@ import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaRegEdit } from "react-icons/fa";
+import {useSelector} from "react-redux";
 
 const TeacherHome = () => {
+    const { currentUser } = useSelector(state => state.auth)
     return (
         <div>
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="8">
-                        <h2 className="text-center textSecondary my-2">Welcome Mr. Jahed!</h2>
+                        <h2 className="text-center textSecondary my-2">Welcome {currentUser?.name}!</h2>
                         <Row>
                             <Col md="4" className="mb-2">
                                 <Link to="courseDetails" className="textHover text-dark">
