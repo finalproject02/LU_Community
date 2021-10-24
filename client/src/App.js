@@ -62,6 +62,7 @@ import AdminHome from "./components/Admin/MainAdmin/AdminHome";
 import AdmissionRequest from "./components/Admin/MainAdmin/AdmissionRequest";
 import HeadProfile from "./components/Admin/DepartmentHead/HeadProfile";
 import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
+import ControllerProfile from "../src/components//Admin//ExamController/ControllerProfile.js";
 
 
 function App() {
@@ -261,6 +262,9 @@ function App() {
             </Route>
             <Route path="/approveCourseResults">
               <ApproveResultCourse />
+            </Route>
+            <Route path="/controllerProfile">
+              <ControllerProfile />
             </Route>
             <Route path="/publishResults">
               <PublishResult />

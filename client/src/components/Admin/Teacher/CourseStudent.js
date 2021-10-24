@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
-import { Card, Col, Container, Row, Table } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
 
 const CourseStudent = () => {
     return (
