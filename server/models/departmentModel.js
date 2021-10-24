@@ -5,7 +5,8 @@ const departmentModel = new mongoose.Schema({
     faculty: String,
     students: Array,
     teachers: Array,
-    courses: Array
+    courses: Array,
+    tuition_fee_per_credit: Number
 });
 
 export default mongoose.model('department', departmentModel)

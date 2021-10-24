@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import { Accordion, Card, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AdminNavbar from '../../AdminNavbar/AdminNavbar';
-import {useDispatch, useSelector} from "react-redux";
-import {departmentAdd} from "../../../../actions/departments";
-import {clearError} from "../../../../actions/errors";
+import { useDispatch, useSelector } from "react-redux";
+import { departmentAdd } from "../../../../actions/departments";
+import { clearError } from "../../../../actions/errors";
 const Department = () => {
     const dispatch = useDispatch();
     const { departments } = useSelector(state => state.departments)
-    const { message, Types } =  useSelector(state => state.errors)
+    const { message, Types } = useSelector(state => state.errors)
     const [show, setShow] = useState(false);
     const handleClose = () => {
         dispatch(clearError())
         setShow(false);
-        setData({department_name: '', faculty: ''})
+        setData({ department_name: '', faculty: '' })
     };
     const handleShow = () => setShow(true);
 
-    const [data, setData] = useState({ department_name: '', faculty: '' });
+    const [data, setData] = useState({ department_name: '', faculty: '', tuition_fee_per_credit: '' });
     const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,7 +38,7 @@ const Department = () => {
                             </div>
                         </Card.Body>
                     </Card>
-                {departments?.map(department => (
+                    {departments?.map(department => (
 
                         <Card className="mb-2 rounded-3">
                             <Card.Body>
@@ -60,7 +60,7 @@ const Department = () => {
                                             <hr />
                                             <div className="text-center">
                                                 <Link to={`/addSimpleStudent/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
-                                                   Student
+                                                    Student
                                                 </Link>
                                             </div>
                                             <hr />
@@ -70,7 +70,7 @@ const Department = () => {
                             </Card.Body>
                         </Card>
 
-                ))}
+                    ))}
                 </Col>
             </Row>
             <Modal show={show} onHide={handleClose} centered>
@@ -80,7 +80,7 @@ const Department = () => {
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
                         {Types === 'ADD_DEPARTMENT_ERROR' && (
-                            <h6 style={{color: 'red'}}>{message}</h6>
+                            <h6 style={{ color: 'red' }}>{message}</h6>
                         )}
 
                         <Form.Floating className="mb-3">
@@ -91,8 +91,12 @@ const Department = () => {
                             <Form.Control type="text" onChange={handleChange} name="faculty" placeholder="Faculty" />
                             <label for="floatingInput">Faculty</label>
                         </Form.Floating>
+                        <Form.Floating className="mb-3">
+                            <Form.Control type="number" onChange={handleChange} name="tuition_fee_per_credit" placeholder="Tuition Fee Per Credit" />
+                            <label for="floatingInput">Tuition Fee Per Credit</label>
+                        </Form.Floating>
                         <div className="bgSecondary text-center mt-4 rounded-3">
-                            <input type="submit" value="Save Changes" className="btn w-100 text-white"/>
+                            <input type="submit" value="Save Changes" className="btn w-100 text-white" />
                         </div>
                     </Form>
                 </Modal.Body>

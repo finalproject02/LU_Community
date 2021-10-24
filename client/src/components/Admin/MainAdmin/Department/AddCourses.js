@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import AdminNavbar from '../../AdminNavbar/AdminNavbar';
-import {useDispatch, useSelector} from "react-redux";
-import {courseAdd} from "../../../../actions/departments";
-import {clearError} from "../../../../actions/errors";
-import {useParams} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { courseAdd } from "../../../../actions/departments";
+import { clearError } from "../../../../actions/errors";
+import { useParams } from "react-router-dom";
 
 const AddCourses = () => {
     const params = useParams();
@@ -52,10 +52,10 @@ const AddCourses = () => {
                                                 <p><span className="fw-bold">Course Credit:</span> {course.credit}</p>
                                                 <p><span className="fw-bold">Course Semester:</span> {course.semester}</p>
                                                 {course.course_prerequisite && (
-                                                    <p><span className="fw-bold">Course Prerequisite: {course.course_prerequisite}</span></p>
+                                                    <p><span className="fw-bold">Course Prerequisite: </span>{course.course_prerequisite}</p>
                                                 )}
                                                 {course.curriculum && (
-                                                    <p><span className="fw-bold">Course Curriculum: {course.curriculum}</span></p>
+                                                    <p><span className="fw-bold">Course Curriculum:</span> {course.curriculum}</p>
                                                 )}
                                             </Card.Body>
                                         </Card>
@@ -74,7 +74,7 @@ const AddCourses = () => {
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
                         {Types === 'ADD_COURSE_ERROR' && (
-                            <h6 style={{color: 'red'}}>{message}</h6>
+                            <h6 style={{ color: 'red' }}>{message}</h6>
                         )}
                         <Form.Floating className="mb-3">
                             <Form.Control type="text" onChange={handleChange} name="course_title" placeholder="Course Title" />
@@ -101,7 +101,7 @@ const AddCourses = () => {
                             <label for="floatingInput">Prerequisite</label>
                         </Form.Floating>
                         <div className="bgSecondary text-center mt-4 rounded-3">
-                            <input type="submit" value="Save Changes" className="btn w-100 text-white"/>
+                            <input type="submit" value="Save Changes" className="btn w-100 text-white" />
                         </div>
                     </Form>
                 </Modal.Body>
