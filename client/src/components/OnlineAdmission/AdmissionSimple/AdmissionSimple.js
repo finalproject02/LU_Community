@@ -1,36 +1,36 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import AdminNavbar from "../../Admin/AdminNavbar/AdminNavbar";
-import {Card, Col, Container, Form, Row} from "react-bootstrap";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
 
 const AdmissionSimple = () => {
-    const [data, setData] = useState({name: '',phone:'',email:'',program_name:'',ssc_gpa:'',hsc_gpa:'',find_us:''});
-    const handleChange = (e) => setData({...data, [e.target.name]: e.target.value});
+    const [data, setData] = useState({ name: '', phone: '', email: '', program_name: '', ssc_gpa: '', hsc_gpa: '', find_us: '' });
+    const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
     const handleSubmit = (e) => {
         e.preventDefault();
     }
     return (
         <div>
-            <AdminNavbar/>
-            <Container className="mt-4">
+            <AdminNavbar />
+            <Container className="mt-5">
                 <Row className="d-flex justify-content-center">
                     <Col md={8}>
                         <Card>
-                            <Card.Title className="textPrimary px-4 text-center p-2">Online Admission</Card.Title>
+                            <Card.Title className="textPrimary px-4 text-center p-2 fs-4">Online Admission</Card.Title>
                             <Card.Body>
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="text" onChange={handleChange} name="name"
-                                                      placeholder="Your name"/>
+                                            placeholder="Your name" />
                                         <label for="floatingInput">Your name</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="number" onChange={handleChange} name="phone"
-                                                      placeholder="Phone Number"/>
+                                            placeholder="Phone Number" />
                                         <label for="floatingInput">Phone Number</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="text" onChange={handleChange} name="email"
-                                                      placeholder="Email"/>
+                                            placeholder="Email" />
                                         <label for="floatingInput">Email</label>
                                     </Form.Floating>
                                     <Form.Select
@@ -53,12 +53,12 @@ const AdmissionSimple = () => {
                                     </Form.Select>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="number" onChange={handleChange} name="ssc_gpa"
-                                                      placeholder="SSC GPA"/>
+                                            placeholder="SSC GPA" />
                                         <label for="floatingInput">SSC GPA</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="number" onChange={handleChange} name="hsc_gpa"
-                                                      placeholder="HSC GPA"/>
+                                            placeholder="HSC GPA" />
                                         <label for="floatingInput">HSC GPA</label>
                                     </Form.Floating>
                                     <Form.Select
@@ -72,7 +72,7 @@ const AdmissionSimple = () => {
                                         <option value="english">Via Newspaper</option>
                                     </Form.Select>
                                     <div className="bgPrimary text-center mt-4 rounded-3">
-                                        <input type="submit" value="Send" className="btn w-100 text-white"/>
+                                        <input type="submit" value="Send" className="btn w-100 text-white" />
                                     </div>
                                 </Form>
                             </Card.Body>

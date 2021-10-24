@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Col, Container, Row, Table, Modal, Form } from 'react-bootstrap';
+import { Card, Col, Container, Row, Modal, Form } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import jahed from "../../../images/Jahed.jpg";
 import { FaRegEdit } from "react-icons/fa";
