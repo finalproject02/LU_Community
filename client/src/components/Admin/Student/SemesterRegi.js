@@ -12,7 +12,7 @@ const SemesterRegi = () => {
                     <Col md="10">
                         <Card className="shadow-sm p-5">
                             <Card.Title className="text-center textPrimary mb-4 fs-4">Semester Registration</Card.Title>
-                            <Card.Body>
+                            <Card.Body className="overflow-scroll">
                                 <div className="d-flex justify-content-between">
                                     <p className="card-text fs-5 fw-bolder">Regular Courses</p>
                                     <Form.Group className="w-25">
