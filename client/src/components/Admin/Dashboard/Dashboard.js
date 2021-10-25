@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import HeadHome from "../../Admin/DepartmentHead/HeadHome"
 
 function Dashboard() {
-    const { currentUser } = useSelector(state =>  state.auth)
+    const { currentUser } = useSelector(state => state.auth)
     return (
         <>
             <AdminNavbar />

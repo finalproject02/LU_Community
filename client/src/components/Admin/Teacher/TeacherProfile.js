@@ -41,7 +41,7 @@ function TeacherProfile() {
                                     <div>
                                         <div className="d-flex justify-content-between align-items-start">
                                             <h5 className="fw-bold">{currentUser?.name}</h5>
-                                            <FaRegEdit className="fs-5" onClick={handleShow} />
+                                            <FaRegEdit className="fs-5 text-end text-success" onClick={handleShow} />
                                         </div>
                                         <small>{currentUser?.designation} | Department of {currentUser?.department}</small>
                                     </div>
@@ -74,8 +74,16 @@ function TeacherProfile() {
                                                 <Modal.Body>
                                                     <Form onSubmit={handleSubmit}>
                                                         <Form.Floating className="mb-3">
+                                                            <Form.Control type="text" onChange={handleChange} name="gender" placeholder="Gender" />
+                                                            <label for="floatingInput">Gender</label>
+                                                        </Form.Floating>
+                                                        <Form.Floating className="mb-3">
                                                             <Form.Control type="text" onChange={handleChange} name="phone" placeholder="Phone" />
                                                             <label for="floatingInput">Phone</label>
+                                                        </Form.Floating>
+                                                        <Form.Floating className="mb-3">
+                                                            <Form.Control type="text" onChange={handleChange} name="designation" placeholder="Designation" />
+                                                            <label for="floatingInput">Designation</label>
                                                         </Form.Floating>
                                                         <Form.Floating className="mb-3">
                                                             <Form.Control type="text" onChange={handleChange} name="address" placeholder="Address" />
@@ -92,7 +100,7 @@ function TeacherProfile() {
                                         <div className="my-3">
                                             <div className="d-flex justify-content-between align-items-start">
                                                 <h3>Area of Study</h3>
-                                                <FaRegEdit className="fs-5" onClick={handleShowSecond} />
+                                                <FaRegEdit className="fs-5 text-success" onClick={handleShowSecond} />
                                             </div>
                                             <div>
                                                 <p className="fw-bold">Educations: </p>
