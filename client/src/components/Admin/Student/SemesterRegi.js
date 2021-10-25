@@ -40,7 +40,6 @@ const SemesterRegi = () => {
         return x;
     }
 
-
     useEffect(() => {
         if (registeredSemester) {
             setSelected(registeredSemester)

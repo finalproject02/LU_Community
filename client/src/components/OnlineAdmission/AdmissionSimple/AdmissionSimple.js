@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import AdminNavbar from "../../Admin/AdminNavbar/AdminNavbar";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import Header from "../../Header/Header";
+import MainNavbar from "../../MainNavbar/MainNavbar";
 
 const AdmissionSimple = () => {
     const [data, setData] = useState({ name: '', phone: '', email: '', program_name: '', ssc_gpa: '', hsc_gpa: '', find_us: '' });
@@ -10,7 +11,8 @@ const AdmissionSimple = () => {
     }
     return (
         <div>
-            <AdminNavbar />
+            <Header />
+            <MainNavbar />
             <Container className="mt-5">
                 <Row className="d-flex justify-content-center">
                     <Col md={8}>

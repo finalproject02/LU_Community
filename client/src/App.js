@@ -63,6 +63,7 @@ import ControllerProfile from "../src/components//Admin//ExamController/Controll
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 
 import { Departments, Course, Teacher, Semester } from "./actions/departments";
+import PaymentDemo from "./components/PaymentDemo/PaymentDemo";
 
 function App() {
   const dispatch = useDispatch();
@@ -182,8 +183,8 @@ function App() {
             <Route path="/departmentofbangla">
               <Home />
             </Route>
-            <Route path="/paymentprocedure">
-              <Home />
+            <Route path="/paymentDemo">
+              <PaymentDemo />
             </Route>
             <Route path="/classroom">
               <Classroom />
