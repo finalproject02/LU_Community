@@ -58,6 +58,7 @@ const AdmissionRequest = () => {
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
                                     <td>CSE</td>
+                                    <td>12345678</td>
                                     <td>20000</td>
                                     <td>
                                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -71,6 +72,7 @@ const AdmissionRequest = () => {
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
                                     <td>CSE</td>
+                                    <td>12345678</td>
                                     <td>20000</td>
                                     <td>
                                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -84,6 +86,7 @@ const AdmissionRequest = () => {
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
                                     <td>CSE</td>
+                                    <td>12345678</td>
                                     <td>20000</td>
                                     <td>
                                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -97,6 +100,7 @@ const AdmissionRequest = () => {
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
                                     <td>CSE</td>
+                                    <td>12345678</td>
                                     <td>20000</td>
                                     <td>
                                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -110,6 +114,7 @@ const AdmissionRequest = () => {
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
                                     <td>CSE</td>
+                                    <td>12345678</td>
                                     <td>20000</td>
                                     <td>
                                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -123,6 +128,7 @@ const AdmissionRequest = () => {
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
                                     <td>CSE</td>
+                                    <td>12345678</td>
                                     <td>20000</td>
                                     <td>
                                         <Form.Group className="mb-3" controlId="formBasicCheckbox">

@@ -66,6 +66,7 @@ import { Departments, Course, Teacher, Semester } from "./actions/departments";
 import PaymentDemo from "./components/PaymentDemo/PaymentDemo";
 import AdmissionRequest from "./components/Admin/Admission/AdmissionRequest";
 import AddStudents from "./components/Admin/Admission/AddStudents";
+import AdmissionProfile from "./components/Admin/Admission/AdmissionProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -334,6 +335,9 @@ function App() {
             </Route>
             <Route path="/admissionRequest">
               <AdmissionRequest />
+            </Route>
+            <Route path="/admissionProfile">
+              <AdmissionProfile/>
             </Route>
             <Route exact path="/">
               <Home />

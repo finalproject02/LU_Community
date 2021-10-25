@@ -36,7 +36,7 @@ const AdmissionSimple = () => {
                                         <label for="floatingInput">Email</label>
                                     </Form.Floating>
                                     <Form.Select
-                                        className="w-100 mb-3"
+                                        className="w-100 mb-3 py-3"
                                         name="program_name"
                                         onChange={handleChange}
                                     >
@@ -64,7 +64,7 @@ const AdmissionSimple = () => {
                                         <label for="floatingInput">HSC GPA</label>
                                     </Form.Floating>
                                     <Form.Select
-                                        className="w-100"
+                                        className="w-100 py-3"
                                         name="fine_us"
                                         onChange={handleChange}
                                     >

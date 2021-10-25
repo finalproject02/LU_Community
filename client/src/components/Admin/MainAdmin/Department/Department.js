@@ -63,7 +63,6 @@ const Department = () => {
                                                     Faculty Member
                                                 </Link>
                                             </div>
-                                            <hr />
                                             {/* <div className="text-center">
                                                 <Link to={`/addSimpleStudent/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
                                                     Student

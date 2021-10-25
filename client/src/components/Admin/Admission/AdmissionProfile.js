@@ -31,7 +31,7 @@ function AdmissionProfile() {
                 <Row className="justify-content-center my-5">
                     <Col md="8">
                         <Card className="shadow-sm p-5 mb-4">
-                            <Card.Title className="textPrimary mb-4 fs-4">About Dept. Head</Card.Title>
+                            <Card.Title className="textPrimary mb-4 fs-4">About Admission Controller</Card.Title>
                             <Card.Body>
                                 <div className="d-flex align-items-center mb-4">
                                     <img src={jahed} alt="" width="100" height="100" className="rounded-3 me-3" />

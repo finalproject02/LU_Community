@@ -19,7 +19,7 @@ const PaymentDemo = () => {
                 <Row className="d-flex justify-content-center">
                     <Col md={8}>
                         <Card>
-                            <Card.Title className="textPrimary px-4 text-center p-2 fs-4">Online Admission</Card.Title>
+                            <Card.Title className="textPrimary px-4 text-center p-2 fs-4">Admission Payment</Card.Title>
                             <Card.Body>
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Floating className="mb-3">
