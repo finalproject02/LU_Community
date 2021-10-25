@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Form, Row, Table } from "react-bootstrap";
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 
-const AdmissionRequest = () => {
+const AdmissionRequestAdd = () => {
     return (
         <div>
             <AdminNavbar />
@@ -143,4 +143,4 @@ const AdmissionRequest = () => {
     );
 };
 
-export default AdmissionRequest;
+export default AdmissionRequestAdd;

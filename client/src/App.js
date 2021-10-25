@@ -44,7 +44,6 @@ import SemesterRegiReq from "./components/Admin/DepartmentHead/SemesterRegiReq/S
 import SemesterRegiDetails from "./components/Admin/DepartmentHead/SemesterRegiReq/SemesterRegiDetails";
 import Department from "./components/Admin/MainAdmin/Department/Department";
 import AddCourses from "./components/Admin/MainAdmin/Department/AddCourses";
-import AddStudents from "./components/Admin/MainAdmin/Department/AddStudents";
 import AddFacultyMembers from "./components/Admin/MainAdmin/Department/AddFacultyMembers";
 import SemesterRegi from "./components/Admin/Student/SemesterRegi";
 import Payment from "./components/Admin/Student/Payment";
@@ -56,14 +55,19 @@ import Settings from "./components/Admin/Settings/Settings";
 import AddSimpleStudent from "./components/Admin/MainAdmin/Department/AddSimpleStudent";
 import AdminProfile from "./components/Admin/MainAdmin/AdminProfile";
 import AdminHome from "./components/Admin/MainAdmin/AdminHome";
-import AdmissionRequest from "./components/Admin/MainAdmin/AdmissionRequest";
 import HeadProfile from "./components/Admin/DepartmentHead/HeadProfile";
 import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
-import ControllerProfile from "../src/components//Admin//ExamController/ControllerProfile.js";
+import ControllerProfile from "../src/components/Admin/ExamController/ControllerProfile.js";
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
+// import AddStudents from "./components/Admin/Admission/AddStudents";
+// import AdmissionRequest from "./components/Admin/Admission/AdmissionRequest";
 
 import { Departments, Course, Teacher, Semester } from "./actions/departments";
 import PaymentDemo from "./components/PaymentDemo/PaymentDemo";
+import AdmissionRequest from "./components/Admin/Admission/AdmissionRequest";
+import AddStudents from "./components/Admin/Admission/AddStudents";
+import AdmissionProfile from "./components/Admin/Admission/AdmissionProfile";
+import AdmissionHome from "./components/Admin/Admission/AdmissionHome";
 
 function App() {
   const dispatch = useDispatch();
@@ -332,6 +336,12 @@ function App() {
             </Route>
             <Route path="/admissionRequest">
               <AdmissionRequest />
+            </Route>
+            <Route path="/admissionProfile">
+              <AdmissionProfile/>
+            </Route>
+            <Route path="/AdmissionHome">
+              <AdmissionHome/>
             </Route>
             <Route exact path="/">
               <Home />
