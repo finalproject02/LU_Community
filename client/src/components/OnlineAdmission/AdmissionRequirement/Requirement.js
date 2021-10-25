@@ -33,7 +33,7 @@ const Requirement = () => {
                 <Card.Text>{item.requirement7}</Card.Text>
                 <hr />
                 <div className="w-100 btn bg-primary text-white px-5"
-                  onClick={() => item.name === 'BSc' ? history.push(`/firstStep`) : alert('Coming soon..')}>
+                  onClick={() => item.name === 'BSc' ? history.push(`/admissionForm`) : alert('Coming soon..')}>
                   Next
                 </div>
               </Card.Body>

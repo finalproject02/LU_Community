@@ -1,5 +1,5 @@
-export const referenceNumberMessage = (name, referenceCode) => {
-    const message = `Hello ${name}.\nYour registration has been successful. For payment you should use this ${referenceCode} code as a reference number. Thank for registration.\n\nLeading University, Sylhet
+export const referenceNumberMessage = (name, reference_no) => {
+    const message = `Hello ${name}.\nYour registration has been successful. For payment you should use this ${reference_no} code as a reference number. Thank for registration.\n\nLeading University, Sylhet
     `
     return message
 }
