@@ -23,8 +23,14 @@ export const SidebarData = () => {
             },
         ]
     }
-    else if (currentUser?.type === 'admission' && currentUser?.name === 'admission') {
+    else if (currentUser?.type === 'admission' && currentUser?.name === 'Admission') {
         return [
+            {
+                title: 'Home',
+                path: '/admissionHome',
+                icon: <AiIcons.AiFillHome />,
+                cName: 'nav-text'
+            },
             {
                 title: 'Admission Request',
                 path: '/admissionRequest',

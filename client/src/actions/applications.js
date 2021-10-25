@@ -2,7 +2,7 @@ import {
     LOADED, LOADING,
     ADMISSION_FIRST_STEP,
     ADMISSION_SECOND_STEP,
-    ADMISSION_FINAL_STEP
+    ADMISSION_FINAL_STEP, CREATE_REFERENCE, PAYMENT
 } from "./types";
 import * as API from "../api";
 import {getErrors} from "./errors";
@@ -46,5 +46,38 @@ export const ApplicationFinalStep = (applicantData, history) => async (dispatch)
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch(getErrors(error.response.data, 'ADMISSION_FINAL_STEP'));
+    }
+}
+
+export const CreateReference = (data) => async (dispatch) => {
+    try {
+        dispatch({ type: LOADING })
+        const { data  : { message }} = await API.createReference(data);
+        dispatch({
+            type: CREATE_REFERENCE,
+            payload: message
+        })
+        ShowToast(1, message)
+        dispatch({ type: LOADED })
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'CREATE_REFERENCE_ERROR'));
+    }
+}
+
+export const PPayment = (data) => async (dispatch) => {
+    try {
+        dispatch({ type: LOADING })
+        const { data  : { message }} = await API.payment(data)
+        dispatch({
+            type: PAYMENT,
+            payload: message
+        })
+        ShowToast(1, message)
+        setTimeout(() => {
+            window.location.reload();
+        }, 500)
+        dispatch({ type: LOADED })
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'PAYMENT_ERROR'));
     }
 }
