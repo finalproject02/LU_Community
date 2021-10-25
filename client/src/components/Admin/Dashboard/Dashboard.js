@@ -3,14 +3,13 @@ import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import StudentHome from '../Student/StudentHome';
 import TeacherHome from '../Teacher/TeacherHome';
 import "./Dashboard.css";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import HeadHome from "../../Admin/DepartmentHead/HeadHome"
 
 function Dashboard() {
-    const { currentUser } = useSelector(state =>  state.auth)
+    const { currentUser } = useSelector(state => state.auth)
     return (
         <>
-            <AdminNavbar />
             {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() !== 'head' && (
                 <TeacherHome />
             )}

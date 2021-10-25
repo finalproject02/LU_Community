@@ -1,10 +1,12 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import { Link } from 'react-router-dom';
 
 const StudentHome = () => {
     return (
         <div>
+            <AdminNavbar />
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">
