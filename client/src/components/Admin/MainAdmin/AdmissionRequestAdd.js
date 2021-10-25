@@ -13,7 +13,6 @@ const AdmissionRequestAdd = () => {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
@@ -24,7 +23,6 @@ const AdmissionRequestAdd = () => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
@@ -37,7 +35,6 @@ const AdmissionRequestAdd = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
@@ -50,7 +47,6 @@ const AdmissionRequestAdd = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
@@ -63,7 +59,6 @@ const AdmissionRequestAdd = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
@@ -76,7 +71,6 @@ const AdmissionRequestAdd = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
@@ -89,7 +83,6 @@ const AdmissionRequestAdd = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
@@ -102,7 +95,6 @@ const AdmissionRequestAdd = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
@@ -115,7 +107,6 @@ const AdmissionRequestAdd = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1732020020</td>
                                     <td>Md Jahed Miah</td>
                                     <td>mdjahedahmed12@gmail.com</td>
                                     <td>0179713005</td>
