@@ -4,6 +4,7 @@ import userModel from "../models/userModel.js";
 import { generateUniquePassword } from "../services/functions.js";
 import { addTeacherSMS, addStudentSMS } from "../services/smsService.js";
 import bcrypt from "bcryptjs";
+import semesterModel from "../models/semesterModel.js";
 
 export const addDepartment = async (req, res) => {
     const { department_name, faculty, tuition_fee_per_credit } = req.body;
@@ -59,7 +60,7 @@ export const addCourse = async (req, res) => {
 
 export const Courses = async (req, res) => {
     try {
-        const courses = await courseModel.find();
+        const courses = await courseModel.find().sort({ semester: 1  });
         res.status(200).json({ courses })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
@@ -116,7 +117,7 @@ export const addTeacher = async (req, res) => {
 
 export const Teachers = async (req, res) => {
     try {
-        const teachers = await userModel.find({ $or: [{ isTeacher: true }, { position: 'Teacher' }] }).sort({ position: 'Professor' });
+        const teachers = await userModel.find({ $or: [{ isTeacher: true }, { position: 'Teacher' }] });
         res.status(200).json({ teachers })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
@@ -171,6 +172,26 @@ export const Students = async (req, res) => {
     try {
         const students = await userModel.find({ position: 'Student' }).sort({ student_id: -1 });
         res.status(200).json({ students })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
+}
+
+export const semesterRegistration = async (req, res) => {
+    try {
+        const item = req.body;
+        const semester = await semesterModel.insertMany(item)
+        res.status(200).json({ semester })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong' })
+    }
+
+}
+
+export const Semesters = async (req, res) => {
+    try {
+        const semesters = await semesterModel.find().sort({ student_id: -1 });
+        res.status(200).json({ semesters })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
     }

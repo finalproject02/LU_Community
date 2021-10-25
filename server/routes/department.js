@@ -1,6 +1,6 @@
 import express from "express";
-import { addDepartment, addCourse, editCourse, deleteCourse,
-    addTeacher, Courses, Teachers, Departments, addStudent, Students } from "../controllers/department.js";
+import { addDepartment, addCourse, editCourse, deleteCourse, Semesters,
+    addTeacher, Courses, Teachers, Departments, addStudent, Students, semesterRegistration } from "../controllers/department.js";
 import {auth} from "../middleware/auth.js";
 const router = express.Router();
 
@@ -13,6 +13,8 @@ router.delete('/course/:id', auth, deleteCourse);
 router.post('/teacher', auth, addTeacher);
 router.get('/teacher', auth, Teachers);
 router.post('/student', auth, addStudent);
-router.get('/student', auth, Students)
+router.get('/student', auth, Students);
+router.post('/semesterRegistration', semesterRegistration);
+router.get('/semesterRegistration', Semesters);
 
 export default router;

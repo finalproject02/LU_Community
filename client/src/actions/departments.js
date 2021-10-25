@@ -1,5 +1,7 @@
-import { ADD_DEPARTMENT, ADD_COURSE, ADD_STUDENT, ADD_TEACHER,
-    ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING } from "./types";
+import {
+    ADD_DEPARTMENT, ADD_COURSE, ADD_STUDENT, ADD_TEACHER, ALL_SEMESTERS,
+    ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING, SEMESTER_REGISTRATION
+} from "./types";
 import {clearError, getErrors} from "./errors";
 import * as api from '../api'
 import ShowToast from "../services/ShowToast";
@@ -123,5 +125,35 @@ export const Student = () => async (dispatch, getState) => {
         dispatch(getErrors(error.response.data, 'STUDENTS_ERROR'))
     }
 }
+
+export const SemesterRegistration = (studentData) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { semester } } = await api.semesterRegistration(getState, studentData)
+        ShowToast(1, 'Semester Registration success');
+        dispatch({
+            type: SEMESTER_REGISTRATION,
+            payload: semester
+        })
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'SEMESTER_REGISTRATION_ERROR'))
+    }
+}
+
+export const Semester = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { semesters } } = await api.semesters(getState)
+        dispatch({
+            type: ALL_SEMESTERS,
+            payload: semesters
+        })
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'SEMESTERS_ERROR'))
+    }
+}
+
 
 

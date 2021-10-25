@@ -73,6 +73,14 @@ const AdminNavbar = () => {
                                         <FaIcons.FaUser className="me-2" />View Profile
                                     </NavDropdown.Item>
                                 )}
+                                {currentUser?.name === 'Administrator' && (
+                                    <NavDropdown.Item
+                                        className="dropdownItem py-3"
+                                        href="/adminProfile"
+                                    >
+                                        <FaIcons.FaUser className="me-2" />View Profile
+                                    </NavDropdown.Item>
+                                )}
 
                                 <NavDropdown.Item
                                     className="dropdownItem py-3"

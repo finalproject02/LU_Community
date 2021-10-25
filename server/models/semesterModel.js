@@ -4,7 +4,7 @@ const semesterModel = new mongoose.Schema({
     course_title: String,
     courseDocId: String,
     course_code: String,
-    credit: String,
+    credit: Number,
     semester: Number,
     department_id: String,
     student_id: String,
@@ -20,6 +20,6 @@ const semesterModel = new mongoose.Schema({
         type: String,
         default: 'submitted'
     }
-});
+}, {timestamps: true});
 
 export default mongoose.model('semester', semesterModel)
