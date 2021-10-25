@@ -82,7 +82,7 @@ const AddFacultyMembers = () => {
                         </Card>
                     </Col>
                 </Row>
-            </Container >
+            </Container>
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>

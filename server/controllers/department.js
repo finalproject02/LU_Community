@@ -10,13 +10,13 @@ export const addDepartment = async (req, res) => {
     const { department_name, faculty, tuition_fee_per_credit } = req.body;
     try {
         const isExists = await departmentModel.findOne({ department_name });
-        if (!department_name || !faculty || !tuition_fee_per_credit) {
+        if (!department_name || !faculty || !tuition_fee_per_credit || other_fee) {
             res.status(400).json({ message: 'Please enter all fields' })
         }
         else if (isExists) {
             res.status(400).json({ message: 'Please change department name' })
         } else {
-            const department = await departmentModel.create({ department_name, faculty, tuition_fee_per_credit });
+            const department = await departmentModel.create({ department_name, faculty, tuition_fee_per_credit,other_fee});
             res.status(200).json({ department })
         }
     } catch (error) {

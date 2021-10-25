@@ -1,5 +1,4 @@
 import React from 'react';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import StudentHome from '../Student/StudentHome';
 import TeacherHome from '../Teacher/TeacherHome';
 import "./Dashboard.css";

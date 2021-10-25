@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import { FaTimesCircle } from "react-icons/fa";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SemesterRegistration } from "../../../actions/departments";
 
 const SemesterRegi = () => {
@@ -31,7 +31,7 @@ const SemesterRegi = () => {
         allItem.department_id = currentUserDepartment.map(de => de._id).toString();
         return allItem
     });
-    const registeredSemester = semesters?.filter(semester => semester.studentDocId === currentUser?._id || currentUser?.student_id === semester.student_id ||  currentUser?.name === semester?.student_name || semester.status === 'submitted');
+    const registeredSemester = semesters?.filter(semester => semester.studentDocId === currentUser?._id || currentUser?.student_id === semester.student_id || currentUser?.name === semester?.student_name || semester.status === 'submitted');
     const numberWithCommas = (x) => {
         x = x.toString();
         const pattern = /(-?\d+)(\d{3})/;
@@ -52,7 +52,7 @@ const SemesterRegi = () => {
             setSelected(selectedCourse)
         }
         if (add && section) {
-            const selectedAddCourse = courses?.filter(course =>  course.course_title === add || course.semester === parseInt(section));
+            const selectedAddCourse = courses?.filter(course => course.course_title === add || course.semester === parseInt(section));
             setSelected(selectedAddCourse)
         }
 
@@ -99,19 +99,19 @@ const SemesterRegi = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {selected?.map(course => (
-                                        <tr>
-                                            <td>{course.course_title}</td>
-                                            <td>{course.course_code}</td>
-                                            <td>{course.credit}</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>{course.semester}</option>
-                                                </select>
-                                            </td>
-                                            <td className="text-center cursor" ><FaTimesCircle onClick={() => setSelected(selected.filter(se => se._id !== course._id))}/></td>
-                                        </tr>
-                                    ))}
+                                        {selected?.map(course => (
+                                            <tr>
+                                                <td>{course.course_title}</td>
+                                                <td>{course.course_code}</td>
+                                                <td>{course.credit}</td>
+                                                <td className="form-group">
+                                                    <select name id className="form-control">
+                                                        <option value={1}>{course.semester}</option>
+                                                    </select>
+                                                </td>
+                                                <td className="text-center cursor" ><FaTimesCircle onClick={() => setSelected(selected.filter(se => se._id !== course._id))} /></td>
+                                            </tr>
+                                        ))}
 
 
                                         <tr>
@@ -135,18 +135,18 @@ const SemesterRegi = () => {
                                                     </select>
                                                 </Form.Group>
                                                 <div className="bgSecondary rounded-3">
-                                                    <button className="btn" onClick={() => {console.log(add)}}>Add</button>
+                                                    <button className="btn" onClick={() => { console.log(add) }}>Add</button>
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
-                                    {selected.length !== 0 && (
-                                        <tr>
-                                            <td colSpan={2}>Total Credit</td>
-                                            <td>{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</td>
-                                        </tr>
-                                    )}
+                                        {selected.length !== 0 && (
+                                            <tr>
+                                                <td colSpan={2}>Total Credit</td>
+                                                <td>{selected?.map(cou => cou.credit).reduce((total, num) => { return total + num })}</td>
+                                            </tr>
+                                        )}
                                     </tfoot>
                                 </Table>
                             </Card.Body>
@@ -159,23 +159,23 @@ const SemesterRegi = () => {
                                                 <Card class="p-3">
                                                     <Card.Body>
                                                         <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</p>
+                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => { return total + num })}</p>
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
                                             <Col md="4">
                                                 <Card class="p-3">
                                                     <Card.Body>
-                                                        <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</p>
+                                                        <Card.Title className="text-center fs-5">Retake Credits</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => { return total + num })}</p>
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
                                             <Col md="4">
                                                 <Card class="p-3">
                                                     <Card.Body>
-                                                        <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</p>
+                                                        <Card.Title className="text-center fs-5">Total Credits</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => { return total + num })}</p>
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
@@ -183,7 +183,7 @@ const SemesterRegi = () => {
                                                 <Card class="p-3">
                                                     <Card.Body>
                                                         <Card.Title className="text-center fs-5">Tuition Fees</Card.Title>
-                                                        <p className="text-center textSecondary fs-2">৳ {numberWithCommas(selected?.map(cou => cou.credit).reduce((total, num) => {return total + num}) * parseInt(currentUserDepartment.map(c => c.tuition_fee_per_credit)))}</p>
+                                                        <p className="text-center textSecondary fs-2">৳ {numberWithCommas(selected?.map(cou => cou.credit).reduce((total, num) => { return total + num }) * parseInt(currentUserDepartment.map(c => c.tuition_fee_per_credit)))}</p>
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
@@ -210,7 +210,7 @@ const SemesterRegi = () => {
                                             Current registration status: <strong>Approved.</strong></p>
                                     </Card.Footer>
                                     <div className="my-2 text-center bgSecondary rounded-3">
-                                        <span href="#" className="btn text-white" onClick={() => {dispatch(SemesterRegistration(RegisterDetails))}}>Submit</span>
+                                        <span href="#" className="btn text-white" onClick={() => { dispatch(SemesterRegistration(RegisterDetails)) }}>Submit</span>
                                     </div>
                                 </>
                             )}
