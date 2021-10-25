@@ -5,6 +5,7 @@ export const admissionFirstStep = (applicantData) => axios.post('/api/admissionF
 export const admissionSecondStep = (applicantData) => axios.post('/api/admissionSecondStep', applicantData);
 export const admissionFinalStep = (applicantData) => axios.post('/api/admissionFinalStep', applicantData);
 export const createReference = (data) => axios.post('/api/student', data);
+export const payment = (data) => axios.patch('/api/student/payment', data);
 export const fileUpload = (fileData) => axios.post('/api/files/storage', fileData);
 export const createAccount = (userData) => axios.post('/api/auth/createAccount', userData);
 export const loginAccount = (userData) => axios.post('/api/auth/loginAccount', userData);

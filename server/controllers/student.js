@@ -1,4 +1,4 @@
-import { smsWithReferenceNumber } from "../services/smsService.js";
+import { smsWithReferenceNumber, paymentSMS } from "../services/smsService.js";
 import { emailWithReferenceNumber } from "../services/mailService.js";
 import userModel from "../models/userModel.js";
 import { generateReferenceCode } from "../services/functions.js";
@@ -48,7 +48,26 @@ export const createReference = async (req, res) => {
             res.status(200).json({ message: 'Reference created successfully' })
         }
     } catch (error) {
-        console.log(error)
-        //res.status(500).json({ message: 'Something went to wrong' })
+       res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
+
+export const payment = async (req, res) => {
+    const { reference_no, amount } = req.body;
+    try {
+        const isExists = await userModel.findOne({reference_no});
+        if (!reference_no || !amount) {
+            res.status(400).json({ message: 'Please enter all fields' })
+        }
+        else if (!isExists) {
+            res.status(400).json({ message: 'Your Reference number is not correct' })
+        } else {
+            paymentSMS(isExists.name, isExists.mobile)
+            await userModel.findByIdAndUpdate(isExists._id, {type: 'user', position: 'paid admission fee', $push: {payment_history: [{admission_fee: amount}]}})
+            res.status(200).json({ message: 'Payment success' })
+        }
+
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong' })
     }
 }
