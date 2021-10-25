@@ -1,11 +1,20 @@
 import React from 'react';
-import { Card, Col, Container, Row, Table } from "react-bootstrap";
+import { Card, Col, Container, Pagination, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn } from "react-icons/all";
 import "./MainAdmin.css";
 
 const AdminHome = () => {
+    let active = 1;
+    let items = [];
+    for (let number = 1; number <= 5; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number === active}>
+                {number}
+            </Pagination.Item>,
+        );
+    }
     return (
         <div>
             <AdminNavbar />
@@ -144,6 +153,7 @@ const AdminHome = () => {
                                                 </tr>
                                             </tbody>
                                         </Table>
+                                        <Pagination>{items}</Pagination>
                                     </Col>
                                 </Row>
                             </Card.Body>

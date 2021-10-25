@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { courseAdd } from "../../../../actions/departments";
 import { clearError } from "../../../../actions/errors";
 import { useParams } from "react-router-dom";
+import { FaRegEdit, FaRegTimesCircle } from 'react-icons/fa';
 
 const AddCourses = () => {
     const params = useParams();
@@ -44,22 +45,32 @@ const AddCourses = () => {
                                     <span className="btn w-100 cursor text-white" onClick={handleShow}>Add Course</span>
                                 </div>
                                 <Card.Text as="div" className="mt-4">
-                                    {currentDepartmentCourses?.map(course => (
-                                        <Card className="mb-2">
-                                            <Card.Body>
-                                                <p><span className="fw-bold">Course Title:</span> {course.course_title}</p>
-                                                <p><span className="fw-bold">Course Code:</span> {course.course_code}</p>
-                                                <p><span className="fw-bold">Course Credit:</span> {course.credit}</p>
-                                                <p><span className="fw-bold">Course Semester:</span> {course.semester}</p>
-                                                {course.course_prerequisite && (
-                                                    <p><span className="fw-bold">Course Prerequisite: </span>{course.course_prerequisite}</p>
-                                                )}
-                                                {course.curriculum && (
-                                                    <p><span className="fw-bold">Course Curriculum:</span> {course.curriculum}</p>
-                                                )}
-                                            </Card.Body>
-                                        </Card>
-                                    ))}
+                                    <Row>
+                                        {currentDepartmentCourses?.map(course => (
+                                            <Col md="4">
+                                                <Card className="mb-2">
+                                                    <Card.Body className="d-flex justify-content-between">
+                                                        <div>
+                                                            <p><span className="fw-bold">Course Title:</span> {course.course_title}</p>
+                                                            <p><span className="fw-bold">Course Code:</span> {course.course_code}</p>
+                                                            <p><span className="fw-bold">Course Credit:</span> {course.credit}</p>
+                                                            <p><span className="fw-bold">Course Semester:</span> {course.semester}</p>
+                                                            {course.course_prerequisite && (
+                                                                <p><span className="fw-bold">Course Prerequisite: </span>{course.course_prerequisite}</p>
+                                                            )}
+                                                            {course.curriculum && (
+                                                                <p><span className="fw-bold">Course Curriculum:</span> {course.curriculum}</p>
+                                                            )}
+                                                        </div>
+                                                        <div>
+                                                            <FaRegEdit className="me-2 fs-1 rounded-3 text-success cursor p-2" onClick={handleShow} />
+                                                            <FaRegTimesCircle className="me-2 fs-1 rounded-3 text-danger cursor p-2" />
+                                                        </div>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                        ))}
+                                    </Row>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

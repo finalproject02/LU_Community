@@ -46,39 +46,43 @@ const AddFacultyMembers = () => {
             <Container>
                 <Row className="d-flex justify-content-center mt-5">
                     <Col md="10">
-                        <Card>
+                        <Card className="mb-4">
                             <Card.Body>
                                 <div className="bgPrimary text-center rounded-3">
                                     <span className="btn w-100 cursor text-white" onClick={handleShow}>Add Faculty Members</span>
                                 </div>
+                            </Card.Body>
+                        </Card>
+                        <Card>
+                            <Card.Body>
                                 <Card.Text as="div" className="mt-4">
-
-                                    {currentDepartmentTeachers?.map(teacher => (
-                                        <Card className="mb-2">
-                                            <Card.Body>
-                                                <Row>
-                                                    <Col md="6">
+                                    <Row>
+                                        {currentDepartmentTeachers?.map(teacher => (
+                                            <Col md="4">
+                                                <Card className="mb-2">
+                                                    <Card.Img variant="top" src={`/api/files/storage/${teacher.profile_picture}`} alt="" width="140" height="180" className="rounded-3 p-1" />
+                                                    <Card.Body>
                                                         <p><span className="fw-bold">ID:</span> {teacher.teacher_id}</p>
                                                         <p><span className="fw-bold">Name:</span> {teacher.name}</p>
                                                         <p><span className="fw-bold">Designation:</span> {teacher.designation}</p>
                                                         <p><span className="fw-bold">Department:</span> {teacher.department}</p>
                                                         <p><span className="fw-bold">Cell Phone:</span> {teacher.mobile}</p>
                                                         <p><span className="fw-bold">E-mail:</span> {teacher.email}</p>
-                                                    </Col>
-                                                    <Col md="4">
-                                                        <img src={`/api/files/storage/${teacher.profile_picture}`} alt="" width="140" height="140" className="rounded-3 p-1" />
-                                                    </Col>
-
-                                                </Row>
-                                            </Card.Body>
-                                        </Card>
-                                    ))}
+                                                        <div className="text-center">
+                                                            <button className="btnn btn-primary me-2 rounded-3 py-2 px-2" onClick={handleShow}>Edit</button>
+                                                            <button className="btnn btn-danger rounded-3 py-2 px-2">Delete</button>
+                                                        </div>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                        ))}
+                                    </Row>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
-            </Container>
+            </Container >
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
@@ -119,7 +123,7 @@ const AddFacultyMembers = () => {
                     </Form>
                 </Modal.Body>
             </Modal>
-        </div>
+        </div >
     );
 };
 
