@@ -63,7 +63,7 @@ import ControllerProfile from "../src/components//Admin//ExamController/Controll
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 
 import { Departments, Course, Teacher, Semester } from "./actions/departments";
-import StudentDetails from "./components/Admin/MainAdmin/StudentDetails";
+//import StudentDetails from "./components/Admin/MainAdmin/StudentDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -297,9 +297,9 @@ function App() {
             <Route path="/AddFacultyMembers/:id">
               <AddFacultyMembers />
             </Route>
-            <Route path="/studentsDetails">
-              <StudentDetails />
-            </Route>
+            {/*<Route path="/studentsDetails">*/}
+            {/*  <StudentDetails />*/}
+            {/*</Route>*/}
             <Route path="/results">
               <Results />
             </Route>
