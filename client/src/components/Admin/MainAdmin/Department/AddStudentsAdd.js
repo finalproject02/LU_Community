@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form } from "react-bootstrap";
 import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 
-const AddStudents = () => {
+const AddStudentsAdd = () => {
     const [Data, setData] = useState({ program_name: 'css', applicant_email: '', applicant_name: '', applicant_birth_or_nid_number: '', applicant_fatherName: '', applicant_date_of_birth: '', applicant_father_occupation: '', applicant_gender: 'male', applicant_motherName: '', applicant_religion: 'islam', applicant_mother_occupation: '', applicant_nationality: '', father_or_mother_nid: '', applicant_marital_status: '', applicant_mobile: '', applicant_blood_group: '', guardian_name: '', guardian_contact: '', present_address: '', permanent_address: '', ssc_regis_no: '', ssc_institution_name: '', ssc_roll_no: '', ssc_group: '', ssc_year: '', ssc_board: '', ssc_gpa: '', hsc_regis_no: '', hsc_institution_name: '', hsc_roll_no: '', hsc_group: '', hsc_year: '', hsc_board: '', hsc_gpa: '' });
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -708,4 +708,4 @@ const AddStudents = () => {
     );
 };
 
-export default AddStudents;
+export default AddStudentsAdd;

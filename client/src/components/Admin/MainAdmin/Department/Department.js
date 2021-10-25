@@ -64,11 +64,11 @@ const Department = () => {
                                                 </Link>
                                             </div>
                                             <hr />
-                                            <div className="text-center">
+                                            {/* <div className="text-center">
                                                 <Link to={`/addSimpleStudent/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
                                                     Student
                                                 </Link>
-                                            </div>
+                                            </div> */}
                                             <hr />
                                         </Accordion.Body>
                                     </Accordion.Item>
