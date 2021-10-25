@@ -154,7 +154,7 @@ const SemesterRegi = () => {
                                     <Col md="4">
                                         <Card class="p-3">
                                             <Card.Body>
-                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
+                                                <Card.Title className="text-center fs-5">Retake Credits</Card.Title>
                                                 <p className="text-center textSecondary fs-2">15</p>
                                             </Card.Body>
                                         </Card>
@@ -162,7 +162,7 @@ const SemesterRegi = () => {
                                     <Col md="4">
                                         <Card class="p-3">
                                             <Card.Body>
-                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
+                                                <Card.Title className="text-center fs-5">Total Credits</Card.Title>
                                                 <p className="text-center textSecondary fs-2">15</p>
                                             </Card.Body>
                                         </Card>
