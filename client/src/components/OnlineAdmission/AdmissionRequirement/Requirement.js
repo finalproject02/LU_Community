@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import "./Requirement.css";
 import admissionTypes from "./AdmissionRequirementData.js";
-import AdmissionFirstStep from "../AdmissionFristStep/AdmissionFirstStep";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Requirement = () => {
-    const history = useHistory();
+  const history = useHistory();
 
   return (
     <Container>
       <Row className="justify-content-center">
-          {admissionTypes.map(item => (
+        {admissionTypes.map(item => (
           <Col key={item.id} md="8">
             <Card className="w-100 my-5">
               <Card.Body className="shadow-sm p-4">
@@ -39,7 +38,7 @@ const Requirement = () => {
               </Card.Body>
             </Card>
           </Col>
-          ))
+        ))
         }
       </Row>
     </Container>
