@@ -234,6 +234,9 @@ const MainNavbar = () => {
                 </Nav.Link>
               </>
             )}
+            <Nav.Link className="navFontSize" href="/dashboard">
+              Dashboard
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

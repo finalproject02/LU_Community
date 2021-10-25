@@ -5,6 +5,7 @@ import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 import { useDispatch, useSelector } from "react-redux";
 import { departmentAdd } from "../../../../actions/departments";
 import { clearError } from "../../../../actions/errors";
+import { FaRegEdit } from "react-icons/fa";
 const Department = () => {
     const dispatch = useDispatch();
     const { departments } = useSelector(state => state.departments)
@@ -44,7 +45,12 @@ const Department = () => {
                             <Card.Body>
                                 <Accordion>
                                     <Accordion.Item eventKey="0">
-                                        <Accordion.Header className="d-flex justify-content-center">{department.department_name}</Accordion.Header>
+                                        <Accordion.Header className="d-flex">
+                                            <div>
+                                                {department.department_name}
+                                            </div>
+                                            <div className="text-end text-success ms-2 fs-5" onClick={handleShow}><FaRegEdit /> </div>
+                                        </Accordion.Header>
                                         <Accordion.Body>
                                             <div className="text-center">
                                                 <Link to={`/addCourses/${department._id}`} className="textHover text-dark d-flex justify-content-start align-items-center">
@@ -94,6 +100,10 @@ const Department = () => {
                         <Form.Floating className="mb-3">
                             <Form.Control type="number" onChange={handleChange} name="tuition_fee_per_credit" placeholder="Tuition Fee Per Credit" />
                             <label for="floatingInput">Tuition Fee Per Credit</label>
+                        </Form.Floating>
+                        <Form.Floating className="mb-3">
+                            <Form.Control type="number" onChange={handleChange} name="other_fee" placeholder="Other Fee" />
+                            <label for="floatingInput">Other Fee</label>
                         </Form.Floating>
                         <div className="bgSecondary text-center mt-4 rounded-3">
                             <input type="submit" value="Save Changes" className="btn w-100 text-white" />
