@@ -62,7 +62,7 @@ import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
 import ControllerProfile from "../src/components//Admin//ExamController/ControllerProfile.js";
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 
-import { Departments, Course, Teacher } from "./actions/departments";
+import { Departments, Course, Teacher, Semester } from "./actions/departments";
 
 function App() {
   const dispatch = useDispatch();
@@ -76,7 +76,8 @@ function App() {
     dispatch(People());
     dispatch(ALlClub());
     dispatch(ALlGroup());
-    dispatch(Messages())
+    dispatch(Messages());
+    dispatch(Semester())
     dispatch(updateProfile({ lastLogin: Date.now() }))
   }, []);
   const { currentUser } = useSelector(state => state.auth);

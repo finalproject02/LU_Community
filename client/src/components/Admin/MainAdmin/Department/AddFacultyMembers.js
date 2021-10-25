@@ -63,7 +63,7 @@ const AddFacultyMembers = () => {
                                                             <p><span className="fw-bold">Designation:</span> {teacher.designation}</p>
                                                             <p><span className="fw-bold">Department:</span> {teacher.department}</p>
                                                             <p><span className="fw-bold">Cell Phone:</span> {teacher.mobile}</p>
-                                                            <p><span className="fw-bold">E-mail:</span> faruq_cse@lus.ac.bd</p>
+                                                            <p><span className="fw-bold">E-mail:</span> {teacher.email}</p>
                                                         </Col>
                                                         <Col md="4">
                                                             <img src={`/api/files/storage/${teacher.profile_picture}`} alt="" width="140" height="140" className="rounded-3 p-1" />

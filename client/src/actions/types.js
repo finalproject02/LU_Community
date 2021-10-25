@@ -62,5 +62,7 @@ export const ADD_TEACHER = 'ADD_TEACHER';
 export const ALL_TEACHER = 'ALL_TEACHER';
 export const ADD_STUDENT = 'ADD_STUDENT';
 export const ALL_STUDENT = 'ALL_STUDENT';
+export const SEMESTER_REGISTRATION = 'SEMESTER_REGISTRATION';
+export const ALL_SEMESTERS = 'ALL_SEMESTERS';
 
 

@@ -1,9 +1,9 @@
 import {
-    ALL_DEPARTMENT, ALL_COURSE, ALL_TEACHER, ALL_STUDENT, LOADED,
-    ADD_DEPARTMENT, ADD_COURSE, ADD_TEACHER, ADD_STUDENT, LOADING
+    ALL_DEPARTMENT, ALL_COURSE, ALL_TEACHER, ALL_STUDENT, LOADED, SEMESTER_REGISTRATION,
+    ADD_DEPARTMENT, ADD_COURSE, ADD_TEACHER, ADD_STUDENT, LOADING, ALL_SEMESTERS,
 } from "../actions/types";
 
-export default (state = { departments: [], teachers: [], students: [], courses: [], isLoading: false }, action) => {
+export default (state = { departments: [], teachers: [], students: [], courses: [], semesters: [], isLoading: false }, action) => {
     switch (action.type) {
         case LOADING:
             return {
@@ -55,6 +55,17 @@ export default (state = { departments: [], teachers: [], students: [], courses: 
                 ...state,
                 students: [action.payload, ...state.students],
             }
+        case ALL_SEMESTERS:
+            return {
+                ...state,
+                semesters: action.payload
+            }
+        case SEMESTER_REGISTRATION: {
+            return {
+                ...state,
+                semesters: [action.payload, ...state.semesters]
+            }
+        }
         default:
             return state
     }

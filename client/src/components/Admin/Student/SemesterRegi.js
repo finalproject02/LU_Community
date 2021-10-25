@@ -1,9 +1,64 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import { FaTimesCircle } from "react-icons/fa";
+import {useDispatch, useSelector} from "react-redux";
+import { SemesterRegistration } from "../../../actions/departments";
 
 const SemesterRegi = () => {
+    const dispatch = useDispatch()
+    const { courses, departments, semesters } = useSelector(state => state.departments);
+    const { currentUser } = useSelector(state => state.auth);
+    const currentUserDepartment = departments?.filter(department => department.department_name === currentUser?.department)
+    const [section, setSection] = useState();
+    const [selected, setSelected] = useState([]);
+    const [add, setAdd] = useState();
+    const [addCourses, setAddCourses] = useState([]);
+    const changeItems = selected.map(({
+        _id: course_id,
+        ...other
+    }) => ({
+        course_id,
+        ...other
+    }))
+    const RegisterDetails = changeItems.map((el) => {
+        const allItem = Object.assign({}, el);
+        allItem.studentDocId = currentUser?._id;
+        allItem.student_id = currentUser?.student_id;
+        allItem.student_name = currentUser?.name;
+        allItem.semester = section;
+        allItem.department_name = currentUser?.department;
+        allItem.department_id = currentUserDepartment.map(de => de._id).toString();
+        return allItem
+    });
+    const registeredSemester = semesters?.filter(semester => semester.studentDocId === currentUser?._id || currentUser?.student_id === semester.student_id ||  currentUser?.name === semester?.student_name || semester.status === 'submitted');
+    const numberWithCommas = (x) => {
+        x = x.toString();
+        const pattern = /(-?\d+)(\d{3})/;
+        while (pattern.test(x))
+            x = x.replace(pattern, "$1,$2");
+        return x;
+    }
+
+
+    useEffect(() => {
+        if (registeredSemester) {
+            setSelected(registeredSemester)
+        }
+        if (section) {
+            const selectedCourse = courses?.filter(course => course.semester === parseInt(section));
+            const addCourse = courses?.filter(course => course.semester !== parseInt(section));
+            setAddCourses(addCourse)
+            setSelected(selectedCourse)
+        }
+        if (add && section) {
+            const selectedAddCourse = courses?.filter(course =>  course.course_title === add || course.semester === parseInt(section));
+            setSelected(selectedAddCourse)
+        }
+
+    }, [section, add])
+
+
     return (
         <div>
             <AdminNavbar />
@@ -17,7 +72,7 @@ const SemesterRegi = () => {
                                     <p className="card-text fs-5 fw-bolder">Regular Courses</p>
                                     <Form.Group className="w-25">
                                         <label htmlFor="inputSection" className="form-label fw-bold">Section</label>
-                                        <select name id className="form-select px-2">
+                                        <select name id className="form-select px-2" onChange={(e) => setSection(e.target.value)}>
                                             <option value={1}>1</option>
                                             <option value={2}>2</option>
                                             <option value={3}>3</option>
@@ -44,61 +99,21 @@ const SemesterRegi = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {selected?.map(course => (
                                         <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
+                                            <td>{course.course_title}</td>
+                                            <td>{course.course_code}</td>
+                                            <td>{course.credit}</td>
                                             <td className="form-group">
                                                 <select name id className="form-control">
-                                                    <option value={1}>1</option>
+                                                    <option value={1}>{course.semester}</option>
                                                 </select>
                                             </td>
-                                            <td className="text-center cursor"><FaTimesCircle /></td>
+                                            <td className="text-center cursor" ><FaTimesCircle onClick={() => setSelected(selected.filter(se => se._id !== course._id))}/></td>
                                         </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                            <td className="text-center cursor"><FaTimesCircle /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                            <td className="text-center cursor"><FaTimesCircle /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                            <td className="text-center cursor"><FaTimesCircle /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                            <td className="text-center cursor"><FaTimesCircle /></td>
-                                        </tr>
+                                    ))}
+
+
                                         <tr>
                                             <td colSpan="3">
                                                 <Form.Label>
@@ -107,99 +122,99 @@ const SemesterRegi = () => {
                                             </td>
                                             <td colSpan="2" className="d-flex align-items-start text-center">
                                                 <Form.Group className="mb-3 me-2" controlId="formBasicEmail">
-                                                    <Form.Select
+                                                    <select
                                                         className="w-100"
                                                         name="program_name"
-
+                                                        onChange={(e) => setAdd(e.target.value)}
                                                     >
                                                         <option value="cse">Select Course</option>
-                                                        <option value="cse">English Reading &amp; Speaking</option>
-                                                        <option value="cse">Introduction to computer</option>
-                                                        <option value="english">Introduction to computer</option>
-                                                        <option value="eee">Introduction to computer</option>
-                                                        <option value="civil">Introduction to computer</option>
-                                                        <option value="civil">Introduction to computer</option>
-                                                        <option value="civil">Introduction to computer</option>
-                                                        <option value="civil">Introduction to computer</option>
-                                                        <option value="civil">Introduction to computer</option>
-                                                        <option value="civil">Introduction to computer</option>
-                                                        <option value="bangla">Introduction to computer</option>
-                                                    </Form.Select>
+                                                        {addCourses?.map(add => (
+                                                            <option value={add.course_title}>{add.course_title}</option>
+                                                        ))}
+
+                                                    </select>
                                                 </Form.Group>
                                                 <div className="bgSecondary rounded-3">
-                                                    <button className="btn">Add</button>
+                                                    <button className="btn" onClick={() => {console.log(add)}}>Add</button>
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
+                                    {selected.length !== 0 && (
                                         <tr>
                                             <td colSpan={2}>Total Credit</td>
-                                            <td>15</td>
+                                            <td>{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</td>
                                         </tr>
+                                    )}
                                     </tfoot>
                                 </Table>
                             </Card.Body>
-                            <Col md="12">
-                                <h3 className="text-center textSecondary mb-4">Registration Summary</h3>
-                                <Row>
-                                    <Col md="4">
-                                        <Card class="p-3">
-                                            <Card.Body>
-                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                <p className="text-center textSecondary fs-2">15</p>
-                                            </Card.Body>
-                                        </Card>
+                            {selected.length !== 0 && (
+                                <>
+                                    <Col md="12">
+                                        <h3 className="text-center textSecondary mb-4">Registration Summary</h3>
+                                        <Row>
+                                            <Col md="4">
+                                                <Card class="p-3">
+                                                    <Card.Body>
+                                                        <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                            <Col md="4">
+                                                <Card class="p-3">
+                                                    <Card.Body>
+                                                        <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                            <Col md="4">
+                                                <Card class="p-3">
+                                                    <Card.Body>
+                                                        <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">{selected?.map(cou => cou.credit).reduce((total, num) => {return total + num})}</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                            <Col md="4">
+                                                <Card class="p-3">
+                                                    <Card.Body>
+                                                        <Card.Title className="text-center fs-5">Tuition Fees</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">৳ {numberWithCommas(selected?.map(cou => cou.credit).reduce((total, num) => {return total + num}) * parseInt(currentUserDepartment.map(c => c.tuition_fee_per_credit)))}</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                            <Col md="4">
+                                                <Card class="p-3">
+                                                    <Card.Body>
+                                                        <Card.Title className="text-center fs-5">Other Fees</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">৳ 5,000.00</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                            <Col md="4">
+                                                <Card class="p-3">
+                                                    <Card.Body>
+                                                        <Card.Title className="text-center fs-5">Total Fees</Card.Title>
+                                                        <p className="text-center textSecondary fs-2">৳ 9,275.00</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                        </Row>
                                     </Col>
-                                    <Col md="4">
-                                        <Card class="p-3">
-                                            <Card.Body>
-                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                <p className="text-center textSecondary fs-2">15</p>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                    <Col md="4">
-                                        <Card class="p-3">
-                                            <Card.Body>
-                                                <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                <p className="text-center textSecondary fs-2">15</p>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                    <Col md="4">
-                                        <Card class="p-3">
-                                            <Card.Body>
-                                                <Card.Title className="text-center fs-5">Tution Fees</Card.Title>
-                                                <p className="text-center textSecondary fs-2">৳ 4,275.00</p>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                    <Col md="4">
-                                        <Card class="p-3">
-                                            <Card.Body>
-                                                <Card.Title className="text-center fs-5">Other Fees</Card.Title>
-                                                <p className="text-center textSecondary fs-2">৳ 5,000.00</p>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                    <Col md="4">
-                                        <Card class="p-3">
-                                            <Card.Body>
-                                                <Card.Title className="text-center fs-5">Total Fees</Card.Title>
-                                                <p className="text-center textSecondary fs-2">৳ 9,275.00</p>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </Col>
-                            <Card.Footer>
-                                <p className="text-muted mt-4">Waiver of 25% applied to the tution fees of regular courses.<br />
-                                    Current registration status: <strong>Approved.</strong></p>
-                            </Card.Footer>
-                            <div className="my-2 text-center bgSecondary rounded-3">
-                                <span href="#" className="btn text-white">Submit</span>
-                            </div>
+                                    <Card.Footer>
+                                        <p className="text-muted mt-4">Waiver of 25% applied to the tution fees of regular courses.<br />
+                                            Current registration status: <strong>Approved.</strong></p>
+                                    </Card.Footer>
+                                    <div className="my-2 text-center bgSecondary rounded-3">
+                                        <span href="#" className="btn text-white" onClick={() => {dispatch(SemesterRegistration(RegisterDetails))}}>Submit</span>
+                                    </div>
+                                </>
+                            )}
+
                         </Card>
                     </Col>
                 </Row>

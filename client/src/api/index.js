@@ -56,3 +56,5 @@ export const addTeacher = (getState, teacherData) => axios.post('/api/department
 export const teachers = (getState) => axios.get('/api/department/teacher', tokenConfig(getState));
 export const addStudent = (getState, studentData) => axios.post('/api/department/student', studentData, tokenConfig(getState));
 export const students = (getState) => axios.get('/api/department/student', tokenConfig(getState));
+export const semesterRegistration = (getState, studentData) => axios.post('/api/department/semesterRegistration', studentData, tokenConfig(getState));
+export const semesters = (getState) => axios.get('/api/department/semesterRegistration', tokenConfig(getState));

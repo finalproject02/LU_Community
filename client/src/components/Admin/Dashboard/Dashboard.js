@@ -11,13 +11,13 @@ function Dashboard() {
     return (
         <>
             <AdminNavbar />
-            {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() !== 'head'(
+            {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() !== 'head' && (
                 <TeacherHome />
             )}
             {currentUser?.position === 'Student' && (
                 <StudentHome />
             )}
-            {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() === 'head' (
+            {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() === 'head' && (
                 <HeadHome />
             )}
 
