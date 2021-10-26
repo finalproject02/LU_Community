@@ -136,7 +136,6 @@ const AdmissionRequest = () => {
                                         </Form.Group>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </Table>
                         <div className="row">
