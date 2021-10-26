@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, Row } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
-import { FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
+import { FaTimesCircle} from 'react-icons/fa';
 
 const AssignCourseList = () => {
     const [data, setData] = useState({});

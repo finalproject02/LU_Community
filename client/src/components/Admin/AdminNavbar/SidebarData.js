@@ -21,6 +21,12 @@ export const SidebarData = () => {
                 icon: <IoIcons.IoIosPaper />,
                 cName: 'nav-text'
             },
+            {
+                title: 'Add On Going Semester',
+                path: '/addSemester',
+                icon: <IoIcons.IoIosPaper />,
+                cName: 'nav-text'
+            },
         ]
     }
     else if (currentUser?.type === 'admission' && currentUser?.name === 'Admission') {
