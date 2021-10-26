@@ -61,6 +61,16 @@ export const SidebarData = () => {
             }
         ]
     }
+    else if (currentUser?.type === 'account' && currentUser?.name === 'account') {
+        return [
+            {
+                title: 'Home',
+                path: '/dashboard',
+                icon: <AiIcons.AiFillHome />,
+                cName: 'nav-text'
+            }
+        ]
+    }
     else if (currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() === 'head') {
         return [
             {

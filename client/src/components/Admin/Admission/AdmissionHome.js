@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Card, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import {useSelector} from "react-redux";
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import {useDispatch, useSelector} from "react-redux";
 import {ApproveAdmission} from "../../../actions/applications";

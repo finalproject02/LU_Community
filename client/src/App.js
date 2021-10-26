@@ -68,6 +68,8 @@ import AdmissionHome from "./components/Admin/Admission/AdmissionHome";
 import AddSemester from "./components/Admin/MainAdmin/AddSemester";
 import DepartmentStudents from "./components/Admin/DepartmentHead/DepartmentStudents";
 import AdmissionStudents from "./components/Admin/Admission/AdmissionStudents";
+import AccountProfile from "./components/Admin/Account/AccountProfile";
+import AccountHome from "./components/Admin/Account/AccountHome";
 
 function App() {
   const dispatch = useDispatch();
@@ -351,6 +353,12 @@ function App() {
             </Route>
             <Route path="/AddStudents/:id">
               <AdmissionStudents />
+            </Route>
+            <Route path="/accountProfile">
+              <AccountProfile />
+            </Route>
+            <Route path="/accountHome">
+              <AccountHome />
             </Route>
             <Route exact path="/">
               <Home />
