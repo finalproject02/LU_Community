@@ -17,7 +17,7 @@ const ViewCourses = () => {
                                     <Accordion.Header className="d-flex justify-content-center">1st Semester</Accordion.Header>
                                     <Accordion.Body>
                                         <div className="text-center">
-                                            <Link to="/courseStudents" className="textHover text-dark">Course Course Titel: Introduction To Computer <br /> Course Code: CSE-1111</Link>
+                                            <Link to="/assignCourseList" className="textHover text-dark">Course Course Titel: Introduction To Computer <br /> Course Code: CSE-1111</Link>
                                         </div>
                                         <hr />
                                         <div className="text-center">

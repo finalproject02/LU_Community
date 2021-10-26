@@ -59,17 +59,14 @@ import HeadProfile from "./components/Admin/DepartmentHead/HeadProfile";
 import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
 import ControllerProfile from "../src/components/Admin/ExamController/ControllerProfile.js";
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
-// import AddStudents from "./components/Admin/Admission/AddStudents";
-// import AdmissionRequest from "./components/Admin/Admission/AdmissionRequest";
-
 import { Departments, Course, Teacher, Semester } from "./actions/departments";
 import PaymentDemo from "./components/PaymentDemo/PaymentDemo";
 import AdmissionRequest from "./components/Admin/Admission/AdmissionRequest";
-import AddStudents from "./components/Admin/Admission/AddStudents";
 import AdmissionProfile from "./components/Admin/Admission/AdmissionProfile";
 import AdmissionHome from "./components/Admin/Admission/AdmissionHome";
 import AddSemester from "./components/Admin/MainAdmin/AddSemester";
 import DepartmentStudents from "./components/Admin/DepartmentHead/DepartmentStudents";
+import AdmissionStudents from "./components/Admin/Admission/AdmissionStudents";
 
 function App() {
   const dispatch = useDispatch();
@@ -303,9 +300,6 @@ function App() {
             <Route path="/departmentStudents">
               <DepartmentStudents />
             </Route>
-            <Route path="/AddStudents/:id">
-              <AddStudents />
-            </Route>
             <Route path="/AddFacultyMembers/:id">
               <AddFacultyMembers />
             </Route>
@@ -348,8 +342,11 @@ function App() {
             <Route path="/admissionProfile">
               <AdmissionProfile />
             </Route>
-            <Route path="/AdmissionHome">
+            <Route path="/admissionHome">
               <AdmissionHome />
+            </Route>
+            <Route path="/AddStudents/:id">
+              <AdmissionStudents />
             </Route>
             <Route exact path="/">
               <Home />
