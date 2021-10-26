@@ -207,4 +207,16 @@ export const assignTeacher = async (req, res) => {
     }
 }
 
+export const approveSemesterRegistration = async (req, res) => {
+    const { studentId } = req.params;
+    try {
+        await userModel.findByIdAndUpdate(studentId, { status: 'Approve' })
+        await semesterModel.updateMany( {studentDocId: studentId}, { status: 'Approve' } )
+        res.status(200).json({ message: 'Approve success'})
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
+}
+
+
 

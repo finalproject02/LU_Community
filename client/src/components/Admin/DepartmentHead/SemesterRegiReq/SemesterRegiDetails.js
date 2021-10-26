@@ -2,9 +2,11 @@ import React from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 import {useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {ApproveSemesterRegistration} from "../../../../actions/departments";
 
 const SemesterRegiDetails = () => {
+    const dispatch = useDispatch();
     const params = useParams();
     const { id } = params;
     const { semesters } = useSelector(state => state.departments);
@@ -122,7 +124,7 @@ const SemesterRegiDetails = () => {
                             <Card.Footer>
                                 <p className="text-muted mt-4">Waiver of 25% applied to the tution fees of regular courses.</p>
                             </Card.Footer>
-                            <div className="my-2 text-center bgSecondary rounded-3">
+                            <div className="my-2 text-center bgSecondary rounded-3" onClick={() => dispatch(ApproveSemesterRegistration(id))}>
                                 <span href="#" className="btn text-white">Approve</span>
                             </div>
                         </Card>

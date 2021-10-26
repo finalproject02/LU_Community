@@ -27,7 +27,7 @@ const SemesterRegi = () => {
         allItem.student_id = currentUser?.student_id;
         allItem.student_name = currentUser?.name;
         allItem.semester = section;
-        allItem.teacherDocId = el.teacher
+        allItem.teacherDocId = el.teacher;
         allItem.department_name = currentUser?.department;
         allItem.department_id = currentUserDepartment.map(de => de._id).toString();
         return allItem
@@ -46,7 +46,7 @@ const SemesterRegi = () => {
             setSelected(registeredSemester)
         }
         if (section) {
-            const selectedCourse = courses?.filter(course => (course.semester === parseInt(section)) && (course.department_name === currentUser.program_name || course.department_name === currentUser.department));
+            const selectedCourse = courses?.filter(course => (course.semester === parseInt(section)) && (course.department_name === currentUser.program_name || course.department_name === currentUser.department) && course.status !== 'complete');
             const addCourse = courses?.filter(course => course.semester !== parseInt(section));
             setAddCourses(addCourse)
             setSelected(selectedCourse)
@@ -209,7 +209,7 @@ const SemesterRegi = () => {
                                         <p className="text-muted mt-4">Waiver of 25% applied to the tution fees of regular courses.<br />
                                             Current registration status: <strong>{currentUser.status}</strong></p>
                                     </Card.Footer>
-                                    {currentUser.status !== 'submitted' && (
+                                    {currentUser.status === 'complete' && (
                                         <div className="my-2 text-center bgSecondary rounded-3">
                                             <span href="#" className="btn text-white" onClick={() => { dispatch(SemesterRegistration(RegisterDetails)) }}>Submit</span>
                                         </div>
