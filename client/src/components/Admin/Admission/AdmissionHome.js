@@ -1,7 +1,6 @@
 import React from 'react';
 import {Card, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import {useSelector} from "react-redux";
 
 const AdmissionHome = () => {
@@ -9,7 +8,6 @@ const AdmissionHome = () => {
     const admissionFeePaid = people?.filter(person => person.position === 'paid admission fee');
     return (
         <div>
-            <AdminNavbar />
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">
