@@ -1,6 +1,8 @@
-import { smsWithReferenceNumber, paymentSMS } from "../services/smsService.js";
+import {smsWithReferenceNumber, paymentSMS, confirmAdmissionSMS} from "../services/smsService.js";
 import { emailWithReferenceNumber } from "../services/mailService.js";
+import {generateUniquePassword} from "../services/functions.js";
 import userModel from "../models/userModel.js";
+import bcrypt from "bcryptjs";
 import { generateReferenceCode } from "../services/functions.js";
 
 export const createReference = async (req, res) => {
@@ -79,5 +81,21 @@ export const approveAdmission = async (req, res) => {
         res.status(200).json({ message: 'Approve success' })
     } catch (error) {
         res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
+
+export const confirmAdmission = async (req, res) => {
+    const password = generateUniquePassword();
+    const { id } = req.params;
+    const { student_id, batch } = req.body;
+    try {
+        const user = await userModel.findOne({_id: id});
+        confirmAdmissionSMS(user.name, user.mobile, student_id, batch, user.email, password)
+        const hashPassword = await bcrypt.hash(password, 10)
+        await userModel.findByIdAndUpdate(id, { student_id, batch, position: 'Student', password: hashPassword })
+        res.status(200).json({ message: 'Admission confirm' })
+    } catch (error) {
+        console.log(error)
+        //res.status(500).json({ message: 'Something went to wrong' })
     }
 }

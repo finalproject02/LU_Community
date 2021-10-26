@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 import { Col, Container, Form, Row, Table } from "react-bootstrap";
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import {ApproveAdmission, ConfirmAdmission} from "../../../actions/applications";
+import {useDispatch, useSelector} from "react-redux";
 
 const DepartmentStudents = () => {
+    const dispatch = useDispatch()
+    const { people } = useSelector(state => state.people);
+    const [student_id, setStudent_id] = useState();
+    const [batch, setBatch] = useState();
+    const [data, setData] = useState({})
+    const newAdmission = people?.filter(person => person.position === 'paid admission fee' && person.approval === 1)
     const [DataSecond, setDataSecond] = useState({ search_id: '', search_name: '', search_semester: '' });
     const handleSubmitSecond = (e) => {
         e.preventDefault();
+    }
+    const confirmAdmission = (id) => {
+        data.student_id = student_id;
+        data.batch = batch
+        dispatch(ConfirmAdmission(id, data))
+
     }
     const handleChangeSecond = (e) => setDataSecond({ ...DataSecond, [e.target.name]: e.target.value });
     return (
@@ -13,7 +27,7 @@ const DepartmentStudents = () => {
             <AdminNavbar />
             <Container>
                 <div className="mb-5">
-                    <h2 className="textPrimary p-2">New Students</h2>
+                    <h2 className="textPrimary p-2">Confirm admission</h2>
                     <Row className="d-flex justify-content-center">
                         <Col md="12">
                             <Table striped bordered hover>
@@ -22,29 +36,30 @@ const DepartmentStudents = () => {
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
+                                        <th scope="col">Ref No</th>
+                                        <th scope="col">Payment</th>
                                         <th scope="col">ID</th>
-                                        <th scope="col">Section</th>
                                         <th scope="col">Batch</th>
+                                        <th scope="col">Confirm Admission</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
+                                {newAdmission.map(admission => (
                                     <tr>
-                                        <td>Md Jahed Miah</td>
-                                        <td>mdjahedahmed12@gmail.com</td>
-                                        <td>0179713005</td>
-                                        <td>12345678</td>
-                                        <td>B</td>
-                                        <td>46</td>
+                                        <td>{admission.name}</td>
+                                        <td>{admission.email}</td>
+                                        <td>{admission.mobile}</td>
+                                        <td>{admission.reference_no}</td>
+                                        <td>{admission.payment_history.map(history => history.admission_fee)}</td>
+                                        <td><input className="form-control w-100" name={'student_id'} type="text" name placeholder="Id" onChange={(e) => setStudent_id(e.target.value)}/></td>
+                                        <td><input className="form-control w-75" name={'batch'} type="text" name placeholder="Batch" onChange={(e) => setBatch(e.target.value)}/></td>
+                                        <td>
+                                            <button className="btn btn-primary" onClick={()  => confirmAdmission(admission._id)}>Confirm</button>
+
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>Md Jahed Miah</td>
-                                        <td>mdjahedahmed12@gmail.com</td>
-                                        <td>0179713005</td>
-                                        <td>12345678</td>
-                                        <td>B</td>
-                                        <td>46</td>
-                                    </tr>
+                                ))}
                                 </tbody>
                             </Table>
                         </Col>
