@@ -21,6 +21,12 @@ export const SidebarData = () => {
                 icon: <IoIcons.IoIosPaper />,
                 cName: 'nav-text'
             },
+            {
+                title: 'Add On Going Semester',
+                path: '/addSemester',
+                icon: <IoIcons.IoIosPaper />,
+                cName: 'nav-text'
+            },
         ]
     }
     else if (currentUser?.type === 'admission' && currentUser?.name === 'Admission') {
@@ -46,6 +52,16 @@ export const SidebarData = () => {
         ]
     }
     else if (currentUser?.type === 'exam controller' && currentUser?.name === 'exam controller') {
+        return [
+            {
+                title: 'Home',
+                path: '/dashboard',
+                icon: <AiIcons.AiFillHome />,
+                cName: 'nav-text'
+            }
+        ]
+    }
+    else if (currentUser?.type === 'account' && currentUser?.name === 'account') {
         return [
             {
                 title: 'Home',

@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {AssignTeacher} from "../../../actions/departments";
 
+
 const AssignCourseList = () => {
     const dispatch = useDispatch();
     const params = useParams();

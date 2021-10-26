@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Pagination, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import AdminNavbar from "../AdminNavbar/AdminNavbar";
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedinIn } from "react-icons/all";
 import "./MainAdmin.css";
 
@@ -17,7 +16,6 @@ const AdminHome = () => {
     }
     return (
         <div>
-            <AdminNavbar />
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">

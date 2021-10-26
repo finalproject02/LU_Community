@@ -58,6 +58,7 @@ import AdminHome from "./components/Admin/MainAdmin/AdminHome";
 import HeadProfile from "./components/Admin/DepartmentHead/HeadProfile";
 import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
 import ControllerProfile from "../src/components/Admin/ExamController/ControllerProfile.js";
+import ControllerHome from "../src/components/Admin/ExamController/ControllerHome.js";
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 import { Departments, Course, Teacher, Semester } from "./actions/departments";
 import PaymentDemo from "./components/PaymentDemo/PaymentDemo";
@@ -67,6 +68,8 @@ import AdmissionHome from "./components/Admin/Admission/AdmissionHome";
 import AddSemester from "./components/Admin/MainAdmin/AddSemester";
 import DepartmentStudents from "./components/Admin/DepartmentHead/DepartmentStudents";
 import AdmissionStudents from "./components/Admin/Admission/AdmissionStudents";
+import AccountProfile from "./components/Admin/Account/AccountProfile";
+import AccountHome from "./components/Admin/Account/AccountHome";
 
 function App() {
   const dispatch = useDispatch();
@@ -276,6 +279,9 @@ function App() {
             <Route path="/controllerProfile">
               <ControllerProfile />
             </Route>
+            <Route path="/controllerHome">
+             <ControllerHome/>
+            </Route>
             <Route path="/publishResults">
               <PublishResult />
             </Route>
@@ -347,6 +353,12 @@ function App() {
             </Route>
             <Route path="/AddStudents/:id">
               <AdmissionStudents />
+            </Route>
+            <Route path="/accountProfile">
+              <AccountProfile />
+            </Route>
+            <Route path="/accountHome">
+              <AccountHome />
             </Route>
             <Route exact path="/">
               <Home />

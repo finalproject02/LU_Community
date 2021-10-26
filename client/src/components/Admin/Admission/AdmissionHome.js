@@ -17,7 +17,6 @@ const AdmissionHome = () => {
     }, [getAdmissionReq]);
     return (
         <div>
-            <AdminNavbar />
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">

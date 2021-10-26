@@ -1,12 +1,10 @@
 import React from 'react';
 import { Accordion, Card, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
 
 const PublishResult = () => {
     return (
         <>
-            <AdminNavbar />
             <Row className="d-flex justify-content-center mt-5">
                 <Col md="8">
                     <h2 className="text-center mb-2">Department of CSE</h2>
