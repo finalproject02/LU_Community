@@ -1,9 +1,16 @@
 import React from 'react';
 import { Card, Col, Container, Row, Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import {useSelector} from "react-redux";
 
 const HeadHome = () => {
+    const history = useHistory();
+    const { currentUser } = useSelector(state => state.auth);
+    const { people } = useSelector(state => state.people);
+
+    const semesterRegStudent = people?.filter(person => (person.status === 'semester_register_submitted') && (person.department === currentUser?.department))
+
     return (
         <div>
             <AdminNavbar />
@@ -59,41 +66,16 @@ const HeadHome = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1732020009</td>
-                                                    <td>Md Jahed Miah</td>
+                                            {semesterRegStudent?.map(req => (
+                                                <tr style={{cursor: 'pointer'}} onClick={() => {history.push(`/semesterRegiDetails/${req._id}`)}}>
+                                                    <td>{req.student_id}</td>
+                                                    <td>{req.name}</td>
                                                     <td>B</td>
-                                                    <td>mdjahedahmed12@gmail.com</td>
-                                                    <td>0179713005</td>
+                                                    <td>{req.email}</td>
+                                                    <td>{req.mobile}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>1732020009</td>
-                                                    <td>Md Jahed Miah</td>
-                                                    <td>B</td>
-                                                    <td>mdjahedahmed12@gmail.com</td>
-                                                    <td>0179713005</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1732020009</td>
-                                                    <td>Md Jahed Miah</td>
-                                                    <td>B</td>
-                                                    <td>mdjahedahmed12@gmail.com</td>
-                                                    <td>0179713005</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1732020009</td>
-                                                    <td>Md Jahed Miah</td>
-                                                    <td>B</td>
-                                                    <td>mdjahedahmed12@gmail.com</td>
-                                                    <td>0179713005</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1732020009</td>
-                                                    <td>Md Jahed Miah</td>
-                                                    <td>B</td>
-                                                    <td>mdjahedahmed12@gmail.com</td>
-                                                    <td>0179713005</td>
-                                                </tr>
+                                            ))}
+
                                             </tbody>
                                         </Table>
                                     </Col>

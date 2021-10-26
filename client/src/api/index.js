@@ -6,6 +6,7 @@ export const admissionSecondStep = (applicantData) => axios.post('/api/admission
 export const admissionFinalStep = (applicantData) => axios.post('/api/admissionFinalStep', applicantData);
 export const createReference = (data) => axios.post('/api/student', data);
 export const payment = (data) => axios.patch('/api/student/payment', data);
+export const approveAdmission = (getState, id) => axios.patch(`/api/student/approve/${id}`, {date: ''}, tokenConfig(getState));
 export const fileUpload = (fileData) => axios.post('/api/files/storage', fileData);
 export const createAccount = (userData) => axios.post('/api/auth/createAccount', userData);
 export const loginAccount = (userData) => axios.post('/api/auth/loginAccount', userData);

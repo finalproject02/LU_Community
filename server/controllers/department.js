@@ -7,10 +7,10 @@ import bcrypt from "bcryptjs";
 import semesterModel from "../models/semesterModel.js";
 
 export const addDepartment = async (req, res) => {
-    const { department_name, faculty, tuition_fee_per_credit } = req.body;
+    const { department_name, faculty, tuition_fee_per_credit, other_fee } = req.body;
     try {
         const isExists = await departmentModel.findOne({ department_name });
-        if (!department_name || !faculty || !tuition_fee_per_credit || other_fee) {
+        if (!department_name || !faculty || !tuition_fee_per_credit || !other_fee) {
             res.status(400).json({ message: 'Please enter all fields' })
         }
         else if (isExists) {
@@ -20,8 +20,7 @@ export const addDepartment = async (req, res) => {
             res.status(200).json({ department })
         }
     } catch (error) {
-        //res.status(500).json({  message: 'Something went wrong..'  });
-        console.log(error)
+        res.status(500).json({  message: 'Something went wrong..'  });
     }
 }
 export const Departments = async (req, res) => {
@@ -180,7 +179,8 @@ export const Students = async (req, res) => {
 export const semesterRegistration = async (req, res) => {
     try {
         const item = req.body;
-        const semester = await semesterModel.insertMany(item)
+        const semester = await semesterModel.insertMany(item);
+        await userModel.findByIdAndUpdate(req.user.id, {status: 'semester_register_submitted'})
         res.status(200).json({ semester })
     } catch (error) {
         res.status(500).json({ message: 'Something went to wrong' })
@@ -196,3 +196,4 @@ export const Semesters = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' })
     }
 }
+

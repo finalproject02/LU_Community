@@ -289,7 +289,7 @@ function App() {
             <Route path="/department">
               <Department />
             </Route>
-            <Route path="/semesterRegiDetails">
+            <Route path="/semesterRegiDetails/:id">
               <SemesterRegiDetails />
             </Route>
             <Route path="/addCourses/:id">

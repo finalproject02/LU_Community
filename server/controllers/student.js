@@ -44,7 +44,7 @@ export const createReference = async (req, res) => {
         } else {
             smsWithReferenceNumber(name, mobile, reference_no);
             await emailWithReferenceNumber(email, name, reference_no);
-            await userModel.create({ name, email, mobile, program_name, ssc_gpa, hsc_gpa, reference_no, position: 'just reference', type: 'create reference', via, approval: 0 });
+            await userModel.create({ name, email, mobile, program_name, ssc_gpa, hsc_gpa, reference_no: reference_no, position: 'just reference', type: 'create reference', via, approval: 0 });
             res.status(200).json({ message: 'Reference created successfully' })
         }
     } catch (error) {
@@ -67,6 +67,16 @@ export const payment = async (req, res) => {
             res.status(200).json({ message: 'Payment success' })
         }
 
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
+
+export const approveAdmission = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await userModel.findByIdAndUpdate(id, { approval: 1 });
+        res.status(200).json({ message: 'Approve success' })
     } catch (error) {
         res.status(500).json({ message: 'Something went to wrong' })
     }

@@ -14,7 +14,7 @@ router.post('/teacher', auth, addTeacher);
 router.get('/teacher', auth, Teachers);
 router.post('/student', auth, addStudent);
 router.get('/student', auth, Students);
-router.post('/semesterRegistration', semesterRegistration);
-router.get('/semesterRegistration', Semesters);
+router.post('/semesterRegistration', auth, semesterRegistration);
+router.get('/semesterRegistration', auth, Semesters);
 
 export default router;

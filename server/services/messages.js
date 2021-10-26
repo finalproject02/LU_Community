@@ -21,3 +21,9 @@ export const addStudentMessage = (name, department, email, password) => {
     `
     return message
 }
+
+export const approveAdmissionMessage = (name, department, email, password) => {
+    const message = `Hello ${name}.\n\nWe are confirm your admission ${department} department at Leading University. Your email: ${email} and password: ${password} for login university web application. Thank you.\n\nLeading University, Sylhet
+    `
+    return message
+}

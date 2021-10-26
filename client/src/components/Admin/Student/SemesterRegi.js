@@ -209,7 +209,7 @@ const SemesterRegi = () => {
                                             Current registration status: <strong>Approved.</strong></p>
                                     </Card.Footer>
                                     <div className="my-2 text-center bgSecondary rounded-3">
-                                        <span href="#" className="btn text-white" onClick={() => { dispatch(SemesterRegistration(RegisterDetails)) }}>Submit</span>
+                                        <span href="#" className="btn text-white" onClick={() => { dispatch(SemesterRegistration(RegisterDetails)) }}>{currentUser.status === 'semester_register_submitted' ? 'Submitted' : 'Submit'}</span>
                                     </div>
                                 </>
                             )}
