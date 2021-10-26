@@ -205,7 +205,7 @@ const MainNavbar = () => {
               </NavDropdown.Item>
               <NavDropdown.Item
                 className="dropdownItem py-3"
-                href="/socialplatform"
+                href="/socialPlatform"
               >
                 Social Platform
               </NavDropdown.Item>

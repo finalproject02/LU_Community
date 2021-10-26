@@ -6,7 +6,7 @@ import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
 import "./AdminNavbar.css";
 import { FaRegBell } from 'react-icons/fa';
-import { Nav, NavDropdown } from "react-bootstrap";
+import {Nav, NavDropdown, NavLink} from "react-bootstrap";
 import Avatar from "../../../images/avatar.jpeg";
 import { Logout } from "../../../actions/auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,10 +33,11 @@ const AdminNavbar = () => {
                         <Link to='#' className='menu-bars'>
                             <FaIcons.FaBars onClick={showSidebar} />
                         </Link>
-                        <Nav>
+                        <Nav className="d-flex justify-content-end align-items-center">
+                            <Link to="/socialPlatform" className="text-decoration-none text-white">Social Platform</Link>
                             <NavDropdown
-                                className="nav-dropdown navFontSize mt-2"
-                                title={<FaRegBell className="fs-5" />}
+                                className="nav-dropdown text-white"
+                                title={<span className="text-white">Notification</span> }
                                 id="collasible-nav-dropdown"
                             >
                                 <NavDropdown.Item

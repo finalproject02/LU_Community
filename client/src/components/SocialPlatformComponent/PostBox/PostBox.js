@@ -107,8 +107,6 @@ const PostBox = ({ details }) => {
             }
         }
 
-
-
         handleClose();
 
     }
