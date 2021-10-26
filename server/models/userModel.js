@@ -28,7 +28,10 @@ const userModel = new mongoose.Schema({
     gender: String,
     nationality: String,
     blood_group: String,
-    password: String,
+    password: {
+        type: String,
+        default: null
+    },
     student_id: {
         type: Number,
         minlength: 10,
@@ -74,6 +77,7 @@ const userModel = new mongoose.Schema({
     notifications: Array,
     peers: Array,
     lastLogin: Date,
+    status: String,
 },
     { timestamps: true }
 

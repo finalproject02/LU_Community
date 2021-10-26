@@ -1,8 +1,16 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const CourseDetails = () => {
+    const params = useParams();
+    const { id } = params;
+    const { courses } = useSelector(state => state.departments);
+    const courseDetails = courses?.filter(course => course._id === id);
+    console.log(typeof id)
+    console.log(courseDetails)
     return (
         <div>
             <AdminNavbar />
@@ -23,16 +31,18 @@ const CourseDetails = () => {
                                         <p className="text-lead">Course Students:</p>
                                         <p className="text-lead">Course Curriculum:</p>
                                     </Col>
-                                    <Col md="8">
-                                        <p className="fw-bold">English Reading and Speaking</p>
-                                        <p className="fw-bold">ENG-1111</p>
-                                        <p className="fw-bold">3</p>
-                                        <p className="fw-bold">1st</p>
-                                        <p className="fw-bold">Null</p>
-                                        <p className="fw-bold">Md Adil chow.</p>
-                                        <p className="fw-bold">22</p>
-                                        <p className="fw-bold">B.Sc. (Honours) in CSE (2014 Curriculum) </p>
-                                    </Col>
+                                    {courseDetails?.map(course => (
+                                        <Col md="8">
+                                            <p className="fw-bold">{course.course_title}</p>
+                                            <p className="fw-bold">{course.course_code}</p>
+                                            <p className="fw-bold">{course.credit}</p>
+                                            <p className="fw-bold">{course.semester}</p>
+                                            <p className="fw-bold">{course.course_prerequisite}</p>
+                                            <p className="fw-bold">Md Adil chow.</p>
+                                            <p className="fw-bold">22</p>
+                                            <p className="fw-bold">{course.curriculum}</p>
+                                        </Col>
+                                    ))}
                                 </Row>
                             </Card.Body>
                         </Card>

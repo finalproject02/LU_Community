@@ -2,7 +2,7 @@ import {
     LOADED, LOADING,
     ADMISSION_FIRST_STEP,
     ADMISSION_SECOND_STEP,
-    ADMISSION_FINAL_STEP, CREATE_REFERENCE, PAYMENT
+    ADMISSION_FINAL_STEP, CREATE_REFERENCE, PAYMENT, APPROVE_ADMISSION, CONFIRM_ADMISSION
 } from "./types";
 import * as API from "../api";
 import {getErrors} from "./errors";
@@ -79,5 +79,33 @@ export const PPayment = (data) => async (dispatch) => {
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch(getErrors(error.response.data, 'PAYMENT_ERROR'));
+    }
+}
+
+export const ApproveAdmission = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING })
+        await API.approveAdmission(getState, id)
+        dispatch({
+            type: APPROVE_ADMISSION,
+            payload: id
+        })
+        dispatch({ type: LOADED })
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'APPROVE_ADMISSION_ERROR'));
+    }
+}
+
+export const ConfirmAdmission = (id, data) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING })
+        await API.confirmAdmission(getState, id, data)
+        dispatch({
+            type: CONFIRM_ADMISSION,
+            payload: id
+        })
+        dispatch({ type: LOADED })
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'CONFIRM_ADMISSION_ERROR'));
     }
 }

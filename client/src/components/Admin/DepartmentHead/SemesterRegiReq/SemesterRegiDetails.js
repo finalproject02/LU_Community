@@ -1,8 +1,16 @@
 import React from 'react';
 import { Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AdminNavbar from '../../AdminNavbar/AdminNavbar';
+import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const SemesterRegiDetails = () => {
+    const params = useParams();
+    const { id } = params;
+    const { semesters } = useSelector(state => state.departments);
+    const { people } = useSelector(state => state.people);
+    const studentInfo = people?.filter(person => person._id === id)
+    const registerCourses = semesters?.filter(semester => semester.studentDocId === id)
     return (
         <div>
             <AdminNavbar />
@@ -15,8 +23,8 @@ const SemesterRegiDetails = () => {
                                 <div className="mb-2">
                                     <Row>
                                         <Col md="6">
-                                            <h6><span className="text-lead">Name:</span> Md Jahed Miah</h6>
-                                            <h6><span className="text-lead">ID:</span> 173200009</h6>
+                                            <h6><span className="text-lead">Name:</span>{studentInfo?.map(student => student.name)}</h6>
+                                            <h6><span className="text-lead">ID:</span>{studentInfo?.map(student => student.student_id)}</h6>
                                         </Col>
                                         <Col md="6">
                                             <h6><span className="text-lead">Semester:</span> 1st</h6>
@@ -36,61 +44,24 @@ const SemesterRegiDetails = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {registerCourses?.map(course => (
                                         <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
+                                            <td>{course.course_title}</td>
+                                            <td>{course.course_code}</td>
+                                            <td>{course.credit}</td>
                                             <td className="form-group">
                                                 <select name id className="form-control">
-                                                    <option value={1}>1</option>
+                                                    <option value={1}>{course.semester}</option>
                                                 </select>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>English Reading &amp; Speaking</td>
-                                            <td>ENG-1111</td>
-                                            <td>3.0</td>
-                                            <td className="form-group">
-                                                <select name id className="form-control">
-                                                    <option value={1}>1</option>
-                                                </select>
-                                            </td>
-                                        </tr>
+                                    ))}
+
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colSpan={2}>Total Credit</td>
-                                            <td>15</td>
+                                            <td>{registerCourses.map(c => c.credit).reduce((total, num) => { return total + num })}</td>
                                         </tr>
                                     </tfoot>
                                 </Table>
@@ -102,7 +73,7 @@ const SemesterRegiDetails = () => {
                                         <Card class="p-3">
                                             <Card.Body>
                                                 <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                <p className="text-center textSecondary fs-2">15</p>
+                                                <p className="text-center textSecondary fs-2">{registerCourses.map(c => c.credit).reduce((total, num) => { return total + num })}</p>
                                             </Card.Body>
                                         </Card>
                                     </Col>
@@ -110,7 +81,7 @@ const SemesterRegiDetails = () => {
                                         <Card class="p-3">
                                             <Card.Body>
                                                 <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                <p className="text-center textSecondary fs-2">15</p>
+                                                <p className="text-center textSecondary fs-2">{registerCourses.map(c => c.credit).reduce((total, num) => { return total + num })}</p>
                                             </Card.Body>
                                         </Card>
                                     </Col>
@@ -118,14 +89,14 @@ const SemesterRegiDetails = () => {
                                         <Card class="p-3">
                                             <Card.Body>
                                                 <Card.Title className="text-center fs-5">Regular Credits</Card.Title>
-                                                <p className="text-center textSecondary fs-2">15</p>
+                                                <p className="text-center textSecondary fs-2">{registerCourses.map(c => c.credit).reduce((total, num) => { return total + num })}</p>
                                             </Card.Body>
                                         </Card>
                                     </Col>
                                     <Col md="4">
                                         <Card class="p-3">
                                             <Card.Body>
-                                                <Card.Title className="text-center fs-5">Tution Fees</Card.Title>
+                                                <Card.Title className="text-center fs-5">Tuition Fees</Card.Title>
                                                 <p className="text-center textSecondary fs-2">৳ 4,275.00</p>
                                             </Card.Body>
                                         </Card>

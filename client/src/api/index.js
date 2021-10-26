@@ -6,6 +6,8 @@ export const admissionSecondStep = (applicantData) => axios.post('/api/admission
 export const admissionFinalStep = (applicantData) => axios.post('/api/admissionFinalStep', applicantData);
 export const createReference = (data) => axios.post('/api/student', data);
 export const payment = (data) => axios.patch('/api/student/payment', data);
+export const approveAdmission = (getState, id) => axios.patch(`/api/student/approve/${id}`, {date: ''}, tokenConfig(getState));
+export const confirmAdmission = (getState, id, data) => axios.patch(`/api/student/confirmAdmission/${id}`, data, tokenConfig(getState));
 export const fileUpload = (fileData) => axios.post('/api/files/storage', fileData);
 export const createAccount = (userData) => axios.post('/api/auth/createAccount', userData);
 export const loginAccount = (userData) => axios.post('/api/auth/loginAccount', userData);
@@ -60,3 +62,4 @@ export const addStudent = (getState, studentData) => axios.post('/api/department
 export const students = (getState) => axios.get('/api/department/student', tokenConfig(getState));
 export const semesterRegistration = (getState, studentData) => axios.post('/api/department/semesterRegistration', studentData, tokenConfig(getState));
 export const semesters = (getState) => axios.get('/api/department/semesterRegistration', tokenConfig(getState));
+export const assignTeacher = (getState, teacherId, courseId) => axios.patch(`/api/department/assignTeacher/${teacherId}/${courseId}`,{data: ''}, tokenConfig(getState));

@@ -1,11 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux";
+import AdminNavbar from '../AdminNavbar/AdminNavbar';
+import {useDispatch, useSelector} from "react-redux";
+import {ApproveAdmission} from "../../../actions/applications";
 
 const AdmissionHome = () => {
+    const dispatch = useDispatch()
     const { people } = useSelector(state => state.people);
-    const admissionFeePaid = people?.filter(person => person.position === 'paid admission fee');
+    const [admissionFeePaid, setAdmissionFeePain] = useState([]);
+    const getAdmissionReq = people?.filter(person => person.position === 'paid admission fee' && person.approval === 0);
+    useEffect(() => {
+        if (getAdmissionReq) {
+            setAdmissionFeePain(getAdmissionReq)
+        }
+    }, [getAdmissionReq]);
     return (
         <div>
             <Container>
@@ -71,22 +81,21 @@ const AdmissionHome = () => {
                                                     <td>{admissionReq.reference_no}</td>
                                                     <td>{admissionReq.payment_history.map(history => history.admission_fee).toString()}</td>
                                                     <td>
-                                                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                                            <Form.Check type="checkbox" />
-                                                        </Form.Group>
+                                                       <button className="btn btn-primary" onClick={() => dispatch(ApproveAdmission(admissionReq._id))}>Approve</button>
+
                                                     </td>
                                                 </tr>
                                             ))}
+
                                             </tbody>
                                         </Table>
+
                                     </Col>
-                                    <div className="text-end">
-                                        <button className="btn btn-primary">Accept all</button>
-                                    </div>
                                 </Row>
                             </Card.Body>
                         </Card>
                     </Col>
+
                 </Row>
             </Container>
         </div>

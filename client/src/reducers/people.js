@@ -1,7 +1,7 @@
 import {
     SUGGESTIONS,
-    LOADING, LOADED,
-    ALL_USERS
+    LOADING, LOADED, CONFIRM_ADMISSION,
+    ALL_USERS, APPROVE_ADMISSION
 } from "../actions/types";
 
 export default (state = { suggestions: [], isLoading: false, people: [] }, action) => {
@@ -28,6 +28,12 @@ export default (state = { suggestions: [], isLoading: false, people: [] }, actio
                 people: action.payload,
                 isLoading: false
             };
+        case APPROVE_ADMISSION:
+        case CONFIRM_ADMISSION:
+            return {
+                ...state,
+                people: state.people.filter(person => person._id !== action.payload)
+            }
         default:
             return state
     }

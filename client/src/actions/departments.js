@@ -1,6 +1,6 @@
 import {
     ADD_DEPARTMENT, ADD_COURSE, ADD_STUDENT, ADD_TEACHER, ALL_SEMESTERS,
-    ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING, SEMESTER_REGISTRATION
+    ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING, SEMESTER_REGISTRATION, ASSIGN_TEACHER
 } from "./types";
 import {clearError, getErrors} from "./errors";
 import * as api from '../api'
@@ -152,6 +152,21 @@ export const Semester = () => async (dispatch, getState) => {
         dispatch({ type: LOADED });
     } catch (error) {
         dispatch(getErrors(error.response.data, 'SEMESTERS_ERROR'))
+    }
+}
+
+export const AssignTeacher = (teacherId, courseId) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { message } } = await api.assignTeacher(getState, teacherId, courseId);
+        ShowToast(1, message);
+        dispatch({
+            type: ASSIGN_TEACHER,
+            payload: message
+        });
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'ASSIGN_TEACHER_ERROR'))
     }
 }
 
