@@ -36,7 +36,7 @@ const PaymentDemo = () => {
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="text" onChange={handleChange} name="amount"
                                             placeholder="Payment Amount" />
-                                        <label for="floatingInput">Amount"</label>
+                                        <label for="floatingInput">Amount</label>
                                     </Form.Floating>
                                     <div className="bgPrimary text-center mt-4 rounded-3">
                                         <input type="submit" value="Send" className="btn w-100 text-white" />
