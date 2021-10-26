@@ -32,6 +32,12 @@ export const SidebarData = () => {
                 cName: 'nav-text'
             },
             {
+                title: 'Students',
+                path: '/addStudents',
+                icon: <IoIcons.IoIosPaper />,
+                cName: 'nav-text'
+            },
+            {
                 title: 'Admission Request',
                 path: '/admissionRequest',
                 icon: <IoIcons.IoIosPaper />,

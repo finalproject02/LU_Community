@@ -33,17 +33,9 @@ const DepartmentStudents = () => {
                                         <td>Md Jahed Miah</td>
                                         <td>mdjahedahmed12@gmail.com</td>
                                         <td>0179713005</td>
-                                        <td>12345678</td>
-                                        <td>B</td>
-                                        <td>46</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Md Jahed Miah</td>
-                                        <td>mdjahedahmed12@gmail.com</td>
-                                        <td>0179713005</td>
-                                        <td>12345678</td>
-                                        <td>B</td>
-                                        <td>46</td>
+                                        <td><input className="form-control w-100" type="text" name placeholder="Id" /></td>
+                                        <td><input className="form-control w-100" type="text" name placeholder="Section" /></td>
+                                        <td><input className="form-control w-100" type="text" name placeholder="Batch" /></td>
                                     </tr>
                                 </tbody>
                             </Table>
