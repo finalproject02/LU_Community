@@ -8,8 +8,13 @@ const HeadHome = () => {
     const history = useHistory();
     const { currentUser } = useSelector(state => state.auth);
     const { people } = useSelector(state => state.people);
+    const { courses } = useSelector(state => state.departments);
+    const takingCourse = courses?.filter(course => course.teacher === currentUser?._id);
+    const totalCourse = courses?.filter(course => course.department_name === currentUser?.department);
+    const totalStudent = people?.filter(student => (student.program_name === currentUser?.department || student.department === currentUser?.department) && student.position === 'Student');
+    const totalTeacher = people?.filter(teacher => (teacher.program_name === currentUser?.department || teacher.department === currentUser?.department) && teacher.position === 'Teacher');
 
-    const semesterRegStudent = people?.filter(person => (person.status === 'semester_register_submitted') && (person.department === currentUser?.department))
+    const semesterRegStudent = people?.filter(person => (person.status === 'submitted') && (person.department === currentUser?.department))
 
     return (
         <div>
@@ -17,14 +22,14 @@ const HeadHome = () => {
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">
-                        <h2 className="text-center textSecondary my-2">Welcome Mr. Jahed!</h2>
+                        <h2 className="text-center textSecondary my-2">Welcome {currentUser?.name}!</h2>
                         <Row>
                             <Col md="4" className="mb-2">
                                 <Link to="courseDetails" className="textHover text-dark">
                                     <Card className="mb-2 p-4 rounded-3 bg-info text-white">
                                         <Card.Body className="text-center">
                                             <h4>Total Course</h4>
-                                            <small>40</small>
+                                            <small>{totalCourse?.length}</small>
                                         </Card.Body>
                                     </Card>
                                 </Link>
@@ -34,7 +39,7 @@ const HeadHome = () => {
                                     <Card className="mb-2 p-4 rounded-3 bg-success text-white">
                                         <Card.Body className="text-center">
                                             <h4>Total Student</h4>
-                                            <small>222</small>
+                                            <small>{totalStudent.length}</small>
                                         </Card.Body>
                                     </Card>
                                 </Link>
@@ -44,7 +49,7 @@ const HeadHome = () => {
                                     <Card className="mb-2 p-4 rounded-3 bg-info text-white">
                                         <Card.Body className="text-center">
                                             <h4>Total Teacher</h4>
-                                            <small>22</small>
+                                            <small>{totalTeacher.length}</small>
                                         </Card.Body>
                                     </Card>
                                 </Link>
@@ -86,69 +91,19 @@ const HeadHome = () => {
                             <Card.Title className="textPrimary px-4 pt-4">Current taking Courses</Card.Title>
                             <Card.Body>
                                 <Row>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card className="rounded-3">
-                                                <Card.Body className="text-center p-4">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                    <p>1st semester</p>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card>
-                                                <Card.Body className="text-center p-4 bg-light">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                    <p>1st semester</p>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card className="rounded-3">
-                                                <Card.Body className="text-center p-4 ">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                    <p>1st semester</p>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card >
-                                                <Card.Body className="text-center p-4 bg-light">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="courseDetails" className="textHover text-dark">
-                                            <Card className="rounded-3">
-                                                <Card.Body className="text-center p-4">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="courseDetails" className="textHover text-dark">
-                                            <Card>
-                                                <Card.Body className="text-center p-4 bg-light">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
+                                    {takingCourse.map(course => (
+                                        <Col md="4" className="mb-2">
+                                            <Link to="/courseStudents" className="textHover text-dark">
+                                                <Card className="rounded-3">
+                                                    <Card.Body className="text-center p-4">
+                                                        <h4>{course.course_title}</h4>
+                                                        <small>{course.course_code}</small>
+                                                        <p>semester {course.semester}</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Link>
+                                        </Col>
+                                    ))}
                                 </Row>
                             </Card.Body>
                         </Card>

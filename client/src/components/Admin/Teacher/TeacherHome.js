@@ -5,7 +5,9 @@ import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import { useSelector } from "react-redux";
 
 const TeacherHome = () => {
-    const { currentUser } = useSelector(state => state.auth)
+    const { currentUser } = useSelector(state => state.auth);
+    const { courses } = useSelector(state => state.departments);
+    const takingCourse = courses?.filter(course => course.teacher === currentUser?._id);
     return (
         <div>
             <AdminNavbar />
@@ -52,69 +54,19 @@ const TeacherHome = () => {
                             </div>
                             <Card.Body>
                                 <Row>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card className="bg-warning  rounded-3">
-                                                <Card.Body className="text-center p-4">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                    <p>1st semester</p>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card>
-                                                <Card.Body className="text-center p-4 bg-light">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                    <p>1st semester</p>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card className="bg-warning  rounded-3">
-                                                <Card.Body className="text-center p-4 ">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                    <p>1st semester</p>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="/courseStudents" className="textHover text-dark">
-                                            <Card >
-                                                <Card.Body className="text-center p-4 bg-light">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="courseDetails" className="textHover text-dark">
-                                            <Card className="bg-danger rounded-3">
-                                                <Card.Body className="text-center p-4">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
-                                    <Col md="4" className="mb-2">
-                                        <Link to="courseDetails" className="textHover text-dark">
-                                            <Card>
-                                                <Card.Body className="text-center p-4 bg-light">
-                                                    <h4>English Reading and Speaking</h4>
-                                                    <small>Eng-1111</small>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
-                                    </Col>
+                                    {takingCourse?.map(course => (
+                                        <Col md="4" className="mb-2">
+                                            <Link to="/courseStudents" className="textHover text-dark">
+                                                <Card className="bg-white  rounded-3">
+                                                    <Card.Body className="text-center p-4">
+                                                        <h4>{course.course_title}</h4>
+                                                        <small>{course.course_code}</small>
+                                                        <p>semester {course.semester}</p>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Link>
+                                        </Col>
+                                    ))}
                                 </Row>
                             </Card.Body>
                         </Card>

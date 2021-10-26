@@ -12,6 +12,6 @@ const courseModel = new mongoose.Schema({
     department_id: String,
     department_name: String,
     curriculum: String,
-    teachers: Array
+    teacher: String
 })
 export default mongoose.model('course', courseModel)

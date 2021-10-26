@@ -180,7 +180,7 @@ export const semesterRegistration = async (req, res) => {
     try {
         const item = req.body;
         const semester = await semesterModel.insertMany(item);
-        await userModel.findByIdAndUpdate(req.user.id, {status: 'semester_register_submitted'})
+        await userModel.findByIdAndUpdate(req.user.id, {status: 'submitted'})
         res.status(200).json({ semester })
     } catch (error) {
         res.status(500).json({ message: 'Something went to wrong' })
@@ -196,4 +196,15 @@ export const Semesters = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' })
     }
 }
+
+export const assignTeacher = async (req, res) => {
+    const { teacherId, courseId } = req.params;
+    try {
+        await courseModel.findByIdAndUpdate(courseId, { teacher: teacherId } )
+        res.status(200).json({ message: 'Assign Success'})
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
+}
+
 

@@ -258,7 +258,7 @@ function App() {
             <Route path="/assignCourses">
               <AssignCourses />
             </Route>
-            <Route path="/assignCourseList">
+            <Route path="/assignCourseList/:id">
               <AssignCourseList />
             </Route>
             <Route path="/headProfile">
@@ -318,7 +318,7 @@ function App() {
             <Route path="/studentProfile">
               <StudentProfile />
             </Route>
-            <Route path="/courseDetails">
+            <Route path="/courseDetails/:id">
               <CourseDetails />
             </Route>
             <Route path="/teacherProfile">

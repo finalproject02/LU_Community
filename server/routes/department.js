@@ -1,5 +1,5 @@
 import express from "express";
-import { addDepartment, addCourse, editCourse, deleteCourse, Semesters,
+import { addDepartment, addCourse, editCourse, deleteCourse, Semesters, assignTeacher,
     addTeacher, Courses, Teachers, Departments, addStudent, Students, semesterRegistration } from "../controllers/department.js";
 import {auth} from "../middleware/auth.js";
 const router = express.Router();
@@ -16,5 +16,6 @@ router.post('/student', auth, addStudent);
 router.get('/student', auth, Students);
 router.post('/semesterRegistration', auth, semesterRegistration);
 router.get('/semesterRegistration', auth, Semesters);
+router.patch('/assignTeacher/:teacherId/:courseId', auth, assignTeacher)
 
 export default router;
