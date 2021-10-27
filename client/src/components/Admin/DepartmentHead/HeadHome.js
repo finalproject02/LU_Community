@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row, Table } from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
-import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import {useSelector} from "react-redux";
 
 const HeadHome = () => {
@@ -18,7 +17,6 @@ const HeadHome = () => {
 
     return (
         <div>
-            <AdminNavbar />
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">

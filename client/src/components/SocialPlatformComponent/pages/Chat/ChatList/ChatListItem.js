@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Avatar from "./Avatar.js";
 
-export default class ChatListItem extends Component {
-    constructor(props) {
-        super(props);
-    }
-    selectChat = (e) => {
+ const ChatListItem = (props)=> {
+    // constructor(props) {
+    //     super(props);
+    // }
+    const selectChat = (e) => {
         for (
             let index = 0;
             index < e.currentTarget.parentNode.children.length;
@@ -16,26 +16,25 @@ export default class ChatListItem extends Component {
         e.currentTarget.classList.add("active");
     };
 
-    render() {
         return (
             <div
-                style={{ animationDelay: `0.${this.props.animationDelay}s` }}
-                onClick={this.selectChat}
-                className={`chatlist__item ${this.props.active ? this.props.active : ""
+                style={{ animationDelay: `0.${props.animationDelay}s` }}
+                onClick={selectChat}
+                className={`chatlist__item ${props.active ? props.active : ""
                     } `}
             >
                 <Avatar
                     image={
-                        this.props.image ? this.props.image : "http://placehold.it/80x80"
+                        props.image ? props.image : "http://placehold.it/80x80"
                     }
-                    isOnline={this.props.isOnline}
+                    isOnline={props.isOnline}
                 />
 
                 <div className="userMeta">
-                    <p>{this.props.name}</p>
+                    <p>{props.name}</p>
                     <span className="activeTime">32 mins ago</span>
                 </div>
             </div>
         );
-    }
 }
+export default ChatListItem;

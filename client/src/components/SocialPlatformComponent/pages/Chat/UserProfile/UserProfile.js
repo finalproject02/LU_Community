@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./UserProfile.css";
+import {Col, Row} from "react-bootstrap";
 
 export default class UserProfile extends Component {
   toggleInfo = (e) => {
@@ -7,22 +8,28 @@ export default class UserProfile extends Component {
   };
   render() {
     return (
-      <div className="main__userprofile">
-        <div className="profile__card user__profile__image">
-          <div className="profile__image">
-            <img src="https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg" />
+      <div className="card p-5">
+        <div className="card.body">
+          <div className="card.img text-center mt-2 rounded-3 img-fluid">
+            <img src="https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg" width="70" height="70"/>
           </div>
-          <h4>Fernando Faucho</h4>
-          <p>CEO & Founder at Highly Inc</p>
+          <h6 className="text-center mt-2">Fernando Faucho</h6>
+          <small className="text-center">Student at Leading university</small>
         </div>
         <div className="profile__card">
           <div className="card__header" onClick={this.toggleInfo}>
             <h4>Information</h4>
-            <i className="fa fa-angle-down"></i>
-          </div>
-          <div className="card__content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            ultrices urna a imperdiet egestas. Donec in magna quis ligula
+            <Row>
+              <Col md="4">
+                <img src="https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg" width="70" height="70"/>
+              </Col>
+              <Col md="4">
+                <img src="https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg" width="70" height="70"/>
+              </Col>
+              <Col md="4">
+                <img src="https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg" width="70" height="70"/>
+              </Col>
+            </Row>
           </div>
         </div>
       </div>
