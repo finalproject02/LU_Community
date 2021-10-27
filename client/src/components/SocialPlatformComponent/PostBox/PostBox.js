@@ -111,7 +111,7 @@ const PostBox = ({ details }) => {
 
     }
     return (
-        <div>
+        <div className="">
             <Card className="w-100 shadow-sm mb-4 w-100 rounded-3">
                 <div className="d-flex justify-content-center pt-4">
                     <img src={details?.profile_picture ? `/api/files/storage/${details?.profile_picture}` : Avatar} alt="name" width="45" height="45" className="rounded-circle me-3" />
@@ -142,71 +142,72 @@ const PostBox = ({ details }) => {
                     </Card.Text>
                 </Card.Body>
             </Card>
-
-            <Modal
-                centered
-                show={show}
-                onHide={handleClose}
-                keyboard={false}
-                className="postModalPosition"
-            >
-                <Form onSubmit={handleSubmit}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Create a post</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                            <img src={details?.profile_picture ? `/api/files/storage/${details?.profile_picture}` : Avatar} alt="" width="50" height="50" className="rounded-circle me-2" />
-                            <div className="d-flex align-items-center">
-                                <div>
-                                    <h6>{details?.name}</h6>
-                                    <Form.Select className="form-select rounded-pill" onChange={handleChange} name="post_status">
-                                        <option value="">Friends</option>
-                                        <option value="">Public</option>
-                                        <option value="">Only me</option>
-                                    </Form.Select>
+            <div className="postModalPosition">
+                <Modal
+                    centered
+                    show={show}
+                    onHide={handleClose}
+                    keyboard={false}
+                    className=""
+                >
+                    <Form onSubmit={handleSubmit}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Create a post</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
+                                <img src={details?.profile_picture ? `/api/files/storage/${details?.profile_picture}` : Avatar} alt="" width="50" height="50" className="rounded-circle me-2" />
+                                <div className="d-flex align-items-center">
+                                    <div>
+                                        <h6>{details?.name}</h6>
+                                        <Form.Select className="form-select rounded-pill" onChange={handleChange} name="post_status">
+                                            <option value="">Friends</option>
+                                            <option value="">Public</option>
+                                            <option value="">Only me</option>
+                                        </Form.Select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="height">
-                            <Form.Control as="textarea" onChange={handleChange} name="description" rows={8} placeholder="what you would like to write?" />
-                        </div>
-                        <div className="w-75 bg-light">
-                            {
-                                file && file.type.startsWith("image") && (<img className="w-100 img-fluid img-thumbnail mt-1" src={URL.createObjectURL(file)} alt="name" />)
-                            }
-                            {
-                                file && file.type.startsWith("video") && (<video className="p-1 shadow-sm" src={URL.createObjectURL(file)} width="320" height="240" autoPlay />)
-                            }
-                            {
-                                otherFile && (<p className="fw-bold fs-5 p-2">{otherFile.name}</p>)
-                            }
-                        </div>
-                        <Card className="mt-2">
-                            <div className="d-flex justify-content-between p-3">
-                                <span>Add to your post</span>
-                                <div>
-                                    <label htmlFor="file">
-                                        <FaPhotoVideo className="me-3 fs-3 text-primary" title="photo/video" />
-                                        <Form.Control onChange={(e) => setFile(e.target.files[0])} accept="image/*,video/*" id="file" type="file" className="d-none" ></Form.Control>
-                                    </label>
-
-                                    <label htmlFor="otherFile">
-                                        <FaFile className="me-3 fs-3 text-info" title="file" />
-                                        <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
-                                    </label>
-
-                                    <FaUserCircle className="me-3 fs-3 text-warning" title="tag friends" />
-                                    <FaMapMarkedAlt className="me-3 fs-3 text-danger" title="check in" />
-                                </div>
+                            <div className="height">
+                                <Form.Control as="textarea" onChange={handleChange} name="description" rows={8} placeholder="what you would like to write?" />
                             </div>
-                        </Card>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <button type="submit" className="btn btn-primary px-4 py-2 fs-6 rounded-3">Post</button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
+                            <div className="w-75 bg-light">
+                                {
+                                    file && file.type.startsWith("image") && (<img className="w-100 img-fluid img-thumbnail mt-1" src={URL.createObjectURL(file)} alt="name" />)
+                                }
+                                {
+                                    file && file.type.startsWith("video") && (<video className="p-1 shadow-sm" src={URL.createObjectURL(file)} width="320" height="240" autoPlay />)
+                                }
+                                {
+                                    otherFile && (<p className="fw-bold fs-5 p-2">{otherFile.name}</p>)
+                                }
+                            </div>
+                            <Card className="mt-2">
+                                <div className="d-flex justify-content-between p-3">
+                                    <span>Add to your post</span>
+                                    <div>
+                                        <label htmlFor="file">
+                                            <FaPhotoVideo className="me-3 fs-3 text-primary" title="photo/video" />
+                                            <Form.Control onChange={(e) => setFile(e.target.files[0])} accept="image/*,video/*" id="file" type="file" className="d-none" ></Form.Control>
+                                        </label>
+
+                                        <label htmlFor="otherFile">
+                                            <FaFile className="me-3 fs-3 text-info" title="file" />
+                                            <Form.Control onChange={(e) => setOtherFile(e.target.files[0])} accept="file/*" id="otherFile" type="file" className="d-none" ></Form.Control>
+                                        </label>
+
+                                        <FaUserCircle className="me-3 fs-3 text-warning" title="tag friends" />
+                                        <FaMapMarkedAlt className="me-3 fs-3 text-danger" title="check in" />
+                                    </div>
+                                </div>
+                            </Card>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button type="submit" className="btn btn-primary px-4 py-2 fs-6 rounded-3">Post</button>
+                        </Modal.Footer>
+                    </Form>
+                </Modal>
+            </div>
         </div>
     );
 };

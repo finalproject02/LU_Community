@@ -1,8 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { messagesList } from "./mockData";
-import jahed from "../../../../images/Jahed.jpg"
-import { Form } from "react-bootstrap";
-import { FaVideo, FaEllipsisV, FaPaperclip, FaPhone } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaVideo, FaEllipsisV, FaPhone } from "react-icons/fa";
 import "./Message.css";
 import FriendModal from "./FriendModal";
 import { useSelector } from "react-redux";

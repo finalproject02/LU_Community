@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Form, NavDropdown, Row } from 'react-bootstrap';
-import {FaUserMinus, FaUserPlus, FaLock, FaGlobe} from 'react-icons/fa';
-import {Link, useParams} from 'react-router-dom';
+import { FaUserMinus, FaUserPlus, FaLock, FaGlobe } from 'react-icons/fa';
+import { Link, useParams } from 'react-router-dom';
 import AllPhotos from '../AllPhotos/AllPhotos';
 import AllVideos from '../AllVideos/AllVideos';
 import GroupHome from '../GroupHome/GroupHome';
 import AboutGroup from '../AboutGroup/AboutGroup';
 import GroupMember from '../GroupMember/GroupMember';
-import {useDispatch, useSelector} from "react-redux";
-import {v4 as uuidv4} from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import path from "path";
-import {uploadFile} from "../../../actions/files";
-import {CancelRequest, GroupUpdate, MemberRequest} from "../../../actions/groups";
+import { uploadFile } from "../../../actions/files";
+import { CancelRequest, GroupUpdate, MemberRequest } from "../../../actions/groups";
 import Avatar from "../../../images/avatar.jpeg";
 
 const GroupProfile = () => {
@@ -82,10 +82,10 @@ const GroupProfile = () => {
     useEffect(() => {
         paramsGroup.map(group => {
             if (group.privacy === 'private') {
-               if ((group.creator_id !== currentUser?._id) && (!currentUser?.memberships.includes(id))) {
-                   setAbout(true);
-                   setPost(false)
-               }
+                if ((group.creator_id !== currentUser?._id) && (!currentUser?.memberships.includes(id))) {
+                    setAbout(true);
+                    setPost(false)
+                }
             }
         })
     }, [])
@@ -99,7 +99,7 @@ const GroupProfile = () => {
                                 <Card.Body className="pt-0">
                                     <label htmlFor="coverPhoto" className="w-100">
                                         {
-                                            coverPhoto && coverPhoto.type.startsWith("image") ? (<div className={'picture-container'}><Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" /><button className="btn btn-warning confirmBtnPosition" onClick={uploadCover}>Confirm</button></div>) : (<Card.Img className="w-100 img-fluid" src={group.cover_picture ? `/api/files/storage/${group.cover_picture}`: Avatar} alt={group.name} style={{ width: "100%", height: "30vh" }} />)
+                                            coverPhoto && coverPhoto.type.startsWith("image") ? (<div className={'picture-container'}><Card.Img style={{ width: "100%", height: "30vh" }} src={URL.createObjectURL(coverPhoto)} alt="name" /><button className="btn btn-warning confirmBtnPosition" onClick={uploadCover}>Confirm</button></div>) : (<Card.Img className="w-100 img-fluid" src={group.cover_picture ? `/api/files/storage/${group.cover_picture}` : Avatar} alt={group.name} style={{ width: "100%", height: "30vh" }} />)
                                         }
                                         {isCreator.length !== 0 && (
                                             <Form.Control onChange={(e) => setCoverPhoto(e.target.files[0])} accept="image/*" id="coverPhoto" type="file" className="d-none" >
@@ -110,7 +110,7 @@ const GroupProfile = () => {
                                         <div className="d-flex align-items-center mb-4">
                                             <Col md="8">
                                                 <h5 className="ms-3 mt-5 fw-bold fs-3">{group.name}</h5>
-                                                <p className="ms-3 mb-0 text-lead fs-5"><small>{group.privacy === 'private' ?  <FaLock/> : <FaGlobe/>} {group.privacy} group. <span>{group.members.length} {group.members.length > 1 ? 'members' : 'member'} </span></small></p>
+                                                <p className="ms-3 mb-0 text-lead fs-5"><small>{group.privacy === 'private' ? <FaLock /> : <FaGlobe />} {group.privacy} group. <span>{group.members.length} {group.members.length > 1 ? 'members' : 'member'} </span></small></p>
                                             </Col>
                                             {isCreator.length === 0 && (
                                                 <Col md="4">
@@ -142,27 +142,27 @@ const GroupProfile = () => {
                                 </Card.Body>
                             </Container>
                         ))}
-                        <Row className="sticky-top">
-                            <nav className="py-2 bg-light border-bottom">
+                        <Row>
+                            <div className="py-2 bg-light border-bottom">
                                 <div className="container d-flex flex-wrap">
                                     <ul className="nav me-auto">
-                                        {paramsGroup.map(group => group.privacy === 'public'  && (
+                                        {paramsGroup.map(group => group.privacy === 'public' && (
                                             <li className="nav-item cardHover rounded-3">
                                                 <p className="nav-link link-dark px-2 active"
-                                                   aria-current="page" onClick={handleChangeHome}>Home</p>
+                                                    aria-current="page" onClick={handleChangeHome}>Home</p>
                                             </li>
                                         ))}
-                                        {paramsGroup.map(group => group.privacy).toString() === 'private'  && isCreator.length !== 0 && (
+                                        {paramsGroup.map(group => group.privacy).toString() === 'private' && isCreator.length !== 0 && (
                                             <li className="nav-item cardHover rounded-3">
                                                 <p className="nav-link link-dark px-2 active"
-                                                   aria-current="page" onClick={handleChangeHome}>Home</p>
+                                                    aria-current="page" onClick={handleChangeHome}>Home</p>
                                             </li>
                                         )}
 
                                         {paramsGroup.map(group => group.privacy).toString() === 'private' && currentUser?.memberships.includes(id) && (
                                             <li className="nav-item cardHover rounded-3">
                                                 <p className="nav-link link-dark px-2 active"
-                                                   aria-current="page" onClick={handleChangeHome}>Home</p>
+                                                    aria-current="page" onClick={handleChangeHome}>Home</p>
                                             </li>
                                         )}
                                         <li className="nav-item cardHover rounded-3">
@@ -174,7 +174,7 @@ const GroupProfile = () => {
 
                                         {paramsGroup.map(group => group.privacy === 'public' && (
                                             <NavDropdown className="navFontSize text-dark cardHover rounded-3"
-                                                         title={<span className="text-dark">More</span>}>
+                                                title={<span className="text-dark">More</span>}>
                                                 <NavDropdown.Item className="py-2 cardHover rounded-3" onClick={handleChangePhoto}>
                                                     Photos
                                                 </NavDropdown.Item>
@@ -183,9 +183,9 @@ const GroupProfile = () => {
                                                 </NavDropdown.Item>
                                             </NavDropdown>
                                         ))}
-                                        {paramsGroup.map(group => group.privacy).toString() === 'private'  && isCreator.length !== 0 && (
+                                        {paramsGroup.map(group => group.privacy).toString() === 'private' && isCreator.length !== 0 && (
                                             <NavDropdown className="navFontSize text-dark cardHover rounded-3"
-                                                         title={<span className="text-dark">More</span>}>
+                                                title={<span className="text-dark">More</span>}>
                                                 <NavDropdown.Item className="py-2 cardHover rounded-3" onClick={handleChangePhoto}>
                                                     Photos
                                                 </NavDropdown.Item>
@@ -197,7 +197,7 @@ const GroupProfile = () => {
 
                                         {paramsGroup.map(group => group.privacy).toString() === 'private' && currentUser?.memberships.includes(id) && (
                                             <NavDropdown className="navFontSize text-dark cardHover rounded-3"
-                                                         title={<span className="text-dark">More</span>}>
+                                                title={<span className="text-dark">More</span>}>
                                                 <NavDropdown.Item className="py-2 cardHover rounded-3" onClick={handleChangePhoto}>
                                                     Photos
                                                 </NavDropdown.Item>
@@ -211,14 +211,14 @@ const GroupProfile = () => {
 
                                     </ul>
                                 </div>
-                            </nav>
+                            </div>
                         </Row>
                     </Card>
                 </Row>
             </div>
 
             {
-                post && <GroupHome setPost={setPost} setPhoto={setPhoto}/>
+                post && <GroupHome setPost={setPost} setPhoto={setPhoto} />
             }
             {
                 about && <AboutGroup />

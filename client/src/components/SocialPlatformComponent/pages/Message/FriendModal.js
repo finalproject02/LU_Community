@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { FaBan, FaBellSlash, FaFile, FaHistory, FaImage, FaLink, FaTrashAlt } from 'react-icons/fa';
 import jahed from "../../../../images/Jahed.jpg";
 

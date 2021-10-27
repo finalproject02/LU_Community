@@ -2,7 +2,7 @@
   box-sizing: content-box;
   display: flex;
   position: static;
-  z-index: auto;
+  z-index: 999999;
   float: none;
   line-height: 16px;
 }
