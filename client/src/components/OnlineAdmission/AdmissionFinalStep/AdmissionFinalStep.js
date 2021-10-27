@@ -12,11 +12,8 @@ import { useHistory } from "react-router-dom";
 const AdmissionFinalStep = () => {
     const { message, field } = useSelector(state => state.errors)
     const history = useHistory();
-    const [finalFormData, setFinalFormData] = useState({ ssc_regis_no: '', ssc_institution_name: '', ssc_roll_no: '', ssc_group: '', ssc_year: '', ssc_board: '', ssc_gpa: '', hsc_regis_no: '', hsc_institution_name: '', hsc_roll_no: '', hsc_group: '', hsc_year: '', hsc_board: '', hsc_gpa: '' });
+    const [finalFormData, setFinalFormData] = useState({ ssc_regis_no: '', ssc_institute_name: '', ssc_roll_no: '', ssc_group: '', ssc_year: '', ssc_board: '', ssc_gpa: '', hsc_regis_no: '', hsc_institute_name: '', hsc_roll_no: '', hsc_group: '', hsc_year: '', hsc_board: '', hsc_gpa: '' });
     const [applicantPhoto, setApplicantPhoto] = useState('');
-    const [guardianPhoto, setGuardianPhoto] = useState('');
-    const [sscTranscript, setSscTranscript] = useState('');
-    const [hscTranscript, setHscTranscript] = useState('');
     const dispatch = useDispatch();
 
     const handleChange = (e) => setFinalFormData({ ...finalFormData, [e.target.name]: e.target.value });
@@ -28,7 +25,7 @@ const AdmissionFinalStep = () => {
                  alert('You should provide image blow of 1MB')
              } else {
                  const applicantPhotoName = uuidv4() + path.extname(applicantPhoto.name);
-                 finalFormData.applicant_photo = applicantPhotoName
+                 finalFormData.profile_picture = applicantPhotoName
                  const fileDate = new FormData();
                  fileDate.append('name', applicantPhotoName);
                  fileDate.append('file', applicantPhoto)
@@ -43,33 +40,8 @@ const AdmissionFinalStep = () => {
         ) {
             document.documentElement.scrollTop = 1
         }
-        if (guardianPhoto || sscTranscript || hscTranscript) {
-            const guardianPhotoName = uuidv4() + path.extname(guardianPhoto.name)
-            const sscTranscriptName = uuidv4() + path.extname(sscTranscript.name)
-            const hscTranscriptName = uuidv4() + path.extname(hscTranscript.name)
+       await dispatch(ApplicationFinalStep(finalFormData, history));
 
-            finalFormData.guardian_photo = guardianPhotoName;
-            finalFormData.ssc_transcript = sscTranscriptName;
-            finalFormData.hsc_transcript = hscTranscriptName;
-
-            const guardianPhotoData = new FormData();
-            const sscTranscriptData = new FormData();
-            const hscTranscriptData = new FormData();
-
-            guardianPhotoData.append('name', guardianPhotoName);
-            guardianPhotoData.append('file', guardianPhoto);
-
-            sscTranscriptData.append('name', sscTranscriptName);
-            sscTranscriptData.append('file', sscTranscript);
-
-            hscTranscriptData.append('name', hscTranscriptName);
-            hscTranscriptData.append('file', hscTranscript);
-
-            dispatch(uploadFile(guardianPhotoData));
-            dispatch(uploadFile(sscTranscriptData));
-            dispatch(uploadFile(hscTranscriptData));
-        }
-        await dispatch(ApplicationFinalStep(finalFormData, history));
 
     }
     useEffect(() => {
@@ -126,9 +98,9 @@ const AdmissionFinalStep = () => {
                                                         type="text"
                                                         className="w-100"
                                                         placeholder="ssc institution name"
-                                                        name={"ssc_institution_name"}
+                                                        name={"ssc_institute_name"}
                                                         onChange={handleChange}
-                                                        value={finalFormData?.ssc_institution_name}
+                                                        value={finalFormData?.ssc_institute_name}
                                                         
                                                     />
                                                 </Form.Group>
@@ -315,9 +287,9 @@ const AdmissionFinalStep = () => {
                                                     <Form.Control
                                                         type="text"
                                                         className="w-100"
-                                                        name="hsc_institution_name"
+                                                        name="hsc_institute_name"
                                                         onChange={handleChange}
-                                                        value={finalFormData?.hsc_institution_name}
+                                                        value={finalFormData?.hsc_institute_name}
                                                         
                                                     />
                                                 </Form.Group>
@@ -483,55 +455,18 @@ const AdmissionFinalStep = () => {
                                                     (Max 1 MB)
                                                     <span className="text-danger fw-bolder">*</span>
                                                 </Form.Label>
-                                                {field === 'applicant_photo' && (
+                                                {field === 'photo' && (
                                                     <h6 style={{color: 'red'}}>{message}</h6>
                                                 )}
                                                 <Form.Control
                                                     type="file"
                                                     className="w-100"
-                                                    name="applicant_photo"
+                                                    name="profile_picture"
                                                     onChange={(e) => setApplicantPhoto(e.target.files[0])}
                                                     accept={'image/*'}
                                                 />
                                             </Form.Group>
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Upload Guardian's Photo
-                                                    (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                <Form.Control
-                                                    type="file"
-                                                    className="w-100"
-                                                    name="guardian_photo"
-                                                    accept={'image/*'}
-                                                    onChange={(e) => setGuardianPhoto(e.target.files[0])}
-                                                />
-                                            </Form.Group>
-                                        </Col>
-                                        <Col md="6">
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Upload SSC Transcript
-                                                    (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                <Form.Control
-                                                    type="file"
-                                                    className="w-100"
-                                                    name="ssc_transcript"
-                                                    accept={'application/pdf'}
-                                                    onChange={(e) => setSscTranscript(e.target.files[0])}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Upload HSC Transcript
-                                                    (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                <Form.Control
-                                                    type="file"
-                                                    className="w-100"
-                                                    name="hsc_transcript"
-                                                    accept={'application/pdf'}
-                                                    onChange={(e) => setHscTranscript(e.target.files[0])}
-                                                />
-                                            </Form.Group>
+
                                         </Col>
                                     </Row>
                                 </fieldset>

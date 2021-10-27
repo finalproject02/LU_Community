@@ -1,13 +1,16 @@
 import axios from "axios";
 import {tokenConfig} from "../actions/auth";
 
-export const admissionFirstStep = (applicantData) => axios.post('/api/admissionFirstStep', applicantData);
-export const admissionSecondStep = (applicantData) => axios.post('/api/admissionSecondStep', applicantData);
-export const admissionFinalStep = (applicantData) => axios.post('/api/admissionFinalStep', applicantData);
+export const admissionFirstStep = (applicantData, getState) => axios.patch('/api/admissionFirstStep', applicantData, tokenConfig(getState));
+export const admissionSecondStep = (applicantData, getState) => axios.patch('/api/admissionSecondStep', applicantData, tokenConfig(getState));
+export const admissionFinalStep = (applicantData, getState) => axios.patch('/api/admissionFinalStep', applicantData, tokenConfig(getState));
 export const createReference = (data) => axios.post('/api/student', data);
 export const payment = (data) => axios.patch('/api/student/payment', data);
 export const approveAdmission = (getState, id) => axios.patch(`/api/student/approve/${id}`, {date: ''}, tokenConfig(getState));
+export const approveAccount = (getState, id) => axios.patch(`/api/student/approveAccount/${id}`, {date: ''}, tokenConfig(getState));
 export const confirmAdmission = (getState, id, data) => axios.patch(`/api/student/confirmAdmission/${id}`, data, tokenConfig(getState));
+export const approveAdmissionFee = (getState, id) => axios.patch(`/api/student/approveAdmissionFee/${id}`, {data: ''}, tokenConfig(getState));
+export const approveAccountAdmission = (getState, id) => axios.patch(`/api/student/approveAccountAdmissionFee/${id}`, {data: ''}, tokenConfig(getState));
 export const fileUpload = (fileData) => axios.post('/api/files/storage', fileData);
 export const createAccount = (userData) => axios.post('/api/auth/createAccount', userData);
 export const loginAccount = (userData) => axios.post('/api/auth/loginAccount', userData);
@@ -64,3 +67,8 @@ export const semesterRegistration = (getState, studentData) => axios.post('/api/
 export const semesters = (getState) => axios.get('/api/department/semesterRegistration', tokenConfig(getState));
 export const assignTeacher = (getState, teacherId, courseId) => axios.patch(`/api/department/assignTeacher/${teacherId}/${courseId}`,{data: ''}, tokenConfig(getState));
 export const approveSemesterRegistration = (getState, studentId) => axios.patch(`/api/department/semesterRegistration/${studentId}`,{data: ''}, tokenConfig(getState));
+
+export const checkSscCredential = (id) => axios.patch(`/api/onlineAdmissions/${id}/SSCCredentialCheck`);
+export const checkHscCredential = (id) => axios.patch(`/api/onlineAdmissions/${id}/HSCCredentialCheck`)
+export const acceptAdmission = (id, getState) => axios.patch(`/api/acceptOnlineAdmission/${id}`, {data: ''}, tokenConfig(getState))
+export const rejectAdmission = (id, getState) => axios.patch(`/api/rejectOnlineAdmission/${id}`, {data: ''}, tokenConfig(getState))

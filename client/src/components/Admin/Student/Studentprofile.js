@@ -2,8 +2,10 @@ import React from 'react'
 import { Card, Col, Container, Row, Table } from 'react-bootstrap';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import jahed from "../../../images/Jahed.jpg";
+import {useSelector} from "react-redux";
 
 function StudentProfile() {
+    const {currentUser} = useSelector(state => state.auth)
     return (
         <div>
             <AdminNavbar />
@@ -14,10 +16,10 @@ function StudentProfile() {
                             <Card.Title className="textPrimary mb-4 fs-4">About Me</Card.Title>
                             <Card.Body>
                                 <div className="d-flex align-items-center mb-4">
-                                    <img src={jahed} alt="" width="90" height="90" className="rounded-circle me-3" />
+                                    <img src={`/api/files/storage/${currentUser?.profile_picture}`} alt="" width="90" height="90" className="rounded-circle me-3" />
                                     <div>
-                                        <h5 className="fw-bold">Md Jahed Miah</h5>
-                                        <small>12th semester | 46th batch</small>
+                                        <h5 className="fw-bold">{currentUser?.name}</h5>
+                                        <small>semester {currentUser?.semester} | batch {currentUser?.batch}</small>
                                     </div>
                                 </div>
                                 <Row>
@@ -29,31 +31,27 @@ function StudentProfile() {
                                                 <p className="text-lead">Section:</p>
                                                 <p className="text-lead">ID:</p>
                                                 <p className="text-lead">Father Name:</p>
-                                                <p className="text-lead">Father Occupation:</p>
                                                 <p className="text-lead">Mother Name:</p>
-                                                <p className="text-lead">Mother Occupation:</p>
                                                 <p className="text-lead">Date Of Birth:</p>
                                                 <p className="text-lead">Religion:</p>
                                                 <p className="text-lead">E-Mail:</p>
                                                 <p className="text-lead">Phone:</p>
-                                                <p className="text-lead">Adress::</p>
+                                                <p className="text-lead">Address::</p>
                                                 <p className="text-lead">Admission Date:</p>
                                             </Col>
                                             <Col md="8">
-                                                <p className="fw-bold">Md Jahed Miah</p>
-                                                <p className="fw-bold">12th</p>
+                                                <p className="fw-bold">{currentUser?.name}</p>
+                                                <p className="fw-bold">{currentUser?.semester}</p>
                                                 <p className="fw-bold">Section: Null</p>
-                                                <p className="fw-bold">1732020009</p>
-                                                <p className="fw-bold">Md Surman Ali</p>
-                                                <p className="fw-bold">Farmer</p>
-                                                <p className="fw-bold">MST. Sharifa Khatun</p>
-                                                <p className="fw-bold">House wife</p>
-                                                <p className="fw-bold">14-02-1998</p>
-                                                <p className="fw-bold">Islam</p>
-                                                <p className="fw-bold">mdjahedahmed12@gmail.com</p>
-                                                <p className="fw-bold">01797213005</p>
-                                                <p className="fw-bold">Tengra, Lalabazar, Bishwanath, Sylhet</p>
-                                                <p className="fw-bold">27-08-2017</p>
+                                                <p className="fw-bold">{currentUser?.student_id}</p>
+                                                <p className="fw-bold">{currentUser?.father_name}</p>
+                                                <p className="fw-bold">{currentUser?.mother_name}</p>
+                                                <p className="fw-bold">{currentUser?.date_of_birth}</p>
+                                                <p className="fw-bold">{currentUser?.religion}</p>
+                                                <p className="fw-bold">{currentUser?.email}</p>
+                                                <p className="fw-bold">{currentUser?.mobile}</p>
+                                                <p className="fw-bold">{currentUser?.present_address}</p>
+                                                <p className="fw-bold">{currentUser?.createdAt}</p>
                                             </Col>
                                         </Row>
                                     </Col>

@@ -16,6 +16,7 @@
     "customize-cra": "^1.0.0",
     "get-blob-duration": "^1.2.0",
     "i": "^0.3.7",
+    "js-file-download": "^0.4.12",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "npm": "^8.0.0",

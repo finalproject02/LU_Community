@@ -11,7 +11,7 @@ const DepartmentStudents = () => {
     const [student_id, setStudent_id] = useState();
     const [batch, setBatch] = useState();
     const [data, setData] = useState({});
-    const newAdmission = people?.filter(person => person.position === 'paid admission fee' && person.approval === 1);
+    const newAdmission = people?.filter(person => person.position === 'paid admission register fee' && person.approval === 5);
     const departmentStudent = people?.filter(person => person.position === 'Student' && person.program_name === currentUser?.department);
     const [DataSecond, setDataSecond] = useState({ search_id: '', search_name: '', search_semester: '' });
     const handleSubmitSecond = (e) => {
@@ -20,7 +20,7 @@ const DepartmentStudents = () => {
     const confirmAdmission = (id) => {
         data.student_id = student_id;
         data.batch = batch
-        dispatch(ConfirmAdmission(id, data))
+      dispatch(ConfirmAdmission(id, data));
 
     }
     const handleChangeSecond = (e) => setDataSecond({ ...DataSecond, [e.target.name]: e.target.value });

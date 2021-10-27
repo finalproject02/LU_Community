@@ -1,7 +1,7 @@
 import {
-    SUGGESTIONS, APPROVE_SEMESTER_REGISTRATION,
-    LOADING, LOADED, CONFIRM_ADMISSION,
-    ALL_USERS, APPROVE_ADMISSION
+    SUGGESTIONS, APPROVE_SEMESTER_REGISTRATION, APPROVE_ACCOUNT_ADMISSION,
+    LOADING, LOADED, CONFIRM_ADMISSION, ACCEPT_APPLICATION, APPROVE_ADMISSION_FEE,
+    ALL_USERS, APPROVE_ADMISSION, APPROVE_ACCOUNT, REJECT_APPLICATION
 } from "../actions/types";
 
 export default (state = { suggestions: [], isLoading: false, people: [] }, action) => {
@@ -30,6 +30,11 @@ export default (state = { suggestions: [], isLoading: false, people: [] }, actio
             };
         case APPROVE_ADMISSION:
         case CONFIRM_ADMISSION:
+        case APPROVE_ACCOUNT:
+        case ACCEPT_APPLICATION:
+        case REJECT_APPLICATION:
+        case APPROVE_ACCOUNT_ADMISSION:
+        case APPROVE_ADMISSION_FEE:
         case APPROVE_SEMESTER_REGISTRATION:
             return {
                 ...state,

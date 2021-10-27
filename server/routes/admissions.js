@@ -1,17 +1,17 @@
 import express from "express";
-import {getApplications, getApplication, admissionFirstStep, admissionSecondStep,
+import {acceptApplication, rejectApplication, admissionFirstStep, admissionSecondStep,
     verifySSCCredentialChecking, verifyHSCCredentialChecking, admissionFinalStep,
-    deleteApplications} from "../controllers/admissions.js";
+} from "../controllers/admissions.js";
+import {auth} from "../middleware/auth.js";
 
 
 const router = express.Router();
 
-router.post('/admissionFirstStep', admissionFirstStep)
-router.post('/admissionSecondStep', admissionSecondStep)
-router.post('/admissionFinalStep', admissionFinalStep)
-router.get('/onlineAdmissions/', getApplications);
-router.get('/onlineAdmission/:id', getApplication);
-router.delete('/onlineAdmission/:id', deleteApplications);
+router.patch('/admissionFirstStep', auth, admissionFirstStep)
+router.patch('/admissionSecondStep', auth,admissionSecondStep)
+router.patch('/admissionFinalStep', auth, admissionFinalStep)
+router.patch('/acceptOnlineAdmission/:id', auth, acceptApplication);
+router.patch('/rejectOnlineAdmission/:id', auth, rejectApplication);
 router.patch('/onlineAdmissions/:id/SSCCredentialCheck', verifySSCCredentialChecking);
 router.patch('/onlineAdmissions/:id/HSCCredentialCheck', verifyHSCCredentialChecking)
 
