@@ -142,13 +142,13 @@ const PostBox = ({ details }) => {
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <div className="postModalPosition">
                 <Modal
                     centered
                     show={show}
                     onHide={handleClose}
+                    backdrop="static"
                     keyboard={false}
-                    className=""
+                    className="postModalPosition"
                 >
                     <Form onSubmit={handleSubmit}>
                         <Modal.Header closeButton>
@@ -207,7 +207,6 @@ const PostBox = ({ details }) => {
                         </Modal.Footer>
                     </Form>
                 </Modal>
-            </div>
         </div>
     );
 };
