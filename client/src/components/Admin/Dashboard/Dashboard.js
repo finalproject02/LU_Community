@@ -20,7 +20,7 @@ function Dashboard() {
             {currentUser?.position === 'Student' && (
                 <StudentHome />
             )}
-            {currentUser?.position === 'Account' && (
+            {currentUser?.name === 'Account' && (
                 <AccountHome />
             )}
             {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() === 'head' && (

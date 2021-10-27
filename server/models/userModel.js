@@ -13,21 +13,27 @@ const userModel = new mongoose.Schema({
     ssc_roll_no: Number,
     ssc_board: String,
     ssc_gpa: Number,
+    ssc_group: String,
+    ssc_year: Number,
+    ssc_credential_authenticate: String,
 
     hsc_regis_no: Number,
     hsc_institute_name: String,
     hsc_roll_no: Number,
     hsc_board: String,
     hsc_gpa: Number,
+    hsc_group: String,
+    hsc_year: String,
+    hsc_credential_authenticate: String,
 
     guardian_name: String,
     religion: String,
     guardian_contact: String,
-    guardian_photo: String,
     marital_status: String,
     gender: String,
     nationality: String,
     blood_group: String,
+    application_status: String,
     password: {
         type: String,
         default: null

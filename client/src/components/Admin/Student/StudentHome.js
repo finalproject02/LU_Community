@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux";
+import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 const StudentHome = () => {
     const { currentUser } = useSelector(state => state.auth);
@@ -10,6 +11,7 @@ const StudentHome = () => {
     const currentCourse = semesters?.filter(course => course.studentDocId === currentUser?._id && course.status === 'Approve')
     return (
         <div>
+            <AdminNavbar/>
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">

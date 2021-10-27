@@ -35,7 +35,11 @@ export const SignIn = (userData, history)  => async (dispatch) => {
             type: LOGIN_ACCOUNT_SUCCESS,
             payload: { user, token }
         });
-        history.push('/dashboard')
+        if (user.position === 'paid admission fee' && user.approval === 2) {
+            history.push('/firstStep')
+        } else {
+            history.push('/dashboard')
+        }
         dispatch({ type: LOADED })
     } catch (error) {
         dispatch(getErrors(error.response.data, 'SIGN_IN_ERROR'))
