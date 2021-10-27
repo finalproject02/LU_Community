@@ -62,14 +62,19 @@ import ControllerHome from "../src/components/Admin/ExamController/ControllerHom
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 import { Departments, Course, Teacher, Semester } from "./actions/departments";
 import PaymentDemo from "./components/PaymentDemo/PaymentDemo";
-import AdmissionRequest from "./components/Admin/Admission/AdmissionRequest";
+import ApproveAdmissionFee from "./components/Admin/Admission/ApproveAdmissionFee";
 import AdmissionProfile from "./components/Admin/Admission/AdmissionProfile";
 import AdmissionHome from "./components/Admin/Admission/AdmissionHome";
 import AddSemester from "./components/Admin/MainAdmin/AddSemester";
 import DepartmentStudents from "./components/Admin/DepartmentHead/DepartmentStudents";
-import AdmissionStudents from "./components/Admin/Admission/AdmissionStudents";
+import ApproveAdmissionForm from "./components/Admin/Admission/ApproveAdmissionForm";
 import AccountProfile from "./components/Admin/Account/AccountProfile";
 import AccountHome from "./components/Admin/Account/AccountHome";
+import AdmissionFirstStep from "./components/OnlineAdmission/AdmissionFristStep/AdmissionFirstStep";
+import AdmissionSecondStep from "./components/OnlineAdmission/AdmissionSecondStep/AdmissionSecondStep";
+import AdmissionFinalStep from "./components/OnlineAdmission/AdmissionFinalStep/AdmissionFinalStep";
+import FormDetails from "./components/Admin/Admission/FormDetails";
+import AccountAdmissionForm from "./components/Admin/Account/AccountAdmissionForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,6 +112,9 @@ function App() {
             </Route>
             <Route path="/admissionpolicy">
               <Home />
+            </Route>
+            <Route path="/approveAccountAdmissionFee">
+              <AccountAdmissionForm />
             </Route>
             <Route path="/scholarshipaid">
               <Home />
@@ -177,15 +185,15 @@ function App() {
             <Route path="/admissionForm">
               <AdmissionSimple />
             </Route>
-            {/*<Route path={'/firstStep'}>*/}
-            {/*  <AdmissionFirstStep />*/}
-            {/*</Route>*/}
-            {/*<Route path={'/secondStep'}>*/}
-            {/*  <AdmissionSecondStep />*/}
-            {/*</Route>*/}
-            {/*<Route path={'/finalStep'}>*/}
-            {/*  <AdmissionFinalStep />*/}
-            {/*</Route>*/}
+            <Route path={'/firstStep'}>
+              <AdmissionFirstStep />
+            </Route>
+            <Route path={'/secondStep'}>
+              <AdmissionSecondStep />
+            </Route>
+            <Route path={'/finalStep'}>
+              <AdmissionFinalStep />
+            </Route>
             <Route path="/departmentofbangla">
               <Home />
             </Route>
@@ -309,9 +317,9 @@ function App() {
             <Route path="/AddFacultyMembers/:id">
               <AddFacultyMembers />
             </Route>
-            {/* <Route path="/studentsDetails">
-              <StudentDetails />
-            </Route> */}
+            <Route path="/FormDetails/:id">
+              <FormDetails/>
+            </Route>
             <Route path="/results">
               <Results />
             </Route>
@@ -342,8 +350,8 @@ function App() {
             <Route path="/adminProfile">
               <AdminProfile />
             </Route>
-            <Route path="/admissionRequest">
-              <AdmissionRequest />
+            <Route path="/approveAdmission">
+              <ApproveAdmissionFee />
             </Route>
             <Route path="/admissionProfile">
               <AdmissionProfile />
@@ -351,8 +359,8 @@ function App() {
             <Route path="/admissionHome">
               <AdmissionHome />
             </Route>
-            <Route path="/AddStudents/:id">
-              <AdmissionStudents />
+            <Route path="/approveAdmissionForm">
+              <ApproveAdmissionForm />
             </Route>
             <Route path="/accountProfile">
               <AccountProfile />

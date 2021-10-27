@@ -61,7 +61,7 @@ export const SidebarData = () => {
             }
         ]
     }
-    else if (currentUser?.type === 'account' && currentUser?.name === 'account') {
+    else if (currentUser?.type === 'account' && currentUser?.name === 'Account') {
         return [
             {
                 title: 'Home',
@@ -88,6 +88,13 @@ export const SidebarData = () => {
             {
                 title: 'Approve Results',
                 path: '/approveResults',
+                icon: <IoIcons.IoMdHelpCircle />,
+                cName: 'nav-text'
+            },
+
+            {
+                title: 'new Admission',
+                path: '/departmentStudents',
                 icon: <IoIcons.IoMdHelpCircle />,
                 cName: 'nav-text'
             },

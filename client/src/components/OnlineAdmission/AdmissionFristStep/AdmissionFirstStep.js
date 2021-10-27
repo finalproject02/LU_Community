@@ -8,17 +8,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearError} from "../../../actions/errors";
 
 const AdmissionFirstStep = () => {
+  const { departments } = useSelector(state =>  state.departments)
   const history = useHistory();
   const { message, field } = useSelector(state => state.errors);
   const dispatch = useDispatch()
-  const [firstFormData, setFirstFormData] = useState({ program_name: '', applicant_email: '', applicant_name: '', applicant_birth_or_nid_number: '', applicant_fatherName: '', applicant_date_of_birth: '', applicant_father_occupation: '', applicant_gender: 'male', applicant_motherName: '', applicant_religion: 'islam', applicant_mother_occupation: '', applicant_nationality: '', father_or_mother_nid: '', applicant_marital_status: '', applicant_mobile: '', applicant_blood_group: '' });
+  const [firstFormData, setFirstFormData] = useState({ department: '',  birth_or_nid_number: '', father_name: '', date_of_birth: '',  gender: '', mother_name: '', religion: '', nationality: '',  marital_status: '', blood_group: '' });
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(ApplicationFirstStep(firstFormData, history));
     dispatch(clearError())
-    if (field === 'program_name' || field === 'applicant_name' || field === 'applicant_fatherName' || field === 'applicant_email' || field === 'nid_or_birth' || field === 'applicant_date_of_birth') {
-      document.documentElement.scrollTop = 1
-    }
   }
   const handleChange = (e) => setFirstFormData({ ...firstFormData, [e.target.name]: e.target.value });
   useEffect(() => {
@@ -57,171 +55,96 @@ const AdmissionFirstStep = () => {
                       <Col md="6">
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Select the Program
+                            Select the Department
                             <span className="text-danger fw-bolder">*</span>
                           </Form.Label>
-                          {field === 'program_name' && (
+                          {field === 'department' && (
                               <h6 style={{color: 'red'}}>{message}</h6>
                           )}
 
                           <Form.Select
                               className="w-100"
-                              name="program_name"
+                              name="department"
                               onChange={handleChange}
                           >
-                            <option value={firstFormData?.program_name}>{firstFormData?.program_name ? firstFormData?.program_name : '--select program--'}</option>
-                            <option value="BBA">BBA</option>
-                            <option value="CSE">CSE</option>
-                            <option value="English">English</option>
-                            <option value="EEE">EEE</option>
-                            <option value="Civil">Civil</option>
-                            <option value="Architecture">Architecture</option>
-                            <option value="Law">Law</option>
-                            <option value="Islamic Studies">Islamic Studies</option>
-                            <option value="Public health">Public health</option>
-                            <option value="Tourism and Hospitality Management">Tourism and Hospitality Management</option>
-                            <option value="Bangla">Bangla</option>
+                            <option value={firstFormData?.department}>{firstFormData?.department ? firstFormData?.department : '--select program--'}</option>
+                            {departments?.map(department => (
+                                <option value={department.department_name}>{department.department_name}</option>
+                            ))}
+
                           </Form.Select>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Label>
-                            Name of the Applicant (Full Name)
-                            <span className="text-danger fw-bolder">*</span>
-                          </Form.Label>
-                          {field === 'applicant_name' && (
-                              <h6 style={{color: 'red'}}>{message}</h6>
-                          )}
-                          <Form.Control
-                              className="w-100"
-                              type="text"
-                              placeholder="applicant name"
-                              name={'applicant_name'}
-                              value={firstFormData?.applicant_name}
-                              onChange={handleChange}
 
-                          />
-                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Applicant's Father Name (Full Name)
+                            Father Name (Full Name)
                             <span className="text-danger fw-bolder">*</span>
                           </Form.Label>
                           <br />
-                          {field === 'applicant_fatherName' && (
+                          {field === 'father_name' && (
                               <h6 style={{color: 'red'}}>{message}</h6>
                           )}
                           <Form.Control
                               type="text"
                               className="w-100"
                               placeholder="applicant father name"
-                              name={'applicant_fatherName'}
+                              name={'father_name'}
                               onChange={handleChange}
-                              value={firstFormData?.applicant_fatherName}
+                              value={firstFormData?.father_name}
 
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Applicant's Father's Occupation
-                          </Form.Label>
-                          <Form.Control
-                              type="text"
-                              className="w-100"
-                              placeholder="applicant's father occupation"
-                              onChange={handleChange}
-                              value={firstFormData?.applicant_father_occupation}
-                              name={'applicant_father_occupation'}
-                          />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Label>
-                            Applicant's Mother Name (Full Name)
+                             Mother Name (Full Name)
                             <span className="text-danger fw-bolder">*</span>
                           </Form.Label>
-                          {field === 'applicant_motherName' && (
+                          {field === 'mother_name' && (
                               <h6 style={{color: 'red'}}>{message}</h6>
                           )}
                           <Form.Control
                               type="text"
                               className="w-100"
                               placeholder="applicant's mother name"
-                              name={'applicant_motherName'}
-                              value={firstFormData?.applicant_motherName}
+                              name={'mother_name'}
+                              value={firstFormData?.mother_name}
                               onChange={handleChange}
 
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Applicant's Mother Occupation
+                            Marital Status
+                            <span className="text-danger fw-bolder">*</span>
+                          </Form.Label>
+                          <Form.Select
+                              className="w-100"
+                              name="marital_status"
+                              onChange={handleChange}
+                          >
+                            <option>--select status--</option>
+                            <option value="Married">Married</option>
+                            <option value="Unmarried">Unmarried</option>
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                          <Form.Label>
+                            Blood Group
                           </Form.Label>
                           <Form.Control
                               type="text"
                               className="w-100"
-                              placeholder="applicant's mother occupation"
+                              name="blood_group"
                               onChange={handleChange}
-                              name={'applicant_mother_occupation'}
-                              value={firstFormData?.applicant_mother_occupation}
-                          />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Label>
-                            Father's/Mother's NID No.
-                            <span className="text-danger fw-bolder">*</span>
-                          </Form.Label>
-                          {field === 'father_or_mother_nid' && (
-                              <h6 style={{color: 'red'}}>{message}</h6>
-                          )}
-                          <Form.Control
-                              type="number"
-                              className="w-100"
-                              id="nid"
-                              placeholder="father's/mother's nid"
-                              name={'father_or_mother_nid'}
-                              value={firstFormData?.father_or_mother_nid}
-                              onChange={handleChange}
-
-                          />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Label>
-                            Applicant's Mobile
-                            <span className="text-danger fw-bolder">*</span>
-                          </Form.Label>
-                          {field === 'applicant_mobile' && (
-                              <h6 style={{color: 'red'}}>{message}</h6>
-                          )}
-                          <Form.Control
-                              type="number"
-                              className="w-100"
-                              placeholder="applicant's mobile"
-                              name={'applicant_mobile'}
-                              onChange={handleChange}
-                              value={firstFormData?.applicant_mobile}
+                              placeholder="applicant's blood group"
+                              value={firstFormData?.blood_group}
                           />
                         </Form.Group>
                       </Col>
                       <Col md="6">
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Applicant's Email
-                            <span className="text-danger fw-bolder">*</span>
-                          </Form.Label>
-                          {field === 'applicant_email' && (
-                              <h6 style={{color: 'red'}}>{message}</h6>
-                          )}
-                          <Form.Control
-                              type="text"
-                              className="w-100"
-                              placeholder="applicant's email"
-                              name={'applicant_email'}
-                              onChange={handleChange}
-                              value={firstFormData?.applicant_email}
-                          />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Label>
-                            Applicant's National ID / Birth Certificate No.
+                            National ID / Birth Certificate No.
                             <span className="text-danger fw-bolder">*</span>
                           </Form.Label>
                           {field === 'nid_or_birth' && (
@@ -232,8 +155,8 @@ const AdmissionFirstStep = () => {
                               className="w-100"
                               placeholder="applicant's nid/birth certificate no. "
                               onChange={handleChange}
-                              name={'applicant_birth_or_nid_number'}
-                              value={firstFormData?.applicant_birth_or_nid_number}
+                              name={'birth_or_nid_number'}
+                              value={firstFormData?.birth_or_nid_number}
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -241,7 +164,7 @@ const AdmissionFirstStep = () => {
                             Applicant's Date of Birth
                             <span className="text-danger fw-bolder">*</span>
                           </Form.Label>
-                          {field === 'applicant_date_of_birth' && (
+                          {field === 'date_of_birth' && (
                               <h6 style={{color: 'red'}}>{message}</h6>
                           )}
 
@@ -251,22 +174,23 @@ const AdmissionFirstStep = () => {
                               id="applicant_birthday"
                               placeholder="applicant's date of birth"
                               onChange={handleChange}
-                              name={'applicant_date_of_birth'}
-                              value={firstFormData?.applicant_date_of_birth}
+                              name={'date_of_birth'}
+                              value={firstFormData?.date_of_birth}
                               reqired
                           />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Applicant's Gender
+                            Gender
                           </Form.Label>
                           <Form.Select
                               className="w-100 "
-                              name="applicant_gender"
+                              name="gender"
                               onChange={handleChange}
-                              value={firstFormData?.applicant_gender}
+                              value={firstFormData?.gender}
                               reqired
                           >
+                            <option>--select gender--</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="other">Other</option>
@@ -274,14 +198,15 @@ const AdmissionFirstStep = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Applicant's Religion
+                           Religion
                           </Form.Label>
                           <Form.Select
                               className="w-100 "
-                              name="applicant_religion"
+                              name="religion"
                               onChange={handleChange}
-                              value={firstFormData?.applicant_religion}
+                              value={firstFormData?.religion}
                           >
+                            <option>--select religion--</option>
                             <option value="islam">Islam</option>
                             <option value="chirstian">Chirstian</option>
                             <option value="hindu">Hindu</option>
@@ -291,47 +216,20 @@ const AdmissionFirstStep = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
-                            Applicant's Nationality
+                            Nationality
                             <span className="text-danger fw-bolder">*</span>
                           </Form.Label>
                           <Form.Control
                               type="text"
                               className="w-100"
                               placeholder="applicant's nationality"
-                              name={'applicant_nationality'}
+                              name={'nationality'}
                               onChange={handleChange}
-                              value={firstFormData?.applicant_nationality}
+                              value={firstFormData?.nationality}
 
                           />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Label>
-                            Applicant's Marital Status
-                            <span className="text-danger fw-bolder">*</span>
-                          </Form.Label>
-                          <Form.Select
-                              className="w-100"
-                              name="applicant_marital_status"
-                              onChange={handleChange}
-                          >
-                            <option>--select status--</option>
-                            <option value="Married">Married</option>
-                            <option value="Unmarried">Unmarried</option>
-                          </Form.Select>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Label>
-                            Applicant's Blood Group
-                          </Form.Label>
-                          <Form.Control
-                              type="text"
-                              className="w-100"
-                              name="applicant_blood_group"
-                              onChange={handleChange}
-                              placeholder="applicant's blood group"
-                              value={firstFormData?.applicant_blood_group}
-                          />
-                        </Form.Group>
+
                       </Col>
                       <hr />
                     </div>

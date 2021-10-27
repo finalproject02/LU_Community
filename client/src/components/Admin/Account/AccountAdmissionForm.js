@@ -2,13 +2,13 @@ import React from 'react';
 import {Card, Col, Container, Form, Row, Table} from "react-bootstrap";
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import {useDispatch, useSelector} from "react-redux";
-import {ApproveAccount} from "../../../actions/applications";
+import {AccountAdmissionFeeApprove} from "../../../actions/applications";
 import {Link} from "react-router-dom";
 
-const AccountHome = () => {
+const AccountAdmissionForm = () => {
     const dispatch = useDispatch()
     const { people } = useSelector(state => state.people);
-    const newAdmission = people?.filter(person => person.position === 'paid admission fee' && person.approval === 1);
+    const newAdmission = people?.filter(person => person.position === 'paid admission register fee' && person.approval === 4);
     return (
         <div>
             <AdminNavbar/>
@@ -59,10 +59,10 @@ const AccountHome = () => {
                                     <td>{admission.mobile}</td>
                                     <td>{admission.program_name}</td>
                                     <td>{admission.reference_no}</td>
-                                    <td>{admission.payment_history.map(history => history.admission_fee)}</td>
+                                    <td>{admission.payment_history.map(history => history.admission_register_fee)}</td>
                                     <td>
                                         <td>
-                                            <button className="btn btn-primary" onClick={() => dispatch(ApproveAccount(admission._id))}>Approve</button>
+                                            <button className="btn btn-primary" onClick={() => dispatch(AccountAdmissionFeeApprove(admission._id))}>Approve</button>
 
                                         </td>
                                     </td>
@@ -77,4 +77,4 @@ const AccountHome = () => {
     );
 };
 
-export default AccountHome;
+export default AccountAdmissionForm;

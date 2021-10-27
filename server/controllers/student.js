@@ -1,4 +1,4 @@
-import {smsWithReferenceNumber, paymentSMS, confirmAdmissionSMS} from "../services/smsService.js";
+import {smsWithReferenceNumber, paymentSMS, confirmAdmissionSMS, smsForAdmissionRegister} from "../services/smsService.js";
 import { emailWithReferenceNumber } from "../services/mailService.js";
 import {generateUniquePassword} from "../services/functions.js";
 import userModel from "../models/userModel.js";
@@ -63,7 +63,11 @@ export const payment = async (req, res) => {
         }
         else if (!isExists) {
             res.status(400).json({ message: 'Your Reference number is not correct' })
-        } else {
+        } else if (amount < 21000 && amount > 500)  {
+            paymentSMS(isExists.name, isExists.mobile)
+            await userModel.findByIdAndUpdate(isExists._id, {type: 'user', position: 'paid admission register fee', approval: 3, $push: {payment_history: [{admission_register_fee: amount}]}})
+            res.status(200).json({ message: 'Payment success' })
+        }else {
             paymentSMS(isExists.name, isExists.mobile)
             await userModel.findByIdAndUpdate(isExists._id, {type: 'user', position: 'paid admission fee', $push: {payment_history: [{admission_fee: amount}]}})
             res.status(200).json({ message: 'Payment success' })
@@ -84,6 +88,19 @@ export const approveAdmission = async (req, res) => {
     }
 }
 
+export const approveAccount = async (req, res) => {
+    const password = generateUniquePassword();
+    const { id } = req.params;
+    try {
+        const user = await userModel.findOne({_id: id});
+        smsForAdmissionRegister(user.name, user.mobile, user.email, password)
+        const hashPassword = await bcrypt.hash(password, 10)
+        await userModel.findByIdAndUpdate(id, { approval: 2, password: hashPassword })
+        res.status(200).json({ message: 'Approved' })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
 export const confirmAdmission = async (req, res) => {
     const password = generateUniquePassword();
     const { id } = req.params;
@@ -94,6 +111,28 @@ export const confirmAdmission = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, 10)
         await userModel.findByIdAndUpdate(id, { student_id, batch, position: 'Student', password: hashPassword, semester: 1 })
         res.status(200).json({ message: 'Admission confirm' })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
+
+
+export const approveAdmissionFee = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await userModel.findByIdAndUpdate(id, { approval: 4 });
+        res.status(200).json({ message: 'Approve success' })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
+
+export const approveAccountAdmissionFee = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await userModel.findByIdAndUpdate(id, { approval: 5 });
+
+        res.status(200).json({ message: 'Approved' })
     } catch (error) {
         res.status(500).json({ message: 'Something went to wrong' })
     }

@@ -1,62 +1,39 @@
-import admissions from "../models/admissionModel.js";
 import { Builder, By, until } from 'selenium-webdriver';
 import { sendOfferLetterMessage, sendAccurateCredential } from "../services/mailService.js";
-import admissionModel from "../models/admissionModel.js";
+import {smsForAccurateCredential, smsForAdmissionFee} from "../services/smsService.js";
+import userModel from "../models/userModel.js";
 
 export const admissionFirstStep = async (req, res) => {
-    const { applicant_name, applicant_email, applicant_birth_or_nid_number, applicant_mobile, program_name,
-        applicant_fatherName, applicant_motherName, applicant_date_of_birth, father_or_mother_nid} = req.body;
+    const { birth_or_nid_number,  department, father_name, mother_name, date_of_birth} = req.body;
 
-    const fullNamePattern = /^[a-z,',-]+(\s)[a-z,',-]+$/i;
     const namePattern = /[A-Za-z ]{3,30}/i;
-    const emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/;
     const nid_or_birth_pattern = /[0-9]{8,17}/;
-    const phonePattern = /[0-9]{11,13}/;
     try {
-        if (!program_name) {
-            res.status(400).json({ message: 'Please select a program', field: 'program_name' });
+        if (!department) {
+            res.status(400).json({ message: 'Please select a program', field: 'department' });
         }
-        else if (!applicant_name) {
-            res.status(400).json({ message: 'Please provide name', field: 'applicant_name'});
-        }
-        else if(!fullNamePattern.test(applicant_name)){
-            res.status(400).json({ message: 'Please provide your full name', field: 'applicant_name' });
-        }
-        else if (!applicant_email) {
-            res.status(400).json({ message: 'Please provide email', field: 'applicant_email' });
-        }
-        else if (!emailPattern.test(applicant_email)) {
-            res.status(400).json({ message: 'Please provide a proper email', field: 'applicant_email' });
-        }
-        else if (!applicant_birth_or_nid_number) {
+
+        else if (!birth_or_nid_number) {
             res.status(400).json({ message: 'Please provide  birth or nid number', field: 'nid_or_birth' });
         }
-        else if (!nid_or_birth_pattern.test(applicant_birth_or_nid_number)) {
+        else if (!nid_or_birth_pattern.test(birth_or_nid_number)) {
             res.status(400).json({ message: 'Check birth or nid number length', field: 'nid_or_birth' });
         }
-        else if (!applicant_fatherName) {
-            res.status(400).json({ message: 'Please provide father name', field: 'applicant_fatherName'});
+        else if (!father_name) {
+            res.status(400).json({ message: 'Please provide father name', field: 'father_name'});
         }
-        else if(!namePattern.test(applicant_fatherName)){
-            res.status(400).json({ message: 'Father name should be 3-30 char long', field: 'applicant_fatherName' });
+        else if(!namePattern.test(father_name)){
+            res.status(400).json({ message: 'Father name should be 3-30 char long', field: 'father_name' });
         }
-        else if (!applicant_motherName) {
-            res.status(400).json({ message: 'Please provide Mother name', field: 'applicant_motherName'});
+        else if (!mother_name) {
+            res.status(400).json({ message: 'Please provide Mother name', field: 'mother_name'});
         }
-        else if(!namePattern.test(applicant_motherName)){
-            res.status(400).json({ message: 'Mother name should be 3-30 char long', field: 'applicant_motherName' });
+        else if(!namePattern.test(mother_name)){
+            res.status(400).json({ message: 'Mother name should be 3-30 char long', field: 'mother_name' });
         }
-        else if (!applicant_mobile) {
-            res.status(400).json({ message: 'Please mobile  number', field: 'applicant_mobile' });
-        }
-        else if (!phonePattern.test(applicant_mobile)) {
-            res.status(400).json({ message: 'Please check  length', field: 'applicant_mobile' });
-        }
-        else if (!applicant_date_of_birth) {
-            res.status(400).json({ message: 'Please provide date of birth', field: 'applicant_date_of_birth' });
-        } else if (father_or_mother_nid && !nid_or_birth_pattern.test(father_or_mother_nid)) {
-            res.status(400).json({ message: 'Please check  nid length', field: 'father_or_mother_nid' });
-        } else {
+        else if (!date_of_birth) {
+            res.status(400).json({ message: 'Please provide date of birth', field: 'date_of_birth' });
+        }  else {
             res.status(200).json({ message: 'firstForm validation competed' })
         }
 
@@ -97,7 +74,7 @@ export const admissionFinalStep = async (req, res) => {
     const registrationNumberPattern = /[0-9]{10}/;
     const rollNumber = /[0-9]{6}/;
     const { ssc_regis_no, ssc_institution_name, ssc_roll_no, ssc_gpa, hsc_regis_no,
-        hsc_institution_name, hsc_roll_no, hsc_gpa, applicant_photo,
+        hsc_institution_name, hsc_roll_no, hsc_gpa, profile_picture,
         ssc_group, hsc_group, ssc_year, hsc_year, ssc_board, hsc_board
     } = req.body
     try {
@@ -158,10 +135,11 @@ export const admissionFinalStep = async (req, res) => {
             res.status(400).json({ message: 'Please provide HSC GPA number', field: 'hsc_gpa' })
         } else if (hsc_gpa > 5) {
             res.status(400).json({ message: 'Please provide proper GPA number', field: 'hsc_gpa' })
-        } else if (!applicant_photo) {
-            res.status(400).json({ message: 'Please provide applicant photo', field: 'applicant_photo' })
+        } else if (!profile_picture) {
+            res.status(400).json({ message: 'Please provide photo', field: 'photo' })
         } else {
-            const application = await admissionModel.create(req.body);
+            await userModel.findByIdAndUpdate(req.user.id, req.body)
+            const application = await userModel.findByIdAndUpdate(req.user.id, { application_status: 'application pending', position: 'credential submitted', password: null })
             res.status(200).json({ application })
         }
 
@@ -170,40 +148,37 @@ export const admissionFinalStep = async (req, res) => {
     }
 }
 
-export const deleteApplications = async (req, res) => {
+
+export const acceptApplication = async (req, res) => {
     const { id } = req.params
     try {
-        await admissions.findByIdAndDelete(id);
-        res.status(200).json({ message: 'Application deleted' });
-    } catch (error) {
-        res.status(400).json({ message: 'Something went wrong' })
-    }
-}
-
-export const getApplications = async (req, res) => {
-    try {
-        const applications = await admissions.find();
-        res.status(200).json({ applications: applications });
-    } catch (error) {
-        res.status(400).json({ message: 'Something went wrong' })
-    }
-}
-
-export const getApplication = async (req, res) => {
-    const { id } = req.params
-    try {
-        const application = await admissions.findOne({ _id: id });
-        if (application.ssc_credential_authenticate === 'authenticated credential' && application.hsc_credential_authenticate === 'authenticated credential' && application.status === 'application pending') {
+        const application = await userModel.findOne({ _id: id });
+        if (application.ssc_credential_authenticate === 'authenticated credential' && application.hsc_credential_authenticate === 'authenticated credential' && application.application_status === 'application pending') {
             await sendOfferLetterMessage(application.applicant_email, application.applicant_name);
-            await admissions.findByIdAndUpdate(id, { status: 'sent email for payment' })
-            res.status(200).json({ application: application })
+            await userModel.findByIdAndUpdate(id, {application_status: 'sent email for payment'});
+            smsForAdmissionFee(application.name, application.mobile)
+            res.status(200).json({message: 'Accept success'})
 
-        } else if (application.ssc_credential_authenticate === 'not authenticated' && application.hsc_credential_authenticate === 'not authenticated' && application.status === 'application pending') {
-            await sendAccurateCredential(application.applicant_email, application.applicant_name);
-            await admissions.findByIdAndUpdate(id, { status: 'sent email for accurate information' })
-            res.status(200).json({ application: application })
         } else {
-            res.status(200).json({ application: application })
+            res.status(200).json({ message: 'Please verify this application credential' })
+        }
+
+    } catch (error) {
+        res.status(400).json({ msg: error })
+    }
+}
+
+export const rejectApplication = async (req, res) => {
+    const { id } = req.params
+    try {
+        const application = await userModel.findOne({ _id: id });
+       if(application.ssc_credential_authenticate === 'not authenticated' && application.hsc_credential_authenticate === 'not authenticated' && application.application_status === 'application pending') {
+            await sendAccurateCredential(application.applicant_email, application.applicant_name);
+            smsForAccurateCredential(application.name, application.mobile);
+            await userModel.findByIdAndDelete(id)
+            res.status(200).json({ message: 'remove success' })
+        } else {
+            res.status(400).json({ message: 'Please verify this application credential' })
         }
 
     } catch (error) {
@@ -214,7 +189,7 @@ export const getApplication = async (req, res) => {
 export const verifySSCCredentialChecking = async (req, res) => {
     const { id } = req.params;
     try {
-        const application = await admissions.findById(id);
+        const application = await userModel.findById(id);
         let driver = await new Builder().forBrowser('firefox').build();
         try {
             await driver.get('http://www.educationboardresults.gov.bd/');
@@ -238,12 +213,12 @@ export const verifySSCCredentialChecking = async (req, res) => {
                     await driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/table/tbody/tr[1]/td[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody")).getText().then(async (rx) => {
                         let result = rx;
                         await driver.quit();
-                        const correct = await FinalResult(result, application.applicant_name, application.ssc_gpa, application.applicant_fatherName, application.applicant_motherName);
+                        const correct = await FinalResult(result, application.name, application.ssc_gpa, application.father_name, application.mother_name);
                         if (correct === true) {
-                            await admissions.findByIdAndUpdate(id, { ssc_credential_authenticate: 'authenticated credential' }, { new: true })
+                            await userModel.findByIdAndUpdate(id, { ssc_credential_authenticate: 'authenticated credential' }, { new: true })
                             res.status(200).json({ message: 'SSC Credential is  valid' })
                         } else {
-                            await admissions.findByIdAndUpdate(id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
+                            await userModel.findByIdAndUpdate(id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
                             res.status(200).json({ message: 'SSC Credential is not valid' })
                         }
 
@@ -251,12 +226,12 @@ export const verifySSCCredentialChecking = async (req, res) => {
                 })
             } catch (error) {
                 console.log('Something went wrong');
-                await admissions.findByIdAndUpdate(id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
+                await userModel.findByIdAndUpdate(id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
                 res.status(200).json({ message: 'SSC Credential is not valid' })
                 await driver.quit();
             }
         } catch (error) {
-            await admissions.findByIdAndUpdate(id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
+            await userModel.findByIdAndUpdate(id, { ssc_credential_authenticate: 'not authenticated' }, { new: true })
             res.status(200).json({ message: 'SSC Credential is not valid' })
         }
     } catch (error) {
@@ -267,7 +242,7 @@ export const verifySSCCredentialChecking = async (req, res) => {
 export const verifyHSCCredentialChecking = async (req, res) => {
     const { id } = req.params;
     try {
-        const application = await admissions.findById(id);
+        const application = await userModel.findById(id);
         let driver = await new Builder().forBrowser('firefox').build();
 
         try {
@@ -293,12 +268,12 @@ export const verifyHSCCredentialChecking = async (req, res) => {
                     await driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/table/tbody/tr[1]/td[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody")).getText().then(async (rx) => {
                         let result = rx;
                         await driver.quit();
-                        const correct = await FinalResult(result, application.applicant_name, application.hsc_gpa, application.applicant_fatherName, application.applicant_motherName);
+                        const correct = await FinalResult(result, application.name, application.hsc_gpa, application.father_name, application.mother_name);
                         if (correct === true) {
-                            await admissions.findByIdAndUpdate(id, { hsc_credential_authenticate: 'authenticated credential' }, { new: true })
+                            await userModel.findByIdAndUpdate(id, { hsc_credential_authenticate: 'authenticated credential' }, { new: true })
                             res.status(200).json({ message: 'HSC Credential is valid' })
                         } else {
-                            await admissions.findByIdAndUpdate(id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
+                            await userModel.findByIdAndUpdate(id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
                             res.status(200).json({ message: 'HSC Credential is not valid' })
                         }
 
@@ -306,13 +281,13 @@ export const verifyHSCCredentialChecking = async (req, res) => {
                 })
             } catch (error) {
                 console.log('Something went wrong');
-                await admissions.findByIdAndUpdate(id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
+                await userModel.findByIdAndUpdate(id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
                 res.status(200).json({ message: 'HSC Credential is not valid' })
                 await driver.quit();
             }
         } catch (error) {
             console.log('Something went wrong');
-            await admissions.findByIdAndUpdate(id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
+            await userModel.findByIdAndUpdate(id, { hsc_credential_authenticate: 'not authenticated' }, { new: true })
             res.status(200).json({ message: 'HSC Credential is not valid' });
             await driver.quit();
         }

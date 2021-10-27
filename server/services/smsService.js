@@ -1,5 +1,6 @@
 import request from 'request';
-import { referenceNumberMessage, addTeacherMessage, addStudentMessage, paymentMessage, confirmAdmissionMessage } from "./messages.js";
+import { referenceNumberMessage, addTeacherMessage, admissionPaymentMessage, accurateInfoMessage,
+    addStudentMessage, paymentMessage, admissionRegister, confirmAdmissionMessage } from "./messages.js";
 
 export const smsWithReferenceNumber = (name, number, reference_no) => {
     const options = {  'url': `http://66.45.237.70/api.php?username=rezaul123&password=GTH5FXE9&number=${number}&message=${referenceNumberMessage(name, reference_no)}` };
@@ -40,3 +41,28 @@ export const confirmAdmissionSMS = (name, number, student_id, batch, email, pass
         console.log('send success')
     })
 }
+
+export const smsForAdmissionRegister = (name, number, email, password) => {
+    const options = {  'url': `http://66.45.237.70/api.php?username=rezaul123&password=GTH5FXE9&number=${number}&message=${admissionRegister(name, email, password)}` };
+    request(options, (error, response) => {
+        if (error) throw Error(error);
+        console.log('send success')
+    })
+}
+
+export const smsForAccurateCredential = (name, number) => {
+    const options = {  'url': `http://66.45.237.70/api.php?username=rezaul123&password=GTH5FXE9&number=${number}&message=${accurateInfoMessage(name)}` };
+    request(options, (error, response) => {
+        if (error) throw Error(error);
+        console.log('send success')
+    })
+}
+
+export const smsForAdmissionFee = (name, number) => {
+    const options = {  'url': `http://66.45.237.70/api.php?username=rezaul123&password=GTH5FXE9&number=${number}&message=${admissionPaymentMessage(name)}` };
+    request(options, (error, response) => {
+        if (error) throw Error(error);
+        console.log('send success')
+    })
+}
+

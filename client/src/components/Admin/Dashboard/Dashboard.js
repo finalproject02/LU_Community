@@ -13,14 +13,17 @@ function Dashboard() {
     const { currentUser } = useSelector(state => state.auth)
     return (
         <>
+<<<<<<< HEAD
             <AdminNavbar />
+=======
+>>>>>>> origin/Rezaul-contribution
             {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() !== 'head' && (
                 <TeacherHome />
             )}
             {currentUser?.position === 'Student' && (
                 <StudentHome />
             )}
-            {currentUser?.position === 'Account' && (
+            {currentUser?.name === 'Account' && (
                 <AccountHome />
             )}
             {currentUser?.position === 'Teacher' && currentUser?.designation.toLowerCase() === 'head' && (

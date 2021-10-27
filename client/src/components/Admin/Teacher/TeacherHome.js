@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
+import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 const TeacherHome = () => {
     const { currentUser } = useSelector(state => state.auth);
@@ -9,6 +10,7 @@ const TeacherHome = () => {
     const takingCourse = courses?.filter(course => course.teacher === currentUser?._id);
     return (
         <div>
+            <AdminNavbar/>
             <Container>
                 <Row className="d-flex justify-content-center">
                     <Col md="10">
