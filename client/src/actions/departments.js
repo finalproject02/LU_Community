@@ -1,5 +1,5 @@
 import {
-    ADD_DEPARTMENT, ADD_COURSE, ADD_STUDENT, ADD_TEACHER, ALL_SEMESTERS,
+    ADD_DEPARTMENT, ADD_COURSE, ADD_STUDENT, ADD_TEACHER, ALL_SEMESTERS, APPROVE_SEMESTER_REGISTRATION,
     ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING, SEMESTER_REGISTRATION, ASSIGN_TEACHER
 } from "./types";
 import {clearError, getErrors} from "./errors";
@@ -138,6 +138,21 @@ export const SemesterRegistration = (studentData) => async (dispatch, getState) 
         dispatch({ type: LOADED });
     } catch (error) {
         dispatch(getErrors(error.response.data, 'SEMESTER_REGISTRATION_ERROR'))
+    }
+}
+
+export const ApproveSemesterRegistration = (studentId) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { message } } = await api.approveSemesterRegistration(getState, studentId)
+        ShowToast(1, message);
+        dispatch({
+            type: APPROVE_SEMESTER_REGISTRATION,
+            payload: studentId
+        })
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'APPROVE_SEMESTER_REGISTRATION_ERROR'))
     }
 }
 

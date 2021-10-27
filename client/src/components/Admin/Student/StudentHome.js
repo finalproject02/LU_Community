@@ -7,7 +7,7 @@ const StudentHome = () => {
     const { currentUser } = useSelector(state => state.auth);
     const { semesters } = useSelector(state => state.departments);
 
-    const currentCourse = semesters?.filter(course => course.studentDocId === currentUser?._id)
+    const currentCourse = semesters?.filter(course => course.studentDocId === currentUser?._id && course.status === 'Approve')
     return (
         <div>
             <Container>

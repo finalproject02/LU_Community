@@ -54,7 +54,7 @@ const TeacherHome = () => {
                                 <Row>
                                     {takingCourse?.map(course => (
                                         <Col md="4" className="mb-2">
-                                            <Link to="/courseStudents" className="textHover text-dark">
+                                            <Link to={`/courseStudents/${course._id}`} className="textHover text-dark">
                                                 <Card className="bg-white  rounded-3">
                                                     <Card.Body className="text-center p-4">
                                                         <h4>{course.course_title}</h4>
