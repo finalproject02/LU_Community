@@ -18,8 +18,6 @@ export const createReference = async (req, res) => {
         }
         else if (!name) {
             res.status(400).json({ message: 'Please provide name' });
-        } else if (!fullNamePattern.test(name)) {
-            res.status(400).json({ message: 'Please provide full name' });
         }
         else if (!mobile) {
             res.status(400).json({ message: 'Please provide a phone number' });
