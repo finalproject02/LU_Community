@@ -1,6 +1,7 @@
 import {
     ADD_DEPARTMENT, ADD_COURSE, ADD_STUDENT, ADD_TEACHER, ALL_SEMESTERS, APPROVE_SEMESTER_REGISTRATION,
-    ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING, SEMESTER_REGISTRATION, ASSIGN_TEACHER
+    ALL_DEPARTMENT, ALL_STUDENT, ALL_TEACHER, ALL_COURSE, LOADED, LOADING, SEMESTER_REGISTRATION, ASSIGN_TEACHER,
+    SUBMIT_RESULT, APPROVE_RESULT_BY_HEAD, APPROVE_RESULT_BY_EXAM_CONTROLLER
 } from "./types";
 import {clearError, getErrors} from "./errors";
 import * as api from '../api'
@@ -182,6 +183,51 @@ export const AssignTeacher = (teacherId, courseId) => async (dispatch, getState)
         dispatch({ type: LOADED });
     } catch (error) {
         dispatch(getErrors(error.response.data, 'ASSIGN_TEACHER_ERROR'))
+    }
+}
+
+export const SubmitResult = (id, data) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { message } } = await api.submitResult(id, data, getState)
+        ShowToast(1, message);
+        dispatch({
+            type: SUBMIT_RESULT,
+            payload: id
+        });
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'SUBMIT_RESULT_ERROR'))
+    }
+}
+
+export const ApproveResultByHead = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data: { message } } = await api.resultApproveByHead(id, getState)
+        ShowToast(1, message);
+        dispatch({
+            type: APPROVE_RESULT_BY_HEAD,
+            payload: id
+        });
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'APPROVE_RESULT_BY_HEAD_ERROR'))
+    }
+}
+
+export const ApproveResultByExamController = (id) => async (dispatch, getState) => {
+    try { 
+        dispatch({ type: LOADING });
+        const { data: { message } } = await api.resultApproveByExamController(id, getState)
+        ShowToast(1, message);
+        dispatch({
+            type: APPROVE_RESULT_BY_EXAM_CONTROLLER,
+            payload: id
+        });
+        dispatch({ type: LOADED });
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'APPROVE_RESULT_BY_EXAM_CONTROLLER_ERROR'))
     }
 }
 

@@ -7,6 +7,7 @@ import HeadHome from "../../Admin/DepartmentHead/HeadHome";
 import AdminHome from "../MainAdmin/AdminHome";
 import AdmissionHome from "../Admission/AdmissionHome";
 import AccountHome from "../Account/AccountHome";
+import ControllerHome from "../ExamController/ControllerHome";
 
 function Dashboard() {
     const { currentUser } = useSelector(state => state.auth)
@@ -30,6 +31,9 @@ function Dashboard() {
             {currentUser?.name === 'Admission' && (
                 <AdmissionHome/>
             )}
+			{currentUser?.name === 'Controller' && (
+				<ControllerHome/>
+			)}
 
         </>
     )

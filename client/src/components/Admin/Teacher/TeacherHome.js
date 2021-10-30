@@ -7,7 +7,7 @@ import AdminNavbar from "../AdminNavbar/AdminNavbar";
 const TeacherHome = () => {
     const { currentUser } = useSelector(state => state.auth);
     const { courses } = useSelector(state => state.departments);
-    const takingCourse = courses?.filter(course => course.teacher === currentUser?._id);
+    const takingCourse = courses?.filter(course => course.teacher === currentUser?._id); 
     return (
         <div>
             <AdminNavbar/>

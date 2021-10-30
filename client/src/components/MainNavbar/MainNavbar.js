@@ -6,7 +6,7 @@ import { Logout } from "../../actions/auth";
 
 const MainNavbar = () => {
   const dispatch = useDispatch()
-  const { isAuthenticated } = useSelector(state => state.auth)
+  const { isAuthenticated, currentUser } = useSelector(state => state.auth)
   return (
     <Navbar
       collapseOnSelect
@@ -21,9 +21,15 @@ const MainNavbar = () => {
           id="responsive-navbar-nav"
         >
           <Nav className="me-auto bgPrimary">
+		  
             <Nav.Link href="/home" className="text-white me-4 navFontSize">
               Home
             </Nav.Link>
+			{currentUser?.position !== 'paid admission fee' && isAuthenticated && (
+				<Nav.Link className="navFontSize" href="/dashboard">
+				  Dashboard
+				</Nav.Link>
+		    )}
             <Nav.Link className="me-4 navFontSize " href="/aboutus">
               About Us
             </Nav.Link>
@@ -233,9 +239,7 @@ const MainNavbar = () => {
                 </Nav.Link>
               </>
             )}
-            <Nav.Link className="navFontSize" href="/dashboard">
-              Dashboard
-            </Nav.Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>

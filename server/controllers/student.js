@@ -2,6 +2,7 @@ import {smsWithReferenceNumber, paymentSMS, confirmAdmissionSMS, smsForAdmission
 import { emailWithReferenceNumber } from "../services/mailService.js";
 import {generateUniquePassword} from "../services/functions.js";
 import userModel from "../models/userModel.js";
+import semesterModel from "../models/semesterModel.js";
 import bcrypt from "bcryptjs";
 import { generateReferenceCode } from "../services/functions.js";
 
@@ -135,5 +136,37 @@ export const approveAccountAdmissionFee = async (req, res) => {
         res.status(200).json({ message: 'Approved' })
     } catch (error) {
         res.status(500).json({ message: 'Something went to wrong' })
+    }
+}
+
+export const submitResult = async (req, res) => {
+    const { attendance, mid_term, final_term, assignment } = req.body;
+    const { id } = req.params;
+    try {
+        const response = await semesterModel.findByIdAndUpdate(id, { attendance, mid_term, final_term, assignment, result_approve: 1 });
+        res.status(200).json({ message: 'Result submit success' })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong..' })
+    }
+}
+
+export const resultApproveByHead = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await semesterModel.findByIdAndUpdate(id, { result_approve: 2 });
+        res.status(200).json({ message: 'Approve success' })
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong..' })
+    }
+}
+
+
+export const resultApproveByExamController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await semesterModel.findByIdAndUpdate(id, { result_approve: 3, status: 'Completed' });
+        res.status(200).json({ message: 'Approve success' })  
+    } catch (error) {
+        res.status(500).json({ message: 'Something went to wrong..' })
     }
 }
