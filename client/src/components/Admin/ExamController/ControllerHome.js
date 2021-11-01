@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector } from "react-redux";
 import PublishResults from "./PublishResults";
-import AdminNavbar from "../AdminNavbar/AdminNavbar";
+import AdminNavbar from "../AdminNavbar/AdminNavbar"
 
 const ControllerHome = () => {
     const { people } = useSelector(state => state.people);

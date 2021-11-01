@@ -281,7 +281,7 @@ function App() {
             <Route path="/approveResults">
               <ApproveResults />
             </Route>
-            <Route path="/approveCourseResults">
+            <Route path="/approveCourseResults/:id">
               <ApproveResultCourse />
             </Route>
             <Route path="/controllerProfile">

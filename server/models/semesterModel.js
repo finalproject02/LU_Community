@@ -16,6 +16,7 @@ const semesterModel = new mongoose.Schema({
     mid_term: Number,
     final_term: Number,
     department_name: String,
+    result_approve: Number,
     status: {
         type: String,
         default: 'submitted'

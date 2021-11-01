@@ -115,7 +115,7 @@ export const SidebarData = () => {
             },
 
         ];
-    } else {
+    } else if(currentUser?.position === 'Students'){
 
         return [
             {
@@ -144,7 +144,17 @@ export const SidebarData = () => {
                 cName: 'nav-text'
             },
         ];
-    }
+    } else if(currentUser?.type === 'Controller' && currentUser?.name === 'Controller') {
+		return [
+			{
+                title: 'Home',
+                path: '/dashboard',
+                icon: <AiIcons.AiFillHome />,
+                cName: 'nav-text'
+            }
+		
+		]
+	}
 
 
 }

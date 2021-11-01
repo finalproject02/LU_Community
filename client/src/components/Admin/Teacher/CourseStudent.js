@@ -1,15 +1,29 @@
-import React from 'react';
+import {useState} from 'react';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import { Col, Container, Row, Table } from "react-bootstrap";
 import {useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {SubmitResult} from "../../../actions/departments"
 
 const CourseStudent = () => {
+	const dispatch = useDispatch()
     const params = useParams();
+	const [assignment, setAssignment] = useState();
+    const [attendance, setAttendance] = useState();
+	const [data, setData] = useState({})
+	const [midTerm, setMidTerm] = useState();
+	const [finalTerm, setFinalTerm] = useState();
     const { id } = params;
     const { courses, semesters } = useSelector(state => state.departments);
     const courseInfo = courses.filter(course => course._id === id);
-    const studentInfo = semesters.filter(student => student.course_title === courseInfo.map(info => info.course_title).toString() && student.status === 'Approve');
+	const handleClick = (studentDocId) => {
+		data.assignment = assignment;
+		data.attendance = attendance;
+		data.mid_term = midTerm;
+		data.final_term = finalTerm;
+		dispatch(SubmitResult(studentDocId, data))
+	}
+    const studentInfo = semesters.filter(student => student.course_title === courseInfo.map(info => info.course_title).toString() && student.status === 'Approve' && !student.result_approve);
     return (
         <div>
             <AdminNavbar />
@@ -32,13 +46,13 @@ const CourseStudent = () => {
                                     <td>{student.student_id}</td>
                                     <td>{student.student_name}</td>
                                     <td>
-                                        <input className="form-control w-75" type="text" name placeholder="Attendence" /></td>
-                                    <td><input className="form-control w-75" type="text" name placeholder="Assignment" /></td>
+                                        <input className="form-control w-75" type="number" name="attendance" placeholder="Attendance" onChange={(e) => setAttendance(e.target.value)}/></td>
+                                    <td><input className="form-control w-75" type="number" name="assignment" placeholder="Assignment" onChange={(e) => setAssignment(e.target.value)}/></td>
                                     <td colSpan="">
-                                        <input className="form-control w-75" type="text" name placeholder="Mid" /></td>
-                                    <td><input className="form-control w-75" type="text" name placeholder="Final" /></td>
+                                        <input className="form-control w-75" type="number" name="mid_term" placeholder="Mid" onChange={(e) => setMidTerm(e.target.value)}/></td>
+                                    <td><input className="form-control w-75" type="number" name="final_term" placeholder="Final" onChange={(e) => setFinalTerm(e.target.value)}/></td>
 
-                                    <td><button className="btn btn-success mr-5 rounded-3" href="#">Submit</button></td>
+                                    <td><button className="btn btn-success mr-5 rounded-3" href="#" onClick={() => handleClick(student._id)}>Submit</button></td>
                                 </tr>
                             ))}
 
