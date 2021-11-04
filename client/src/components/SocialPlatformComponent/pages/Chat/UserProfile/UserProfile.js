@@ -1,22 +1,24 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 import "./UserProfile.css";
+import Avatar from "../../../../../images/avatar.jpeg";
+import {useSelector} from "react-redux";
 
-export default class UserProfile extends Component {
-  toggleInfo = (e) => {
+export default function  UserProfile () {
+  const { currentUser } = useSelector(state => state.auth);
+  const toggleInfo = (e) => {
     e.target.parentNode.classList.toggle("open");
   };
-  render() {
     return (
       <div className="main__userprofile">
         <div className="profile__card user__profile__image">
           <div className="profile__image">
-            <img src="https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg" />
+            <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} />
           </div>
-          <h4>Fernando Faucho</h4>
-          <p>CEO & Founder at Highly Inc</p>
+          <h4>{currentUser?.name}</h4>
+          <p>{currentUser?.position}</p>
         </div>
         <div className="profile__card">
-          <div className="card__header" onClick={this.toggleInfo}>
+          <div className="card__header" onClick={toggleInfo}>
             <h4>Information</h4>
             <i className="fa fa-angle-down"></i>
           </div>
@@ -27,5 +29,5 @@ export default class UserProfile extends Component {
         </div>
       </div>
     );
-  }
+
 }

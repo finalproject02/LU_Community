@@ -37,8 +37,14 @@ export const SignIn = (userData, history)  => async (dispatch) => {
         });
         if (user.position === 'paid admission fee' && user.approval === 2) {
             history.push('/firstStep')
-        } else {
+        } else if (user.position === 'Teacher' && user.designation.toLowerCase() === 'head') {
             history.push('/dashboard')
+        } else if (user.name === 'Account') {
+            history.push('/dashboard')
+        } else if (user.name === 'Admission') {
+            history.push('/dashboard')
+        } else {
+            history.push('/socialPlatform')
         }
         dispatch({ type: LOADED })
     } catch (error) {

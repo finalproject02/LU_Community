@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { clearError } from "../../actions/errors";
 
 const LoginForm = () => {
+    const [showPassword, setShowPassword] = useState(false)
     const { message, Types } = useSelector(state => state.errors);
     const history = useHistory();
     const dispatch = useDispatch();
@@ -39,18 +40,18 @@ const LoginForm = () => {
 
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name={'password'} onChange={handleChange} />
+                    <Form.Control type={showPassword ? "text": "password"} placeholder="Password" name={'password'} onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Check type="checkbox" label="Remember me" />
+                    <Form.Check type="checkbox" label="Show password" onClick={() => setShowPassword((prevalue) => !prevalue)}/>
                 </Form.Group>
 
                 <div className="bgSecondary text-center mb-2">
                     <input type="submit" value="LOG IN" className="btn w-100 text-white" />
                 </div>
                 <div className="text-center">
-                    <span className="textSecondary textHover">Forgot your password?</span>
+                    <span className="textSecondary textHover">Don't have an account?</span>
                     <Link to="signup" className="textSecondary textHover"> signup</Link>
                 </div>
 
