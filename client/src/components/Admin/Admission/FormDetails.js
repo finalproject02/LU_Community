@@ -1,17 +1,13 @@
-import React, {useEffect, useState} from 'react';
 import { Container, Row, Col, Card, Form } from "react-bootstrap";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import Button from '@restart/ui/esm/Button';
 import {useHistory, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {checkSSCResult, checkHSCResult, AcceptAdmission, RejectAdmission} from "../../../actions/applications"
+import {AcceptAdmission, RejectAdmission} from "../../../actions/applications"
 import fileDownload from "js-file-download";
 import axios from "axios";
 import avatar_pic from '../../../images/avatar.jpeg'
 import AdminNavbar from "../AdminNavbar/AdminNavbar";
 
 const FormDetails = () => {
-    const { Types, message } = useSelector(state => state.errors)
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
@@ -232,7 +228,7 @@ const FormDetails = () => {
                                                                 <Form.Control
                                                                     type="text"
                                                                     className="w-100"
-                                                                    value={application?.ssc_institution_name}
+                                                                    value={application?.ssc_institute_name}
                                                                 />
                                                             </Form.Group>
                                                             <Form.Group className="mb-3">
@@ -275,31 +271,6 @@ const FormDetails = () => {
                                                                     value={application?.ssc_gpa}
                                                                 />
                                                             </Form.Group>
-                                                            {application?.application_status === 'application pending' && (
-                                                                <div className="mt-3 mb-1">
-                                                                    <Button className="btn bg-success"
-                                                                            onClick={() => dispatch(checkSSCResult(id))}
-                                                                    >Check SSC Result</Button>
-                                                                </div>
-                                                            )
-                                                            }
-                                                            { application?.ssc_credential_authenticate === 'authenticated credential' && (
-                                                                <small className="text-success">
-                                                                    <FaCheckCircle/>
-                                                                    The credential is valid
-                                                                </small>
-                                                            )}
-
-                                                            { application?.ssc_credential_authenticate === 'not authenticated' && (
-                                                                <small className="text-danger">
-                                                                    <FaTimesCircle/>
-                                                                    The credential is not valid
-                                                                </small>
-                                                            )}
-
-
-
-
                                                         </fieldset>
                                                     </Col>
                                                     <div className="col-md-6">
@@ -319,7 +290,7 @@ const FormDetails = () => {
                                                                 <Form.Control
                                                                     type="text"
                                                                     className="w-100"
-                                                                    value={application?.hsc_institution_name}
+                                                                    value={application?.hsc_institute_name}
                                                                 />
                                                             </Form.Group>
                                                             <Form.Group className="mb-3">
@@ -362,26 +333,6 @@ const FormDetails = () => {
                                                                     value={application?.hsc_gpa}
                                                                 />
                                                             </Form.Group>
-                                                            {application?.application_status === 'application pending' &&
-                                                            <div className="mt-3 mb-1">
-                                                                <Button className="btn bg-success"
-                                                                        onClick={() => dispatch(checkHSCResult(id))}
-                                                                >Check HSC Result</Button>
-                                                            </div>
-                                                            }
-                                                            { application?.hsc_credential_authenticate === 'authenticated credential' && (
-                                                                <small className="text-success">
-                                                                    <FaCheckCircle/>
-                                                                    The credential is valid
-                                                                </small>
-                                                            )}
-
-                                                            { application?.hsc_credential_authenticate === 'not authenticated' && (
-                                                                <small className="text-danger">
-                                                                    <FaTimesCircle/>
-                                                                    The credential is not valid
-                                                                </small>
-                                                            )}
 
 
                                                         </fieldset>
@@ -405,18 +356,16 @@ const FormDetails = () => {
                                                             />
                                                         </Form.Group>
                                                     </Col>
-                                                    {Types === "ACCEPT_ADMISSION_ERROR" || Types === "REJECT_ADMISSION_ERROR" && (
-                                                        <h6 style={{color: 'red'}}>{message}</h6>
-                                                    )}
+
                                                 </Row>
                                             </fieldset>
                                             <br />
                                             <div className="d-flex justify-content-between px-3">
                                                 <div>
-                                                    <input type="button" value="Reject Request" className="btn btn-danger" onClick={() => dispatch(RejectAdmission(application._id, history))}/>
+                                                    <input type="button" value="Reject Request" className="btn btn-danger" onClick={() => dispatch(RejectAdmission(id, history))}/>
                                                 </div>
                                                 <div>
-                                                    <input value="Accept Request" className="btn btn-success" onClick={() => dispatch(AcceptAdmission(application._id, history))}/>
+                                                    <input value="Accept Request" className="btn btn-success" onClick={() => dispatch(AcceptAdmission(id, history))}/>
                                                 </div>
                                             </div>
                                         </fieldset>

@@ -38,17 +38,11 @@ export const SidebarData = () => {
                 cName: 'nav-text'
             },
             {
-                title: 'Students',
-                path: '/addStudents',
+                title: 'new Admission',
+                path: '/AdmissionDetailsForm',
                 icon: <IoIcons.IoIosPaper />,
                 cName: 'nav-text'
-            },
-            {
-                title: 'Admission Request',
-                path: '/admissionRequest',
-                icon: <IoIcons.IoIosPaper />,
-                cName: 'nav-text'
-            },
+            }
         ]
     }
     else if (currentUser?.type === 'account' && currentUser?.name === 'Account') {

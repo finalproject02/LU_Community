@@ -71,7 +71,7 @@ export const approveSemesterRegistration = (getState, studentId) => axios.patch(
 export const checkSscCredential = (id) => axios.patch(`/api/onlineAdmissions/${id}/SSCCredentialCheck`);
 export const checkHscCredential = (id) => axios.patch(`/api/onlineAdmissions/${id}/HSCCredentialCheck`)
 export const acceptAdmission = (id, getState) => axios.patch(`/api/acceptOnlineAdmission/${id}`, {data: ''}, tokenConfig(getState));
-export const rejectAdmission = (id, getState) => axios.patch(`/api/rejectOnlineAdmission/${id}`, {data: ''}, tokenConfig(getState));
+export const rejectAdmission = (id, getState) => axios.delete(`/api/rejectOnlineAdmission/${id}`, tokenConfig(getState));
 
 export const submitResult = (id, data, getState) => axios.patch(`/api/student/submitResult/${id}`, data, tokenConfig(getState));
 export const resultApproveByHead = (id, getState) => axios.patch(`/api/student/resultApproveByHead/${id}`, {data: ''}, tokenConfig(getState));

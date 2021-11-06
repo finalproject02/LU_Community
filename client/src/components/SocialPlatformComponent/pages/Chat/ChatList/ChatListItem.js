@@ -1,41 +1,28 @@
-import React, { Component } from "react";
 import Avatar from "./Avatar.js";
+import moment from "moment";
 
-export default class ChatListItem extends Component {
-    constructor(props) {
-        super(props);
+export default function  ChatListItem (prop) {
+
+    const handleClick = (id) => {
+        localStorage.setItem('chatId', JSON.stringify({id}));
     }
-    selectChat = (e) => {
-        for (
-            let index = 0;
-            index < e.currentTarget.parentNode.children.length;
-            index++
-        ) {
-            e.currentTarget.parentNode.children[index].classList.remove("active");
-        }
-        e.currentTarget.classList.add("active");
-    };
-
-    render() {
-        return (
+    return (
             <div
-                style={{ animationDelay: `0.${this.props.animationDelay}s` }}
-                onClick={this.selectChat}
-                className={`chatlist__item ${this.props.active ? this.props.active : ""
+                style={{ animationDelay: `0.${prop.animationDelay}s` }}
+                onClick={() =>handleClick(prop.id)}
+                className={`chatlist__item ${prop.active ? prop.active : ""
                     } `}
             >
                 <Avatar
-                    image={
-                        this.props.image ? this.props.image : "http://placehold.it/80x80"
-                    }
-                    isOnline={this.props.isOnline}
+                    image={prop.profile_picture ? `/api/files/storage/${prop.profile_picture}` : "http://placehold.it/80x80"}
+                    isOnline={prop.isOnline}
                 />
 
                 <div className="userMeta">
-                    <p>{this.props.name}</p>
-                    <span className="activeTime">32 mins ago</span>
+                    <p>{prop.name}</p>
+                    <span className="activeTime">{moment(prop.lastLogin).fromNow()}</span>
                 </div>
             </div>
-        );
-    }
+    );
+
 }

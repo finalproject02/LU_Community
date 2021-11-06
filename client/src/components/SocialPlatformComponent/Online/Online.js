@@ -7,7 +7,7 @@ import Avatar from "../../../images/avatar.jpeg";
 const Online = () => {
     const { currentUser } = useSelector(state => state.auth);
     const { people } = useSelector(state => state.people);
-    const onlinePeople = people?.filter(person => currentUser.connection.includes(person._id))
+    const onlinePeople = people?.filter(person => currentUser?.connection.includes(person._id))
     return (
         <div className="mb-4">
             {onlinePeople?.length !== 0 && (

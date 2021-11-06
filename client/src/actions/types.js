@@ -36,6 +36,7 @@ export const CREATE_CLUB = 'CREATE_CLUB';
 export const CREATE_GROUP = 'CREATE_GROUP';
 export const ALL_CLUB = 'ALL_CLUB';
 export const ALL_GROUP = 'ALL_GROUP';
+export const CURRENT_CHAT =  'CURRENT_CHAT';
 
 export const CLUB_UPDATE = 'CLUB_UPDATE';
 export const CLUB_UNFOLLOW = 'CLUB_UNFOLLOW';

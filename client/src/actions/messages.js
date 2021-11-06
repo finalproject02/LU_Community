@@ -1,4 +1,4 @@
-import { PEER, SEND_MESSAGE, MESSAGES, LOADING, LOADED, REAL_TIME_MESSAGE } from "./types";
+import { CURRENT_CHAT, PEER, SEND_MESSAGE, MESSAGES, LOADING, LOADED, REAL_TIME_MESSAGE } from "./types";
 import * as api from '../api'
 import {getErrors} from "./errors";
 
@@ -54,4 +54,12 @@ export const Messages = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch(getErrors(error.response.data, 'GET_MESSAGE_ERROR'))
     }
+}
+
+export const setCurrentChat = (id) => async (dispatch) => {
+    dispatch({
+        type: CURRENT_CHAT,
+        payload: id
+
+    })
 }

@@ -1,12 +1,18 @@
-import React, { Component } from "react";
+import React, {Component, useEffect, useState} from "react";
 import "./ChatBody.css";
 import ChatList from "../ChatList/ChatList";
 import ChatContent from "../ChatContent/ChatContent";
 import UserProfile from "../UserProfile/UserProfile";
 import SocialNavbar from "../../../SocialNavbar/SocialNavbar";
 
-export default class ChatBody extends Component {
-  render() {
+export default function ChatBody () {
+    const [chat, setChat] = useState("")
+
+    useEffect(() => {
+        setChat(JSON.parse(localStorage.getItem('chatId')));
+
+    }, [])
+    console.log(chat)
     return (
       <>
         <SocialNavbar />
@@ -17,5 +23,4 @@ export default class ChatBody extends Component {
         </div>
       </>
     );
-  }
 }

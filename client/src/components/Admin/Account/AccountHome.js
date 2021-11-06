@@ -13,29 +13,6 @@ const AccountHome = () => {
         <div>
             <AdminNavbar/>
             <Container>
-                <Row>
-                    <Col md="4" className="mb-2">
-                        <Link to="/dashboard" className="textHover text-dark">
-                            <Card className="mb-2 p-4 rounded-3 bg-info text-white">
-                                <Card.Body className="text-center">
-                                    <h4>Approve Admission Form  Fee</h4>
-                                    <small>40</small>
-                                </Card.Body>
-                            </Card>
-                        </Link>
-                    </Col>
-                    <Col md="4" className="mb-2">
-                        <Link to="/approveAccountAdmissionFee" className="textHover text-dark">
-                            <Card className="mb-2 p-4 rounded-3 bg-success text-white">
-                                <Card.Body className="text-center">
-                                    <h4>Approve Admission  Fee</h4>
-                                    <small>222</small>
-                                </Card.Body>
-                            </Card>
-                        </Link>
-                    </Col>
-
-                </Row>
                 <h2 className="textPrimary p-2 text-center">New Admission Request</h2>
                 <Row className="d-flex justify-content-center">
                     <Col md="12">

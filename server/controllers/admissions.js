@@ -153,15 +153,11 @@ export const acceptApplication = async (req, res) => {
     const { id } = req.params
     try {
         const application = await userModel.findOne({ _id: id });
-        if (application.ssc_credential_authenticate === 'authenticated credential' && application.hsc_credential_authenticate === 'authenticated credential' && application.application_status === 'application pending') {
             await sendOfferLetterMessage(application.applicant_email, application.applicant_name);
             await userModel.findByIdAndUpdate(id, {application_status: 'sent email for payment'});
             smsForAdmissionFee(application.name, application.mobile)
             res.status(200).json({message: 'Accept success'})
 
-        } else {
-            res.status(200).json({ message: 'Please verify this application credential' })
-        }
 
     } catch (error) {
         res.status(400).json({ msg: error })
@@ -172,14 +168,10 @@ export const rejectApplication = async (req, res) => {
     const { id } = req.params
     try {
         const application = await userModel.findOne({ _id: id });
-       if(application.ssc_credential_authenticate === 'not authenticated' && application.hsc_credential_authenticate === 'not authenticated' && application.application_status === 'application pending') {
             await sendAccurateCredential(application.applicant_email, application.applicant_name);
             smsForAccurateCredential(application.name, application.mobile);
             await userModel.findByIdAndDelete(id)
             res.status(200).json({ message: 'remove success' })
-        } else {
-            res.status(400).json({ message: 'Please verify this application credential' })
-        }
 
     } catch (error) {
         res.status(400).json({ msg: error })
