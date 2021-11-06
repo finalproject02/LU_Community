@@ -67,7 +67,7 @@ export const ApplicationFinalStep = (applicantData, history) => async (dispatch,
 export const CreateReference = (data) => async (dispatch) => {
     try {
         dispatch({ type: LOADING })
-        const { data  : { message }} = await API.createReference(data);
+        const { data  : { message }} = await API.createReference(data)
         dispatch({
             type: CREATE_REFERENCE,
             payload: message

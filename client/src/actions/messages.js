@@ -22,7 +22,7 @@ export const SendMessage = (data) => async (dispatch, getState) => {
         const { data: { message } } = await api.sendMessage(getState,data)
         dispatch({
             type: SEND_MESSAGE,
-            payload: data
+            payload: message
         })
         dispatch({ type: LOADED })
     } catch (error) {

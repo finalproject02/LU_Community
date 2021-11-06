@@ -1,7 +1,7 @@
 .main__chatcontent {
   flex-grow: 1;
   padding: 20px 40px;
-  max-width: 63%;
+  max-width: 100%;
   border-right: 1px solid #ebe7fb;
 }
 .content__header {
@@ -41,10 +41,10 @@
   animation-iteration-count: 1;
   animation-direction: normal; /* or: normal */
   animation-timing-function: cubic-bezier(
-    0.88,
-    0.19,
-    0.37,
-    1.11
+          0.88,
+          0.19,
+          0.37,
+          1.11
   ); /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
   animation-fill-mode: both; /* or: backwards, both, none */
   animation-delay: 0.2s; /* or: Xms */

@@ -1,66 +1,23 @@
-import React, {Component, useState, createRef, useEffect, useRef} from "react";
-
+import React, {useState, useEffect, useRef} from "react";
 import "./ChatContent.css";
 import Avatar from "../ChatList/Avatar";
 import ChatItem from "./ChatItem";
-import { FaPaperclip, FaPaperPlane, FaRegPaperPlane } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
+import {useDispatch, useSelector} from "react-redux";
+import {SendMessage, RealTimeMessage} from "../../../../../actions/messages";
+import { io } from 'socket.io-client'
 
 export default function ChatContent(){
+    const dispatch = useDispatch();
+    const [onlineConnection, setOnlineConnection] = useState([])
     const messagesEndRef = useRef(null);
-    const chatItems = [
-        {
-            key: 1,
-            image:
-                "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-            type: "",
-            msg: "Hi Tim, How are you?",
-        },
-        {
-            key: 2,
-            image:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "other",
-            msg: "I am fine.",
-        },
-        {
-            key: 3,
-            image:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "other",
-            msg: "What about you?",
-        },
-        {
-            key: 4,
-            image:
-                "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-            type: "",
-            msg: "Awesome these days.",
-        },
-        {
-            key: 5,
-            image:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "other",
-            msg: "Finally. What's the plan?",
-        },
-        {
-            key: 6,
-            image:
-                "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-            type: "",
-            msg: "what plan mate?",
-        },
-        {
-            key: 7,
-            image:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-            type: "other",
-            msg: "I'm talking about the tutorial",
-        },
-    ];
-
-    const [chat, setChat] = useState(chatItems);
-    const [msg, setMsg] = useState("")
+    const { current_chat, messages } = useSelector(state => state.messages);
+    const { people } = useSelector(state => state.people);
+    const { currentUser } = useSelector(state => state.auth)
+    const currentChatUser = people?.filter(user => user._id === current_chat);
+    const peerMessages = messages?.filter(conversation => (conversation.sender === current_chat && conversation.receiver === currentUser?._id) || (conversation.receiver === current_chat && conversation.sender === currentUser?._id));
+    const [msg, setMsg] = useState("");
+    const socket = useRef();
 
     const scrollToBottom = () => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -69,85 +26,109 @@ export default function ChatContent(){
     const handleKeyDown = (e) => {
        if (e.keyCode === 13) {
            if (msg !== "") {
-               chatItems.push({
-                   key: 1,
-                   type: "",
-                   msg: msg,
-                   image:
-                       "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-               });
-
+               dispatch(SendMessage({ message: msg, receiver: current_chat }));
+               socket.current.emit('sendMessage', {
+                   sender: currentUser?._id,
+                   receiver: current_chat,
+                   message: msg,
+                   createdAt: Date.now()
+               })
                setMsg("")
-               setChat(chatItems)
+               scrollToBottom();
            }
            scrollToBottom();
        }
     }
+    useEffect(() => {
+        socket.current = io("ws://localhost:8900");
+        socket.current.on('getMessage', (data) => {
+            dispatch(RealTimeMessage(data))
+
+        })
+    }, [])
+
+    useEffect(() => {
+        socket.current.emit('currentUser', currentUser?._id);
+        socket.current.on('getUser', (users) => {
+            setOnlineConnection(currentUser?.connection.filter(con => users.some((u) => u.userId === con)))
+        });
+
+    }, [])
 
     useEffect(() => {
 
         scrollToBottom();
     }, [])
+    useEffect(() => {
+        if (peerMessages) {
+            scrollToBottom();
+        }
+        scrollToBottom();
+    }, [peerMessages])
     const onStateChange = (e) => {
         setMsg(e.target.value);
     };
 
 
     return (
-        <div className="main__chatcontent">
-            <div className="content__header">
-                <div className="blocks">
-                    <div className="current-chatting-user">
-                        <Avatar
-                            isOnline="active"
-                            image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU"
-                        />
-                        <p>Tim Hover</p>
-                    </div>
-                </div>
+        current_chat !== "" ? (
+                <div className="main__chatcontent">
+                    <div className="content__header">
+                        <div className="blocks">
+                            {currentChatUser?.map(usr => (
+                                <div className="current-chatting-user">
+                                    <Avatar
+                                        isOnline="active"
+                                        image={usr?.profile_picture}
+                                    />
+                                    <p>{usr.name}</p>
+                                </div>
+                            ))}
+                        </div>
 
-                <div className="blocks">
-                    <div className="settings">
-                        <button className="btn-nobg">
-                            <i className="fa fa-cog"></i>
-                        </button>
+                        <div className="blocks">
+                            <div className="settings">
+                                <button className="btn-nobg">
+                                    <i className="fa fa-cog"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="content__body">
+                        <div className="chat__items">
+                            {peerMessages.map((itm, index) => {
+                                return (
+                                    <ChatItem
+                                        animationDelay={index + 2}
+                                        key={itm.key}
+                                        user={itm.sender === currentUser._id ? "" : "other"}
+                                        message={itm.message}
+                                        id={itm.sender === currentUser?._id ? currentUser._id : current_chat}
+                                        createdAt={itm.createdAt}
+
+                                    />
+                                );
+                            })}
+                            <div ref={messagesEndRef} />
+                        </div>
+                    </div>
+                    <div className="content__footer">
+                        <div className="sendNewMessage">
+                            <input
+                                type="text"
+                                placeholder="Type a message here"
+                                onChange={(e) => onStateChange(e)}
+                                value={msg}
+                                name={"message"}
+                                onKeyDown={(e) =>handleKeyDown(e)}
+                            />
+                            <button className="btnSendMsg" id="sendMsgBtn">
+                                <FaPaperPlane/>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="content__body">
-                <div className="chat__items">
-                    {chat.map((itm, index) => {
-                        return (
-                            <ChatItem
-                                animationDelay={index + 2}
-                                key={itm.key}
-                                user={itm.type ? itm.type : "me"}
-                                msg={itm.msg}
-                                image={itm.image}
-                            />
-                        );
-                    })}
-                    <div ref={messagesEndRef} />
-                </div>
-            </div>
-            <div className="content__footer">
-                <div className="sendNewMessage">
-                    <button className="addFiles">
-                        <FaPaperclip />
-                    </button>
-                    <input
-                        type="text"
-                        placeholder="Type a message here"
-                        onChange={onStateChange}
-                        value={msg}
-                        onKeyDown={(e) =>handleKeyDown(e)}
-                    />
-                    <button className="btnSendMsg" id="sendMsgBtn">
-                        <FaPaperPlane />
-                    </button>
-                </div>
-            </div>
-        </div>
+            ) : <h6>Please start conversations</h6>
     );
 
 }
