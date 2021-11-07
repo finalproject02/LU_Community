@@ -1,10 +1,9 @@
 .postModalPosition {
   box-sizing: content-box;
   display: flex;
-  position: static;
-  z-index: auto;
+  position: fixed;
+  z-index: 10000000 !important;
   float: none;
-  line-height: 16px;
 }
 .height {
   min-height: 26px;

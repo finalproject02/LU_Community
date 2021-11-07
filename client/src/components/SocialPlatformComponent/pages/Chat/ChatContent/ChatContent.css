@@ -68,7 +68,7 @@
   color: #fff;
   padding: 15px;
   border-radius: 10px 10px 0 10px;
-  max-width: 50%;
+  max-width: 100%;
   min-width: 215px;
 }
 .chat__item__content .chat__meta {

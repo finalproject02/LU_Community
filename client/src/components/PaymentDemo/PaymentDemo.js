@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import Header from "../Header/Header";
 import MainNavbar from "../MainNavbar/MainNavbar";
-import {useDispatch, useSelector} from "react-redux";
-import {PPayment} from "../../actions/applications";
+import { useDispatch, useSelector } from "react-redux";
+import { PPayment } from "../../actions/applications";
 
 const PaymentDemo = () => {
     const dispatch = useDispatch();
@@ -22,11 +22,11 @@ const PaymentDemo = () => {
                 <Row className="d-flex justify-content-center">
                     <Col md={8}>
                         <Card>
-                            <Card.Title className="textPrimary px-4 text-center p-2 fs-4">Online Admission</Card.Title>
+                            <Card.Title className="textPrimary px-4 text-center p-2 fs-4">Payment</Card.Title>
                             <Card.Body>
                                 <Form onSubmit={handleSubmit}>
                                     {Types === "PAYMENT_ERROR" && (
-                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                        <h6 style={{ color: 'red' }}>{message}</h6>
                                     )}
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="number" onChange={handleChange} name="reference_no"

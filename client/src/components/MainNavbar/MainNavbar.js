@@ -21,15 +21,15 @@ const MainNavbar = () => {
           id="responsive-navbar-nav"
         >
           <Nav className="me-auto bgPrimary">
-		  
+
             <Nav.Link href="/home" className="text-white me-4 navFontSize">
               Home
             </Nav.Link>
-			{currentUser?.position !== 'paid admission fee' && isAuthenticated && (
-				<Nav.Link className="navFontSize" href="/dashboard">
-				  Dashboard
-				</Nav.Link>
-		    )}
+            {currentUser?.position !== 'paid admission fee' && isAuthenticated && (
+              <Nav.Link className="navFontSize" href="/dashboard">
+                Dashboard
+              </Nav.Link>
+            )}
             <Nav.Link className="me-4 navFontSize " href="/aboutus">
               About Us
             </Nav.Link>
@@ -198,7 +198,7 @@ const MainNavbar = () => {
               <NavDropdown.Item
                 className="dropdownItem py-3"
                 href="/paymentDemo">
-                Payment Demo
+                Payment
               </NavDropdown.Item>
               <NavDropdown.Item
                 className="dropdownItem py-3"
@@ -239,7 +239,7 @@ const MainNavbar = () => {
                 </Nav.Link>
               </>
             )}
-            
+
           </Nav>
         </Navbar.Collapse>
       </Container>
