@@ -112,8 +112,7 @@ const PostCard = ({ posts }) => {
                                         <NavDropdown.Item className="dropdownItem py-1" onClick={() => dispatch(DeletePosts(post._id))}>Delete
                                             Post
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item className="dropdownItem py-1">Edit Post
-                                        </NavDropdown.Item>
+
                                     </NavDropdown>
                                 )}
 
@@ -125,10 +124,10 @@ const PostCard = ({ posts }) => {
                             </div>
                         </Card.Text>
                         <Card.Text as="div" className="d-flex justify-content-center">
-                            <img className="w-100 img-fluid cursor"
-                                src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} />
-                            <video className="w-100 d-none" controls src={`/api/files/storage/${post.filename}`}></video>
-                            <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".." ></iframe>
+                            {post.filename && (
+                                <img className="w-100 img-fluid cursor"
+                                     src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} />
+                            ) }
                         </Card.Text>
                         <Card.Text as="div">
                             <div className="d-flex align-items-center justify-content-between">

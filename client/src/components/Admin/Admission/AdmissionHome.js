@@ -37,7 +37,6 @@ const AdmissionHome = () => {
                                                     <th scope="col">Department</th>
                                                     <th scope="col">Reference Number</th>
                                                     <th scope="col">Payment</th>
-                                                    <th scope="col">Approve</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -49,10 +48,6 @@ const AdmissionHome = () => {
                                                         <td>{admissionReq.program_name}</td>
                                                         <td>{admissionReq.reference_no}</td>
                                                         <td>{admissionReq.payment_history.map(history => history.admission_fee).toString()}</td>
-                                                        <td>
-                                                            <button className="btn btn-primary" onClick={() => dispatch(ApproveAdmission(admissionReq._id))}>Approve</button>
-
-                                                        </td>
                                                     </tr>
                                                 ))}
 

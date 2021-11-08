@@ -7,7 +7,7 @@ const ChatBody = () => {
     return (
         <>
             <SocialNavbar />
-            <div className="main__chatbody mt-5">
+            <div className="main__chatbody mt-3">
                 <ChatList />
                 <ChatContent />
             </div>

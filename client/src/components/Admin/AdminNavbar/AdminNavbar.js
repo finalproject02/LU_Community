@@ -57,22 +57,7 @@ const AdminNavbar = () => {
                                 </div>}
                                 id="collasible-nav-dropdown"
                             >
-                                {currentUser?.position === 'Teacher' && (
-                                    <NavDropdown.Item
-                                        className="dropdownItem py-3"
-                                        href="/teacherProfile"
-                                    >
-                                    <FaIcons.FaUser className="me-2" />View Profile
-                                    </NavDropdown.Item>
-                                )}
-                                {currentUser?.position === 'Student' && (
-                                    <NavDropdown.Item
-                                        className="dropdownItem py-3"
-                                        href="/studentProfile"
-                                    >
-                                        <FaIcons.FaUser className="me-2" />View Profile
-                                    </NavDropdown.Item>
-                                )}
+
                                 {currentUser?.name === 'Administrator' && (
                                     <NavDropdown.Item
                                         className="dropdownItem py-3"

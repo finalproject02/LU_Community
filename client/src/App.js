@@ -86,7 +86,7 @@ function App() {
     dispatch(ALlGroup());
     dispatch(Messages());
     dispatch(Semester())
-    dispatch(updateProfile({ lastLogin: Date.now() }))
+    dispatch(updateProfile({lastLogin: Date.now()}))
   }, []);
   const { currentUser } = useSelector(state => state.auth);
   const department = currentUser?.department

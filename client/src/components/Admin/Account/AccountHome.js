@@ -7,7 +7,7 @@ import { ApproveAccount } from "../../../actions/applications";
 const AccountHome = () => {
     const dispatch = useDispatch()
     const { people } = useSelector(state => state.people);
-    const newAdmission = people?.filter(person => person.position === 'paid admission fee' && person.approval === 1);
+    const newAdmission = people?.filter(person => person.position === 'paid admission fee' && person.approval === 0);
     return (
         <div>
             <AdminNavbar />

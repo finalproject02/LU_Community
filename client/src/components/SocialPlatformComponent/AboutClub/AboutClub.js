@@ -13,7 +13,6 @@ const AboutClub = () => {
                         <ClubInfo />
                     </Col>
                     <Col md="4">
-                        <ClubCommittee />
                         <ClubSuggestionsCard />
                     </Col>
                 </Row>

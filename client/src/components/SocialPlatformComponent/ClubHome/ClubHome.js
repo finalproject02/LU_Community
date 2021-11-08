@@ -34,7 +34,6 @@ const ClubHome = () => {
                     </Col>
                     <Col md="4">
                         <PhotoCard  photos={clubPhotos}/>
-                        <VideoCard />
                         <ClubSuggestionsCard />
                     </Col>
                 </Row>
