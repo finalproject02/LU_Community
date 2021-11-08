@@ -29,7 +29,6 @@ const SocialHome = () => {
                         </Col>
                         <Col md="4">
                             <HomeSmProfile />
-                            <Online />
                             <Suggestions />
                         </Col>
                     </Row>

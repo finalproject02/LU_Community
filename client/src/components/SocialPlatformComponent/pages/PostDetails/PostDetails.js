@@ -101,12 +101,12 @@ const NotificationPostPage = () => {
                                                 {item.owner_position.startsWith('Group') && (
                                                     item.owner_position === 'Group_admin' ? (
                                                         <>
-                                                            <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                            <h6 style={{cursor: 'pointer'}} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                             <small>{moment(item.createdAt).fromNow()}</small>
                                                             <p onClick={() => action(item.owner_id, 'own_post')}>Admin post</p>
                                                         </>
                                                     ) : <>
-                                                        <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                        <h6 style={{cursor: 'pointer'}} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>
                                                         <p onClick={() => action(item.owner_id, 'own_post')}>{getUserName(item.owner_id, 'own_post', '')}</p>
                                                     </>
@@ -114,12 +114,12 @@ const NotificationPostPage = () => {
 
                                                 {item.owner_position === 'own_post' && (
                                                     <>
-                                                        <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                        <h6 style={{cursor: 'pointer'}} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>
                                                     </>
                                                 )} {item.owner_position === 'club_post' && (
                                                     <>
-                                                        <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                        <h6 style={{cursor: 'pointer'}} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>
                                                     </>
                                                 )

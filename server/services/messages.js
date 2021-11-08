@@ -16,7 +16,7 @@ export const confirmAdmissionMessage = (name, student_id, batch, email, password
 }
 
 export const admissionRegister = (name, email, password) => {
-    const message = `Hello ${name}.\n\nWe are follow that you are pay for admission form. Your Email: ${email} and password: ${password}.Please login our website and fill the admission form. Thank your\n\nLeading University, Sylhet
+    const message = `Hello ${name}.\n\n Congratulation, your admission payment is successful. Please login (www.lus.ac.bd/login) with following email ${email} and password: ${password}.\n\nLeading University, Sylhet
     `
     return message
 }

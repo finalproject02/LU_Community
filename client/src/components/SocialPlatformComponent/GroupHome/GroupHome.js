@@ -29,7 +29,6 @@ const GroupHome = ({setPhoto, setPost}) => {
                     <Col md="4">
                         <GroupIntro />
                         <PhotoCard photos={groupPhotos} setPost={setPost} setPhoto={setPhoto}/>
-                        <VideoCard />
                         <AllGroup suggestionGroup={suggestionGroup}/>
                     </Col>
                 </Row>

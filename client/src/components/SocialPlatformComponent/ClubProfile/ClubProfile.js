@@ -206,17 +206,6 @@ const ClubProfile = () => {
                                             </NavDropdown.Item>
                                         </NavDropdown>
                                     </ul>
-                                    <ul className="nav">
-
-                                        <li className="nav-item">
-                                            <div className="nav-link link-dark px-2">
-                                                <Form className="col-12 col-lg-auto mb-3 mb-lg-0">
-                                                    <input type="search" className="form-control" placeholder="Search..."
-                                                        aria-label="Search" />
-                                                </Form>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </nav>
                         </Row>

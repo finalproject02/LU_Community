@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import PhotoCard from '../../PhotoCard/PhotoCard';
-import Post from '../../Post/Post';
 import Suggestions from '../../Suggestions/Suggestions';
 import UserProfileEducation from './UserProfileEducation';
 import UserProfileIntro from './UserProfileIntro';
