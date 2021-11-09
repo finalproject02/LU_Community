@@ -13,6 +13,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import Avatar from '../../../../images/avatar.jpeg'
 import path from "path";
+import {Peer} from "../../../../actions/messages";
 
 const UserProfileCard = () => {
     const dispatch = useDispatch();
@@ -110,7 +111,9 @@ const UserProfileCard = () => {
                                                     </p>
                                                     {isConnected.length !== 0 && (
                                                         <div className="mb-2">
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
+                                                            <Link to="/chat" className="btn btn-primary me-2" onClick={() => {
+                                                                dispatch(Peer(user._id));
+                                                            }}>Message</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Remove Connection</Link>
                                                         </div>
                                                     )}

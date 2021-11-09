@@ -24,8 +24,8 @@ const UserProfileHome = ({ setPhoto, setAbout, setConnection, setPost }) => {
                         <PostCard posts={paramsUserPosts}/>
                     </Col>
                     <Col md="4">
-                        <UserProfileIntro />
-                        <UserProfileEducation />
+                        <UserProfileIntro setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection} setPost={setPost}/>
+                        <UserProfileEducation  />
                         <PhotoCard setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection} setPost={setPost} photos={paramsUserPhoto}/>
                         <UserFriendCard setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection} setPost={setPost}/>
                         <Suggestions />

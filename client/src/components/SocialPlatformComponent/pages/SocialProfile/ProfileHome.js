@@ -22,7 +22,7 @@ const ProfileHome = ({ setPhoto, setAbout, setConnection, setPost}) => {
                         <Post details={currentUser} posts={currentUserPost}/>
                     </Col>
                     <Col md="4">
-                        <ProfileIntro />
+                        <ProfileIntro setPost={setPost} setAbout={setAbout} setPhoto={setPhoto} setConnection={setConnection}/>
                         <ProfileEducation/>
                         <PhotoCard setPost={setPost} setAbout={setAbout} setPhoto={setPhoto} setConnection={setConnection} photos={currentUserPhotos}/>
                         <FriendCard setPost={setPost} setAbout={setAbout} setPhoto={setPhoto} setConnection={setConnection}/>

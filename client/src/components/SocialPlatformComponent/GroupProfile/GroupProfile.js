@@ -25,8 +25,12 @@ const GroupProfile = () => {
     const [post, setPost] = useState(true);
     const [groupMember, setGroupMember] = useState(false);
     const [photo, setPhoto] = useState(false);
+    const { posts } = useSelector(state => state.posts)
     const [video, setVideo] = useState(false);
     const [coverPhoto, setCoverPhoto] = useState();
+
+    const currentUserPost = posts.filter(post => post.post_to === id);
+    const currentUserPhotos = currentUserPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase().toLowerCase() === '.jpg')
 
     const handleChangeHome = () => {
         setPost(true);
@@ -218,7 +222,7 @@ const GroupProfile = () => {
             </div>
 
             {
-                post && <GroupHome setPost={setPost} setPhoto={setPhoto} />
+                post && <GroupHome setPost={setPost} setPhoto={setPhoto} setAbout={setAbout} />
             }
             {
                 about && <AboutGroup />
@@ -227,7 +231,7 @@ const GroupProfile = () => {
                 groupMember && <GroupMember />
             }
             {
-                photo && <AllPhotos />
+                photo && <AllPhotos photos={currentUserPhotos}/>
             }
             {
                 video && <AllVideos />

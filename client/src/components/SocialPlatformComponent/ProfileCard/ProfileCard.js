@@ -315,7 +315,7 @@ const ProfileCard = () => {
                 </Row>
             </div>
             {post && <ProfileHome setPhoto={setPhoto} setPost={setPost} setAbout={setAbout} setConnection={setConnection} />}
-            {about && <ProfileAbout />}
+            {about && <ProfileAbout/>}
             {connection && <AllFriend connections={currentUserConnections} />}
             {photo && <AllPhotos photos={currentUserPhotos} />}
             {video && <AllVideos />}

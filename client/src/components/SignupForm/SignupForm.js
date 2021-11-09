@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { SignUp } from "../../actions/auth";
+import {useHistory} from "react-router-dom";
 
 const SignupForm = () => {
+    const history = useHistory();
     const { message, Types } = useSelector(state => state.errors);
     const { departments } = useSelector(state => state.departments);
     const dispatch = useDispatch();
@@ -26,7 +28,7 @@ const SignupForm = () => {
         if (data.password !== data.confirmPassword) {
             alert("Those passwords didn't match. Try again.")
         }
-        dispatch(SignUp(data));
+        dispatch(SignUp(data, history));
     }
     return (
         <div className="mt-5 p-4">

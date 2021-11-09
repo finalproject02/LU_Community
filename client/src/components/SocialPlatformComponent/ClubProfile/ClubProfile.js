@@ -23,13 +23,15 @@ const ClubProfile = () => {
     const [clubData, setClubData] = useState({})
     const { clubs } = useSelector(state => state.clubs);
     const { currentUser } = useSelector(state => state.auth);
+    const { posts } = useSelector(state => state.posts)
     const [about, setAbout] = useState(false);
     const [post, setPost] = useState(true);
     const [follower, setFollower] = useState(false);
     const [photo, setPhoto] = useState(false);
     const [video, setVideo] = useState(false);
     const [event, setEvent] = useState(false);
-
+    const currentUserPost = posts.filter(post => post.post_to === id);
+    const currentUserPhotos = currentUserPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase().toLowerCase() === '.jpg')
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
 
@@ -223,7 +225,7 @@ const ClubProfile = () => {
                 follower && <ClubFollower paramsClub={paramsClub} />
             }
             {
-                photo && <AllPhotos />
+                photo && <AllPhotos photos={currentUserPhotos} />
             }
             {
                 video && <AllVideos />
