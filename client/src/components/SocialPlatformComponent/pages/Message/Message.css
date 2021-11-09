@@ -1,0 +1,116 @@
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  background: #e5ddd6;
+}
+.messageDiv {
+  display: flex;
+  margin: 5px 15px;
+}
+.message {
+  padding: 8px 10px;
+  border-radius: 4px;
+  max-width: 50%;
+  color: #303030;
+  font-size: 14px;
+}
+.chatBox {
+  background: #f0f0f0;
+  padding: 10px;
+  align-items: center;
+}
+.messageContainer {
+  flex-direction: column;
+  overflow-y: auto;
+  background: #e4e0dd;
+}
+.searchContainer {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  padding: 5px 10px;
+  gap: 10px;
+  width: 100%;
+}
+
+.profileHeader {
+  display: flex;
+  flex-direction: row;
+  background: #ededed;
+  padding: 10px;
+  align-items: center;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: row;
+  background: #ededed;
+  align-items: center;
+  gap: 10px;
+}
+.aside {
+  width: 100%;
+  height: 800px;
+  background-color: #ffffff;
+  display: inline-block;
+  font-size: 15px;
+  vertical-align: top;
+}
+.chat {
+  width: 100%;
+  height: 90vh;
+  display: inline-block;
+  font-size: 16px;
+  vertical-align: top;
+}
+.conversationListHover:hover {
+  background-color: #6daf2c;
+  cursor: pointer;
+}
+.commentBoxPostDetails {
+  position: absolute;
+  right: 18%;
+  bottom: 40%;
+  font-size: 15px;
+}
+
+.conversation {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100%;
+  /*width: 100%;*/
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  /*overflow-y: auto;*/
+}
+.heading {
+  padding: 10px 16px 10px 15px;
+  margin: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #ededed;
+  z-index: 1000;
+}
+.message {
+  padding: 0 !important;
+  margin: 0 !important;
+  background-size: cover;
+  overflow-y: auto;
+  border: 1px solid #f7f7f7;
+  height: calc(100% - 220px);
+}
+.message-body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+.reply {
+  height: 60px;
+  width: 100%;
+  background-color: #f5f1ee;
+  padding: 10px 5px 10px 5px !important;
+  margin: 0 !important;
+  z-index: 1000;
+}

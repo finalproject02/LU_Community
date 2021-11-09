@@ -1,15 +1,18 @@
-import { LOADED, LOADING, NEW_APPLICATION } from "../actions/types";
+import {
+    LOADED, LOADING,
+    ADMISSION_FIRST_STEP
+} from "../actions/types";
 
 export default (state = { isLoading: false, admission: [] }, action) => {
     switch (action.type) {
-        case NEW_APPLICATION:
+        case ADMISSION_FIRST_STEP:
             return {
                 ...state,
                 admission: action.payload,
                 isLoading: false
             }
         case LOADING:
-            return  {
+            return {
                 ...state,
                 isLoading: true
             }

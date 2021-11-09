@@ -1,14 +1,19 @@
 import mongoose from "mongoose";
 
 const postModel = new mongoose.Schema({
-    creator_name: {
+    owner_name: {
         type: String,
         required: true
     },
-    creator_id: {
+    owner_id: {
         type: String,
         required: true
     },
+    owner_position: {
+        type: String,
+        default: 'own_post'
+    },
+    post_to: String,
     description: String,
     filename: String,
     likes: {
@@ -23,6 +28,7 @@ const postModel = new mongoose.Schema({
         type: Array,
         default: []
     },
+    admin_to: String,
     post_status: {
         type: String,
         default: 'Public',

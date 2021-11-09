@@ -1,18 +1,19 @@
-import { GET_ERRORS, CLEAR_ERRORS } from "../actions/types";
+import {CLEAR_ERRORS, GET_ERRORS} from "../actions/types";
 
-export default (state = { message: {}, status: null}, action) => {
+export default (state = { message: null, Types: null, field: null }, action) => {
     switch (action.type) {
         case GET_ERRORS:
             return {
                 ...state,
-                message: action.payload.message,
-                status: action.payload.status,
+                message: action.payload.message.message,
+                field: action.payload.message.field,
+                Types: action.payload.Types
             }
         case CLEAR_ERRORS:
             return {
                 ...state,
-                message: {},
-                status: null,
+                message: null,
+                Types: null
             }
         default:
             return state

@@ -8,38 +8,29 @@ const VideoCard = () => {
             <Card className="w-100">
                 <Card.Body>
                     <Card.Title>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4>Photos</h4>
-                            <h6 class="card-subtitle mb-2 text-muted textHover">See All</h6>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h4>Videos</h4>
+                            <h6 className="mb-2 textHover">See all</h6>
                         </div>
                     </Card.Title>
                     <Card.Text>
                         <Row>
-                            <Col md="4" className="mb-2">
+                            <Col md="6" className="mb-2">
                                 <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
                             </Col>
-                            <Col md="4" className="mb-2">
+                            <Col md="6" className="mb-2">
                                 <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
                             </Col>
-                            <Col md="4" className="mb-2">
+                            <Col md="6" className="mb-2">
                                 <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
                             </Col>
-                            <Col md="4" className="mb-2">
+                            <Col md="6" className="mb-2">
                                 <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
                             </Col>
-                            <Col md="4" className="mb-2">
+                            <Col md="6" className="mb-2">
                                 <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
                             </Col>
-                            <Col md="4" className="mb-2">
-                                <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
-                                <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
-                            </Col>
-                            <Col md="4" className="mb-2">
+                            <Col md="6" className="mb-2">
                                 <video controls src={video} className="rounded-3 mb-2 w-100" alt="" />
                             </Col>
                         </Row>

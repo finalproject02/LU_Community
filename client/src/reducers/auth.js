@@ -4,12 +4,18 @@ import {
     CREATE_ACCOUNT_FAILED,
     LOGIN_ACCOUNT_FAILED,
     LOGOUT_SUCCESS,
-    CURRENT_USER,
-    LOADING,
-    LOADED, UPDATE_INFO
+    CURRENT_USER, CHANGE_PASSWORD,
+    LOADING, GET_ERRORS,
+    LOADED, UPDATE_INFO,
+    ACCEPT_CONNECTION_REQUEST,
+    CONNECT, DISCONNECT, PEER,
+    DELETE_EDUCATION_BACKGROUND, DELETE_JOB,
+    CLUB_FOLLOW, CLUB_UNFOLLOW, MEMBER_REQUEST,
+    CANCEL_REQUEST, ACCEPT_REQUEST, REJECT_REQUEST,
+
 } from "../actions/types";
 
-export default (state = { token: localStorage.getItem('token'), currentUser: null, isAuthenticated: false, isLoading: false }, action) => {
+export default (state = { token: localStorage.getItem('token'), currentUser: null, isAuthenticated: false, isLoading: false, message: '' }, action) => {
     switch (action.type) {
         case CREATE_ACCOUNT_SUCCESS:
         case LOGIN_ACCOUNT_SUCCESS:
@@ -50,14 +56,44 @@ export default (state = { token: localStorage.getItem('token'), currentUser: nul
         case LOADED:
             return {
                 ...state,
-                isAuthenticated: true,
                 isLoading: false
             };
         case UPDATE_INFO:
+        case CLUB_FOLLOW:
+        case CLUB_UNFOLLOW:
+        case MEMBER_REQUEST:
+        case CANCEL_REQUEST:
+        case PEER:
+        case CHANGE_PASSWORD:
             return {
                 ...state,
                 currentUser: action.payload,
                 isAuthenticated: true
+            }
+        case GET_ERRORS:
+            return {
+                ...state,
+                isAuthenticated: false,
+                message: action.payload.message
+            }
+        case ACCEPT_CONNECTION_REQUEST:
+        case CONNECT:
+        case DISCONNECT:
+            return {
+                ...state,
+                currentUser: action.payload
+            };
+        case DELETE_EDUCATION_BACKGROUND:
+        case DELETE_JOB:
+            return {
+                ...state,
+                currentUser: action.payload
+            }
+        case ACCEPT_REQUEST:
+        case REJECT_REQUEST:
+            return {
+                ...state,
+                currentUser: action.payload.creator
             }
         default:
             return state

@@ -12,7 +12,7 @@ function CampusFacilities() {
         {CampusFacilitiesData.map((item) => (
           <Col key={item.id} md="4">
             <Card className="w-100 shadow-sm mb-4 p-4">
-              <Card.Body className="text-center py-4">
+              <Card.Body className="text-center py-4 h-100">
                 <FontAwesomeIcon
                   className="textSecondary fs-1 mb-3"
                   icon={item.icon}

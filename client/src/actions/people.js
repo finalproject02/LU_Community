@@ -1,6 +1,9 @@
 import * as api from '../api'
-import {LOADING, LOADED, SUGGESTIONS, ALL_USERS} from "./types";
-import {returnErrors} from "./erros";
+import {
+    LOADING, LOADED,
+    SUGGESTIONS,
+    ALL_USERS
+} from "./types";
 
 export const People = () => async (dispatch, getState) => {
     try {
@@ -12,7 +15,7 @@ export const People = () => async (dispatch, getState) => {
         });
         dispatch({ type: LOADED })
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        console.log('error')
     }
 }
 
@@ -27,6 +30,6 @@ export const Suggestions = (keyWord) => async (dispatch, getState) => {
         })
         dispatch({ type: LOADED });
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        console.log('error')
     }
 }

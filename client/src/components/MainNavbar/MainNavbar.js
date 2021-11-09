@@ -2,17 +2,16 @@ import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./MainNavbar.css";
 import { useSelector, useDispatch } from "react-redux";
-import {Logout} from "../../actions/auth";
+import { Logout } from "../../actions/auth";
 
 const MainNavbar = () => {
   const dispatch = useDispatch()
-  const { isAuthenticated } = useSelector(state => state.auth)
+  const { isAuthenticated, currentUser } = useSelector(state => state.auth)
   return (
     <Navbar
       collapseOnSelect
       expand="lg"
-      className="bgPrimary sticky-top borderBottom"
-      variant="dark"
+      className="sticky-top borderBottom" style={{ backgroundColor: "#187875" }}
     >
       <Container>
         <Navbar.Brand href="#home"></Navbar.Brand>
@@ -22,10 +21,16 @@ const MainNavbar = () => {
           id="responsive-navbar-nav"
         >
           <Nav className="me-auto bgPrimary">
+
             <Nav.Link href="/home" className="text-white me-4 navFontSize">
               Home
             </Nav.Link>
-            <Nav.Link className="me-4 navFontSize" href="/aboutus">
+            {currentUser?.position !== 'paid admission fee' && isAuthenticated && (
+              <Nav.Link className="navFontSize" href="/dashboard">
+                Dashboard
+              </Nav.Link>
+            )}
+            <Nav.Link className="me-4 navFontSize " href="/aboutus">
               About Us
             </Nav.Link>
             <NavDropdown
@@ -192,9 +197,8 @@ const MainNavbar = () => {
               </NavDropdown.Item>
               <NavDropdown.Item
                 className="dropdownItem py-3"
-                href="/paymentprocedure"
-              >
-                Payment Procedure
+                href="/paymentDemo">
+                Payment
               </NavDropdown.Item>
               <NavDropdown.Item
                 className="dropdownItem py-3"
@@ -207,7 +211,7 @@ const MainNavbar = () => {
               </NavDropdown.Item>
               <NavDropdown.Item
                 className="dropdownItem py-3"
-                href="/socialplatform"
+                href="/socialPlatform"
               >
                 Social Platform
               </NavDropdown.Item>
@@ -224,20 +228,18 @@ const MainNavbar = () => {
             <Nav.Link className="navFontSize me-4" href="/library">
               Library
             </Nav.Link>
-            {isAuthenticated? (
-                <Nav.Link className="navFontSize" onClick={() => dispatch(Logout())}>
-                  Logout
-                </Nav.Link>
+            {isAuthenticated ? (
+              <Nav.Link className="navFontSize" onClick={() => dispatch(Logout())}>
+                Logout
+              </Nav.Link>
             ) : (
-                <>
-                  <Nav.Link className="navFontSize" href="/login">
-                    Login
-                  </Nav.Link>
-                  <Nav.Link className="navFontSize" href="/signup">
-                    Signup
-                  </Nav.Link>
-                </>
+              <>
+                <Nav.Link className="navFontSize" href="/login">
+                  Login
+                </Nav.Link>
+              </>
             )}
+
           </Nav>
         </Navbar.Collapse>
       </Container>

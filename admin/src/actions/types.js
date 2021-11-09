@@ -1,8 +1,0 @@
-export const LOADING =  'LOADING';
-export const LOADED =  'LOADED';
-export const GET_ERRORS =  'GET_ERROR';
-export const CLEAR_ERROR =  'CLEAR_ERROR';
-export const GET_APPLICATIONS = 'GET_APPLICATIONS';
-export const GET_APPLICATION = 'GET_APPLICATION';
-export const CHECKED_SSC_RESULT = 'CHECKED_SSC_RESULT';
-export const CHECKED_HSC_RESULT = 'CHECKED_HSC_RESULT';

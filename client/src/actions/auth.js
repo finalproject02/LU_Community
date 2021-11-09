@@ -1,34 +1,34 @@
 import {
     CREATE_ACCOUNT_SUCCESS,
     LOGIN_ACCOUNT_SUCCESS,
-    CREATE_ACCOUNT_FAILED,
-    LOGIN_ACCOUNT_FAILED,
-    LOGOUT_SUCCESS,
-    CURRENT_USER,
-    LOADING,
-    LOADED,
-    UPDATE_INFO
+    LOGOUT_SUCCESS, CURRENT_USER,
+    LOADING, LOADED, UPDATE_INFO,
+    SEARCHING, CONNECT, CHANGE_PASSWORD,
+    DISCONNECT, ACCEPT_CONNECTION_REQUEST, DELETE_EDUCATION_BACKGROUND, DELETE_JOB
 } from "./types";
 import * as api from '../api';
-import {returnErrors} from './erros';
+import {clearError, getErrors} from "./errors";
+import ShowToast from "../services/ShowToast";
 
 
-export const SignUp = (userData) => async (dispatch) => {
+export const SignUp = (userData, history) => async (dispatch) => {
     try {
         dispatch({ type: LOADING });
         const { data : { user, token } } = await api.createAccount(userData);
+        history.push('/socialPlatform')
         dispatch({
             type: CREATE_ACCOUNT_SUCCESS,
             payload: { user, token }
         });
         dispatch({ type: LOADED })
     } catch (error) {
-        dispatch({type: CREATE_ACCOUNT_FAILED});
-        returnErrors(error.response.message, error.response.status)
+       dispatch(getErrors(error.response.data, 'SIGNUP_ERROR'));
+       console.log(error)
+
     }
 }
 
-export const SignIn = (userData)  => async (dispatch) => {
+export const SignIn = (userData, history)  => async (dispatch) => {
     try {
         dispatch({ type: LOADING });
         const { data : { user, token } } = await api.loginAccount(userData);
@@ -36,10 +36,36 @@ export const SignIn = (userData)  => async (dispatch) => {
             type: LOGIN_ACCOUNT_SUCCESS,
             payload: { user, token }
         });
+        if (user.position === 'paid admission fee' && user.approval === 2) {
+            history.push('/firstStep')
+        } else if (user.name === 'Account') {
+            history.push('/dashboard')
+        } else if (user.name === 'Admission') {
+            history.push('/dashboard')
+        } else {
+            history.push('/socialPlatform')
+        }
         dispatch({ type: LOADED })
     } catch (error) {
-        dispatch({ type: LOGIN_ACCOUNT_FAILED });
-        returnErrors(error.response.message, error.response.status)
+        dispatch(getErrors(error.response.data, 'SIGN_IN_ERROR'))
+    }
+}
+
+export const ChangePassword = (userData)  => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data : { user }} = await api.changePassword(userData, getState);
+        ShowToast(1, 'Password change success');
+        setTimeout(() => {
+            window.location.reload()
+        }, 1000)
+        dispatch({
+            type: CHANGE_PASSWORD,
+            payload: user
+        });
+        dispatch({ type: LOADED })
+    } catch (error) {
+        dispatch(getErrors(error.response.data, 'CHANGE_PASSWORD_ERROR'))
     }
 }
 
@@ -58,7 +84,7 @@ export const LoadingCurrentUser = () => async (dispatch, getState) => {
         });
         dispatch({ type: LOADED })
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+       console.log('error')
     }
 }
 export const tokenConfig = (getState) => {
@@ -78,7 +104,6 @@ export const tokenConfig = (getState) => {
 
 export const updateProfile = (userData) => async (dispatch, getState) => {
 
-    console.log('first token: ', getState)
     try {
         dispatch({ type: LOADING });
         const {data: { user }} = await api.updateUserData(getState, userData);
@@ -88,6 +113,90 @@ export const updateProfile = (userData) => async (dispatch, getState) => {
         })
         dispatch({ type: LOADED });
     } catch (error) {
-        returnErrors(error.response.data, error.response.status)
+        getErrors(error.response.data, 'UPDATE_ERROR')
+    }
+}
+
+export const search = (searchKey) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING });
+        const { data } = await api.searchUser(getState, searchKey)
+        dispatch({
+            type: SEARCHING,
+            payload: data
+        });
+        dispatch({ type: LOADED });
+    } catch (error) {
+        getErrors(error.response.data, 'SEARCH_ERROR')
+    }
+}
+
+export const Connect = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({ type:LOADING });
+        const { data : {user}  } = await api.connect(getState, id);
+        dispatch({
+            type: CONNECT,
+            payload: user
+        })
+        dispatch({ type:LOADED});
+    } catch (error) {
+        getErrors(error.response.data, 'CONNECT_ERROR')
+    }
+}
+
+export const Disconnect = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({ type:LOADING });
+        const { data : { user } } = await api.disconnect(getState, id);
+        dispatch({
+            type: DISCONNECT,
+            payload: user
+        })
+        dispatch({ type:LOADED});
+    } catch (error) {
+       getErrors(error.response.data, 'DISCONNECT_ERROR')
+    }
+}
+
+export const Accept_Connection_Request = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({ type:LOADING });
+        const { data : { user } } = await api.accept_connection_request(getState, id);
+        dispatch({
+            type: ACCEPT_CONNECTION_REQUEST,
+            payload: user
+        })
+        dispatch({ type:LOADED});
+    } catch (error) {
+        getErrors(error.response.data, 'ACCEPT_ERROR')
+    }
+}
+
+export const DeleteEducationBackground = (degree) => async (dispatch, getState) => {
+    try {
+       dispatch({ type: LOADING })
+       const { data : { user }} = await api.deleteEducationBackground(getState, degree);
+       dispatch({
+           type: DELETE_EDUCATION_BACKGROUND,
+           payload: user
+       })
+       dispatch({ type: LOADED })
+    } catch (error) {
+        getErrors(error.response.data, 'DELETE_EDUCATION_ERROR')
+    }
+}
+
+export const DeleteJob = (company_name) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: LOADING })
+        const { data : { user }} = await api.deleteJob(getState, company_name);
+        dispatch({
+            type: DELETE_JOB,
+            payload: user
+        })
+        dispatch({ type: LOADED })
+    } catch (error) {
+        getErrors(error.response.data, 'DELETE_JOB_ERROR')
     }
 }

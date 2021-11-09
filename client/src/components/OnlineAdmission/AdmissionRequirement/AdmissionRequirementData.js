@@ -6,6 +6,7 @@ const admissionTypes = [
         subtitle: "Admission for Undergraduate Programs",
         heading: "Admission Requirements:",
         requirement1:
+
             "1. Minimum score of CGPA 2.50 both in SSC and HSC or CGPA 6.00 for both examinations in aggregate but not less than 2.00 in any of S.S.C & H.S.C.",
         requirement2:
             "2. For the Children of freedom fighters aggregated CGPA of S.S.C & H.S.C or equivalent examinations is 5.00.",
@@ -16,7 +17,7 @@ const admissionTypes = [
         id: 2,
         name: "MSc",
         title: "Leading University Admission Form",
-        subtitle: "Admission for Undergraduate Programs",
+        subtitle: "Admission for Graduate Programs",
         heading: "Admission Requirements:",
         requirement1:
             "Must have minimum score of CGPA 2.50 both in SSC and HSC or CGPA 6.00 for both examinations in aggregate but not less than 2.00 in any of S.S.C & H.S.C. with following result into the graduation level:",

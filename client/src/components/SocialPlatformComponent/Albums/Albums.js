@@ -40,7 +40,6 @@ const Albums = () => {
                     </Row>
                 </Card.Body>
             </Card>
-
         </div>
     );
 };
