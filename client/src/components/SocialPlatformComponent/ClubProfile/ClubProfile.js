@@ -178,8 +178,8 @@ const ClubProfile = () => {
                                 </Card.Body>
                             ))}
                         </Container>
-                        <Row className="sticky-top">
-                            <nav className="py-2 bg-light border-bottom">
+                        <Row>
+                            <div className="py-2 bg-light border-bottom">
                                 <div className="container d-flex flex-wrap">
                                     <ul className="nav me-auto">
                                         <li className="nav-item cardHover rounded-3">
@@ -207,7 +207,7 @@ const ClubProfile = () => {
                                         </NavDropdown>
                                     </ul>
                                 </div>
-                            </nav>
+                            </div>
                         </Row>
                     </Card>
                 </Row>

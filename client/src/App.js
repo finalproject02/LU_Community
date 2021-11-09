@@ -199,7 +199,7 @@ function App() {
             <Route path="/classroom">
               <Classroom />
             </Route>
-            <Route path="/socialplatform">
+            <Route path="/socialPlatform">
               <SocialPlatform />
             </Route>
             <Route path="/socialProfile">
