@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { updateProfile } from "../../../actions/auth";
 
-const ProfileIntro = () => {
+const ProfileIntro = ({setAbout, setConnection, setPost, setPhoto}) => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.auth);
     const [show, setShow] = useState(false);
@@ -107,7 +107,12 @@ const ProfileIntro = () => {
 
                     </Card.Text>
                     <div className="bgPrimary text-center rounded-3">
-                        <Link to="#" className="btn w-100 text-white">View More</Link>
+                        <button className="btn w-100 text-white" onClick={() => {
+                            setPost(false);
+                            setPhoto(false);
+                            setConnection(false);
+                            setAbout(true)
+                        }}>View More</button>
                     </div>
                 </Card.Body>
             </Card>

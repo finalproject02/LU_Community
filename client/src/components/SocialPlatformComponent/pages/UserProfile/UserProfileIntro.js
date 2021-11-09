@@ -5,7 +5,7 @@ import { FaBlog, FaBook, FaCommentDots, FaGraduationCap, FaHome, FaPhone } from 
 import { useSelector } from "react-redux";
 import moment from "moment";
 
-const UserProfileIntro = () => {
+const UserProfileIntro = ({setPhoto, setAbout, setConnection, setPost}) => {
     const { people } = useSelector(state => state.people);
     const params = useParams();
     const { id } = params;
@@ -84,7 +84,12 @@ const UserProfileIntro = () => {
                                 </Card.Text>
                             )}
                             <div className="bgPrimary text-center rounded-3 mt-4">
-                                <strong className="btn w-100 text-white">View More</strong>
+                                <strong className="btn w-100 text-white" onClick={() => {
+                                    setPost(false);
+                                    setConnection(false);
+                                    setPhoto(false);
+                                    setAbout(true)
+                                }}>View More</strong>
                             </div>
                         </>
                     ))}

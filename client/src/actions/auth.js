@@ -11,10 +11,11 @@ import {clearError, getErrors} from "./errors";
 import ShowToast from "../services/ShowToast";
 
 
-export const SignUp = (userData) => async (dispatch) => {
+export const SignUp = (userData, history) => async (dispatch) => {
     try {
         dispatch({ type: LOADING });
         const { data : { user, token } } = await api.createAccount(userData);
+        history.push('/socialPlatform')
         dispatch({
             type: CREATE_ACCOUNT_SUCCESS,
             payload: { user, token }

@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import { FaEye, FaGlobe, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const GroupIntro = () => {
+const GroupIntro = ({setPost, setPhoto, setAbout}) => {
     return (
         <div className="mb-4">
             <Card className="w-100">
@@ -28,7 +28,11 @@ const GroupIntro = () => {
                     </Card.Text>
                 </Card.Body>
                 <div className="bgPrimary text-center rounded-3">
-                    <strong className="btn w-100 cursor text-white">View more</strong>
+                    <strong className="btn w-100 cursor text-white" onClick={() => {
+                        setPhoto(false);
+                        setPost(false);
+                        setAbout(true);
+                    }}>View more</strong>
                 </div>
             </Card>
         </div>
