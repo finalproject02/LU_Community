@@ -1,5 +1,5 @@
 export const referenceNumberMessage = (name, reference_no) => {
-    const message = `Hello ${name}.\n\nYour registration has been successful. For payment you should use this ${reference_no} code as a reference number. Thank for registration.\n\nLeading University, Sylhet
+    const message = `Hello ${name}.\n\nYour registration has been successful.Pay 500 for the form fee and use this ${reference_no} code as a reference number. Thank for registration.\n\nLeading University, Sylhet
     `
     return message
 }
@@ -15,7 +15,7 @@ export const confirmAdmissionMessage = (name, student_id, batch, email, password
     return message
 }
 
-export const admissionRegister = (name,  email, password) => {
+export const admissionRegister = (name, email, password) => {
     const message = `Hello ${name}.\n\n Congratulation, your admission payment is successful. Please login (www.lus.ac.bd/login) with following email ${email} and password: ${password}.\n\nLeading University, Sylhet
     `
     return message

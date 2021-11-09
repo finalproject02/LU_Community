@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Badge, Container, Dropdown, Form, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaHome, FaRegBell, FaRegCommentDots, FaTh, FaUser, FaUserPlus } from 'react-icons/fa';
+import { FaHome, FaRegBell, FaRegCommentDots, FaTh, FaUserPlus } from 'react-icons/fa';
 import './SocialNavbar.css';
 import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../../../actions/auth";
