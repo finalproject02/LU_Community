@@ -141,7 +141,7 @@ const ClubProfile = () => {
                                             )}
                                         </label>
                                         <Col md="12" className="mt-5 ms-sm-5 ms-3">
-                                            <h5 className="ms-3 mt-5 fw-bold fs-3">{club.name}</h5>
+                                            <h5 className="ms-3 mt-5 fw-bold fs-3 pt-2">{club.name}</h5>
                                             <p className="ms-3 mb-0 text-lead fs-5">@Leading.University.Computer.Club</p>
                                             <div className="mb-2 mt-4 d-flex">
 
