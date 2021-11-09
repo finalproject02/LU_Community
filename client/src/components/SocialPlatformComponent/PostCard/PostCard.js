@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Dropdown, NavDropdown } from 'react-bootstrap';
-import { FaEllipsisH, FaEllipsisV, FaRegComment, FaRegHeart, FaShare, FaHeart } from 'react-icons/fa';
+import { Card, NavDropdown } from 'react-bootstrap';
+import { FaEllipsisH, FaRegComment, FaRegHeart, FaShare, FaHeart } from 'react-icons/fa';
 import Avatar from "../../../images/avatar.jpeg";
 import "./PostCard.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -126,8 +126,8 @@ const PostCard = ({ posts }) => {
                         <Card.Text as="div" className="d-flex justify-content-center">
                             {post.filename && (
                                 <img className="w-100 img-fluid cursor"
-                                     src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} />
-                            ) }
+                                    src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} />
+                            )}
                         </Card.Text>
                         <Card.Text as="div">
                             <div className="d-flex align-items-center justify-content-between">
