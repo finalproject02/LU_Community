@@ -19,7 +19,7 @@ const FriendCard = ({ setPhoto, setPost, setAbout, setConnection }) => {
                         <Card.Title>
                             <div className="d-flex justify-content-between align-items-center">
                                 <h6>Connections</h6>
-                                {connections.length > 6 && <h6 className="mb-2 textHover" style={{cursor: 'pointer'}} onClick={() => {
+                                {connections.length > 6 && <h6 className="mb-2 textHover" style={{ cursor: 'pointer' }} onClick={() => {
                                     setPost(false);
                                     setPhoto(false);
                                     setConnection(true);
@@ -36,7 +36,7 @@ const FriendCard = ({ setPhoto, setPost, setAbout, setConnection }) => {
                                             Avatar} style={{ cursor: 'pointer', height: "12vh" }} className="card-img-top rounded-3" alt="" onClick={() => {
                                                 history.push(`/profile/${connection._id}`);
                                             }} />
-                                        <span className="textHover cursor" onClick={() => {
+                                        <span className="textHover cursor text-center" onClick={() => {
                                             history.push(`/profile/${connection._id}`);
                                         }}>{connection.name}</span>
                                     </Col>

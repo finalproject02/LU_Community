@@ -69,14 +69,6 @@ const ClubProfile = () => {
         setFollower(false);
         setPhoto(true);
     }
-    const handleChangeVideo = () => {
-        setPost(false);
-        setAbout(false);
-        setEvent(false);
-        setPhoto(false);
-        setFollower(false);
-        setVideo(true);
-    }
     const handleChangeEvent = () => {
         setPost(false);
         setAbout(false);
@@ -165,12 +157,6 @@ const ClubProfile = () => {
                                                             </div>
                                                         </div>
                                                     )}
-                                                    <div style={{ cursor: 'pointer' }} className="bgPrimary text-center rounded-3 w-25 mb-2">
-                                                        <div className="btn text-white">
-                                                            <FaCommentDots className="me-2 mb-1" />
-                                                            Send Message
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             )}
                                         </Col>
@@ -198,9 +184,6 @@ const ClubProfile = () => {
                                             <NavDropdown.Item className="py-2" onClick={handleChangePhoto}>
                                                 Photos
                                             </NavDropdown.Item>
-                                            <NavDropdown.Item className="py-2" onClick={handleChangeVideo}>
-                                                Videos
-                                            </NavDropdown.Item>
                                             <NavDropdown.Item className="py-2" onClick={handleChangeEvent}>
                                                 Events
                                             </NavDropdown.Item>
@@ -224,9 +207,6 @@ const ClubProfile = () => {
             }
             {
                 photo && <AllPhotos />
-            }
-            {
-                video && <AllVideos />
             }
             {
                 event && <ClubEvents />

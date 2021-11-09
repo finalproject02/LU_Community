@@ -30,7 +30,7 @@ const SignupForm = () => {
     }
     return (
         <div className="mt-5 p-4">
-            <h2 className="text-center textPrimary">Student Signup</h2>
+            <h2 className="text-center textPrimary">{isTeacher ? 'Teacher Signup' : 'Student Signup'}</h2>
             {Types === 'SIGNUP_ERROR' && <h6>{message}</h6>}
             <Form onSubmit={handleSubmit} className="shadow p-5">
                 <Form.Group className="mb-3">
@@ -78,9 +78,9 @@ const SignupForm = () => {
                     <Form.Control type={showPassword ? "text" : "password"} placeholder="Enter confirm Password" name={'confirmPassword'} onChange={handleChange} />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Check type="checkbox" label="Show password" onClick={() => setShowPassword((prevalue) => !prevalue)}/>
+                    <Form.Check type="checkbox" label="Show password" onClick={() => setShowPassword((prevalue) => !prevalue)} />
                 </Form.Group>
-                <p onClick={()=> setIsTeacher(prevalue => !prevalue)}>{isTeacher ? 'Student Signup' : 'Teacher Signup' }</p>
+                <p className="textHover cursor" onClick={() => setIsTeacher(prevalue => !prevalue)}>{isTeacher ? 'Student Signup' : 'Teacher Signup'}</p>
                 <div className="bgSecondary text-center">
                     <input type="submit" value="SIGN UP" className="btn w-100 text-white" />
                 </div>

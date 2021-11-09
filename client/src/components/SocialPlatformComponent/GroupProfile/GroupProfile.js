@@ -206,9 +206,6 @@ const GroupProfile = () => {
                                                 </NavDropdown.Item>
                                             </NavDropdown>
                                         )}
-
-
-
                                     </ul>
                                 </div>
                             </div>

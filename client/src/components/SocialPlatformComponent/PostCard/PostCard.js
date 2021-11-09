@@ -133,7 +133,15 @@ const PostCard = ({ posts }) => {
                             <div className="d-flex align-items-center justify-content-between">
                                 <div className="d-flex align-items-center py-2">
                                     <div className="d-flex ps-3">
-                                        <FaRegHeart className="skyColor fs-5 me-2" />
+                                        {post.likes.some(usr => usr.id === currentUser?._id) ? (
+                                            <>
+                                                <FaHeart className="fs-5 me-2 skyColor" />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaRegHeart className="fs-5 me-2" />
+                                            </>
+                                        )}
                                     </div>
                                     <small id="totalLike" className="text-dark textHover fs-5">{post.likes?.length}</small>
                                 </div>
@@ -149,7 +157,7 @@ const PostCard = ({ posts }) => {
                                 <div className="d-flex align-items-center cursor ps-4 rounded-3" onClick={() => dispatch(LikeAndDislike(post._id))}>
                                     {post.likes.some(usr => usr.id === currentUser?._id) ? (
                                         <>
-                                            <FaHeart className="fs-5 mb-1" />
+                                            <FaHeart className="fs-5 mb-1 skyColor" />
                                             <p className="ps-2 pt-2 fs-5">Liked</p>
                                         </>
                                     ) : (

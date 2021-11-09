@@ -36,7 +36,7 @@ const UserProfileCard = () => {
     const [photo, setPhoto] = useState(false);
     const [video, setVideo] = useState(false);
 
-   // console.log(paramsUserPhotos)
+    // console.log(paramsUserPhotos)
     const handleChangePost = () => {
         setPost(true);
         setPhoto(false);
@@ -124,7 +124,7 @@ const UserProfileCard = () => {
 
                                                     {isConnectionRequest.length !== 0 && (
                                                         <div className="mb-2">
-                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Accept_Connection_Request(paramUser.map(user => user._id)))}}>Accept</Link>
+                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Accept_Connection_Request(paramUser.map(user => user._id))) }}>Accept</Link>
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))); }}>Ignore</Link>
                                                         </div>
                                                     )}
@@ -245,7 +245,7 @@ const UserProfileCard = () => {
                 }
 
                 {
-                    post && <UserProfileHome setPost={setPost} setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection}/>
+                    post && <UserProfileHome setPost={setPost} setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection} />
                 }
                 {
                     about && <UserProfileAbout />
@@ -254,10 +254,7 @@ const UserProfileCard = () => {
                     connection && <AllFriend setPost={setPost} paramsConnection={paramsConnection} />
                 }
                 {
-                    photo && <AllPhotos photos={paramsUserPhoto}/>
-                }
-                {
-                    video && <AllVideos />
+                    photo && <AllPhotos photos={paramsUserPhoto} />
                 }
             </div>
         </div>

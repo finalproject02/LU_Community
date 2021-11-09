@@ -97,8 +97,6 @@ const Club = () => {
                                     </Card.Body>
                                 </Card>
                             )}
-                            <h5 className="mb-2">Recent activity</h5>
-                            <PostCard />
                         </Col>
                         <Col md="4">
                             <ClubSuggestionsCard suggestions={suggestionClub} />
