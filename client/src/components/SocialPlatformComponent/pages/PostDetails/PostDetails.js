@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Row, Container, Form, Card, NavDropdown } from "react-bootstrap";
-import { FaEllipsisH, FaPhotoVideo, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
+import {FaEllipsisH, FaHeart, FaPhotoVideo, FaRegHeart, FaRegSmile, FaShare} from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { Comment, LikeAndDislike } from "../../../../actions/posts";
@@ -143,8 +143,17 @@ const NotificationPostPage = () => {
                                     <hr className="hr" />
                                     <div className="d-flex justify-content-between align-items-center">
                                         <div className="d-flex align-items-center cursor ps-2" onClick={() => dispatch(LikeAndDislike(item._id))}>
-                                            <FaRegHeart className="mb-1" />
-                                            <p className="ps-1 pt-2">Like</p>
+                                            {item.likes.some(usr => usr.id === currentUser?._id) ? (
+                                                <>
+                                                    <FaHeart className="fs-5 mb-1" />
+                                                    <p className="ps-2 pt-2 fs-5">Liked</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <FaRegHeart className="fs-5 mb-1" />
+                                                    <p className="ps-2 pt-2 fs-5">Like</p>
+                                                </>
+                                            )}
                                         </div>
                                         <div className="d-flex align-items-center cursor"
                                             aria-controls="example-collapse-text">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, NavDropdown } from 'react-bootstrap';
-import { FaEllipsisH, FaRegComment, FaRegHeart, FaShare } from 'react-icons/fa';
+import { FaEllipsisH, FaRegComment, FaRegHeart, FaShare, FaHeart } from 'react-icons/fa';
 import Avatar from "../../../images/avatar.jpeg";
 import "./PostCard.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -147,8 +147,17 @@ const PostCard = ({ posts }) => {
                         <Card.Text as="div">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center cursor ps-4 rounded-3" onClick={() => dispatch(LikeAndDislike(post._id))}>
-                                    <FaRegHeart className="fs-5 mb-1" />
-                                    <p className="ps-2 pt-2 fs-5">Like</p>
+                                    {post.likes.some(usr => usr.id === currentUser?._id) ? (
+                                        <>
+                                            <FaHeart className="fs-5 mb-1" />
+                                            <p className="ps-2 pt-2 fs-5">Liked</p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FaRegHeart className="fs-5 mb-1" />
+                                            <p className="ps-2 pt-2 fs-5">Like</p>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="d-flex align-items-center cursor rounded-3" onClick={() => setOpen(!open)}
                                     aria-controls="example-collapse-text"

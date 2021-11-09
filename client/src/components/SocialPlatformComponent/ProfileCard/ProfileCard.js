@@ -156,7 +156,7 @@ const ProfileCard = () => {
                             </Card.Body>
                         </Container>
                         <Row>
-                            <nav class="py-2 bg-light border-bottom sticky-top zindex2">
+                            <div class="py-2 bg-light border-bottom">
                                 <div class="container d-flex flex-wrap">
                                     <Nav class="nav me-auto">
                                         <Nav.Item>
@@ -188,7 +188,7 @@ const ProfileCard = () => {
                                         </li>
                                     </ul>
                                 </div>
-                            </nav>
+                            </div>
                         </Row>
                     </Card>
                     <Modal show={show} onHide={handleClose}>
