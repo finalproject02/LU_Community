@@ -118,7 +118,6 @@ const UserProfileCard = () => {
                                                     {isConnecting.length !== 0 && (
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2">Connecting</Link>
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))) }}>Remove Connection</Link>
                                                         </div>
                                                     )}
@@ -127,13 +126,11 @@ const UserProfileCard = () => {
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Accept_Connection_Request(paramUser.map(user => user._id)))}}>Accept</Link>
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))); }}>Ignore</Link>
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
                                                     {otherPosition.length !== 0 && (
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Connect(paramUser.map(user => user._id))) }}>Connect</Link>
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
                                                     {user._id === currentUser?._id && (
