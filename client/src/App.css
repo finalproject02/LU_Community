@@ -19,3 +19,28 @@
 .textHover:hover {
   text-decoration: underline;
 }
+.coverPhoto {
+  background-position: top;
+}
+.cursor {
+  cursor: pointer;
+}
+.cardHover:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+.picture-container {
+  margin: 0 auto;
+  overflow: hidden;
+  background-position: 50% 30%;
+}
+.picture-img {
+  height: 300px;
+  width: 100%;
+}
+.overFlowY {
+  overflow-y: scroll;
+}
+.commentBg {
+  background-color: whitesmoke;
+}

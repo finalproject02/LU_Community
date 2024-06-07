@@ -5,22 +5,31 @@
 }
 .position {
   position: absolute;
-  top: 12%;
-  left: 32%;
+  top: 17%;
+  left: 37%;
 }
-.fontSize {
+.leading {
   font-size: 3.3em;
 }
 /* small phone to small tablet */
 @media only screen and (max-width: 767px) {
   .position {
     position: absolute;
-    top: 10%;
-    left: 45%;
+    top: 12%;
+    left: 46%;
   }
-  .fontSize {
+  .leading {
     font-size: 1.9rem;
-    
+  }
+  /* .motoSm {
+    font-size: 10px;@media only screen and (max-width: 767px) {
+  .position {
+    position: absolute;
+    top: 12%;
+    left: 46%;
+  }
+  .leading {
+    font-size: 1.9rem;
   }
   /* .motoSm {
     font-size: 10px;

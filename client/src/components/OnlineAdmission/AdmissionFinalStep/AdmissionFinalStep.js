@@ -1,14 +1,67 @@
-import React from 'react';
-import { Card, Col, Container, Form, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Card, Col, Form, Row } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
+import path from "path";
+import { ApplicationFinalStep } from "../../../actions/applications";
+import { uploadFile } from "../../../actions/files";
+import {useDispatch, useSelector} from "react-redux";
+import MainNavbar from "../../MainNavbar/MainNavbar";
+import Header from "../../Header/Header";
+import { useHistory } from "react-router-dom";
 
 const AdmissionFinalStep = () => {
+    const { message, field } = useSelector(state => state.errors)
+    const history = useHistory();
+    const [finalFormData, setFinalFormData] = useState({ ssc_regis_no: '', ssc_institute_name: '', ssc_roll_no: '', ssc_group: '', ssc_year: '', ssc_board: '', ssc_gpa: '', hsc_regis_no: '', hsc_institute_name: '', hsc_roll_no: '', hsc_group: '', hsc_year: '', hsc_board: '', hsc_gpa: '' });
+    const [applicantPhoto, setApplicantPhoto] = useState('');
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => setFinalFormData({ ...finalFormData, [e.target.name]: e.target.value });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+         if (applicantPhoto) {
+             if (applicantPhoto.size > 1000000) {
+                 alert('You should provide image blow of 1MB')
+             } else {
+                 const applicantPhotoName = uuidv4() + path.extname(applicantPhoto.name);
+                 finalFormData.profile_picture = applicantPhotoName
+                 const fileDate = new FormData();
+                 fileDate.append('name', applicantPhotoName);
+                 fileDate.append('file', applicantPhoto)
+                 await dispatch(uploadFile(fileDate))
+             }
+
+         }
+
+        if (
+            field === 'ssc_regis_no' || field === 'hsc_regis_no' || field === 'ssc_roll_no'
+            || field === 'hsc_roll_no' || field === 'ssc_institute' || field === 'hsc_institute'
+        ) {
+            document.documentElement.scrollTop = 1
+        }
+       await dispatch(ApplicationFinalStep(finalFormData, history));
+
+
+    }
+    useEffect(() => {
+        const first = JSON.parse(localStorage.getItem('firstStep'))
+        const second = JSON.parse(localStorage.getItem('secondStep'))
+        const final = JSON.parse(localStorage.getItem('finalStep'));
+        setFinalFormData({ ...first, ...second, ...final })
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('finalStep', JSON.stringify(finalFormData))
+    }, [finalFormData])
     return (
-        <Container>
+        <div>
+            <Header />
+            <MainNavbar />
             <Row className="justify-content-center">
                 <Col md="8">
                     <Card className="bg-light w-100 shadow rounded my-5">
                         <Card.Body className="p-4">
-                            <Form action="" method="post">
+                            <Form onSubmit={handleSubmit}>
                                 <fieldset>
                                     <Row>
                                         <legend>
@@ -21,45 +74,185 @@ const AdmissionFinalStep = () => {
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Registration no.of SSC
                                                         <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="ssc_regi"
-                                                        placeholder="ssc registration number" />
+                                                    {field === 'ssc_regis_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Control
+                                                        type="number"
+                                                        className="w-100"
+                                                        placeholder="ssc registration number"
+                                                        name={'ssc_regis_no'}
+                                                        value={finalFormData?.ssc_regis_no}
+                                                        onChange={handleChange}
+                                                        
+                                                    />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Name of the
                                                         Institution (SSC)
                                                         <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100"
-                                                        id="ssc_inst_name" placeholder="ssc institution name" />
+                                                        {field === 'ssc_institute' && (
+                                                            <h6 style={{color: 'red'}}>{message}</h6>
+                                                        )}
+                                                    <Form.Control
+                                                        type="text"
+                                                        className="w-100"
+                                                        placeholder="ssc institution name"
+                                                        name={"ssc_institute_name"}
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.ssc_institute_name}
+                                                        
+                                                    />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Roll
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="ssc_roll"
-                                                        placeholder="ssc roll" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_roll_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Control
+                                                        type="number"
+                                                        className="w-100"
+                                                        placeholder="ssc roll"
+                                                        name={'ssc_roll_no'}
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.ssc_roll_no}
+                                                        
+                                                    />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                    <Form.Label>Group
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="ssc_group"
-                                                        placeholder="ssc group" />
+                                                    <Form.Label>
+                                                        Group
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_group' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Select
+                                                        type="text"
+                                                        className="w-100"
+                                                        placeholder="ssc group"
+                                                        onChange={handleChange}
+                                                        name={'ssc_group'}
+                                                        value={finalFormData?.ssc_group}
+                                                        
+                                                    >
+                                                        <option>--select group--</option>
+                                                        <option value="science">Science</option>
+                                                        <option value="arts">Arts</option>
+                                                        <option value="commerce">Commerce</option>
+                                                    </Form.Select>
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Year
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100"
-                                                        id="ssc_inst_year" placeholder="ssc year" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_year' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Select
+                                                        type="number"
+                                                        className="w-100"
+                                                        placeholder="ssc year"
+                                                        name={'ssc_year'}
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.ssc_year}
+                                                        >
+                                                        <option >--select year--</option>
+                                                        <option value="2030">2030</option>
+                                                        <option value="2029">2029</option>
+                                                        <option value="2028">2028</option>
+                                                        <option value="2027">2027</option>
+                                                        <option value="2026">2026</option>
+                                                        <option value="2025">2025</option>
+                                                        <option value="2024">2024</option>
+                                                        <option value="2023">2023</option>
+                                                        <option value="2022">2022</option>
+                                                        <option value="2021">2021</option>
+                                                        <option value="2020">2020</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2017">2017</option>
+                                                        <option value="2016">2016</option>
+                                                        <option value="2015">2015</option>
+                                                        <option value="2014">2014</option>
+                                                        <option value="2013">2013</option>
+                                                        <option value="2012">2012</option>
+                                                        <option value="2011">2011</option>
+                                                        <option value="2010">2010</option>
+                                                        <option value="2009">2009</option>
+                                                        <option value="2008">2008</option>
+                                                        <option value="2007">2007</option>
+                                                        <option value="2006">2006</option>
+                                                        <option value="2005">2005</option>
+                                                        <option value="2004">2004</option>
+                                                        <option value="2003">2003</option>
+                                                        <option value="2002">2002</option>
+                                                        <option value="2001">2001</option>
+                                                        <option value="2000">2000</option>
+                                                        <option value="1999">1999</option>
+                                                        <option value="1998">1998</option>
+                                                        <option value="1997">1997</option>
+                                                        <option value="1996">1996</option>
+                                                        <option value="1995">1995</option>
+                                                        <option value="1994">1994</option>
+                                                        <option value="1993">1993</option>
+                                                        <option value="1992">1992</option>
+                                                        <option value="1991">1991</option>
+                                                        <option value="1990">1990</option>
+                                                    </Form.Select>
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                    <Form.Label>Board
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="ssc_board"
-                                                        placeholder="ssc board" />
+                                                    <Form.Label>
+                                                        Board
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_board' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Select
+                                                        type="text"
+                                                        className="w-100"
+                                                        id="ssc_board"
+                                                        placeholder="ssc board"
+                                                        onChange={handleChange}
+                                                        name={'ssc_board'}
+                                                        value={finalFormData?.ssc_board}
+                                                        
+                                                    >
+                                                        <option >--select board--</option>
+                                                        <option value="barisal">Barisal</option>
+                                                        <option value="chittagong">Chittagong</option>
+                                                        <option value="comilla">Comilla</option>
+                                                        <option value="dhaka">Dhaka</option>
+                                                        <option value="dinajpur">Dinajpur</option>
+                                                        <option value="jessore">Jessore</option>
+                                                        <option value="mymenshing">Mymenshing</option>
+                                                        <option value="rajshahi">Rajshahi</option>
+                                                        <option value="sylhet">Sylhet</option>
+                                                        <option value="madrasha">Madrasha</option>
+                                                        <option value="sylhet">Sylhet</option>
+                                                        <option value="technica">Technica</option>
+                                                    </Form.Select>
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>GPA
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="ssc_gpa"
-                                                        placeholder="ssc gpa" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'ssc_gpa' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Control
+                                                        type="number"
+                                                        className="w-100"
+                                                        name="ssc_gpa"
+                                                        placeholder="ssc gpa"
+                                                        onChange={handleChange}
+                                                        step={'any'}
+                                                        value={finalFormData?.ssc_gpa}
+                                                        
+                                                    />
                                                 </Form.Group>
                                             </fieldset>
                                         </div>
@@ -68,46 +261,186 @@ const AdmissionFinalStep = () => {
                                                 <legend>HSC Info.</legend>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Registration no.of HSC
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="hsc_regi"
-                                                        placeholder="hsc registration number" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_regis_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Control
+                                                        type="number"
+                                                        className="w-100"
+                                                        placeholder="hsc registration number"
+                                                        onChange={handleChange}
+                                                        name={'hsc_regis_no'}
+                                                        value={finalFormData?.hsc_regis_no}
+                                                        
+                                                    />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Name of the
                                                         Institution (HSC)
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100"
-                                                        id="hsc_inst_name" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_institute' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Control
+                                                        type="text"
+                                                        className="w-100"
+                                                        name="hsc_institute_name"
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.hsc_institute_name}
+                                                        
+                                                    />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Roll
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="hsc_roll"
-                                                        placeholder="hsc roll" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_roll_no' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Control
+                                                        type="number"
+                                                        className="w-100"
+                                                        name="hsc_roll_no"
+                                                        onChange={handleChange}
+                                                        placeholder="hsc roll"
+                                                        value={finalFormData?.hsc_roll_no}
+                                                        
+                                                    />
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                    <Form.Label>Group
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="hsc_group"
-                                                        placeholder="hsc group" />
+                                                    <Form.Label>
+                                                        Group
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_group' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Select
+                                                        type="text"
+                                                        className="w-100"
+                                                        placeholder="hsc group"
+                                                        onChange={handleChange}
+                                                        name={'hsc_group'}
+                                                        value={finalFormData?.hsc_group}
+                                                        
+                                                    >
+                                                        <option>--select group--</option>
+                                                        <option value="science">Science</option>
+                                                        <option value="arts">Arts</option>
+                                                        <option value="commerce">Commerce</option>
+                                                    </Form.Select>
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Year
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100"
-                                                        id="hsc_inst_year" placeholder="hsc year" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_year' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Select
+                                                        type="number"
+                                                        className="w-100"
+                                                        name="hsc_year"
+                                                        placeholder="hsc year"
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.hsc_year}
+                                                        >
+                                                        <option >--select year--</option>
+                                                        <option value="2030">2030</option>
+                                                        <option value="2029">2029</option>
+                                                        <option value="2028">2028</option>
+                                                        <option value="2027">2027</option>
+                                                        <option value="2026">2026</option>
+                                                        <option value="2025">2025</option>
+                                                        <option value="2024">2024</option>
+                                                        <option value="2023">2023</option>
+                                                        <option value="2022">2022</option>
+                                                        <option value="2021">2021</option>
+                                                        <option value="2020">2020</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2017">2017</option>
+                                                        <option value="2016">2016</option>
+                                                        <option value="2015">2015</option>
+                                                        <option value="2014">2014</option>
+                                                        <option value="2013">2013</option>
+                                                        <option value="2012">2012</option>
+                                                        <option value="2011">2011</option>
+                                                        <option value="2010">2010</option>
+                                                        <option value="2009">2009</option>
+                                                        <option value="2008">2008</option>
+                                                        <option value="2007">2007</option>
+                                                        <option value="2006">2006</option>
+                                                        <option value="2005">2005</option>
+                                                        <option value="2004">2004</option>
+                                                        <option value="2003">2003</option>
+                                                        <option value="2002">2002</option>
+                                                        <option value="2001">2001</option>
+                                                        <option value="2000">2000</option>
+                                                        <option value="1999">1999</option>
+                                                        <option value="1998">1998</option>
+                                                        <option value="1997">1997</option>
+                                                        <option value="1996">1996</option>
+                                                        <option value="1995">1995</option>
+                                                        <option value="1994">1994</option>
+                                                        <option value="1993">1993</option>
+                                                        <option value="1992">1992</option>
+                                                        <option value="1991">1991</option>
+                                                        <option value="1990">1990</option>
+                                                    </Form.Select>
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                    <Form.Label>Board
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="hsc_board"
-                                                        placeholder="hsc board" />
+                                                    <Form.Label>
+                                                        Board
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_board' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Select
+                                                        type="text"
+                                                        className="w-100"
+                                                        name="hsc_board"
+                                                        placeholder="hsc board"
+                                                        onChange={handleChange}
+                                                        value={finalFormData?.hsc_board}
+                                                        
+                                                    >
+                                                        <option >--select board--</option>
+                                                        <option value="barisal">Barisal</option>
+                                                        <option value="chittagong">Chittagong</option>
+                                                        <option value="comilla">Comilla</option>
+                                                        <option value="dhaka">Dhaka</option>
+                                                        <option value="dinajpur">Dinajpur</option>
+                                                        <option value="jessore">Jessore</option>
+                                                        <option value="mymenshing">Mymenshing</option>
+                                                        <option value="rajshahi">Rajshahi</option>
+                                                        <option value="sylhet">Sylhet</option>
+                                                        <option value="madrasha">Madrasha</option>
+                                                        <option value="sylhet">Sylhet</option>
+                                                        <option value="technica">Technica</option>
+                                                    </Form.Select>
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>GPA
-                                                        <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                    <Form.Control type="text" className="w-100" id="hsc_gpa"
-                                                        placeholder="hsc gpa" />
+                                                        <span className="text-danger fw-bolder">*</span>
+                                                    </Form.Label>
+                                                    {field === 'hsc_gpa' && (
+                                                        <h6 style={{color: 'red'}}>{message}</h6>
+                                                    )}
+                                                    <Form.Control
+                                                        type="number"
+                                                        className="w-100"
+                                                        name="hsc_gpa"
+                                                        placeholder="hsc gpa"
+                                                        onChange={handleChange}
+                                                        step={'any'}
+                                                        value={finalFormData?.hsc_gpa}
+                                                        
+                                                    />
                                                 </Form.Group>
                                             </fieldset>
                                         </Col>
@@ -120,43 +453,38 @@ const AdmissionFinalStep = () => {
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label>Upload Applicant's Photo
                                                     (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                <Form.Control type="file" className="w-100" id="applicant_photo" />
+                                                    <span className="text-danger fw-bolder">*</span>
+                                                </Form.Label>
+                                                {field === 'photo' && (
+                                                    <h6 style={{color: 'red'}}>{message}</h6>
+                                                )}
+                                                <Form.Control
+                                                    type="file"
+                                                    className="w-100"
+                                                    name="profile_picture"
+                                                    onChange={(e) => setApplicantPhoto(e.target.files[0])}
+                                                    accept={'image/*'}
+                                                />
                                             </Form.Group>
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Upload Guardian's Photo
-                                                    (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                <Form.Control type="file" className="w-100" id="guardian_photo" />
-                                            </Form.Group>
-                                        </Col>
-                                        <Col md="6">
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Upload SSC Transcript
-                                                    (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                <Form.Control type="file" className="w-100" id="ssc_transcript" />
-                                            </Form.Group>
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Upload HSC Transcript
-                                                    (Max 1 MB)
-                                                    <span className="text-danger fw-bolder">*</span></Form.Label>
-                                                <Form.Control type="file" className="w-100" id="hsc_transcript" />
-                                            </Form.Group>
+
                                         </Col>
                                     </Row>
                                 </fieldset>
                                 <hr />
-                                <div className="text-end">
-                                    <a href="#" className="btn bg-primary text-white px-5">Submit</a>
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <button className="btn bg-primary text-white px-5" type={'button'} onClick={() => history.push('/secondStep')}>
+                                        Previous
+                                    </button>
+                                    <button className="btn bg-primary text-white px-5" type={'submit'}>
+                                        Submit
+                                    </button>
                                 </div>
                             </Form>
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
-        </Container>
+        </div>
     );
 };
-
-export default AdmissionFinalStep;
+export default AdmissionFinalStep

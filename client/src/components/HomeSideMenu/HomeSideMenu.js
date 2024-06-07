@@ -5,8 +5,8 @@ import "./HomeSideMenu.css";
 const HomeSideMenu = () => {
   return (
     <div>
-      <Table striped bordered className="shadow">
-        <tbody>
+      <Table striped bordered className="shadow mb-5">
+        <tbody className="mb-4">
           <tr className="sideMenuHoVer">
             <td className="p-4">Department of Business Administration</td>
           </tr>

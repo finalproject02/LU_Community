@@ -1,44 +1,49 @@
 import express from "express";
-import path from "path";
 import mongoose from "mongoose";
-import multer from "multer";
+import Grid from "gridfs-stream";
 import { GridFsStorage } from "multer-gridfs-storage";
-import Grid from 'gridfs-stream';
-const router = express.Router();
-const mongoURI = 'mongodb://localhost:27017/lucommunity'
+import multer from "multer";
+
+const router = express.Router()
+
+const mongoURI = 'mongodb+srv://Rezaul123:X8ZIKUlb0aS4BZX2@cluster0.gbm1r.mongodb.net/LU_Community?retryWrites=true&w=majority';
 const conn = mongoose.createConnection(mongoURI, {
-    useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+
 });
 
 let gfs;
+
 conn.once('open', () => {
     gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('storage')
-})
+    gfs.collection('storage');
+});
 
 const storage = new GridFsStorage({
     url: mongoURI,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
-            const filename = file.originalname;
+            const filename = req.body.name;
             const fileInfo = {
                 filename: filename,
                 bucketName: 'storage'
             }
             resolve(fileInfo)
+
         })
     }
-})
+});
 
 const upload = multer({ storage });
 router.post('/storage', upload.single('file'), (req, res) => {
-    res.json('Upload success')
-})
+    res.json('upload success')
+});
 
-router.get('/storage/:filename', (req, res) => {
-    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+router.get('/storage/:filename', async (req, res) => {
+    const { filename } = req.params
+    await gfs.files.findOne({ filename }, (err, file) => {
         if (!file || file.length === 0) {
             return res.status(404).json({
                 err: 'No file exists'
@@ -47,8 +52,26 @@ router.get('/storage/:filename', (req, res) => {
             const readStream = gfs.createReadStream(file.filename);
             readStream.pipe(res)
         }
-    })
-})
 
+    })
+});
+
+router.delete('/storage/:filename', async (req, res) => {
+    const { filename } = req.params;
+    await gfs.files.findOne({ filename }, (err, file) => {
+        if (!file || file.length === 0) {
+            return res.status(404).json({
+                err: 'No file exists'
+            })
+        } else {
+            gfs.remove({ _id: file._id, root: 'storage' }, (err, gridStore) => {
+                if (err) return console.log('error')
+                res.send('success')
+            })
+        }
+
+    })
+
+})
 
 export default router;

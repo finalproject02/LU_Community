@@ -1,0 +1,12 @@
+.simpleProfileBg {
+  width: 100%;
+  height: 140px;
+  position: relative;
+  background-size: cover;
+  background-position: top;
+}
+.simpleProfileImg {
+  position: absolute;
+  top: 20%;
+  left: 37%;
+}

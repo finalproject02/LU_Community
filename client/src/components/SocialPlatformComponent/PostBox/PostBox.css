@@ -1,0 +1,10 @@
+.postModalPosition {
+  box-sizing: content-box;
+  display: flex;
+  position: fixed;
+  z-index: 10000000 !important;
+  float: none;
+}
+.height {
+  min-height: 26px;
+}
