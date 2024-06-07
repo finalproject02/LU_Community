@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearError} from "../../../actions/errors";
 
 const AdmissionFirstStep = () => {
+  const { currentUser } = useSelector(state => state.auth)
   const { departments } = useSelector(state =>  state.departments)
   const history = useHistory();
   const { message, field } = useSelector(state => state.errors);
@@ -53,6 +54,19 @@ const AdmissionFirstStep = () => {
                         Admission for Graduate Programs
                       </h6>
                       <Col md="6">
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                          <Form.Label>Name (Full Name)
+
+                          </Form.Label>
+                          <br />
+                          <Form.Control
+                              type="text"
+                              className="w-100"
+                              placeholder="applicant father name"
+                              value={currentUser?.name}
+                              disabled
+                          />
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
                             Select the Department
@@ -142,6 +156,17 @@ const AdmissionFirstStep = () => {
                         </Form.Group>
                       </Col>
                       <Col md="6">
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                          <Form.Label>Email
+                          </Form.Label>
+                          <br />
+                          <Form.Control
+                              type="text"
+                              className="w-100"
+                              value={currentUser?.email}
+                              disabled
+                          />
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>
                             National ID / Birth Certificate No.

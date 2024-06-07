@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Row, Container, Form, Card, NavDropdown } from "react-bootstrap";
-import { FaEllipsisH, FaPhotoVideo, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
+import { FaEllipsisH, FaHeart, FaPhotoVideo, FaRegHeart, FaRegSmile, FaShare } from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { Comment, LikeAndDislike } from "../../../../actions/posts";
@@ -101,12 +101,12 @@ const NotificationPostPage = () => {
                                                 {item.owner_position.startsWith('Group') && (
                                                     item.owner_position === 'Group_admin' ? (
                                                         <>
-                                                            <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                            <h6 style={{ cursor: 'pointer' }} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                             <small>{moment(item.createdAt).fromNow()}</small>
                                                             <p onClick={() => action(item.owner_id, 'own_post')}>Admin post</p>
                                                         </>
                                                     ) : <>
-                                                        <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                        <h6 style={{ cursor: 'pointer' }} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>
                                                         <p onClick={() => action(item.owner_id, 'own_post')}>{getUserName(item.owner_id, 'own_post', '')}</p>
                                                     </>
@@ -114,12 +114,12 @@ const NotificationPostPage = () => {
 
                                                 {item.owner_position === 'own_post' && (
                                                     <>
-                                                        <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                        <h6 style={{ cursor: 'pointer' }} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>
                                                     </>
                                                 )} {item.owner_position === 'club_post' && (
                                                     <>
-                                                        <h6 onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
+                                                        <h6 style={{ cursor: 'pointer' }} onClick={() => action(item.owner_id, item.owner_position, item.post_to)}>{getUserName(item.owner_id, item.owner_position, item.post_to)}</h6>
                                                         <small>{moment(item.createdAt).fromNow()}</small>
                                                     </>
                                                 )
@@ -132,7 +132,15 @@ const NotificationPostPage = () => {
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div className="d-flex align-items-center py-2">
                                             <div className="d-flex ps-3">
-                                                <FaRegHeart className="skyColor me-2" />
+                                                {item.likes.some(usr => usr.id === currentUser?._id) ? (
+                                                    <>
+                                                        <FaHeart className="fs-5 me-2 skyColor" />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <FaRegHeart className="fs-5 me-2" />
+                                                    </>
+                                                )}
                                             </div>
                                             <small id="totalLike" className="text-dark textHover cursor">{item.likes.length} likes</small>
                                         </div>
@@ -143,8 +151,17 @@ const NotificationPostPage = () => {
                                     <hr className="hr" />
                                     <div className="d-flex justify-content-between align-items-center">
                                         <div className="d-flex align-items-center cursor ps-2" onClick={() => dispatch(LikeAndDislike(item._id))}>
-                                            <FaRegHeart className="mb-1" />
-                                            <p className="ps-1 pt-2">Like</p>
+                                            {item.likes.some(usr => usr.id === currentUser?._id) ? (
+                                                <>
+                                                    <FaHeart className="fs-5 mb-1 skyColor" />
+                                                    <p className="ps-2 pt-2">Liked</p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <FaRegHeart className="fs-5 mb-1" />
+                                                    <p className="ps-2 pt-2">Like</p>
+                                                </>
+                                            )}
                                         </div>
                                         <div className="d-flex align-items-center cursor"
                                             aria-controls="example-collapse-text">

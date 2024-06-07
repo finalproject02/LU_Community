@@ -11,10 +11,11 @@ import {clearError, getErrors} from "./errors";
 import ShowToast from "../services/ShowToast";
 
 
-export const SignUp = (userData) => async (dispatch) => {
+export const SignUp = (userData, history) => async (dispatch) => {
     try {
         dispatch({ type: LOADING });
         const { data : { user, token } } = await api.createAccount(userData);
+        history.push('/socialPlatform')
         dispatch({
             type: CREATE_ACCOUNT_SUCCESS,
             payload: { user, token }
@@ -37,8 +38,12 @@ export const SignIn = (userData, history)  => async (dispatch) => {
         });
         if (user.position === 'paid admission fee' && user.approval === 2) {
             history.push('/firstStep')
-        } else {
+        } else if (user.name === 'Account') {
             history.push('/dashboard')
+        } else if (user.name === 'Admission') {
+            history.push('/dashboard')
+        } else {
+            history.push('/socialPlatform')
         }
         dispatch({ type: LOADED })
     } catch (error) {

@@ -2,11 +2,10 @@
   "name": "realtimedata",
   "version": "1.0.0",
   "description": "it's only for real time data",
-
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodomon server.js"
   },
   "author": "Rezaul Karim",
   "license": "ISC",

@@ -9,7 +9,7 @@ import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import path from "path";
 
-const GroupHome = ({setPhoto, setPost}) => {
+const GroupHome = ({setPhoto, setPost, setAbout}) => {
     const params = useParams()
     const { id } = params
     const {posts} = useSelector(state => state.posts);
@@ -27,9 +27,8 @@ const GroupHome = ({setPhoto, setPost}) => {
                         <Post details={currentUser} posts={groupPost}/>
                     </Col>
                     <Col md="4">
-                        <GroupIntro />
+                        <GroupIntro setPost={setPost} setPhoto={setPhoto} setAbout={setAbout}/>
                         <PhotoCard photos={groupPhotos} setPost={setPost} setPhoto={setPhoto}/>
-                        <VideoCard />
                         <AllGroup suggestionGroup={suggestionGroup}/>
                     </Col>
                 </Row>

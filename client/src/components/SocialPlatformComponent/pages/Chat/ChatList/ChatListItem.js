@@ -1,40 +1,30 @@
-import React, { Component } from "react";
 import Avatar from "./Avatar.js";
+import moment from "moment";
+import {setCurrentChat} from "../../../../../actions/messages";
+import {useDispatch} from "react-redux";
 
- const ChatListItem = (props)=> {
-    // constructor(props) {
-    //     super(props);
-    // }
-    const selectChat = (e) => {
-        for (
-            let index = 0;
-            index < e.currentTarget.parentNode.children.length;
-            index++
-        ) {
-            e.currentTarget.parentNode.children[index].classList.remove("active");
-        }
-        e.currentTarget.classList.add("active");
-    };
+export default function  ChatListItem (prop) {
+    const dispatch = useDispatch();
 
-        return (
+    const handleClick = (id) => {
+       dispatch(setCurrentChat(id))
+    }
+    return (
             <div
-                style={{ animationDelay: `0.${props.animationDelay}s` }}
-                onClick={selectChat}
-                className={`chatlist__item ${props.active ? props.active : ""
-                    } `}
+                style={{ animationDelay: `0.${prop.animationDelay}s` }}
+                onClick={() =>handleClick(prop.id)}
+                className={`chatlist__item ${prop.active ? prop.active : ""}`}
             >
                 <Avatar
-                    image={
-                        props.image ? props.image : "http://placehold.it/80x80"
-                    }
-                    isOnline={props.isOnline}
+                    image={prop.profile_picture}
+                    isOnline={prop.isOnline}
                 />
 
                 <div className="userMeta">
-                    <p>{props.name}</p>
-                    <span className="activeTime">32 mins ago</span>
+                    <p>{prop.name}</p>
+                    <span className="activeTime">{moment(prop.lastLogin).fromNow()}</span>
                 </div>
             </div>
-        );
+    );
+
 }
-export default ChatListItem;

@@ -23,13 +23,15 @@ const ClubProfile = () => {
     const [clubData, setClubData] = useState({})
     const { clubs } = useSelector(state => state.clubs);
     const { currentUser } = useSelector(state => state.auth);
+    const { posts } = useSelector(state => state.posts)
     const [about, setAbout] = useState(false);
     const [post, setPost] = useState(true);
     const [follower, setFollower] = useState(false);
     const [photo, setPhoto] = useState(false);
     const [video, setVideo] = useState(false);
     const [event, setEvent] = useState(false);
-
+    const currentUserPost = posts.filter(post => post.post_to === id);
+    const currentUserPhotos = currentUserPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase().toLowerCase() === '.jpg')
     const [coverPhoto, setCoverPhoto] = useState();
     const [profilePhoto, setProfilePhoto] = useState();
 
@@ -68,14 +70,6 @@ const ClubProfile = () => {
         setVideo(false);
         setFollower(false);
         setPhoto(true);
-    }
-    const handleChangeVideo = () => {
-        setPost(false);
-        setAbout(false);
-        setEvent(false);
-        setPhoto(false);
-        setFollower(false);
-        setVideo(true);
     }
     const handleChangeEvent = () => {
         setPost(false);
@@ -141,7 +135,7 @@ const ClubProfile = () => {
                                             )}
                                         </label>
                                         <Col md="12" className="mt-5 ms-sm-5 ms-3">
-                                            <h5 className="ms-3 mt-5 fw-bold fs-3">{club.name}</h5>
+                                            <h5 className="ms-3 mt-5 fw-bold fs-3 pt-2">{club.name}</h5>
                                             <p className="ms-3 mb-0 text-lead fs-5">@Leading.University.Computer.Club</p>
                                             <div className="mb-2 mt-4 d-flex">
 
@@ -165,12 +159,6 @@ const ClubProfile = () => {
                                                             </div>
                                                         </div>
                                                     )}
-                                                    <div style={{ cursor: 'pointer' }} className="bgPrimary text-center rounded-3 w-25 mb-2">
-                                                        <div className="btn text-white">
-                                                            <FaCommentDots className="me-2 mb-1" />
-                                                            Send Message
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             )}
                                         </Col>
@@ -198,24 +186,10 @@ const ClubProfile = () => {
                                             <NavDropdown.Item className="py-2" onClick={handleChangePhoto}>
                                                 Photos
                                             </NavDropdown.Item>
-                                            <NavDropdown.Item className="py-2" onClick={handleChangeVideo}>
-                                                Videos
-                                            </NavDropdown.Item>
                                             <NavDropdown.Item className="py-2" onClick={handleChangeEvent}>
                                                 Events
                                             </NavDropdown.Item>
                                         </NavDropdown>
-                                    </ul>
-                                    <ul className="nav">
-
-                                        <li className="nav-item">
-                                            <div className="nav-link link-dark px-2">
-                                                <Form className="col-12 col-lg-auto mb-3 mb-lg-0">
-                                                    <input type="search" className="form-control" placeholder="Search..."
-                                                        aria-label="Search" />
-                                                </Form>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -234,10 +208,7 @@ const ClubProfile = () => {
                 follower && <ClubFollower paramsClub={paramsClub} />
             }
             {
-                photo && <AllPhotos />
-            }
-            {
-                video && <AllVideos />
+                photo && <AllPhotos photos={currentUserPhotos} />
             }
             {
                 event && <ClubEvents />

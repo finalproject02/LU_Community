@@ -13,6 +13,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import Avatar from '../../../../images/avatar.jpeg'
 import path from "path";
+import {Peer} from "../../../../actions/messages";
 
 const UserProfileCard = () => {
     const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const UserProfileCard = () => {
     const [photo, setPhoto] = useState(false);
     const [video, setVideo] = useState(false);
 
-   // console.log(paramsUserPhotos)
+    // console.log(paramsUserPhotos)
     const handleChangePost = () => {
         setPost(true);
         setPhoto(false);
@@ -110,7 +111,9 @@ const UserProfileCard = () => {
                                                     </p>
                                                     {isConnected.length !== 0 && (
                                                         <div className="mb-2">
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
+                                                            <Link to="/chat" className="btn btn-primary me-2" onClick={() => {
+                                                                dispatch(Peer(user._id));
+                                                            }}>Message</Link>
                                                             <Link to="#" className="btn btn-primary me-2">Remove Connection</Link>
                                                         </div>
                                                     )}
@@ -118,22 +121,19 @@ const UserProfileCard = () => {
                                                     {isConnecting.length !== 0 && (
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2">Connecting</Link>
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))) }}>Remove Connection</Link>
                                                         </div>
                                                     )}
 
                                                     {isConnectionRequest.length !== 0 && (
                                                         <div className="mb-2">
-                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Accept_Connection_Request(paramUser.map(user => user._id)))}}>Accept</Link>
+                                                            <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Accept_Connection_Request(paramUser.map(user => user._id))) }}>Accept</Link>
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Disconnect(paramUser.map(user => user._id))); }}>Ignore</Link>
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
                                                     {otherPosition.length !== 0 && (
                                                         <div className="mb-2">
                                                             <Link to="#" className="btn btn-primary me-2" onClick={() => { dispatch(Connect(paramUser.map(user => user._id))) }}>Connect</Link>
-                                                            <Link to="#" className="btn btn-primary me-2">Message</Link>
                                                         </div>
                                                     )}
                                                     {user._id === currentUser?._id && (
@@ -248,7 +248,7 @@ const UserProfileCard = () => {
                 }
 
                 {
-                    post && <UserProfileHome setPost={setPost} setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection}/>
+                    post && <UserProfileHome setPost={setPost} setPhoto={setPhoto} setAbout={setAbout} setConnection={setConnection} />
                 }
                 {
                     about && <UserProfileAbout />
@@ -257,10 +257,7 @@ const UserProfileCard = () => {
                     connection && <AllFriend setPost={setPost} paramsConnection={paramsConnection} />
                 }
                 {
-                    photo && <AllPhotos photos={paramsUserPhoto}/>
-                }
-                {
-                    video && <AllVideos />
+                    photo && <AllPhotos photos={paramsUserPhoto} />
                 }
             </div>
         </div>

@@ -136,7 +136,7 @@ const SocialNavbar = () => {
                     <Container>
                         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                             <div>
-                                <Link to="/socialplatform" className="d-flex align-items-center pb-1 mb-lg-0 text-decoration-none fs-2 fw-bold bgSecondary rounded-3 px-2 text-white">
+                                <Link to="/socialplatform" className="d-flex align-items-center pb-1 mb-lg-0 text-dark text-decoration-none fs-2 fw-bold bgPrimary rounded-3 px-2 text-white">
                                     LUSP
                                 </Link>
                             </div>
@@ -168,7 +168,7 @@ const SocialNavbar = () => {
                                                 {currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length !== 0 && (
                                                     <Badge bg="danger" className="notificationCount text-white fw-bold">{currentUser?.notifications.filter(notification => notification.isShow === false && notification.types !== 'connection_request').length}</Badge>
                                                 )}
-                                                <span className="text-dark d-none d-sm-block text-white">Notification</span>
+                                                <span className="text-dark d-none d-sm-block text-white me-4">Notification</span>
                                             </div>}>
 
                                         {currentUser?.notifications.filter(notify => notify !== 'connection_requests').slice(currentUser?.notifications.length - 4, currentUser?.notifications.length).sort((a, b) => new Date(b.time) - new Date(a.time)).map(notification => (

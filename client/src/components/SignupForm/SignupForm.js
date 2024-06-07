@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { SignUp } from "../../actions/auth";
+import {useHistory} from "react-router-dom";
 
 const SignupForm = () => {
-    const { message, Types } = useSelector(state => state.errors)
+    const history = useHistory();
+    const { message, Types } = useSelector(state => state.errors);
+    const { departments } = useSelector(state => state.departments);
     const dispatch = useDispatch();
+    const [showPassword, setShowPassword] = useState(false)
+
     const [signup, setSignup] = useState(false);
     const [isTeacher, setIsTeacher] = useState(false);
     const [data, setData] = useState();
@@ -20,21 +24,15 @@ const SignupForm = () => {
         if (Types === 'SIGNUP_ERROR') {
             document.documentElement.scrollTop = 0
         }
-        dispatch(SignUp(data))
+
+        if (data.password !== data.confirmPassword) {
+            alert("Those passwords didn't match. Try again.")
+        }
+        dispatch(SignUp(data, history));
     }
-
-    useEffect(() => {
-        window.onbeforeunload = function () {
-            return true;
-        };
-
-        return () => {
-            window.onbeforeunload = null;
-        };
-    }, [])
     return (
         <div className="mt-5 p-4">
-            <h2 className="text-center textPrimary">Student Signup</h2>
+            <h2 className="text-center textPrimary">{isTeacher ? 'Teacher Signup' : 'Student Signup'}</h2>
             {Types === 'SIGNUP_ERROR' && <h6>{message}</h6>}
             <Form onSubmit={handleSubmit} className="shadow p-5">
                 <Form.Group className="mb-3">
@@ -48,12 +46,12 @@ const SignupForm = () => {
                 {isTeacher ? (
                     <>
                         <Form.Group className="mb-3">
-                            <Form.Label>Department</Form.Label>
-                            <Form.Control type="text" placeholder="Department" name={'department'} onChange={handleChange} />
+                            <Form.Label>Teacher Id</Form.Label>
+                            <Form.Control type="text" placeholder="Teacher Id" name={'teacher_id'} onChange={handleChange} />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Position</Form.Label>
-                            <Form.Control type="text" placeholder="Current Position" name={'current_position'} onChange={handleChange} />
+                            <Form.Label>Designation</Form.Label>
+                            <Form.Control type="text" placeholder="Designation" name={'designation'} onChange={handleChange} />
                         </Form.Group>
                     </>
 
@@ -63,14 +61,28 @@ const SignupForm = () => {
                         <Form.Control type="number" placeholder="Enter id" name={'student_id'} onChange={handleChange} />
                     </Form.Group>
                 )}
+                <Form.Select
+                    className="w-100 mb-3"
+                    name="department"
+                    onChange={handleChange}
+                >
+                    <option value="cse">Select Program</option>
+                    {departments?.map(department => (
+                        <option value={department.department_name}>{department.department_name}</option>
+                    ))}
+                </Form.Select>
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter password" name={'password'} onChange={handleChange} />
+                    <Form.Control type={showPassword ? "text" : "password"} placeholder="Enter password" name={'password'} onChange={handleChange} />
                 </Form.Group>
                 <Form.Group className="mb-5">
                     <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter confirm Password" name={'confirmPassword'} onChange={handleChange} />
+                    <Form.Control type={showPassword ? "text" : "password"} placeholder="Enter confirm Password" name={'confirmPassword'} onChange={handleChange} />
                 </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Check type="checkbox" label="Show password" onClick={() => setShowPassword((prevalue) => !prevalue)} />
+                </Form.Group>
+                <p className="textHover cursor" onClick={() => setIsTeacher(prevalue => !prevalue)}>{isTeacher ? 'Student Signup' : 'Teacher Signup'}</p>
                 <div className="bgSecondary text-center">
                     <input type="submit" value="SIGN UP" className="btn w-100 text-white" />
                 </div>

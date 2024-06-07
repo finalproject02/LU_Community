@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Dropdown, NavDropdown } from 'react-bootstrap';
-import { FaEllipsisH, FaEllipsisV, FaRegComment, FaRegHeart, FaShare } from 'react-icons/fa';
+import { Card, NavDropdown } from 'react-bootstrap';
+import { FaEllipsisH, FaRegComment, FaRegHeart, FaShare, FaHeart } from 'react-icons/fa';
 import Avatar from "../../../images/avatar.jpeg";
 import "./PostCard.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -112,8 +112,7 @@ const PostCard = ({ posts }) => {
                                         <NavDropdown.Item className="dropdownItem py-1" onClick={() => dispatch(DeletePosts(post._id))}>Delete
                                             Post
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item className="dropdownItem py-1">Edit Post
-                                        </NavDropdown.Item>
+
                                     </NavDropdown>
                                 )}
 
@@ -125,16 +124,24 @@ const PostCard = ({ posts }) => {
                             </div>
                         </Card.Text>
                         <Card.Text as="div" className="d-flex justify-content-center">
-                            <img className="w-100 img-fluid cursor"
-                                src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} />
-                            <video className="w-100 d-none" controls src={`/api/files/storage/${post.filename}`}></video>
-                            <iframe className="w-100 d-none" src={`/api/files/storage/${post.filename}`} frameborder="0" title=".." ></iframe>
+                            {post.filename && (
+                                <img className="w-100 img-fluid cursor"
+                                    src={`/api/files/storage/${post.filename}`} alt=".." onClick={() => history.push(`/post/${post._id}`)} />
+                            )}
                         </Card.Text>
                         <Card.Text as="div">
                             <div className="d-flex align-items-center justify-content-between">
                                 <div className="d-flex align-items-center py-2">
                                     <div className="d-flex ps-3">
-                                        <FaRegHeart className="skyColor fs-5 me-2" />
+                                        {post.likes.some(usr => usr.id === currentUser?._id) ? (
+                                            <>
+                                                <FaHeart className="fs-5 me-2 skyColor" />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaRegHeart className="fs-5 me-2" />
+                                            </>
+                                        )}
                                     </div>
                                     <small id="totalLike" className="text-dark textHover fs-5">{post.likes?.length}</small>
                                 </div>
@@ -148,8 +155,17 @@ const PostCard = ({ posts }) => {
                         <Card.Text as="div">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center cursor ps-4 rounded-3" onClick={() => dispatch(LikeAndDislike(post._id))}>
-                                    <FaRegHeart className="fs-5 mb-1" />
-                                    <p className="ps-2 pt-2 fs-5">Like</p>
+                                    {post.likes.some(usr => usr.id === currentUser?._id) ? (
+                                        <>
+                                            <FaHeart className="fs-5 mb-1 skyColor" />
+                                            <p className="ps-2 pt-2 fs-5">Liked</p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FaRegHeart className="fs-5 mb-1" />
+                                            <p className="ps-2 pt-2 fs-5">Like</p>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="d-flex align-items-center cursor rounded-3" onClick={() => setOpen(!open)}
                                     aria-controls="example-collapse-text"

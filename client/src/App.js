@@ -38,8 +38,6 @@ import AssignCourses from "./components/Admin/DepartmentHead/AssignCourses";
 import AssignCourseList from "./components/Admin/DepartmentHead/AssignCourseList";
 import ApproveResults from "./components/Admin/DepartmentHead/ApproveResults";
 import ApproveResultCourse from "./components/Admin/DepartmentHead/ApproveResultCourse";
-import PublishResult from "./components/Admin/ExamController/PublishResults";
-import StudentResults from "./components/Admin/ExamController/StudentResults";
 import SemesterRegiReq from "./components/Admin/DepartmentHead/SemesterRegiReq/SemesterRegiReq";
 import SemesterRegiDetails from "./components/Admin/DepartmentHead/SemesterRegiReq/SemesterRegiDetails";
 import Department from "./components/Admin/MainAdmin/Department/Department";
@@ -57,8 +55,6 @@ import AdminProfile from "./components/Admin/MainAdmin/AdminProfile";
 import AdminHome from "./components/Admin/MainAdmin/AdminHome";
 import HeadProfile from "./components/Admin/DepartmentHead/HeadProfile";
 import HeadHome from "./components/Admin/DepartmentHead/HeadHome";
-import ControllerProfile from "../src/components/Admin/ExamController/ControllerProfile.js";
-import ControllerHome from "../src/components/Admin/ExamController/ControllerHome.js";
 import AdmissionSimple from "./components/OnlineAdmission/AdmissionSimple/AdmissionSimple";
 import { Departments, Course, Teacher, Semester } from "./actions/departments";
 import PaymentDemo from "./components/PaymentDemo/PaymentDemo";
@@ -284,20 +280,9 @@ function App() {
             <Route path="/approveCourseResults/:id">
               <ApproveResultCourse />
             </Route>
-            <Route path="/controllerProfile">
-              <ControllerProfile />
-            </Route>
-            <Route path="/controllerHome">
-             <ControllerHome/>
-            </Route>
-            <Route path="/publishResults">
-              <PublishResult />
-            </Route>
+
             <Route path="/semesterRegistrationRequest">
               <SemesterRegiReq />
-            </Route>
-            <Route path="/publishStudentResults">
-              <StudentResults />
             </Route>
             <Route path="/department">
               <Department />
@@ -318,7 +303,7 @@ function App() {
               <AddFacultyMembers />
             </Route>
             <Route path="/FormDetails/:id">
-              <FormDetails/>
+              <FormDetails />
             </Route>
             <Route path="/results">
               <Results />
@@ -359,7 +344,7 @@ function App() {
             <Route path="/admissionHome">
               <AdmissionHome />
             </Route>
-            <Route path="/approveAdmissionForm">
+            <Route path="/AdmissionDetailsForm">
               <ApproveAdmissionForm />
             </Route>
             <Route path="/accountProfile">

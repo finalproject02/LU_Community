@@ -1,10 +1,10 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import { sendOfferLetterMessage, sendAccurateCredential } from "../services/mailService.js";
-import {smsForAccurateCredential, smsForAdmissionFee} from "../services/smsService.js";
+import { smsForAccurateCredential, smsForAdmissionFee } from "../services/smsService.js";
 import userModel from "../models/userModel.js";
 
 export const admissionFirstStep = async (req, res) => {
-    const { birth_or_nid_number,  department, father_name, mother_name, date_of_birth} = req.body;
+    const { birth_or_nid_number, department, father_name, mother_name, date_of_birth } = req.body;
 
     const namePattern = /[A-Za-z ]{3,30}/i;
     const nid_or_birth_pattern = /[0-9]{8,17}/;
@@ -20,20 +20,20 @@ export const admissionFirstStep = async (req, res) => {
             res.status(400).json({ message: 'Check birth or nid number length', field: 'nid_or_birth' });
         }
         else if (!father_name) {
-            res.status(400).json({ message: 'Please provide father name', field: 'father_name'});
+            res.status(400).json({ message: 'Please provide father name', field: 'father_name' });
         }
-        else if(!namePattern.test(father_name)){
+        else if (!namePattern.test(father_name)) {
             res.status(400).json({ message: 'Father name should be 3-30 char long', field: 'father_name' });
         }
         else if (!mother_name) {
-            res.status(400).json({ message: 'Please provide Mother name', field: 'mother_name'});
+            res.status(400).json({ message: 'Please provide Mother name', field: 'mother_name' });
         }
-        else if(!namePattern.test(mother_name)){
+        else if (!namePattern.test(mother_name)) {
             res.status(400).json({ message: 'Mother name should be 3-30 char long', field: 'mother_name' });
         }
         else if (!date_of_birth) {
             res.status(400).json({ message: 'Please provide date of birth', field: 'date_of_birth' });
-        }  else {
+        } else {
             res.status(200).json({ message: 'firstForm validation competed' })
         }
 
@@ -51,7 +51,7 @@ export const admissionSecondStep = async (req, res) => {
             res.status(400).json({ message: 'Please provide guardian name', field: 'guardian_name' })
         } else if (!namePattern.test(guardian_name)) {
             res.status(400).json({ message: 'Guardian name should be 3-30 char long', field: 'guardian_name' });
-        }else if (!guardian_contact) {
+        } else if (!guardian_contact) {
             res.status(400).json({ message: 'Please provide guardian contact', field: 'guardian_contact' })
         } else if (!phonePattern.test(guardian_contact)) {
             res.status(400).json({ message: 'Please check length', field: 'guardian_contact' })
@@ -73,8 +73,8 @@ export const admissionFinalStep = async (req, res) => {
     const institutePattern = /[A-Za-z ]{10,15}/i;
     const registrationNumberPattern = /[0-9]{10}/;
     const rollNumber = /[0-9]{6}/;
-    const { ssc_regis_no, ssc_institution_name, ssc_roll_no, ssc_gpa, hsc_regis_no,
-        hsc_institution_name, hsc_roll_no, hsc_gpa, profile_picture,
+    const { ssc_regis_no, ssc_institute_name, ssc_roll_no, ssc_gpa, hsc_regis_no,
+        hsc_institute_name, hsc_roll_no, hsc_gpa, profile_picture,
         ssc_group, hsc_group, ssc_year, hsc_year, ssc_board, hsc_board
     } = req.body
     try {
@@ -88,14 +88,14 @@ export const admissionFinalStep = async (req, res) => {
         } else if (!registrationNumberPattern.test(hsc_regis_no)) {
             res.status(400).json({ message: 'Please check HSC registration number length', field: 'hsc_regis_no' })
         }
-        else if (!ssc_institution_name) {
+        else if (!ssc_institute_name) {
             res.status(400).json({ message: 'Please provide SSC institute name', field: 'ssc_institute' })
-        } else if (!institutePattern.test(ssc_institution_name)) {
+        } else if (!institutePattern.test(ssc_institute_name)) {
             res.status(400).json({ message: 'Please provide institute full name', field: 'ssc_institute' })
         }
-        else if (!hsc_institution_name) {
+        else if (!hsc_institute_name) {
             res.status(400).json({ message: 'Please provide HSC institute name', field: 'hsc_institute' })
-        } else if (!institutePattern.test(hsc_institution_name)) {
+        } else if (!institutePattern.test(hsc_institute_name)) {
             res.status(400).json({ message: 'Please provide institute full name', field: 'hsc_institute' })
         }
         else if (!ssc_roll_no) {
@@ -153,15 +153,11 @@ export const acceptApplication = async (req, res) => {
     const { id } = req.params
     try {
         const application = await userModel.findOne({ _id: id });
-        if (application.ssc_credential_authenticate === 'authenticated credential' && application.hsc_credential_authenticate === 'authenticated credential' && application.application_status === 'application pending') {
-            await sendOfferLetterMessage(application.applicant_email, application.applicant_name);
-            await userModel.findByIdAndUpdate(id, {application_status: 'sent email for payment'});
-            smsForAdmissionFee(application.name, application.mobile)
-            res.status(200).json({message: 'Accept success'})
+        await sendOfferLetterMessage(application.applicant_email, application.applicant_name);
+        await userModel.findByIdAndUpdate(id, { application_status: 'sent email for payment' });
+        smsForAdmissionFee(application.name, application.mobile)
+        res.status(200).json({ message: 'Accept success' })
 
-        } else {
-            res.status(200).json({ message: 'Please verify this application credential' })
-        }
 
     } catch (error) {
         res.status(400).json({ msg: error })
@@ -172,14 +168,10 @@ export const rejectApplication = async (req, res) => {
     const { id } = req.params
     try {
         const application = await userModel.findOne({ _id: id });
-       if(application.ssc_credential_authenticate === 'not authenticated' && application.hsc_credential_authenticate === 'not authenticated' && application.application_status === 'application pending') {
-            await sendAccurateCredential(application.applicant_email, application.applicant_name);
-            smsForAccurateCredential(application.name, application.mobile);
-            await userModel.findByIdAndDelete(id)
-            res.status(200).json({ message: 'remove success' })
-        } else {
-            res.status(400).json({ message: 'Please verify this application credential' })
-        }
+        await sendAccurateCredential(application.applicant_email, application.applicant_name);
+        smsForAccurateCredential(application.name, application.mobile);
+        await userModel.findByIdAndDelete(id)
+        res.status(200).json({ message: 'remove success' })
 
     } catch (error) {
         res.status(400).json({ msg: error })

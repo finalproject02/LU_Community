@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import SocialNavbar from '../../SocialNavbar/SocialNavbar';
 import Avatar from "../../../../images/avatar.jpeg";
@@ -52,7 +52,7 @@ const Club = () => {
                                                     <img src={club.profile_picture ? `/api/files/storage/${club.profile_picture}` : Avatar} alt="" width="45" height="45" className="rounded-circle me-2" />
                                                     <div className="d-flex align-items-center">
                                                         <div>
-                                                            <strong className="mb-0">{club.name}</strong>
+                                                            <h6 className="mb-0">{club.name}</h6>
                                                             <small>{club.category}</small>
                                                         </div>
                                                     </div>
@@ -97,8 +97,6 @@ const Club = () => {
                                     </Card.Body>
                                 </Card>
                             )}
-                            <h5 className="mb-2">Recent activity</h5>
-                            <PostCard />
                         </Col>
                         <Col md="4">
                             <ClubSuggestionsCard suggestions={suggestionClub} />

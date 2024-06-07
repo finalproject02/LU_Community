@@ -6,7 +6,7 @@ import AllGroup from '../AllGroup/AllGroup';
 import CreateGroup from '../CreateGroup/CreateGroup';
 import PostCard from '../PostCard/PostCard';
 import SocialNavbar from '../SocialNavbar/SocialNavbar';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Avatar from "../../../images/avatar.jpeg";
 
 const GroupInitial = () => {
@@ -41,7 +41,7 @@ const GroupInitial = () => {
                                     <Card.Body>
                                         <div className="d-flex justify-content-between align-items-center mb-3">
                                             <h6>Your Group</h6>
-                                            {!moreShow && myGroup?.length > 3 && <h6 className="textHover" style={{cursor: 'pointer'}} onClick={() =>  setMoreShow(true)}>See all</h6>}
+                                            {!moreShow && myGroup?.length > 3 && <h6 className="textHover" style={{ cursor: 'pointer' }} onClick={() => setMoreShow(true)}>See all</h6>}
 
                                         </div>
                                         {!moreShow && myGroup.slice(0, 3).map(group => (
@@ -75,7 +75,7 @@ const GroupInitial = () => {
                                     <Card.Body>
                                         <div className="d-flex justify-content-between align-items-center mb-3">
                                             <h6>Joined Group</h6>
-                                            {memberGroup.length > 3 && <h6 style={{cursor: 'pointer'}} className="textHover" onClick={() => setMoreShowJoined(true)}>See all</h6>}
+                                            {memberGroup.length > 3 && <h6 style={{ cursor: 'pointer' }} className="textHover" onClick={() => setMoreShowJoined(true)}>See all</h6>}
                                         </div>
                                         {memberGroup.slice(0, 3).map(group => (
                                             <Link to={`/group/${group._id}`} className="d-flex justify-content-start align-items-center mb-2 cardHover p-3 rounded-3 text-decoration-none text-dark">
@@ -111,11 +111,9 @@ const GroupInitial = () => {
                                     </Card.Body>
                                 </Card>
                             )}
-                            <h4 className="mb-2">Recent activity</h4>
-                            <PostCard />
                         </Col>
                         <Col md="4">
-                            <AllGroup suggestionGroup={suggestionGroup}/>
+                            <AllGroup suggestionGroup={suggestionGroup} />
                         </Col>
                     </Row>
                 </Container>

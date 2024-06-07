@@ -17,7 +17,8 @@ const ClubHome = () => {
     const {posts} = useSelector(state => state.posts);
     const clubPost = posts?.filter(post => post.post_to === id);
     const clubPhotos = clubPost.filter(file => path.extname(file.filename).toLowerCase() === '.png' || path.extname(file.filename).toLowerCase() === '.jpeg' || path.extname(file.filename).toLowerCase() === '.jpg')
-    const paramClub = clubs?.filter(club => club._id === id)
+    const paramClub = clubs?.filter(club => club._id === id);
+    const suggestionClub = clubs?.filter(club => (club.creator_id !== currentUser?._id) && (!currentUser?.followings.includes(club._id)) && club._id !== id);
     return (
         <div>
             <Container>
@@ -34,8 +35,7 @@ const ClubHome = () => {
                     </Col>
                     <Col md="4">
                         <PhotoCard  photos={clubPhotos}/>
-                        <VideoCard />
-                        <ClubSuggestionsCard />
+                        <ClubSuggestionsCard suggestions={suggestionClub}/>
                     </Col>
                 </Row>
             </Container>

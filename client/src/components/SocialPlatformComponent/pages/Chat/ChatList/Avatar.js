@@ -1,16 +1,11 @@
-import React, { Component } from "react";
-
-const Avatar =(props)=> {
-    // constructor(props) {
-    //     super(props);
-    // }
+import abPic from '../../../../../images/avatar.jpeg'
+export default function  Avatar (props){
         return (
             <div className="avatar">
                 <div className="avatar-img">
-                    <img src={props.image} alt="#" />
+                    <img src={props.image ? `/api/files/storage/${props.image}` : abPic} alt="#" />
                 </div>
-                <span className={`isOnline ${props.isOnline}`}></span>
             </div>
         );
+
 }
-export default Avatar;

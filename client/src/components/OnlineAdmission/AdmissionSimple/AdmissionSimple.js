@@ -32,20 +32,20 @@ const AdmissionSimple = () => {
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="text" onChange={handleChange} name="name"
                                             placeholder="Your name" />
-                                        <label for="floatingInput">Your name</label>
+                                        <label  >Your name</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="number" onChange={handleChange} name="mobile"
                                             placeholder="Phone Number" />
-                                        <label for="floatingInput">Phone Number</label>
+                                        <label  >Phone Number</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="text" onChange={handleChange} name="email"
                                             placeholder="Email" />
-                                        <label for="floatingInput">Email</label>
+                                        <label  >Email</label>
                                     </Form.Floating>
                                     <Form.Select
-                                        className="w-100 mb-3 py-2"
+                                        className="w-100 mb-3 my-3"
                                         name="program_name"
                                         onChange={handleChange}
                                     >
@@ -57,15 +57,15 @@ const AdmissionSimple = () => {
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="number" onChange={handleChange} name="ssc_gpa" step={'any'}
                                             placeholder="SSC GPA" />
-                                        <label for="floatingInput">SSC GPA</label>
+                                        <label  >SSC GPA</label>
                                     </Form.Floating>
                                     <Form.Floating className="mb-3">
                                         <Form.Control type="number" onChange={handleChange} name="hsc_gpa"
                                             placeholder="HSC GPA" step={'any'} />
-                                        <label for="floatingInput">HSC GPA</label>
+                                        <label  >HSC GPA</label>
                                     </Form.Floating>
                                     <Form.Select
-                                        className="w-100 py-2"
+                                        className="w-100 my-3"
                                         name="via"
                                         onChange={handleChange}
                                     >

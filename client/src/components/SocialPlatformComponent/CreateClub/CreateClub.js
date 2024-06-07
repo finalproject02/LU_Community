@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Modal } from 'react-bootstrap';
 import Avatar from "../../../images/avatar.jpeg";
@@ -25,13 +25,13 @@ const CreateClub = ({ show, handleClose }) => {
     return (
         <div>
             {show &&
-                <Modal show={show} onHide={finalClose} size="lg">
+                <Modal show={show} onHide={finalClose} size="lg" centered>
                     <Modal.Header closeButton>
                         <Modal.Title>Create a Club</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="d-flex justify-content-start align-items-center pt-3 mb-2">
-                            <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}`: Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
+                            <img src={currentUser?.profile_picture ? `/api/files/storage/${currentUser?.profile_picture}` : Avatar} alt="" width="52" height="52" className="rounded-circle me-2" />
                             <div className="d-flex align-items-center">
                                 <div>
                                     <h6 className="mb-0">{currentUser?.name}</h6>
@@ -42,7 +42,7 @@ const CreateClub = ({ show, handleClose }) => {
                         <div className="mb-4 mt-4">
                             <Form onSubmit={handleSubmit}>
                                 {Types === 'CLUB_ERROR' && (
-                                    <h6 style={{color: 'red'}}>{message}</h6>
+                                    <h6 style={{ color: 'red' }}>{message}</h6>
                                 )}
                                 <Form.Floating className="mb-3">
                                     <Form.Control type="text" placeholder="Club Name" onChange={handleChange} name="name" />

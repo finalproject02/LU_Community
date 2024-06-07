@@ -39,7 +39,7 @@ const AllFriend = ({ connections, paramsConnection, setPost }) => {
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
                                                             <strong className="btn w-100 text-white" onClick={() => {
                                                                 dispatch(Peer(connection._id))
-                                                                history.push(`message`);
+                                                                history.push(`/chat`);
                                                             }}>Chat</strong>
                                                         </div>
                                                         <div className="bgPrimary text-center rounded-3 mb-2">
